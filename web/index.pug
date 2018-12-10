@@ -1,0 +1,127 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.5.4), angularjs(1.3.15), bootstrap(3.0/4.0)/semantic-ui(0.9.3/0.9.5)
+//-                  fontawesome(4.4.0), reactjs(0.14.0)
+- var use = { cdn: false, og: false, favicon: true, appleicon: true }
+- var lib = { jquery: true, d3js: false, angular: true, bootstrap: true, semantic: false, fontawesome: true, reactjs: false, revealjs: false, ionrangeslider: false, ldcolorpicker: false }
+- var assets = "assets"
+- var favicon = "thumbnail.png"
+- var title = "template"
+- var og = {}
+- og.title = title
+- og.twitter = {type: "summary_large_image", site: "@zbryikt", creator: "@zbryikt"}
+- og.domain = "zbryikt.github.io"
+- og.url = ""
+- og.thumbnail = {width: 200, height: 200, type: "image/png"}
+- og.thumbnail.url = "thumbnail.png"
+- og.author = "zbryikt"
+- og.section = "Taiwan"
+- og.keyword = "zbryikt,template"
+- og.description = ""
+- var fb = {}
+- fb.app_id = ""
+- fb.admins = ""
+html(lang="en")
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    // libraries
+    include library.pug
+    // custom files
+    link(rel="stylesheet",type="text/css",href="index.css")
+    link(rel="stylesheet",type="text/css",href="assets/ion-rangeslider/2.1.7/css/ion.rangeSlider.css")
+    link(rel="stylesheet",type="text/css",href="assets/ion-rangeslider/2.1.7/css/ion.rangeSlider.skinFlat.css")
+    link(rel="stylesheet",type="text/css",href="assets/ldcolorpicker/1.0.0/ldcp.css")
+    script(src="assets/ion-rangeslider/2.1.7/js/ion.rangeSlider.js")
+    script(src="assets/ldcolor/0.0.1/ldColor.min.js")
+    script(src="assets/ldcolorpicker/1.0.0/ldcp.min.js")
+  body
+
+    mixin palette(palette)
+      - if(!palette) palette = [[],""]
+      .palette
+        .colors
+          each color in palette[1]
+            .color(style="background:" + color)
+          .ctrl
+            .btn.btn-sm
+              .fa.fa-check
+              .desc USE
+            .btn.btn-sm(data-action="edit")
+              .fa.fa-cog
+              .desc EDIT
+        .name= palette[0]
+
+    mixin list(palettes)
+      each palette in palettes
+        +palette(palette)
+    #root
+
+
+      br
+      h1 One Picker to Rule Them All
+      br
+      include palette-data.pug
+      .widget(ldPalettePicker)
+        .navbar.text-center: .inner
+          ul.nav.nav-pills
+            li.nav-item: a.nav-link.active(data-panel="all") All
+            li.nav-item: a.nav-link(data-panel="pure") Pure
+            li.nav-item: a.nav-link.dropdown-toggle(data-panel="category") Category #[b.caret]
+            li.nav-item: a.nav-link.dropdown-toggle(data-panel="functional") Functional #[b.caret]
+            li.nav-item: a.nav-link(data-panel="saved") Saved
+            li.nav-item: a.nav-link(data-panel="custom") Custom
+        .panels
+          .panel.active(data-panel="all")
+            +list(palettes)
+          .panel(data-panel="custom")
+            .palette
+              .name
+              .colors
+            .edit
+              div(style="padding:20px")
+                .row
+                  .col-sm-6
+                    .ldColorPicker.no-border.no-palette
+                  .col-sm-6
+                    .row.mb-2
+                      .col-sm-8
+                        select.form-control.form-control-sm(value="rgb")
+                          option(value="rgb") RGB
+                          option(value="hsl") HSL
+                          option(value="hcl") HCL
+                      .col-sm-4: input.form-control.form-control-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
+
+                    - var configs = [["Red", "Green", "Blue", "rgb", "active"], ["Hue", "Saturation", "Luminance", "hsl",""], ["Hue", "Chroma", "Luminance", "hcl",""]];
+                    each config in configs
+                      .row.config(data-tag=config[3],class=config[4])
+                        .col-sm-8
+                          .label-group: span= config[0]
+                          input.ion-slider(
+                          data-tag=config[3] + "-" + config[0][0].toLowerCase())
+                          .label-group: span= config[1]
+                          input.ion-slider(
+                          data-tag=config[3] + "-" + config[1][0].toLowerCase())
+                          .label-group: span= config[2]
+                          input.ion-slider(
+                          data-tag=config[3] + "-" + config[2][0].toLowerCase())
+                        .col-sm-4
+                          input.value.form-control.form-control-sm(
+                          data-tag=config[3] + "-" + config[0][0].toLowerCase())
+                          input.value.form-control.form-control-sm(
+                          data-tag=config[3] + "-" + config[1][0].toLowerCase())
+                          input.value.form-control.form-control-sm(
+                          data-tag=config[3] + "-" + config[2][0].toLowerCase())
+                hr
+                .foot(style="position:absolute;bottom:0;padding:20px;width:100%;left:0")
+                  .pull-right
+                    .btn.btn-primary.mr-2 Use This Palette
+                    .btn.btn-outline-secondary Save
+                  .btn.btn-outline-secondary(data-action="undo") Undo #[i.fa.fa-undo]
+      .palette-dropdown
+        +list(palettes.splice(0,10))
+        br
+        a(href="#") more..
+      #test(style="width: 400px;height:60px")
+
+    script(type="text/javascript",src="index.js")
