@@ -157,11 +157,12 @@ ldPalettePicker = (node, opt = {}) ->
   document.addEventListener \mouseup, -> document.removeEventListener \mousemove, dragger
 
   # Search Dynamics
-  search = (v = "") ->
+  search = (v = "") ~>
     if !v => return content.build opt.palettes
     v = v.toLowerCase!trim!
     content.build opt.palettes.filter ->
       it.name.indexOf(v) >= 0 or it.tag.filter(->it.indexOf(v) >= 0).length
+    @tab \view
   el.nv.search.on \keyup, (e) -> search (e.target.value or "")
 
   # Edit Dynamics
@@ -257,6 +258,4 @@ palettes = ldPalettePicker.parse.text palettes
 
 ldPalettePicker.init = ->
   Array.from(document.querySelectorAll '*[ldPalettePicker]').map -> new ldPalettePicker it, {palettes}
-
-ldPalettePicker.init!
 
