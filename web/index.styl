@@ -15,16 +15,18 @@ html,body
 
 #root
   margin-bottom: 200px
-.widget
+
+.ldpp
   position: relative
-  height: 100%
   width: 640px
   height: 600px
-  border-radius: 5px
+  margin: auto
   overflow:hidden
+  /* styling */
+  border-radius: 5px
   box-shadow: 0 4px 8px rgba(0,0,0,.3)
   padding: 0
-  margin: auto
+
 .navbar
   position: absolute
   font-size: 18px
@@ -40,6 +42,9 @@ html,body
     width: 100%
   .nav-link
     cursor: pointer
+  .dropdown-toggle
+    line-height: 1.6em
+    border-radius: 0 5px 5px 0
 
 .palette
   text-align: left
@@ -113,7 +118,7 @@ html,body
 for num in (1..10)
   .panel:nth-child({num})
     transform: translate(100% * (num - 1),0)
-.panel[data-name=custom]
+.panel[data-name=edit]
   .palette
     width: 90%
     margin: auto
@@ -138,7 +143,7 @@ for num in (1..10)
   overflow: scroll
   &.active
     display: block
-.panel[data-panel=custom] .palette
+.panel[data-panel=edit] .palette
   width: 100%
   margin: 10px 0 0
   padding: 0 20px 0
@@ -197,7 +202,7 @@ for num in (1..10)
         display: none
 
 
-.panel[data-panel=custom]
+.panel[data-panel=edit]
   .ldColorPicker
     width: 100%
     height: 200px
