@@ -1,5 +1,7 @@
 require! <[fs]>
 lines = (fs.read-file-sync \min.txt .toString!).split \\n .filter -> it
+lines2 = (fs.read-file-sync \brew.txt .toString!).split \\n .filter -> it
+lines = lines ++ lines2
 pals = []
 for line in lines =>
   cells = line.split \,
