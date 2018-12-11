@@ -1,6 +1,6 @@
 Attack on Titan,1d0e0b 774023 d88c51 f3e7c9 fff9f5,artwork,gradient
 Bleach / ブリーチ,0a0a0a 28292f ffffff f9ae5c e4812f,artwork,diverging
-Big Hero 6,85a2b6 bbcedd dce4eb fdfdfd a00d1e be5960 d69293,artwork,disney,diverging
+Big Hero 6,85a2b6 bbcedd dce4eb fdfdfd d69293 be5960 a00d1e,artwork,disney,diverging
 Frozen - Elsa alt,1d3f72 5699d2 d8ebf9 71c2cc 4996a2 785471 e8cdc5 eee7d8,artwork,disney
 Frozen - Elsa,93dbe9 689cc5 5e6fa3 3b4368 191d3a d9dbee b3b7e2,artwork,disney
 Frozen,292664 667395 94a9ce b5ccf1 f5f4fa f2bed1 87434d 552b2f,artwork,disney,diverging
@@ -124,6 +124,11 @@ Gray,6a6a6a 979797 bdbdbd e2e2e2 f8f8f8,gradient,concept
 Black White,353535 666666 9b9b9b d4d4d4 ffffff,gradient,concept
 Turquoise,1d5167 437f79 7aab92 b0c7a2 e8f2d1,gradient,concept
 Purplish,420457 5a3faa 708adc b0d6f9 e8faff,gradient,concept
+Dirt,2c160a 56341b 81572a a97e39 cfa949 f1d75c,gradient,concept
+lime,072824 1b4f3e 3d7a52 6ca55e a9d066 f3f86e,gradient,concept
+teal,15212b 204651 247074 309d8e 55c89d 8df9a2,gradient,concept
+lilac,17232d 343f52 595d7a 867aa2 b9998ca f3b4f0,gradient,concept
+HCL,4d2527 6c4760 617899 38acaf 6fda97 e6f972,qualitative
 Brown,200800 522506 864411 a36316 ce862b,concept
 Cool,6252c5 2a9fde 21e499 7ff658,concept
 Cyan,00fff5 aafbfb 4cd4cc 049bba 10808b,concept
