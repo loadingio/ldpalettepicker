@@ -64,16 +64,52 @@ html(lang="en")
       include palette-data.pug
       .widget(ldPalettePicker)
         .navbar.text-center: .inner
-          ul.nav.nav-pills
+          ul.nav.nav-pills(data-tag="menu")
             li.nav-item: a.nav-link.active(data-panel="all") All
-            li.nav-item: a.nav-link(data-panel="pure") Pure
-            li.nav-item: a.nav-link.dropdown-toggle(data-panel="category") Category #[b.caret]
-            li.nav-item: a.nav-link.dropdown-toggle(data-panel="functional") Functional #[b.caret]
-            li.nav-item: a.nav-link(data-panel="saved") Saved
-            li.nav-item: a.nav-link(data-panel="custom") Custom
+            li.nav-item
+              .input-group
+                input.form-control.mt-1.ml-2.pull-right(style="width:120px",
+                placeholder="Search...",data-tag="search")
+
+                .input-group-append
+                  .dropdown
+                    .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Filter
+                    .dropdown-menu(data-tag="categories")
+                      a.dropdown-item(href="#",data-cat="") All
+                      //-a.dropdown-item(href="#",data-cat="starred") Starred
+                      .dropdown-divider
+                      a.dropdown-item(href="#",data-cat="artwork") Artwork
+                      a.dropdown-item(href="#",data-cat="brand") Brand
+                      a.dropdown-item(href="#",data-cat="concept") Concept
+                      .dropdown-divider
+                      a.dropdown-item(href="#",data-cat="gradient") Gradient
+
+
+          //-
+            //.pull-right.input-group.mt-1.ml-2(style="width:180px",data-tag="search")
+            input.form-control.mt-1.ml-2.pull-right(style="width:180px",placeholder="Search...",data-tag="search")
+            //.input-group-append: .btn.btn-outline-dark(style="border-radius:0 3px 3px 0") #[i.fa.fa-search]
+
+            ul.nav.nav-pills(data-tag="menu")
+              li.nav-item: a.nav-link.active(data-panel="all") Browse
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle(data-toggle="dropdown") Categories
+                .dropdown-menu(data-tag="categories")
+                  a.dropdown-item(href="#",data-cat="") All
+                  //-a.dropdown-item(href="#",data-cat="starred") Starred
+                  .dropdown-divider
+                  a.dropdown-item(href="#",data-cat="artwork") Artwork
+                  a.dropdown-item(href="#",data-cat="brand") Brand
+                  a.dropdown-item(href="#",data-cat="concept") Concept
+                  .dropdown-divider
+                  a.dropdown-item(href="#",data-cat="gradient") Gradient
+                  a.dropdown-item(href="#",data-cat="diverging") Diverging
+                  a.dropdown-item(href="#",data-cat="qualitative") Qualitative
+              li.nav-item: a.nav-link(data-panel="custom") Custom
+
         .panels
           .panel.active(data-panel="all")
-            +list(palettes)
+            //-+list(palettes)
           .panel(data-panel="custom")
             .palette
               .name
@@ -119,9 +155,10 @@ html(lang="en")
                     .btn.btn-outline-secondary Save
                   .btn.btn-outline-secondary(data-action="undo") Undo #[i.fa.fa-undo]
       .palette-dropdown
-        +list(palettes.splice(0,10))
+        //-+list(palettes.splice(0,10))
         br
         a(href="#") more..
       #test(style="width: 400px;height:60px")
 
+    script(type="text/javascript",src="palettes-compact.js")
     script(type="text/javascript",src="index.js")

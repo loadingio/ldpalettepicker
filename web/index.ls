@@ -16,7 +16,7 @@ HTMLElement.prototype <<< do
   remove: -> @parentNode.removeChild @
   insertAfter: (n, s) -> s.parentNode.insertBefore n, s.nextSibling
 
-ldPalettePicker = (node) ->
+ldPalettePicker = (node, palette-list = []) ->
   @root = root = if typeof(node) == typeof('') => node = document.querySelector(node) else node
   @ldcp = new ldColorPicker @root.find('.panel[data-panel=custom] .ldColorPicker',0), {inline: true}
   palette = @root.find('.panel[data-panel=custom] .palette',0)
@@ -85,10 +85,29 @@ ldPalettePicker = (node) ->
         history.current = null
       ), 200
 
-  toggle-edit = (n) ~>
-    hexs = if n.parent('.colors', root) => that.find('.color').map -> ldColor.hex(it.style.background) else []
-    name = (if n.parent('.palette', root) => that.find('.name',0).innerText else null) or 'untitled'
-    @tab \custom
+  palette-html = (c) ->
+    cs = c.colors.map(->"""<div class="color" style="background:#{ldColor.rgbaStr(it)}"></div>""").join("")
+    """
+    <div class="palette">
+      <div class="colors">
+      #{cs}
+      <div class="ctrl">
+      <div class="btn btn-sm" data-action="use"><div class="fa fa-check"></div><div class="desc">USE</div></div>
+      <div class="btn btn-sm" data-action="edit"><div class="fa fa-cog"></div><div class="desc">EDIT</div></div>
+      </div>
+      </div>
+      <div class="name">#{c.name}</div>
+    </div>
+    """
+  toggle-edit = (n,options ={}) ~>
+    options = {colors: null, toggle: true, name: "Custom"} <<< options
+    if options.toggle => @tab \custom
+    if options.colors =>
+      hexs = options.colors.map -> ldColor.hex(it)
+      name = options.name
+    else
+      hexs = if n.parent('.colors', root) => that.find('.color').map -> ldColor.hex(it.style.background) else []
+      name = (if n.parent('.palette', root) => that.find('.name',0).innerText else null) or 'untitled'
     colors.innerHTML = hexs
       .map (d,i) ->
         hcl = ldColor.hcl(d)
@@ -129,7 +148,30 @@ ldPalettePicker = (node) ->
 
   document.addEventListener \mouseup, -> document.removeEventListener \mousemove, handler
 
+  search = (value = "") ->
+    if !value => return rebuild palette-list
+    value = value.toLowerCase!
+    remains = palette-list.filter ->
+      it.name.indexOf(value) >= 0 or it.tag.filter(->it.indexOf(value) >= 0).length
+    rebuild remains
+  root.find('input[data-tag=search]',0).on \keyup, (e) -> search (e.target.value or "").toLowerCase!trim!
+    
   root.addEventListener \click, (e) ~>
+    n = e.target.parent("*[data-tag=menu]",root)
+    if n =>
+      m = e.target.parent("*[data-panel=all]", n)
+      if m =>
+        @tab \all
+        #if root.find('input[data-tag=search]',0).value =>
+        #  root.find('input[data-tag=search]',0).value = ""
+        #  search ""
+        return
+      n = e.target.parent("*[data-cat]",n)
+      if n =>
+        tag = n.attr("data-cat")
+        root.find('input[data-tag=search]',0).value = tag
+        @tab \all
+        return search n.attr("data-cat")
     n = e.target.parent(".palette .btn", root)
     if n => if n.attr(\data-action) == \edit => return toggle-edit(n)
     n = e.target.parent("*[data-action=undo]", root)
@@ -154,7 +196,14 @@ ldPalettePicker = (node) ->
     if color =>
       color.parentNode.child!map -> it.classList[if it == color => \add else \remove] \active
       @ldcp.set-color color.style.background
-
+ 
+  rebuild = (p = []) ->
+    htmls = p
+      .map -> palette-html it
+      .join('')
+    @root.find('.panel[data-panel=all]',0).innerHTML = htmls
+  rebuild palette-list
+  toggle-edit null, {colors: <[#b34e19 #d78c51 #f3e7c9]>, toggle: false}
   @
 
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
@@ -165,8 +214,17 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
     @root.find(\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
     @root.find(".nav-link").map -> it.classList[if it.attr(\data-panel) == name => \add else \remove] \active
 
+palettes = palettes.split(\\n)
+  .filter -> it
+  .map ->
+    it = it.split ',' .map -> it.toLowerCase!
+    return do
+      name: it.0
+      colors: it.1.split(' ').map -> "\##it"
+      tag: it.slice(2)
+
 ldPalettePicker.init = ->
-  Array.from(document.querySelectorAll '*[ldPalettePicker]').map -> new ldPalettePicker it
+  Array.from(document.querySelectorAll '*[ldPalettePicker]').map -> new ldPalettePicker it, palettes
 
 ldPalettePicker.init!
 
