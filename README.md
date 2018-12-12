@@ -41,6 +41,11 @@ Invoke it when you need a palette:
 ```
 
 
+## TODO
+
+ * better ordering for default palettes; make it more eye-pleasuring.
+
+
 ## License
 
 MIT License.
