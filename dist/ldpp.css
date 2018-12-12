@@ -85,8 +85,11 @@
   height: 48px;
   border-radius: 3px;
   overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .ldpp .palette .color {
+  flex: 1 1 auto;
   display: inline-block;
   width: 32px;
   height: 100%;
@@ -162,11 +165,13 @@
   margin: auto;
   height: 100%;
   text-align: center;
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   color: #444;
 }
 .ldpp .panel[data-panel=edit] .palette .color .btns .fa {
+  flex: 0 0 auto;
   cursor: pointer;
 }
 .ldpp .panel[data-panel=edit] .palette .color.active .btns {

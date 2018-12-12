@@ -87,21 +87,7 @@ ldPalettePicker = (node, opt = {}) ->
 
   # Color Picker Initialization
   @ldcp = ldcp = new ldColorPicker el.ed.picker, {inline: true}
-  ldcp.on \change, ~>
-    log.push!
-    hcl = ldColor.hcl(it)
-    node = root.find('.color.active',0)
-    node.style.background = ldColor.rgbaStr it
-    node.classList[if hcl.l < 50 => "add" else "remove"] \dark
-    el.ed.hex.value = ldColor.hex it
-    c = {rgb: ldColor.rgb(it), hsl: ldColor.hsl(it), hcl: ldColor.hcl(it) }
-    <[rgb-r rgb-g rgb-b hsl-h hsl-s hsl-l hcl-h hcl-c hcl-l]>.map (t) ~>
-      p = t.split \-
-      v = c[p.0][p.1]
-      if !(t == \hsl-s or t == \hsl-l) => v = Math.round(v)
-      root.find(".value[data-tag=#{t}]",0).value = v
-      if ldcp._slider == t => return ldcp._slider = null
-      $(root.find(".ion-slider[data-tag=#{t}]",0)).data("ionRangeSlider").update from: v
+  ldcp.on \change, ~> log.push!; edit-update it
 
   # Input ( Slider, Inputbox ) Initialization
   irs-opt = base: min: 0, max: 255, step: 1, hide_min_max: true, hide_from_to: true, grid: false
@@ -188,6 +174,23 @@ ldPalettePicker = (node, opt = {}) ->
         """
       .join('')
     el.ed.colors.parentNode.find('.name',0).innerHTML = name
+    edit-update hexs.0
+    ldcp.set-color hexs.0
+  edit-update = (c) ->
+    hcl = ldColor.hcl(c)
+    node = root.find('.color.active',0)
+    node.style.background = ldColor.rgbaStr c
+    node.classList[if hcl.l < 50 => "add" else "remove"] \dark
+    el.ed.hex.value = ldColor.hex c
+    c = {rgb: ldColor.rgb(c), hsl: ldColor.hsl(c), hcl: hcl }
+    <[rgb-r rgb-g rgb-b hsl-h hsl-s hsl-l hcl-h hcl-c hcl-l]>.map (t) ~>
+      p = t.split \-
+      v = c[p.0][p.1]
+      if !(t == \hsl-s or t == \hsl-l) => v = Math.round(v)
+      root.find(".value[data-tag=#{t}]",0).value = v
+      if ldcp._slider == t => return ldcp._slider = null
+      $(root.find(".ion-slider[data-tag=#{t}]",0)).data("ionRangeSlider").update from: v
+
 
   # General Action
   evts = do

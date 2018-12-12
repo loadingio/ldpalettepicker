@@ -67,7 +67,7 @@ import$(HTMLElement.prototype, {
   }
 });
 ldPalettePicker = function(node, opt){
-  var root, el, content, log, ldcp, irsOpt, ref$, getIdx, dragger, search, editInit, evts, this$ = this;
+  var root, el, content, log, ldcp, irsOpt, ref$, getIdx, dragger, search, editInit, editUpdate, evts, this$ = this;
   opt == null && (opt = {});
   opt = import$({
     palettes: []
@@ -140,33 +140,8 @@ ldPalettePicker = function(node, opt){
     inline: true
   });
   ldcp.on('change', function(it){
-    var hcl, node, c;
     log.push();
-    hcl = ldColor.hcl(it);
-    node = root.find('.color.active', 0);
-    node.style.background = ldColor.rgbaStr(it);
-    node.classList[hcl.l < 50 ? "add" : "remove"]('dark');
-    el.ed.hex.value = ldColor.hex(it);
-    c = {
-      rgb: ldColor.rgb(it),
-      hsl: ldColor.hsl(it),
-      hcl: ldColor.hcl(it)
-    };
-    return ['rgb-r', 'rgb-g', 'rgb-b', 'hsl-h', 'hsl-s', 'hsl-l', 'hcl-h', 'hcl-c', 'hcl-l'].map(function(t){
-      var p, v;
-      p = t.split('-');
-      v = c[p[0]][p[1]];
-      if (!(t === 'hsl-s' || t === 'hsl-l')) {
-        v = Math.round(v);
-      }
-      root.find(".value[data-tag=" + t + "]", 0).value = v;
-      if (ldcp._slider === t) {
-        return ldcp._slider = null;
-      }
-      return $(root.find(".ion-slider[data-tag=" + t + "]", 0)).data("ionRangeSlider").update({
-        from: v
-      });
-    });
+    return editUpdate(it);
   });
   irsOpt = {
     base: {
@@ -298,7 +273,37 @@ ldPalettePicker = function(node, opt){
       hcl = ldColor.hcl(d);
       return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div class=\"btns\">\n    <div class=\"fa fa-clone\"></div>\n    <div class=\"fa fa-bars\"></div>\n    <div class=\"fa fa-close\"></div>\n  </div>\n</div>";
     }).join('');
-    return el.ed.colors.parentNode.find('.name', 0).innerHTML = name;
+    el.ed.colors.parentNode.find('.name', 0).innerHTML = name;
+    editUpdate(hexs[0]);
+    return ldcp.setColor(hexs[0]);
+  };
+  editUpdate = function(c){
+    var hcl, node, this$ = this;
+    hcl = ldColor.hcl(c);
+    node = root.find('.color.active', 0);
+    node.style.background = ldColor.rgbaStr(c);
+    node.classList[hcl.l < 50 ? "add" : "remove"]('dark');
+    el.ed.hex.value = ldColor.hex(c);
+    c = {
+      rgb: ldColor.rgb(c),
+      hsl: ldColor.hsl(c),
+      hcl: hcl
+    };
+    return ['rgb-r', 'rgb-g', 'rgb-b', 'hsl-h', 'hsl-s', 'hsl-l', 'hcl-h', 'hcl-c', 'hcl-l'].map(function(t){
+      var p, v;
+      p = t.split('-');
+      v = c[p[0]][p[1]];
+      if (!(t === 'hsl-s' || t === 'hsl-l')) {
+        v = Math.round(v);
+      }
+      root.find(".value[data-tag=" + t + "]", 0).value = v;
+      if (ldcp._slider === t) {
+        return ldcp._slider = null;
+      }
+      return $(root.find(".ion-slider[data-tag=" + t + "]", 0)).data("ionRangeSlider").update({
+        from: v
+      });
+    });
   };
   evts = {
     view: function(tgt){
