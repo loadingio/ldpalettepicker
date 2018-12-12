@@ -1,1 +1,5 @@
-#!/use/bin/env bash
+#!/usr/bin/env bash
+lsc -cbp src/ldpp.ls > dist/ldpp.js
+stylus -o dist src/ldpp.styl
+uglifyjs dist/ldpp.js > dist/ldpp.min.js
+uglifycss dist/ldpp.css > dist/ldpp.min.css
