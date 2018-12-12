@@ -251,14 +251,32 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
     @root.find(".nav-link").map -> it.classList[if it.attr(\data-panel) == n => \add else \remove] \active
     true
 
-ldPalettePicker.parse = do
-  text: (txt) ->
-    txt.split(\\n).filter(-> it).map (v) ->
-      v = v.split(',').map(-> it.toLowerCase!)
-      return name: v.0, colors: v.1.split(' ').map(-> "\##it"), tag: v.slice(2)
+# Class Methods
+ldPalettePicker <<< do
+  palettes: []
+  parse: do
+    text: (txt) ->
+      txt.split(\\n).filter(-> it).map (v) ->
+        v = v.split(',').map(-> it.toLowerCase!)
+        return name: v.0, colors: v.1.split(' ').map(-> "\##it"), tag: v.slice(2)
 
-palettes = ldPalettePicker.parse.text palettes
+  register: (name, palettes) ->
+    if typeof(palettes) == \string => palettes = @parse.text palettes
+    @palettes.push [name, palettes]
 
-ldPalettePicker.init = ->
-  Array.from(document.querySelectorAll '*[ldPalettePicker]').map -> new ldPalettePicker it, {palettes}
+  get: (name) -> return (@palettes.filter(-> it.0 == name).0 or ['',[]]).1
+
+  init: (pals = null) ->
+    if !pals => pals = @get \default
+    Array.from(document.querySelectorAll '*[ldPalettePicker]').map -> new ldPalettePicker it, {palettes: pals}
+
+# Default Color Palette
+ldPalettePicker.register "default", """
+  flourish,b22 e55 f87 fb6 ab8 898,qualitative
+  gray,000 333 666 ddd fff,gradient
+  young,fec fe6 cd9 acd 7ab aac,concept
+  plotDB,ed1e79 c69c6d 8cc63f 29abe2,brand
+  French,37a 9ab eee f98 c10,diverging
+  Afghan Girl,010 253 ffd da8 b53,artwork
+"""
 

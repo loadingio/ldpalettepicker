@@ -10,7 +10,7 @@ Palette Format
   colors: ["#999", ...]                       # compact but losing color tags
 }
 */
-var ldPalettePicker, palettes;
+var ldPalettePicker;
 import$(HTMLElement.prototype, {
   find: function(s, n){
     var ret;
@@ -418,6 +418,7 @@ ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
     return true;
   }
 });
+ldPalettePicker.palettes = [];
 ldPalettePicker.parse = {
   text: function(txt){
     return txt.split('\n').filter(function(it){
@@ -436,8 +437,23 @@ ldPalettePicker.parse = {
     });
   }
 };
-palettes = ldPalettePicker.parse.text(palettes);
-ldPalettePicker.init = function(){
+ldPalettePicker.register = function(name, palettes){
+  if (typeof palettes === 'string') {
+    palettes = this.parse.text(palettes);
+  }
+  return this.palettes.push([name, palettes]);
+};
+ldPalettePicker.get = function(name){
+  return (this.palettes.filter(function(it){
+    return it[0] === name;
+  })[0] || ['', []])[1];
+};
+ldPalettePicker.register("default", ["flourish,b22 e55 f87 fb6 ab8 898,qualitative", "gray,000 333 666 ddd fff,gradient", "young,fec fe6 cd9 acd 7ab aac,concept", "plotDB,ed1e79 c69c6d 8cc63f 29abe2,brand", "French,37a 9ab eee f98 c10,diverging", "Afghan Girl,010 253 ffd da8 b53,artwork"].join('\n'));
+ldPalettePicker.init = function(palettes){
+  palettes == null && (palettes = null);
+  if (!palettes) {
+    palettes = this.get('default');
+  }
   return Array.from(document.querySelectorAll('*[ldPalettePicker]')).map(function(it){
     return new ldPalettePicker(it, {
       palettes: palettes
