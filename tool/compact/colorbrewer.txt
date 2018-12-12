@@ -61,15 +61,15 @@ BrBG / 8,8c510a bf812d dfc27d f6e8c3 c7eae5 80cdc1 35978f 01665e,diverging,color
 BrBG / 9,8c510a bf812d dfc27d f6e8c3 f5f5f5 c7eae5 80cdc1 35978f 01665e,diverging,colorbrew
 BrBG / 10,543005 8c510a bf812d dfc27d f6e8c3 c7eae5 80cdc1 35978f 01665e 003c30,diverging,colorbrew
 BrBG / 11,543005 8c510a bf812d dfc27d f6e8c3 f5f5f5 c7eae5 80cdc1 35978f 01665e 003c30,diverging,colorbrew
-RdGy / 3,ef8a62 ffffff 999999,diverging,colorbrew
+RdGy / 3,ef8a62 fff 999,diverging,colorbrew
 RdGy / 4,ca0020 f4a582 bababa 404040,diverging,colorbrew
-RdGy / 5,ca0020 f4a582 ffffff bababa 404040,diverging,colorbrew
-RdGy / 6,b2182b ef8a62 fddbc7 e0e0e0 999999 4d4d4d,diverging,colorbrew
-RdGy / 7,b2182b ef8a62 fddbc7 ffffff e0e0e0 999999 4d4d4d,diverging,colorbrew
+RdGy / 5,ca0020 f4a582 fff bababa 404040,diverging,colorbrew
+RdGy / 6,b2182b ef8a62 fddbc7 e0e0e0 999 4d4d4d,diverging,colorbrew
+RdGy / 7,b2182b ef8a62 fddbc7 fff e0e0e0 999 4d4d4d,diverging,colorbrew
 RdGy / 8,b2182b d6604d f4a582 fddbc7 e0e0e0 bababa 878787 4d4d4d,diverging,colorbrew
-RdGy / 9,b2182b d6604d f4a582 fddbc7 ffffff e0e0e0 bababa 878787 4d4d4d,diverging,colorbrew
+RdGy / 9,b2182b d6604d f4a582 fddbc7 fff e0e0e0 bababa 878787 4d4d4d,diverging,colorbrew
 RdGy / 10,67001f b2182b d6604d f4a582 fddbc7 e0e0e0 bababa 878787 4d4d4d 1a1a1a,diverging,colorbrew
-RdGy / 11,67001f b2182b d6604d f4a582 fddbc7 ffffff e0e0e0 bababa 878787 4d4d4d 1a1a1a,diverging,colorbrew
+RdGy / 11,67001f b2182b d6604d f4a582 fddbc7 fff e0e0e0 bababa 878787 4d4d4d 1a1a1a,diverging,colorbrew
 PuOr / 3,f1a340 f7f7f7 998ec3,diverging,colorbrew
 PuOr / 4,e66101 fdb863 b2abd2 5e3c99,diverging,colorbrew
 PuOr / 5,e66101 fdb863 f7f7f7 b2abd2 5e3c99,diverging,colorbrew
@@ -86,18 +86,18 @@ Set2 / 6,66c2a5 fc8d62 8da0cb e78ac3 a6d854 ffd92f,qualitative,colorbrew
 Set2 / 7,66c2a5 fc8d62 8da0cb e78ac3 a6d854 ffd92f e5c494,qualitative,colorbrew
 Set2 / 8,66c2a5 fc8d62 8da0cb e78ac3 a6d854 ffd92f e5c494 b3b3b3,qualitative,colorbrew
 Accent / 3,7fc97f beaed4 fdc086,qualitative,colorbrew
-Accent / 4,7fc97f beaed4 fdc086 ffff99,qualitative,colorbrew
-Accent / 5,7fc97f beaed4 fdc086 ffff99 386cb0,qualitative,colorbrew
-Accent / 6,7fc97f beaed4 fdc086 ffff99 386cb0 f0027f,qualitative,colorbrew
-Accent / 7,7fc97f beaed4 fdc086 ffff99 386cb0 f0027f bf5b17,qualitative,colorbrew
-Accent / 8,7fc97f beaed4 fdc086 ffff99 386cb0 f0027f bf5b17 666666,qualitative,colorbrew
+Accent / 4,7fc97f beaed4 fdc086 ff9,qualitative,colorbrew
+Accent / 5,7fc97f beaed4 fdc086 ff9 386cb0,qualitative,colorbrew
+Accent / 6,7fc97f beaed4 fdc086 ff9 386cb0 f0027f,qualitative,colorbrew
+Accent / 7,7fc97f beaed4 fdc086 ff9 386cb0 f0027f bf5b17,qualitative,colorbrew
+Accent / 8,7fc97f beaed4 fdc086 ff9 386cb0 f0027f bf5b17 666,qualitative,colorbrew
 Set1 / 3,e41a1c 377eb8 4daf4a,qualitative,colorbrew
 Set1 / 4,e41a1c 377eb8 4daf4a 984ea3,qualitative,colorbrew
 Set1 / 5,e41a1c 377eb8 4daf4a 984ea3 ff7f00,qualitative,colorbrew
-Set1 / 6,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ffff33,qualitative,colorbrew
-Set1 / 7,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ffff33 a65628,qualitative,colorbrew
-Set1 / 8,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ffff33 a65628 f781bf,qualitative,colorbrew
-Set1 / 9,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ffff33 a65628 f781bf 999999,qualitative,colorbrew
+Set1 / 6,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ff3,qualitative,colorbrew
+Set1 / 7,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ff3 a65628,qualitative,colorbrew
+Set1 / 8,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ff3 a65628 f781bf,qualitative,colorbrew
+Set1 / 9,e41a1c 377eb8 4daf4a 984ea3 ff7f00 ff3 a65628 f781bf 999,qualitative,colorbrew
 Set3 / 3,8dd3c7 ffffb3 bebada,qualitative,colorbrew
 Set3 / 4,8dd3c7 ffffb3 bebada fb8072,qualitative,colorbrew
 Set3 / 5,8dd3c7 ffffb3 bebada fb8072 80b1d3,qualitative,colorbrew
@@ -113,7 +113,7 @@ Dark2 / 4,1b9e77 d95f02 7570b3 e7298a,qualitative,colorbrew
 Dark2 / 5,1b9e77 d95f02 7570b3 e7298a 66a61e,qualitative,colorbrew
 Dark2 / 6,1b9e77 d95f02 7570b3 e7298a 66a61e e6ab02,qualitative,colorbrew
 Dark2 / 7,1b9e77 d95f02 7570b3 e7298a 66a61e e6ab02 a6761d,qualitative,colorbrew
-Dark2 / 8,1b9e77 d95f02 7570b3 e7298a 66a61e e6ab02 a6761d 666666,qualitative,colorbrew
+Dark2 / 8,1b9e77 d95f02 7570b3 e7298a 66a61e e6ab02 a6761d 666,qualitative,colorbrew
 Paired / 3,a6cee3 1f78b4 b2df8a,qualitative,colorbrew
 Paired / 4,a6cee3 1f78b4 b2df8a 33a02c,qualitative,colorbrew
 Paired / 5,a6cee3 1f78b4 b2df8a 33a02c fb9a99,qualitative,colorbrew
@@ -122,27 +122,27 @@ Paired / 7,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f,qualitative,colorbre
 Paired / 8,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00,qualitative,colorbrew
 Paired / 9,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6,qualitative,colorbrew
 Paired / 10,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6 6a3d9a,qualitative,colorbrew
-Paired / 11,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6 6a3d9a ffff99,qualitative,colorbrew
-Paired / 12,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6 6a3d9a ffff99 b15928,qualitative,colorbrew
+Paired / 11,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6 6a3d9a ff9,qualitative,colorbrew
+Paired / 12,a6cee3 1f78b4 b2df8a 33a02c fb9a99 e31a1c fdbf6f ff7f00 cab2d6 6a3d9a ff9 b15928,qualitative,colorbrew
 Pastel2 / 3,b3e2cd fdcdac cbd5e8,qualitative,colorbrew
 Pastel2 / 4,b3e2cd fdcdac cbd5e8 f4cae4,qualitative,colorbrew
 Pastel2 / 5,b3e2cd fdcdac cbd5e8 f4cae4 e6f5c9,qualitative,colorbrew
 Pastel2 / 6,b3e2cd fdcdac cbd5e8 f4cae4 e6f5c9 fff2ae,qualitative,colorbrew
 Pastel2 / 7,b3e2cd fdcdac cbd5e8 f4cae4 e6f5c9 fff2ae f1e2cc,qualitative,colorbrew
-Pastel2 / 8,b3e2cd fdcdac cbd5e8 f4cae4 e6f5c9 fff2ae f1e2cc cccccc,qualitative,colorbrew
+Pastel2 / 8,b3e2cd fdcdac cbd5e8 f4cae4 e6f5c9 fff2ae f1e2cc ccc,qualitative,colorbrew
 Pastel1 / 3,fbb4ae b3cde3 ccebc5,qualitative,colorbrew
 Pastel1 / 4,fbb4ae b3cde3 ccebc5 decbe4,qualitative,colorbrew
 Pastel1 / 5,fbb4ae b3cde3 ccebc5 decbe4 fed9a6,qualitative,colorbrew
-Pastel1 / 6,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffffcc,qualitative,colorbrew
-Pastel1 / 7,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffffcc e5d8bd,qualitative,colorbrew
-Pastel1 / 8,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffffcc e5d8bd fddaec,qualitative,colorbrew
-Pastel1 / 9,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffffcc e5d8bd fddaec f2f2f2,qualitative,colorbrew
+Pastel1 / 6,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffc,qualitative,colorbrew
+Pastel1 / 7,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffc e5d8bd,qualitative,colorbrew
+Pastel1 / 8,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffc e5d8bd fddaec,qualitative,colorbrew
+Pastel1 / 9,fbb4ae b3cde3 ccebc5 decbe4 fed9a6 ffc e5d8bd fddaec f2f2f2,qualitative,colorbrew
 OrRd / 3,fee8c8 fdbb84 e34a33,gradient,colorbrew
 OrRd / 4,fef0d9 fdcc8a fc8d59 d7301f,gradient,colorbrew
 OrRd / 5,fef0d9 fdcc8a fc8d59 e34a33 b30000,gradient,colorbrew
 OrRd / 6,fef0d9 fdd49e fdbb84 fc8d59 e34a33 b30000,gradient,colorbrew
-OrRd / 7,fef0d9 fdd49e fdbb84 fc8d59 ef6548 d7301f 990000,gradient,colorbrew
-OrRd / 8,fff7ec fee8c8 fdd49e fdbb84 fc8d59 ef6548 d7301f 990000,gradient,colorbrew
+OrRd / 7,fef0d9 fdd49e fdbb84 fc8d59 ef6548 d7301f 900,gradient,colorbrew
+OrRd / 8,fff7ec fee8c8 fdd49e fdbb84 fc8d59 ef6548 d7301f 900,gradient,colorbrew
 OrRd / 9,fff7ec fee8c8 fdd49e fdbb84 fc8d59 ef6548 d7301f b30000 7f0000,gradient,colorbrew
 PuBu / 3,ece7f2 a6bddb 2b8cbe,gradient,colorbrew
 PuBu / 4,f1eef6 bdc9e1 74a9cf 0570b0,gradient,colorbrew
@@ -180,10 +180,10 @@ YlOrBr / 7,ffffd4 fee391 fec44f fe9929 ec7014 cc4c02 8c2d04,gradient,colorbrew
 YlOrBr / 8,ffffe5 fff7bc fee391 fec44f fe9929 ec7014 cc4c02 8c2d04,gradient,colorbrew
 YlOrBr / 9,ffffe5 fff7bc fee391 fec44f fe9929 ec7014 cc4c02 993404 662506,gradient,colorbrew
 YlGn / 3,f7fcb9 addd8e 31a354,gradient,colorbrew
-YlGn / 4,ffffcc c2e699 78c679 238443,gradient,colorbrew
-YlGn / 5,ffffcc c2e699 78c679 31a354 006837,gradient,colorbrew
-YlGn / 6,ffffcc d9f0a3 addd8e 78c679 31a354 006837,gradient,colorbrew
-YlGn / 7,ffffcc d9f0a3 addd8e 78c679 41ab5d 238443 005a32,gradient,colorbrew
+YlGn / 4,ffc c2e699 78c679 238443,gradient,colorbrew
+YlGn / 5,ffc c2e699 78c679 31a354 006837,gradient,colorbrew
+YlGn / 6,ffc d9f0a3 addd8e 78c679 31a354 006837,gradient,colorbrew
+YlGn / 7,ffc d9f0a3 addd8e 78c679 41ab5d 238443 005a32,gradient,colorbrew
 YlGn / 8,ffffe5 f7fcb9 d9f0a3 addd8e 78c679 41ab5d 238443 005a32,gradient,colorbrew
 YlGn / 9,ffffe5 f7fcb9 d9f0a3 addd8e 78c679 41ab5d 238443 006837 004529,gradient,colorbrew
 Reds / 3,fee0d2 fc9272 de2d26,gradient,colorbrew
@@ -208,10 +208,10 @@ Greens / 7,edf8e9 c7e9c0 a1d99b 74c476 41ab5d 238b45 005a32,gradient,colorbrew
 Greens / 8,f7fcf5 e5f5e0 c7e9c0 a1d99b 74c476 41ab5d 238b45 005a32,gradient,colorbrew
 Greens / 9,f7fcf5 e5f5e0 c7e9c0 a1d99b 74c476 41ab5d 238b45 006d2c 00441b,gradient,colorbrew
 YlGnBu / 3,edf8b1 7fcdbb 2c7fb8,gradient,colorbrew
-YlGnBu / 4,ffffcc a1dab4 41b6c4 225ea8,gradient,colorbrew
-YlGnBu / 5,ffffcc a1dab4 41b6c4 2c7fb8 253494,gradient,colorbrew
-YlGnBu / 6,ffffcc c7e9b4 7fcdbb 41b6c4 2c7fb8 253494,gradient,colorbrew
-YlGnBu / 7,ffffcc c7e9b4 7fcdbb 41b6c4 1d91c0 225ea8 0c2c84,gradient,colorbrew
+YlGnBu / 4,ffc a1dab4 41b6c4 225ea8,gradient,colorbrew
+YlGnBu / 5,ffc a1dab4 41b6c4 2c7fb8 253494,gradient,colorbrew
+YlGnBu / 6,ffc c7e9b4 7fcdbb 41b6c4 2c7fb8 253494,gradient,colorbrew
+YlGnBu / 7,ffc c7e9b4 7fcdbb 41b6c4 1d91c0 225ea8 0c2c84,gradient,colorbrew
 YlGnBu / 8,ffffd9 edf8b1 c7e9b4 7fcdbb 41b6c4 1d91c0 225ea8 0c2c84,gradient,colorbrew
 YlGnBu / 9,ffffd9 edf8b1 c7e9b4 7fcdbb 41b6c4 1d91c0 225ea8 253494 081d58,gradient,colorbrew
 Purples / 3,efedf5 bcbddc 756bb1,gradient,colorbrew
@@ -229,18 +229,18 @@ GnBu / 7,f0f9e8 ccebc5 a8ddb5 7bccc4 4eb3d3 2b8cbe 08589e,gradient,colorbrew
 GnBu / 8,f7fcf0 e0f3db ccebc5 a8ddb5 7bccc4 4eb3d3 2b8cbe 08589e,gradient,colorbrew
 GnBu / 9,f7fcf0 e0f3db ccebc5 a8ddb5 7bccc4 4eb3d3 2b8cbe 0868ac 084081,gradient,colorbrew
 Greys / 3,f0f0f0 bdbdbd 636363,gradient,colorbrew
-Greys / 4,f7f7f7 cccccc 969696 525252,gradient,colorbrew
-Greys / 5,f7f7f7 cccccc 969696 636363 252525,gradient,colorbrew
+Greys / 4,f7f7f7 ccc 969696 525252,gradient,colorbrew
+Greys / 5,f7f7f7 ccc 969696 636363 252525,gradient,colorbrew
 Greys / 6,f7f7f7 d9d9d9 bdbdbd 969696 636363 252525,gradient,colorbrew
 Greys / 7,f7f7f7 d9d9d9 bdbdbd 969696 737373 525252 252525,gradient,colorbrew
-Greys / 8,ffffff f0f0f0 d9d9d9 bdbdbd 969696 737373 525252 252525,gradient,colorbrew
-Greys / 9,ffffff f0f0f0 d9d9d9 bdbdbd 969696 737373 525252 252525 000000,gradient,colorbrew
+Greys / 8,fff f0f0f0 d9d9d9 bdbdbd 969696 737373 525252 252525,gradient,colorbrew
+Greys / 9,fff f0f0f0 d9d9d9 bdbdbd 969696 737373 525252 252525 000,gradient,colorbrew
 YlOrRd / 3,ffeda0 feb24c f03b20,gradient,colorbrew
 YlOrRd / 4,ffffb2 fecc5c fd8d3c e31a1c,gradient,colorbrew
 YlOrRd / 5,ffffb2 fecc5c fd8d3c f03b20 bd0026,gradient,colorbrew
 YlOrRd / 6,ffffb2 fed976 feb24c fd8d3c f03b20 bd0026,gradient,colorbrew
 YlOrRd / 7,ffffb2 fed976 feb24c fd8d3c fc4e2a e31a1c b10026,gradient,colorbrew
-YlOrRd / 8,ffffcc ffeda0 fed976 feb24c fd8d3c fc4e2a e31a1c b10026,gradient,colorbrew
+YlOrRd / 8,ffc ffeda0 fed976 feb24c fd8d3c fc4e2a e31a1c b10026,gradient,colorbrew
 PuRd / 3,e7e1ef c994c7 dd1c77,gradient,colorbrew
 PuRd / 4,f1eef6 d7b5d8 df65b0 ce1256,gradient,colorbrew
 PuRd / 5,f1eef6 d7b5d8 df65b0 dd1c77 980043,gradient,colorbrew

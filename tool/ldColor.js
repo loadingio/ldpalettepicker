@@ -314,14 +314,19 @@
         return ret;
       }
     },
-    hex: function(v){
+    hex: function(v, compact){
       var ret;
+      compact == null && (compact = false);
       ret = utils.rgb(v);
-      return "#" + ['r', 'g', 'b'].map(function(it){
+      ret = ['r', 'g', 'b'].map(function(it){
         var v;
         v = Math.floor(ret[it]).toString(16) + "";
         return v = repeatString$("0", 2 - v.length) + v;
       }).join('');
+      if (compact && ret[0] === ret[1] && ret[2] === ret[3] && ret[4] === ret[5]) {
+        ret = ret[0] + ret[2] + ret[4];
+      }
+      return "#" + ret;
     },
     lab: function(v){
       var ref$, r, g, b, a, y, x, z;
