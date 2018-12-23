@@ -45,4 +45,6 @@ html(lang="en")
     script(type="text/javascript",src="ldpp.palettes.js")
     script(type="text/javascript",src="ldpp.js")
     script.
-      ldPalettePicker.init();
+      ldPalettePicker.register("default2", palettes);
+      var pals = ldPalettePicker.get("default2");
+      ldPalettePicker.init(pals);
