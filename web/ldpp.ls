@@ -142,6 +142,17 @@ ldPalettePicker = (node, opt = {}) ->
     document.removeEventListener \mousemove, dragger
   document.addEventListener \mouseup, -> document.removeEventListener \mousemove, dragger
 
+  pal-from-node = (n) ->
+    name = if n.find('.palette',0) or n.parent('.palette', root) => that.find('.name',0).innerText else 'untitled'
+    hexs = if n.find('.colors',0) or n.parent('.colors', root) =>
+      that.find('.color').map -> ldColor.hex(it.style.background)
+    else []
+    return {name, hexs}
+  # Use Dynamic
+  use-pal = (n) ~>
+    {name, hexs} = pal-from-node n
+    @fire \use, {name, colors: hexs.map -> {hex: it}}
+
   # Search Dynamics
   search = (v = "") ~>
     if !v => return content.build opt.palettes
@@ -156,9 +167,7 @@ ldPalettePicker = (node, opt = {}) ->
     opt = {colors: null, toggle: true, name: \Custom} <<< opt
     if opt.toggle => @tab \edit
     if opt.colors => [hexs,name] = [opt.colors.map(-> ldColor.hex it), opt.name]
-    else
-      hexs = if n.parent('.colors', root) => that.find('.color').map -> ldColor.hex(it.style.background) else []
-      name = (if n.parent('.palette', root) => that.find('.name',0).innerText else null) or 'untitled'
+    else {name, hexs} = pal-from-node n
     el.ed.colors.innerHTML = hexs
       .map (d,i) ->
         hcl = ldColor.hcl(d)
@@ -194,6 +203,12 @@ ldPalettePicker = (node, opt = {}) ->
 
   # General Action
   evts = do
+    use: (tgt) ~>
+      if (n = tgt.parent(".palette .btn", root)) =>
+        if n.attr(\data-action) == \use => return use-pal(n) or true
+      if n = tgt.parent(".panel[data-panel=edit]", root) =>
+        n = n.find \.palette, 0
+        if n => return use-pal(n) or true
     view: (tgt) ~>
       if !(p = tgt.parent(".navbar",root)) => return
       if(n = tgt.parent("*[data-panel=view]", p)) => return @tab \view
@@ -230,6 +245,7 @@ ldPalettePicker = (node, opt = {}) ->
         return true
   root.addEventListener \click, (e) ~>
     tgt = e.target
+    if evts.use(tgt) => return
     if evts.view(tgt) => return
     if evts.edit(tgt) => return
     if evts.undo(tgt) => return
@@ -237,12 +253,15 @@ ldPalettePicker = (node, opt = {}) ->
     if evts.edit-color(tgt) => return
 
   # Final Preparation
+  @evt-handler = {}
   content.build opt.palettes
   edit-init null, {colors: <[#b34e19 #d78c51 #f3e7c9]>, toggle: false}
 
   @
 
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
+  on: (n, cb) -> @evt-handler.[][n].push cb
+  fire: (n, ...v) -> for cb in (@evt-handler[n] or []) => cb.apply @, v
   tab: (n) -> 
     if !n => return
     idx = if @root.find(".panel[data-panel=#n]",0) => that.index! else -1

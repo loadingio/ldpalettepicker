@@ -10,7 +10,7 @@ Palette Format
   colors: ["#999", ...]                       # compact but losing color tags
 }
 */
-var ldPalettePicker;
+var ldPalettePicker, slice$ = [].slice;
 import$(HTMLElement.prototype, {
   find: function(s, n){
     var ret;
@@ -67,7 +67,7 @@ import$(HTMLElement.prototype, {
   }
 });
 ldPalettePicker = function(node, opt){
-  var root, el, content, log, ldcp, irsOpt, ref$, getIdx, dragger, search, editInit, editUpdate, evts, this$ = this;
+  var root, el, content, log, ldcp, irsOpt, ref$, getIdx, dragger, palFromNode, usePal, search, editInit, editUpdate, evts, this$ = this;
   opt == null && (opt = {});
   opt = import$({
     palettes: []
@@ -227,6 +227,31 @@ ldPalettePicker = function(node, opt){
   document.addEventListener('mouseup', function(){
     return document.removeEventListener('mousemove', dragger);
   });
+  palFromNode = function(n){
+    var name, that, hexs;
+    name = (that = n.find('.palette', 0) || n.parent('.palette', root)) ? that.find('.name', 0).innerText : 'untitled';
+    hexs = (that = n.find('.colors', 0) || n.parent('.colors', root))
+      ? that.find('.color').map(function(it){
+        return ldColor.hex(it.style.background);
+      })
+      : [];
+    return {
+      name: name,
+      hexs: hexs
+    };
+  };
+  usePal = function(n){
+    var ref$, name, hexs;
+    ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs;
+    return this$.fire('use', {
+      name: name,
+      colors: hexs.map(function(it){
+        return {
+          hex: it
+        };
+      })
+    });
+  };
   search = function(v){
     v == null && (v = "");
     if (!v) {
@@ -244,7 +269,7 @@ ldPalettePicker = function(node, opt){
     return search(e.target.value || "");
   });
   editInit = function(n, opt){
-    var ref$, hexs, name, that;
+    var ref$, hexs, name;
     opt == null && (opt = {});
     opt = import$({
       colors: null,
@@ -261,12 +286,7 @@ ldPalettePicker = function(node, opt){
         }), opt.name
       ], hexs = ref$[0], name = ref$[1];
     } else {
-      hexs = (that = n.parent('.colors', root))
-        ? that.find('.color').map(function(it){
-          return ldColor.hex(it.style.background);
-        })
-        : [];
-      name = ((that = n.parent('.palette', root)) ? that.find('.name', 0).innerText : null) || 'untitled';
+      ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs;
     }
     el.ed.colors.innerHTML = hexs.map(function(d, i){
       var hcl;
@@ -306,6 +326,20 @@ ldPalettePicker = function(node, opt){
     });
   };
   evts = {
+    use: function(tgt){
+      var n;
+      if (n = tgt.parent(".palette .btn", root)) {
+        if (n.attr('data-action') === 'use') {
+          return usePal(n) || true;
+        }
+      }
+      if (n = tgt.parent(".panel[data-panel=edit]", root)) {
+        n = n.find('.palette', 0);
+        if (n) {
+          return usePal(n) || true;
+        }
+      }
+    },
     view: function(tgt){
       var p, n;
       if (!(p = tgt.parent(".navbar", root))) {
@@ -378,6 +412,9 @@ ldPalettePicker = function(node, opt){
   root.addEventListener('click', function(e){
     var tgt;
     tgt = e.target;
+    if (evts.use(tgt)) {
+      return;
+    }
     if (evts.view(tgt)) {
       return;
     }
@@ -392,6 +429,7 @@ ldPalettePicker = function(node, opt){
     }
     if (evts.editColor(tgt)) {}
   });
+  this.evtHandler = {};
   content.build(opt.palettes);
   editInit(null, {
     colors: ['#b34e19', '#d78c51', '#f3e7c9'],
@@ -400,6 +438,19 @@ ldPalettePicker = function(node, opt){
   return this;
 };
 ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
+  on: function(n, cb){
+    var ref$;
+    return ((ref$ = this.evtHandler)[n] || (ref$[n] = [])).push(cb);
+  },
+  fire: function(n){
+    var v, i$, ref$, len$, cb, results$ = [];
+    v = slice$.call(arguments, 1);
+    for (i$ = 0, len$ = (ref$ = this.evtHandler[n] || []).length; i$ < len$; ++i$) {
+      cb = ref$[i$];
+      results$.push(cb.apply(this, v));
+    }
+    return results$;
+  },
   tab: function(n){
     var idx, that;
     if (!n) {
@@ -418,48 +469,50 @@ ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
     return true;
   }
 });
-ldPalettePicker.palettes = [];
-ldPalettePicker.parse = {
-  text: function(txt){
-    return txt.split('\n').filter(function(it){
-      return it;
-    }).map(function(v){
-      v = v.split(',').map(function(it){
-        return it.toLowerCase();
+import$(ldPalettePicker, {
+  palettes: [],
+  parse: {
+    text: function(txt){
+      return txt.split('\n').filter(function(it){
+        return it;
+      }).map(function(v){
+        v = v.split(',').map(function(it){
+          return it.toLowerCase();
+        });
+        return {
+          name: v[0],
+          colors: v[1].split(' ').map(function(it){
+            return "#" + it;
+          }),
+          tag: v.slice(2)
+        };
       });
-      return {
-        name: v[0],
-        colors: v[1].split(' ').map(function(it){
-          return "#" + it;
-        }),
-        tag: v.slice(2)
-      };
+    }
+  },
+  register: function(name, palettes){
+    if (typeof palettes === 'string') {
+      palettes = this.parse.text(palettes);
+    }
+    return this.palettes.push([name, palettes]);
+  },
+  get: function(name){
+    return (this.palettes.filter(function(it){
+      return it[0] === name;
+    })[0] || ['', []])[1];
+  },
+  init: function(pals){
+    pals == null && (pals = null);
+    if (!pals) {
+      pals = this.get('default');
+    }
+    return Array.from(document.querySelectorAll('*[ldPalettePicker]')).map(function(it){
+      return new ldPalettePicker(it, {
+        palettes: pals
+      });
     });
   }
-};
-ldPalettePicker.register = function(name, palettes){
-  if (typeof palettes === 'string') {
-    palettes = this.parse.text(palettes);
-  }
-  return this.palettes.push([name, palettes]);
-};
-ldPalettePicker.get = function(name){
-  return (this.palettes.filter(function(it){
-    return it[0] === name;
-  })[0] || ['', []])[1];
-};
-ldPalettePicker.register("default", ["flourish,b22 e55 f87 fb6 ab8 898,qualitative", "gray,000 333 666 ddd fff,gradient", "young,fec fe6 cd9 acd 7ab aac,concept", "plotDB,ed1e79 c69c6d 8cc63f 29abe2,brand", "French,37a 9ab eee f98 c10,diverging", "Afghan Girl,010 253 ffd da8 b53,artwork"].join('\n'));
-ldPalettePicker.init = function(palettes){
-  palettes == null && (palettes = null);
-  if (!palettes) {
-    palettes = this.get('default');
-  }
-  return Array.from(document.querySelectorAll('*[ldPalettePicker]')).map(function(it){
-    return new ldPalettePicker(it, {
-      palettes: palettes
-    });
-  });
-};
+});
+ldPalettePicker.register("default", "flourish,b22 e55 f87 fb6 ab8 898,qualitative\ngray,000 333 666 ddd fff,gradient\nyoung,fec fe6 cd9 acd 7ab aac,concept\nplotDB,ed1e79 c69c6d 8cc63f 29abe2,brand\nFrench,37a 9ab eee f98 c10,diverging\nAfghan Girl,010 253 ffd da8 b53,artwork");
 function import$(obj, src){
   var own = {}.hasOwnProperty;
   for (var key in src) if (own.call(src, key)) obj[key] = src[key];
