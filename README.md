@@ -40,6 +40,15 @@ Invoke it when you need a palette:
         });
 ```
 
+## Custom Palettes
+
+example:
+```
+    ldPalettePicker.register("default2", palettes);
+    var pals = ldPalettePicker.get("default2");
+    ldPalettePicker.init(pals);
+```
+
 
 ## TODO
 
