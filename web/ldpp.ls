@@ -4,9 +4,9 @@ Palette Format
   name: "Palette Name",
   tag: ["tag", "list", ...],
   # either one of below
-  colors: [{hex: "#999", tag: [...]}, ...]    # hex. color follows ldColor format
-  colors: [{value: "#999"}, ...]              # deprecated
-  colors: ["#999", ...]                       # compact but losing color tags
+  colors: [ldColor, ldColor, ...]               # type agnoistic color. we should internally use this
+  colors: [{hex: "#999", tag: [...]}, ...]      # hex. color follows ldColor format.
+  colors: ["#999", ...]                         # compact but losing color tags
 }
 */
 
@@ -151,7 +151,7 @@ ldPalettePicker = (node, opt = {}) ->
   # Use Dynamic
   use-pal = (n) ~>
     {name, hexs} = pal-from-node n
-    @fire \use, {name, colors: hexs.map -> {hex: it}}
+    @fire \use, {name, colors: hexs.map -> ldColor.rgb(it)}
 
   # Search Dynamics
   search = (v = "") ~>

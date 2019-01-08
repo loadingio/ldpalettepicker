@@ -5,9 +5,9 @@ Palette Format
   name: "Palette Name",
   tag: ["tag", "list", ...],
   # either one of below
-  colors: [{hex: "#999", tag: [...]}, ...]    # hex. color follows ldColor format
-  colors: [{value: "#999"}, ...]              # deprecated
-  colors: ["#999", ...]                       # compact but losing color tags
+  colors: [ldColor, ldColor, ...]               # type agnoistic color. we should internally use this
+  colors: [{hex: "#999", tag: [...]}, ...]      # hex. color follows ldColor format.
+  colors: ["#999", ...]                         # compact but losing color tags
 }
 */
 var ldPalettePicker, slice$ = [].slice;
@@ -246,9 +246,7 @@ ldPalettePicker = function(node, opt){
     return this$.fire('use', {
       name: name,
       colors: hexs.map(function(it){
-        return {
-          hex: it
-        };
+        return ldColor.rgb(it);
       })
     });
   };
