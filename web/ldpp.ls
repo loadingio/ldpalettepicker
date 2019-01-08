@@ -204,8 +204,8 @@ ldPalettePicker = (node, opt = {}) ->
   # General Action
   evts = do
     use: (tgt) ~>
-      if (n = tgt.parent(".palette .btn", root)) =>
-        if n.attr(\data-action) == \use => return use-pal(n) or true
+      if !tgt.parent('[data-action=use]',root) => return false
+      if (n = tgt.parent(".palette .btn", root)) => return use-pal(n) or true
       if n = tgt.parent(".panel[data-panel=edit]", root) =>
         n = n.find \.palette, 0
         if n => return use-pal(n) or true

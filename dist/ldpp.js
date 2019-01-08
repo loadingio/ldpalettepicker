@@ -326,10 +326,11 @@ ldPalettePicker = function(node, opt){
   evts = {
     use: function(tgt){
       var n;
+      if (!tgt.parent('[data-action=use]', root)) {
+        return false;
+      }
       if (n = tgt.parent(".palette .btn", root)) {
-        if (n.attr('data-action') === 'use') {
-          return usePal(n) || true;
-        }
+        return usePal(n) || true;
       }
       if (n = tgt.parent(".panel[data-panel=edit]", root)) {
         n = n.find('.palette', 0);
