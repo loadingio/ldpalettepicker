@@ -18,9 +18,10 @@ mixin ldPalettePicker
   .ldpp(ldPalettePicker)
     .navbar.text-center: .inner(data-tag="menu")
       ul.nav.nav-pills.float-right
+        div.nav-item: a.nav-link.active(data-panel="view") View
         li.nav-item: a.nav-link(data-panel="edit") Edit
       div.nav.nav-pills
-        div.nav-item: a.nav-link.active(data-panel="view") View
+        //div.nav-item: a.nav-link.active(data-panel="view") View
         .input-group.ml-2(style="width:200px")
           input.form-control(placeholder="Search...",data-tag="search")
           .input-group-append.dropdown
