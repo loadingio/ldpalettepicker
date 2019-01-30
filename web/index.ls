@@ -27,7 +27,6 @@ ldPage.prototype = Object.create(Object.prototype) <<< do
     if @running or @end => return
     clearTimeout @handle.scroll
     @handle.scroll = setTimeout (~>
-      console.log @host, @host.scrollHeight, @host.scrollTop, @host.clientHeight, @boundary
       if @host.scrollHeight - @host.scrollTop - @host.clientHeight > @boundary => return
       if !@end and !@running => @fetch!then ~> @fire \scroll.fetch, it
     ), @scroll-delay

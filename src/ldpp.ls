@@ -58,19 +58,18 @@ ldPalettePicker = (node, opt = {}) ->
       """
 
   #Custom Palette List
-  console.log "opt.mypal?", opt.mypal
   if opt.mypal? => # mypal should be a ldPage instance
-    opt.mypal.set-host el.pn.mypal
-    opt.mypal.on \scroll.fetch, ->
-      content.add \mypal, it
-      console.log ">>", it
-      content.build content.pals.mypal, 'mypal'
-    mypal= do
-      page: opt.mypal
+    mypal = do
+      page: Object.create(opt.mypal)
       fetch: -> 
         @page.fetch!then (ret) ->
           content.add \mypal, ret
           content.build content.pals.mypal, 'mypal'
+    mypal.page
+      ..set-host el.pn.mypal
+      ..on \scroll.fetch, ->
+        content.add \mypal, it
+        content.build content.pals.mypal, 'mypal'
 
   # Undo System
   log = do
@@ -221,14 +220,10 @@ ldPalettePicker = (node, opt = {}) ->
         n = ld$.find n, \.palette, 0
         if n => return use-pal(n) or true
     mypal: (tgt) ~>
-      console.log tgt
       if !(p = ld$.parent(tgt,".navbar",root)) => return
-      console.log p
       if(n = ld$.parent(tgt,"*[data-panel=mypal]", p)) =>
-        console.log mypal
         if !(mypal?) => return @tab \view
         mypal.fetch!
-        console.log \ok123
         return @tab \mypal
     view: (tgt) ~>
       if !(p = ld$.parent(tgt,".navbar",root)) => return
