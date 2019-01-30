@@ -13,6 +13,9 @@ Prepare HTML structure with our Pug mixin:
       +ldPalettePicker
 ```
 
+By default ldPalettePicker doesn't provide styling of the panel / dialog so you can do it in the wrap div.
+
+
 Initialize the widget with JavaScript:
 
 ```
@@ -40,7 +43,9 @@ Invoke it when you need a palette:
         });
 ```
 
+
 ## Custom Palettes
+
 
 example:
 ```
@@ -49,6 +54,34 @@ example:
     ldPalettePicker.init(pals);
 ```
 
+
+## Spec
+
+Palette is defined as following format:
+
+    {
+      name: "Palette Name",
+      tag: ["tag", "list", ...],
+      # either one of below
+      colors: [ldColor, ldColor, ...]               # type agnoistic color. we should internally use this
+      colors: [{hex: "#999", tag: [...]}, ...]      # hex. color follows ldColor format.
+      colors: ["#999", ...]                         # compact but losing color tags
+    }
+
+
+## License Consideration
+
+For better performance with large amount of palettes, you can enable [Clusterize.js](https://clusterize.js.org/) by setting useClusterizejs to true:
+
+````
+    ldPalettePicker.init({useClusterizejs: true});
+````
+
+( To make it work you also have to include js and css files of [Clusterize.js](https://clusterize.js.org/). )
+
+Yet Clusterize.js is released under dual license - free for personal use and charge for commercial license. So it's up to your discretion to whether use it or not - and you should acquire necessary license when you use it.
+
+When enabling, Clusterize.js requires another option "itemPerLine", which controls how many palettes are in a line in the list view. Its default value is 2.
 
 ## TODO
 

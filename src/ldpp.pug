@@ -1,4 +1,6 @@
 //- module
+
+//- Palette Widget in Palette List
 mixin palette(palette)
   - if(!palette) palette = [[],""]
   .palette
@@ -14,14 +16,15 @@ mixin palette(palette)
           .desc EDIT
     .name= palette[0]
 
+//- Palette Picker Widget
 mixin ldPalettePicker
   .ldpp(ldPalettePicker)
     .navbar.text-center: .inner(data-tag="menu")
       ul.nav.nav-pills.float-right
         div.nav-item: a.nav-link.active(data-panel="view") View
+        div.nav-item: a.nav-link(data-panel="mypal") My Pals
         li.nav-item: a.nav-link(data-panel="edit") Edit
       div.nav.nav-pills
-        //div.nav-item: a.nav-link.active(data-panel="view") View
         .input-group.ml-2(style="width:200px")
           input.form-control(placeholder="Search...",data-tag="search")
           .input-group-append.dropdown
@@ -38,13 +41,14 @@ mixin ldPalettePicker
                 a.dropdown-item(href="#",data-cat="diverging") Diverging
                 a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
     .panels
-      .panel.active(data-panel="view")
+      .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
+      .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px"): .inner.clusterize-content
       .panel(data-panel="edit")
         .palette
           .name
           .colors
         .edit
-          div(style="padding:20px")
+          .inner(style="padding:20px")
             .row
               .col-sm-6
                 .ldColorPicker.no-border.no-palette
@@ -77,7 +81,7 @@ mixin ldPalettePicker
                       input.value.form-control.form-control-sm(
                       data-tag=config[3] + "-" + config[2][0].toLowerCase())
             hr
-            .foot(style="position:absolute;bottom:0;padding:20px;width:100%;left:0")
+            .foot
               .float-right
                 .btn.btn-primary.mr-2(data-action="use") Use This Palette
                 .btn.btn-outline-secondary Save

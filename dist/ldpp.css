@@ -4,10 +4,6 @@
   height: 600px;
   margin: auto;
   overflow: hidden;
-/* styling */
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  padding: 0;
 }
 .ldpp {
   position: relative;
@@ -128,7 +124,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 120px 10px 40px;
+  padding: 120px 10px 0;
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -218,6 +214,13 @@
 .ldpp .panel[data-panel=edit] .edit {
   text-align: left;
   margin-top: 0;
+}
+.ldpp .panel[data-panel=edit] .edit > .inner {
+  padding: 20px;
+}
+.ldpp .panel[data-panel=edit] .edit > .foot {
+  padding: 20px;
+  width: 100%;
 }
 .ldpp .panel[data-panel=edit] .irs {
   margin: -25px 0 20px;

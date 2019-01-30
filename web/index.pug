@@ -33,18 +33,30 @@ html(lang="en")
     link(rel="stylesheet",type="text/css",href="assets/ion-rangeslider/2.1.7/css/ion.rangeSlider.css")
     link(rel="stylesheet",type="text/css",href="assets/ion-rangeslider/2.1.7/css/ion.rangeSlider.skinFlat.css")
     link(rel="stylesheet",type="text/css",href="assets/ldcolorpicker/1.0.0/ldcp.css")
+    script(src="assets/ldQuery/ldq.min.js")
     script(src="assets/ion-rangeslider/2.1.7/js/ion.rangeSlider.js")
     script(src="assets/ldcolor/0.0.1/ldColor.min.js")
     script(src="assets/ldcolorpicker/1.0.0/ldcp.js")
+    link(rel="stylesheet",type="text/css",href="assets/ldcv/ldcv.min.css")
+    script(src="assets/ldcv/ldcv.min.js")
+    link(rel="stylesheet",type="text/css",href="assets/clusterize/clusterize.css")
+    script(src="assets/clusterize/clusterize.min.js")
 
   body
-
+    include ldpp.pug
+    br
+    h2 Palette Picker
+    .text-center handy palette picker widget for curated palette list
+    hr
     #root(style="padding-top: 30px")
-      include ldpp.pug
-      +ldPalettePicker
+      h3 Embedded Picker
+      #container: +ldPalettePicker
+      br
+      hr
+      br
+      h3 Work with ldCover
+      .btn.btn-primary(onclick="ldcv.toggle(true)") Toggle
+      .ldcv: .base: .inner: +ldPalettePicker
     script(type="text/javascript",src="ldpp.palettes.js")
     script(type="text/javascript",src="ldpp.js")
-    script.
-      ldPalettePicker.register("default2", palettes);
-      var pals = ldPalettePicker.get("default2");
-      ldPalettePicker.init(pals);
+    script(src="index.js")

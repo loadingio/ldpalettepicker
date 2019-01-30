@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
+echo "Transpiling ldpp.ls..."
 lsc -cbp src/ldpp.ls > dist/ldpp.js
-stylus -o dist src/ldpp.styl
+echo "Transpiling ldpp.styl..."
+stylus -p src/ldpp.styl > dist/ldpp.css
+echo "Uglifying ldpp.js..."
 uglifyjs dist/ldpp.js > dist/ldpp.min.js
+echo "Uglifying ldpp.css..."
 uglifycss dist/ldpp.css > dist/ldpp.min.css
+echo "Copy palettes presets to dist/ folder..."
+cp tool/js/*.js dist/
+echo "Done."
+
