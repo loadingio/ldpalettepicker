@@ -222,8 +222,9 @@
   padding: 20px;
   width: 100%;
 }
-.ldpp .panel[data-panel=edit] .irs {
-  margin: -25px 0 20px;
+.ldpp .panel[data-panel=edit] .ldrs {
+  margin-top: -3px;
+  height: 37px;
 }
 .ldpp .panel[data-panel=edit] .label-group {
   position: relative;

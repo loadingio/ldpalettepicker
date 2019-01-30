@@ -81,19 +81,22 @@ ldPalettePicker = (node, opt = {}) ->
       if !html => return
       el.ed.pal.innerHTML = html
       el.ed.colors = ld$.find(el.ed.pal,'.colors',0)
-    push: ->
+    push: (forced = false) ->
       if @handle => clearTimeout that
       if !@cur => @cur = el.ed.pal.innerHTML
-      @handle = setTimeout (~> 
+      _ = ~>
         if @stack[* - 1] != @cur => @stack.push @cur
         @ <<< handle: null, cur: null
-      ), 200
+      if forced => _!
+      else @handle = setTimeout (~> _! ), 200
+
 
   # Color Picker Initialization
   @ldcp = ldcp = new ldColorPicker el.ed.picker, {inline: true}
   ldcp.on \change, ~> log.push!; edit-update it
 
   # Input ( Slider, Inputbox ) Initialization
+  ldrs = {}
   irs-opt = base: min: 0, max: 255, step: 1, hide_min_max: true, hide_from_to: true, grid: false
   irs-opt  <<< do
     "hsl-h": {} <<< irs-opt.base <<< {max: 360}
@@ -111,16 +114,20 @@ ldPalettePicker = (node, opt = {}) ->
         c = ldcp.get-color v.0
         c[v.1] = e.target.value
         ldcp.set-color c
-      # Drag in input.ion-slider: set ldcp
-      $(ld$.find(root,".ion-slider[data-tag=#{t}]",0)).ionRangeSlider irs-opt[t] <<< onChange: (e) ~>
-        ldcp._slider = t
-        c = ldcp.get-color v.0
-        c[v.1] = e.from
-        ldcp.set-color c
+      # Drag in input.ldSlider: set ldcp
+      ldrs[t] = new ldSlider {root: ld$.find(root,".ion-slider[data-tag=#{t}]",0)} <<< irs-opt[t]
+      ((t) ->
+        ldrs[t].on \change, (val) ->
+          ldcp._slider = t
+          c = ldcp.get-color v.0
+          c[v.1] = val
+          ldcp.set-color c
+      )(t)
     ) it
   el.ed.hex.addEventListener \change, (e) -> ldcp.set-color e.target.value   # Hex Input
   el.ed.sel.addEventListener \change, (e) ~> el.ed.cfgs.map ~>               # Select Box
-    it.classList[if it.attr(\data-tag) == e.target.value => \add else \remove] \active
+    it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
+    for k,v of ldrs => v.update!
 
   # Drag to re-order Dynamics
   get-idx = (e) ->
@@ -195,6 +202,7 @@ ldPalettePicker = (node, opt = {}) ->
     ld$.find(el.ed.colors.parentNode,'.name',0).innerHTML = name
     edit-update hexs.0
     ldcp.set-color hexs.0
+
   edit-update = (c) ->
     hcl = ldColor.hcl(c)
     node = ld$.find(root,'.color.active',0)
@@ -208,7 +216,7 @@ ldPalettePicker = (node, opt = {}) ->
       if !(t == \hsl-s or t == \hsl-l) => v = Math.round(v)
       ld$.find(root,".value[data-tag=#{t}]",0).value = v
       if ldcp._slider == t => return ldcp._slider = null
-      $(ld$.find(root,".ion-slider[data-tag=#{t}]",0)).data("ionRangeSlider").update from: v
+      ldrs[t].set v
 
 
   # General Action
