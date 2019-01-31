@@ -52,6 +52,9 @@ ldPalettePicker = function(node, opt){
       var rows, lines, i$, step$, to$, i, line, j$, to1$, j;
       p == null && (p = []);
       tgt == null && (tgt = 'view');
+      if (tgt === 'edit') {
+        tgt = 'view';
+      }
       rows = p.map(function(it){
         return it.html;
       });
@@ -280,6 +283,9 @@ ldPalettePicker = function(node, opt){
       return content.build(content.pals[pal] || [], pal);
     }
     v = v.toLowerCase().trim();
+    if (pal === 'edit') {
+      pal = 'view';
+    }
     content.build((content.pals[pal] || []).filter(function(it){
       return it.obj.name.indexOf(v) >= 0 || (it.obj.tag || []).filter(function(it){
         return it.indexOf(v) >= 0;

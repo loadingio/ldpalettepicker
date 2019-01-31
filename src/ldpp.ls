@@ -29,6 +29,9 @@ ldPalettePicker = (node, opt = {}) ->
       if !@pals[tab] => @pals[tab] = []
       @pals[tab] ++= (p.map ~> {html: @html(it), obj: it})
     build: (p = [], tgt='view') ->
+      # build content for edit? it might be we searching while in edit panel.
+      # just set tgt to view.
+      if tgt == \edit => tgt = \view
       rows = p.map -> it.html
       if rows.length == 0 => return el.pnin[tgt]innerHTML = "no result..."
       if opt.use-clusterizejs  =>
@@ -176,6 +179,7 @@ ldPalettePicker = (node, opt = {}) ->
     pal = if n => ld$.attr(n, \data-panel) else \view
     if !v => return content.build (content.pals[pal] or []), pal
     v = v.toLowerCase!trim!
+    if pal == \edit => pal = \view # we dont search at edit panel. it must be for view panel.
     content.build(
       (content.pals[pal] or []).filter(->
         it.obj.name.indexOf(v) >= 0 or (it.obj.tag or []).filter(->it.indexOf(v) >= 0).length),
