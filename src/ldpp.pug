@@ -65,13 +65,13 @@ mixin ldPalettePicker
                   .row.config(data-tag=config[3],class=config[4])
                     .col-sm-8
                       .label-group: span= config[0]
-                      input.ion-slider(
+                      input.ldrs(
                       data-tag=config[3] + "-" + config[0][0].toLowerCase())
                       .label-group: span= config[1]
-                      input.ion-slider(
+                      input.ldrs(
                       data-tag=config[3] + "-" + config[1][0].toLowerCase())
                       .label-group: span= config[2]
-                      input.ion-slider(
+                      input.ldrs(
                       data-tag=config[3] + "-" + config[2][0].toLowerCase())
                     .col-sm-4
                       input.value.form-control.form-control-sm(

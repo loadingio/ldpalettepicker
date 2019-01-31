@@ -179,7 +179,7 @@ ldPalettePicker = function(node, opt){
         return ldcp.setColor(c);
       });
       ldrs[t] = new ldSlider(import$({
-        root: ld$.find(root, ".ion-slider[data-tag=" + t + "]", 0)
+        root: ld$.find(root, ".ldrs[data-tag=" + t + "]", 0)
       }, irsOpt[t]));
       return function(t){
         return ldrs[t].on('change', function(val){

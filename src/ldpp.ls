@@ -114,8 +114,8 @@ ldPalettePicker = (node, opt = {}) ->
         c = ldcp.get-color v.0
         c[v.1] = e.target.value
         ldcp.set-color c
-      # Drag in input.ldSlider: set ldcp
-      ldrs[t] = new ldSlider {root: ld$.find(root,".ion-slider[data-tag=#{t}]",0)} <<< irs-opt[t]
+      # Drag in input.ldrs: set ldcp
+      ldrs[t] = new ldSlider {root: ld$.find(root,".ldrs[data-tag=#{t}]",0)} <<< irs-opt[t]
       ((t) ->
         ldrs[t].on \change, (val) ->
           ldcp._slider = t
