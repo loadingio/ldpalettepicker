@@ -7,7 +7,9 @@ echo "Uglifying ldpp.js..."
 uglifyjs dist/ldpp.js > dist/ldpp.min.js
 echo "Uglifying ldpp.css..."
 uglifycss dist/ldpp.css > dist/ldpp.min.css
-echo "Copy palettes presets to dist/ folder..."
+echo "Copy palettes presets to dist/ ..."
 cp tool/js/*.js dist/
+echo "Copy pug mixin to dist/ ..."
+cp src/ldpp.pug dist/
 echo "Done."
 

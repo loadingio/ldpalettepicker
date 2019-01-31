@@ -1,0 +1,88 @@
+//- module
+
+//- Palette Widget in Palette List
+mixin palette(palette)
+  - if(!palette) palette = [[],""]
+  .palette
+    .colors
+      each color in palette[1]
+        .color(style="background:" + color)
+      .ctrl
+        .btn.btn-sm
+          .fa.fa-check
+          .desc USE
+        .btn.btn-sm(data-action="edit")
+          .fa.fa-cog
+          .desc EDIT
+    .name= palette[0]
+
+//- Palette Picker Widget
+mixin ldPalettePicker
+  .ldpp(ldPalettePicker)
+    .navbar.text-center: .inner(data-tag="menu")
+      ul.nav.nav-pills.float-right
+        div.nav-item: a.nav-link.active(data-panel="view") View
+        div.nav-item: a.nav-link(data-panel="mypal") My Pals
+        li.nav-item: a.nav-link(data-panel="edit") Edit
+      div.nav.nav-pills
+        .input-group.ml-2(style="width:200px")
+          input.form-control(placeholder="Search...",data-tag="search")
+          .input-group-append.dropdown
+              .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Filter
+              .dropdown-menu(data-tag="categories")
+                a.dropdown-item(href="#",data-cat="") All
+                .dropdown-divider
+                a.dropdown-item(href="#",data-cat="artwork") Artwork
+                a.dropdown-item(href="#",data-cat="brand") Brand
+                a.dropdown-item(href="#",data-cat="concept") Concept
+                .dropdown-divider
+                a.dropdown-item(href="#",data-cat="gradient") Gradient
+                a.dropdown-item(href="#",data-cat="qualitative") Qualitative
+                a.dropdown-item(href="#",data-cat="diverging") Diverging
+                a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
+    .panels
+      .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
+      .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px"): .inner.clusterize-content
+      .panel(data-panel="edit")
+        .palette
+          .name
+          .colors
+        .edit
+          .inner(style="padding:20px")
+            .row
+              .col-sm-6
+                .ldColorPicker.no-border.no-palette
+              .col-sm-6
+                .row.mb-2
+                  .col-sm-8
+                    select.form-control.form-control-sm(value="rgb")
+                      option(value="rgb") RGB
+                      option(value="hsl") HSL
+                      option(value="hcl") HCL
+                  .col-sm-4: input.form-control.form-control-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
+                - var configs = [["Red", "Green", "Blue", "rgb", "active"], ["Hue", "Saturation", "Luminance", "hsl",""], ["Hue", "Chroma", "Luminance", "hcl",""]];
+                each config in configs
+                  .row.config(data-tag=config[3],class=config[4])
+                    .col-sm-8
+                      .label-group: span= config[0]
+                      input.ldrs(
+                      data-tag=config[3] + "-" + config[0][0].toLowerCase())
+                      .label-group: span= config[1]
+                      input.ldrs(
+                      data-tag=config[3] + "-" + config[1][0].toLowerCase())
+                      .label-group: span= config[2]
+                      input.ldrs(
+                      data-tag=config[3] + "-" + config[2][0].toLowerCase())
+                    .col-sm-4
+                      input.value.form-control.form-control-sm(
+                      data-tag=config[3] + "-" + config[0][0].toLowerCase())
+                      input.value.form-control.form-control-sm(
+                      data-tag=config[3] + "-" + config[1][0].toLowerCase())
+                      input.value.form-control.form-control-sm(
+                      data-tag=config[3] + "-" + config[2][0].toLowerCase())
+            hr
+            .foot
+              .float-right
+                .btn.btn-primary.mr-2(data-action="use") Use This Palette
+                .btn.btn-outline-secondary Save
+              .btn.btn-outline-secondary(data-action="undo") Undo #[i.fa.fa-undo]
