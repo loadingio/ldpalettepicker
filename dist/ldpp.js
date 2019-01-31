@@ -381,8 +381,8 @@ ldPalettePicker = function(node, opt){
       if (!(n = ld$.parent(tgt, "*[data-cat]", p))) {
         return;
       }
-      search(el.nv.search.value = ld$.attr(n, "data-cat") || "");
-      return this$.tab('view');
+      this$.tab('view');
+      return search(el.nv.search.value = ld$.attr(n, "data-cat") || "");
     },
     edit: function(tgt){
       var n;

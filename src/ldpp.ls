@@ -237,8 +237,8 @@ ldPalettePicker = (node, opt = {}) ->
       if !(p = ld$.parent(tgt,".navbar",root)) => return
       if(n = ld$.parent(tgt,"*[data-panel=view]", p)) => return @tab \view
       if !(n = ld$.parent(tgt,"*[data-cat]",p)) => return
+      @tab \view # go to view first so search will execute in view panel
       search el.nv.search.value = (ld$.attr(n,"data-cat") or "")
-      return @tab \view
     edit: (tgt) ->
       if !(n = ld$.parent(tgt,".palette .btn", root)) => return
       if ld$.attr(n,\data-action) == \edit => return edit-init(n) or true
