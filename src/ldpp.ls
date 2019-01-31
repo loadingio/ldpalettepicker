@@ -70,6 +70,10 @@ ldPalettePicker = (node, opt = {}) ->
       ..on \scroll.fetch, ->
         content.add \mypal, it
         content.build content.pals.mypal, 'mypal'
+  else
+    ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.nav-item', el.nv.root)
+    ret.style.display = \none
+    ld$.remove(el.pn.mypal)
 
   # Undo System
   log = do
