@@ -58,6 +58,26 @@ html(lang="en")
       h3 Work with ldCover
       .btn.btn-primary(onclick="ldcv.toggle(true)") Toggle
       .ldcv: .base: .inner: +ldPalettePicker
+      br
+      hr
+      br
+      h3 Standalone Palette Styling
+      .ldpal
+        .colors
+          each c in ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
+            .color(style="background:" + c)
+          .ctrl Rainbow
+        .name Rainbow
+      br
+      br
+      h5 usage
+      textarea(rows="7",cols="60",style="font-family:monospace;font-size:16px;border-radius:3px").
+        .ldpal
+          .colors
+            .color(style="background:...")
+            ...
+            .ctrl ( things to show on hover )
+          .name Pal Name
     script(type="text/javascript",src="ldpp.palettes.js")
     script(type="text/javascript",src="ldpp.js")
     script(src="index.js")
