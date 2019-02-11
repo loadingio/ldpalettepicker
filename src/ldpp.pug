@@ -42,7 +42,11 @@ mixin ldPalettePicker
                 a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
     .panels
       .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
-      .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px"): .inner.clusterize-content
+      .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px")
+        .inner.clusterize-content
+        .btn.btn-primary.btn-block.loader.ld-over-inverse
+          | Load More
+          .ld.ldld.ldbtn.sm
       .panel(data-panel="edit")
         .palette
           .name

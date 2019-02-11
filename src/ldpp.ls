@@ -21,6 +21,8 @@ ldPalettePicker = (node, opt = {}) ->
     hex: ld$.find(el.pn.edit,'input[data-tag=hex]',0)
     sel: ld$.find(el.pn.edit,'select',0)
     cfgs: ld$.find(el.pn.edit,'.config')
+  el.mp = do
+    load: ld$.find(el.pn.mypal,'.btn.loader',0)
 
   # Prepare content
   content = do
@@ -63,16 +65,20 @@ ldPalettePicker = (node, opt = {}) ->
   #Custom Palette List
   if opt.mypal? => # mypal should be a ldPage instance
     mypal = do
+      loader: new ldLoader root: el.mp.load
       page: Object.create(opt.mypal)
       fetch: -> 
         @page.fetch!then (ret) ->
           content.add \mypal, ret
           content.build content.pals.mypal, 'mypal'
-    mypal.page
-      ..set-host el.pn.mypal
-      ..on \scroll.fetch, ->
-        content.add \mypal, it
-        content.build content.pals.mypal, 'mypal'
+    mypal.page.set-host el.pn.mypal
+    el.mp.load.addEventListener \click, ->
+      mypal.loader.on 100
+        .then -> mypal.page.fetch!
+        .then ->
+          content.add \mypal, it
+          content.build content.pals.mypal, 'mypal'
+        .then -> mypal.loader.off 100
   else
     ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.nav-item', el.nv.root)
     ret.style.display = \none
@@ -259,6 +265,7 @@ ldPalettePicker = (node, opt = {}) ->
       color = ld$.parent(tgt,".color", el.ed.pal)
       if btn and !btn.classList.contains(\fa-bars) and color.classList.contains \active =>
         if btn.classList.contains \fa-close =>
+          if color.parentNode.childNodes.length <= 1 => return true
           log.push!
           if color.classList.contains \active
             sibling = (color.parentNode.childNodes[ld$.index(color) + 1] 

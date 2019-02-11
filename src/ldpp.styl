@@ -92,12 +92,16 @@
 for num in (1..3)
   .ldpp .panel:nth-child({num})
     transform: translate(100% * (num - 1),0)
-.ldpp .panel[data-name=edit]
+.ldpp .panel[data-panel=edit]
   .palette
     width: 90%
     margin: auto
     .colors
       height: 64px
+      .color:nth-last-child(-n+2)
+        border-radius: 0
+      .color:nth-last-child(-n+1)
+        border-radius: 0 3px 3px 0
     .name
       display: none
 .ldpp .panels
@@ -110,12 +114,14 @@ for num in (1..3)
   position: absolute
   top: 0
   left: 0
-  padding: 120px 10px 0
+  padding: 120px 10px 20px
   width: 100%
   height: 100%
   overflow: scroll
   &.active
     display: block
+  & > .inner
+    text-align: center
 
 .ldpp .panel[data-panel=edit] .palette
   width: 100%
@@ -204,6 +210,12 @@ for num in (1..3)
       position: absolute
       top: 3px
       right: 0
+
+.ldpp .panel[data-panel=mypal] .btn.loader
+  position: relative
+  width: 50%
+  margin: 20px auto
+  cursor: pointer
 
 .ldpp .config
   display: none
