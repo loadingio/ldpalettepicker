@@ -95,6 +95,12 @@
   width: 32px;
   height: 100%;
 }
+.ldpp .palette .color:first-of-type {
+  border-radius: 3px 0 0 3px;
+}
+.ldpp .palette .color:nth-last-child(-n+2) {
+  border-radius: 0 3px 3px 0;
+}
 .ldpp .panel:nth-child(1) {
   transform: translate(0%, 0);
 }
