@@ -21,9 +21,9 @@ mixin ldPalettePicker
   .ldpp(ldPalettePicker)
     .navbar.text-center: .inner(data-tag="menu")
       ul.nav.nav-pills.float-right
-        div.nav-item: a.nav-link.active(data-panel="view") View
-        div.nav-item: a.nav-link(data-panel="mypal") My Pals
-        li.nav-item: a.nav-link(data-panel="edit") Edit
+        .nav-item: a.nav-link.active(data-panel="view") View
+        .nav-item: a.nav-link(data-panel="mypal") My Pals
+        .nav-item: a.nav-link(data-panel="edit") Edit
       div.nav.nav-pills
         .input-group.ml-2(style="width:200px")
           input.form-control(placeholder="Search...",data-tag="search")
@@ -44,7 +44,7 @@ mixin ldPalettePicker
       .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
       .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px")
         .inner.clusterize-content
-        .btn.btn-primary.btn-block.loader.ld-over-inverse
+        .btn.btn-primary.btn-block.ld-over-inverse.btn-load
           | Load More
           .ld.ldld.ldbtn.sm
       .panel(data-panel="edit")

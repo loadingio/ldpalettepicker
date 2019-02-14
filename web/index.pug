@@ -29,7 +29,6 @@ html(lang="en")
     include library.pug
     // custom files
     link(rel="stylesheet",type="text/css",href="index.css")
-
     link(rel="stylesheet",type="text/css",href="assets/ldcolorpicker/1.0.0/ldcp.css")
     link(rel="stylesheet",type="text/css",href="ldpp.css")
     link(rel="stylesheet",type="text/css",href="assets/ldrs.min.css")
@@ -39,7 +38,7 @@ html(lang="en")
     script(src="assets/ldrs.min.js")
     script(src="assets/ldld/ldld.min.js")
     script(src="assets/ldpage.min.js")
-    script(src="assets/ldcolor/0.0.1/ldColor.min.js")
+    script(src="assets/ldColor/ldColor.min.js")
     script(src="assets/ldcolorpicker/1.0.0/ldcp.js")
     link(rel="stylesheet",type="text/css",href="assets/ldcv/ldcv.min.css")
     script(src="assets/ldcv/ldcv.min.js")
@@ -60,7 +59,7 @@ html(lang="en")
       br
       h3 Work with ldCover
       .btn.btn-primary(onclick="ldcv.toggle(true)") Toggle
-      .ldcv: .base: .inner: +ldPalettePicker
+      .ldcv.default-size: .base: .inner: +ldPalettePicker
       br
       hr
       br

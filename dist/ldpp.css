@@ -63,6 +63,10 @@
   margin-top: 1px;
   line-height: 1.2em;
 }
+.ldpp .palette .ctrl .btn:hover,
+.ldpal .ctrl .btn:hover {
+  color: #fff;
+}
 .ldpp .palette .ctrl .fa,
 .ldpal .ctrl .fa {
   font-size: 1.6em;
@@ -122,14 +126,20 @@
 .ldpp .panel:nth-child(3) {
   transform: translate(200%, 0);
 }
-.ldpp .panel[data-name=edit] .palette {
+.ldpp .panel[data-panel=edit] .palette {
   width: 90%;
   margin: auto;
 }
-.ldpp .panel[data-name=edit] .palette .colors {
+.ldpp .panel[data-panel=edit] .palette .colors {
   height: 64px;
 }
-.ldpp .panel[data-name=edit] .palette .name {
+.ldpp .panel[data-panel=edit] .palette .colors .color:nth-last-child(-n+2) {
+  border-radius: 0;
+}
+.ldpp .panel[data-panel=edit] .palette .colors .color:nth-last-child(-n+1) {
+  border-radius: 0 3px 3px 0;
+}
+.ldpp .panel[data-panel=edit] .palette .name {
   display: none;
 }
 .ldpp .panels {
@@ -137,18 +147,22 @@
   transition: transform 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 .ldpp .panel {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 120px 10px 0;
+  padding: 120px 10px 20px;
   width: 100%;
   height: 100%;
   overflow: scroll;
 }
 .ldpp .panel.active {
   display: block;
+}
+.ldpp .panel > .inner {
+  text-align: center;
 }
 .ldpp .panel[data-panel=edit] .palette {
   width: 100%;
@@ -253,6 +267,12 @@
   position: absolute;
   top: 3px;
   right: 0;
+}
+.ldpp .panel[data-panel=mypal] .btn-load {
+  position: relative;
+  width: 50%;
+  margin: 20px auto;
+  cursor: pointer;
 }
 .ldpp .config {
   display: none;

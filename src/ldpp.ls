@@ -3,6 +3,7 @@ ldPalettePicker = (node, opt = {}) ->
   @pals = view: opt.palettes
   # Prepare DOM
   @root = root = if typeof(node) == typeof('') => node = document.querySelector(node) else node
+  if opt.className => @root.classList.add.apply @root.classList, opt.className.split(' ').filter(->it).map(->it.trim!)
   @el = el = {}
   el.nv = do
     root: ld$.find(root, '.navbar', 0)
@@ -22,7 +23,7 @@ ldPalettePicker = (node, opt = {}) ->
     sel: ld$.find(el.pn.edit,'select',0)
     cfgs: ld$.find(el.pn.edit,'.config')
   el.mp = do
-    load: ld$.find(el.pn.mypal,'.btn.loader',0)
+    load: ld$.find(el.pn.mypal,'.btn-load',0)
 
   # Prepare content
   content = do
