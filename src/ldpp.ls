@@ -55,8 +55,8 @@ ldPalettePicker = (node, opt = {}) ->
         <div class="colors">
         #{cs}
         <div class="ctrl">
-        <div class="btn btn-sm" data-action="use"><div class="fa fa-check"></div><div class="desc">USE</div></div>
-        <div class="btn btn-sm" data-action="edit"><div class="fa fa-cog"></div><div class="desc">EDIT</div></div>
+        <div class="btn btn-sm" data-action="use"><i class="i-check"></i><div class="desc">USE</div></div>
+        <div class="btn btn-sm" data-action="edit"><i class="i-cog"></i><div class="desc">EDIT</div></div>
         </div>
         </div>
         <div class="name">#{c.name}</div>
@@ -207,9 +207,9 @@ ldPalettePicker = (node, opt = {}) ->
         <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
         style="background:#d;color:#d">
           <div class="btns">
-            <div class="fa fa-clone"></div>
-            <div class="fa fa-bars"></div>
-            <div class="fa fa-close"></div>
+            <i class="i-clone"></i>
+            <i class="i-bars"></i>
+            <i class="i-close"></i>
           </div>
         </div>
         """
@@ -264,8 +264,8 @@ ldPalettePicker = (node, opt = {}) ->
     edit-color: (tgt) ->
       btn = ld$.parent(tgt,'.fa', el.ed.pal)
       color = ld$.parent(tgt,".color", el.ed.pal)
-      if btn and !btn.classList.contains(\fa-bars) and color.classList.contains \active =>
-        if btn.classList.contains \fa-close =>
+      if btn and !btn.classList.contains(\i-bars) and color.classList.contains \active =>
+        if btn.classList.contains \i-close =>
           if color.parentNode.childNodes.length <= 1 => return true
           log.push!
           if color.classList.contains \active
@@ -274,7 +274,7 @@ ldPalettePicker = (node, opt = {}) ->
             if sibling => sibling.classList.add \active
           color.remove!
           return true
-        if btn.classList.contains \fa-clone =>
+        if btn.classList.contains \i-clone =>
           node = color.cloneNode(true)
           ld$.child(color.parentNode).map -> it.classList.remove \active
           node.classList.add \active

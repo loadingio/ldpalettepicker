@@ -96,7 +96,7 @@ ldPalettePicker = function(node, opt){
       cs = c.colors.map(function(it){
         return "<div class=\"color\" style=\"background:" + ldColor.rgbaStr(it) + "\"></div>";
       }).join("");
-      return "<div class=\"palette\">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><div class=\"fa fa-check\"></div><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><div class=\"fa fa-cog\"></div><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + c.name + "</div>\n</div>";
+      return "<div class=\"palette\">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><i class=\"i-check\"></i><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><i class=\"i-cog\"></i><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + c.name + "</div>\n</div>";
     }
   };
   if (opt.mypal != null) {
@@ -337,7 +337,7 @@ ldPalettePicker = function(node, opt){
     el.ed.colors.innerHTML = hexs.map(function(d, i){
       var hcl;
       hcl = ldColor.hcl(d);
-      return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div class=\"btns\">\n    <div class=\"fa fa-clone\"></div>\n    <div class=\"fa fa-bars\"></div>\n    <div class=\"fa fa-close\"></div>\n  </div>\n</div>";
+      return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div class=\"btns\">\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
     }).join('');
     ld$.find(el.ed.colors.parentNode, '.name', 0).innerHTML = name;
     editUpdate(hexs[0]);
@@ -436,8 +436,8 @@ ldPalettePicker = function(node, opt){
       var btn, color, sibling, node;
       btn = ld$.parent(tgt, '.fa', el.ed.pal);
       color = ld$.parent(tgt, ".color", el.ed.pal);
-      if (btn && !btn.classList.contains('fa-bars') && color.classList.contains('active')) {
-        if (btn.classList.contains('fa-close')) {
+      if (btn && !btn.classList.contains('i-bars') && color.classList.contains('active')) {
+        if (btn.classList.contains('i-close')) {
           if (color.parentNode.childNodes.length <= 1) {
             return true;
           }
@@ -451,7 +451,7 @@ ldPalettePicker = function(node, opt){
           color.remove();
           return true;
         }
-        if (btn.classList.contains('fa-clone')) {
+        if (btn.classList.contains('i-clone')) {
           node = color.cloneNode(true);
           ld$.child(color.parentNode).map(function(it){
             return it.classList.remove('active');
