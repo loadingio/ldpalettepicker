@@ -274,9 +274,9 @@
   margin: 20px auto;
   cursor: pointer;
 }
-.ldpp .config {
+.ldpp .row.config {
   display: none;
 }
-.ldpp .config.active {
+.ldpp .row.config.active {
   display: flex;
 }
