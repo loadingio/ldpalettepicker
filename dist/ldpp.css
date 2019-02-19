@@ -164,6 +164,13 @@
 .ldpp .panel > .inner {
   text-align: center;
 }
+.ldpp .panel > .inner:after {
+  content: " ";
+  display: inline-block;
+  width: 280px;
+  height: 48px;
+  margin: 0 10px 11px;
+}
 .ldpp .panel[data-panel=edit] .palette {
   width: 100%;
   margin: 10px 0 0;
