@@ -22,6 +22,7 @@ ldPalettePicker = (node, opt = {}) ->
     hex: ld$.find(el.pn.edit,'input[data-tag=hex]',0)
     sel: ld$.find(el.pn.edit,'select',0)
     cfgs: ld$.find(el.pn.edit,'.config')
+    save: ld$.find(el.pn.edit,'*[data-action=save]',0)
   el.mp = do
     load: ld$.find(el.pn.mypal,'.btn-load',0)
 
@@ -59,7 +60,7 @@ ldPalettePicker = (node, opt = {}) ->
         <div class="btn btn-sm" data-action="edit"><i class="i-cog"></i><div class="desc">EDIT</div></div>
         </div>
         </div>
-        <div class="name">#{c.name}</div>
+        <div class="name">#{c.name or 'untitled'}</div>
       </div>
       """
 
@@ -80,10 +81,19 @@ ldPalettePicker = (node, opt = {}) ->
           content.add \mypal, it
           content.build content.pals.mypal, 'mypal'
         .then -> mypal.loader.off 100
+        .then -> if mypal.page.is-end! => el.mp.load.style.display = \none
   else
     ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.nav-item', el.nv.root)
     ret.style.display = \none
     ld$.remove(el.pn.mypal)
+
+  #Save
+  if opt.save? =>
+    saver = do
+      loader: new ldLoader root: el.ed.save
+      save: opt.save
+
+  else ld$.remove(el.ed.save)
 
   # Undo System
   log = do
@@ -189,7 +199,7 @@ ldPalettePicker = (node, opt = {}) ->
     if pal == \edit => pal = \view # we dont search at edit panel. it must be for view panel.
     content.build(
       (content.pals[pal] or []).filter(->
-        it.obj.name.indexOf(v) >= 0 or (it.obj.tag or []).filter(->it.indexOf(v) >= 0).length),
+        (it.obj.name or 'untitled').indexOf(v) >= 0 or (it.obj.tag or []).filter(->it.indexOf(v) >= 0).length),
       pal)
     @tab pal
   el.nv.search.addEventListener \keyup, (e) -> search (e.target.value or "")
@@ -236,6 +246,40 @@ ldPalettePicker = (node, opt = {}) ->
 
   # General Action
   evts = do
+    save: (tgt) ~>
+      if !ld$.parent(tgt, '[data-action=save]',root) => return false
+      if !(saver?) => return true
+      saver.loader.on!
+      colors = ld$.find el.ed.colors, '.color' .map -> {value: it.style.color}
+      [width, height, len] = [800, 300, colors.length]
+      canvas = document.createElement \canvas
+      document.body.appendChild canvas
+      canvas.style <<< display: \block, position: \absolute, zIndex: -1, opacity: 0, visibility: \hidden
+      canvas.width = width
+      canvas.height = height
+      ctx = canvas.getContext \2d
+      ctx.fillStyle = \#ffffff
+      ctx.fillRect 0, 0, canvas.width, canvas.height
+      for i from 0 til len =>
+        ctx.fillStyle = colors[i].value
+        ctx.fillRect(
+          (width - 600)*0.5 + 600*(i/len),
+          (height - 150) * 0.5,
+          600/len,
+          150
+        )
+      canvas.toBlob (blob) ~>
+        saver.save({
+          thumb: blob
+          data: { name: \untitled, type: \palette, payload: {colors: colors} }
+        }
+        )
+          .finally ~> saver.loader.off 500
+          .then ~> @fire \save, null
+          .catch ~> @fire \save, it
+
+      return true
+
     use: (tgt) ~>
       if !ld$.parent(tgt,'[data-action=use]',root) => return false
       if (n = ld$.parent(tgt,".palette .btn", root)) => return use-pal(n) or true
@@ -286,6 +330,7 @@ ldPalettePicker = (node, opt = {}) ->
         return true
   root.addEventListener \click, (e) ~>
     tgt = e.target
+    if evts.save(tgt) => return
     if evts.use(tgt) => return
     if evts.mypal(tgt) => return
     if evts.view(tgt) => return
