@@ -97,7 +97,7 @@ ldPalettePicker = function(node, opt){
       cs = c.colors.map(function(it){
         return "<div class=\"color\" style=\"background:" + ldColor.rgbaStr(it) + "\"></div>";
       }).join("");
-      return "<div class=\"palette\">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><i class=\"i-check\"></i><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><i class=\"i-cog\"></i><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
+      return "<div class=\"palette\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><i class=\"i-check\"></i><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><i class=\"i-cog\"></i><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
     }
   };
   if (opt.mypal != null) {
@@ -285,8 +285,11 @@ ldPalettePicker = function(node, opt){
     return document.removeEventListener('mousemove', dragger);
   });
   palFromNode = function(n){
-    var name, that, hexs;
-    name = (that = ld$.find(n, '.palette', 0) || ld$.parent(n, '.palette', root)) ? ld$.find(that, '.name', 0).innerText : 'untitled';
+    var p, that, ref$, key, name, hexs;
+    p = ld$.find(n, '.palette', 0) || ld$.parent(n, '.palette', root);
+    ref$ = (that = p)
+      ? [ld$.attr(p, 'data-key'), ld$.find(that, '.name', 0).innerText]
+      : [null, 'untitled'], key = ref$[0], name = ref$[1];
     hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
       ? ld$.find(that, '.color').map(function(it){
         return ldColor.hex(it.style.background);
@@ -294,14 +297,16 @@ ldPalettePicker = function(node, opt){
       : [];
     return {
       name: name,
-      hexs: hexs
+      hexs: hexs,
+      key: key
     };
   };
   usePal = function(n){
-    var ref$, name, hexs;
-    ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs;
+    var ref$, name, hexs, key;
+    ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs, key = ref$.key;
     return this$.fire('use', {
       name: name,
+      key: key,
       colors: hexs.map(function(it){
         return ldColor.rgb(it);
       })
@@ -330,7 +335,7 @@ ldPalettePicker = function(node, opt){
     return search(e.target.value || "");
   });
   editInit = function(n, opt){
-    var ref$, hexs, name;
+    var ref$, hexs, name, key, elp;
     opt == null && (opt = {});
     opt = import$({
       colors: null,
@@ -347,14 +352,20 @@ ldPalettePicker = function(node, opt){
         }), opt.name
       ], hexs = ref$[0], name = ref$[1];
     } else {
-      ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs;
+      ref$ = palFromNode(n), name = ref$.name, hexs = ref$.hexs, key = ref$.key;
+    }
+    elp = el.ed.colors.parentNode;
+    if (key) {
+      elp.setAttribute('data-key', key);
+    } else {
+      elp.removeAttribute('data-key');
     }
     el.ed.colors.innerHTML = hexs.map(function(d, i){
       var hcl;
       hcl = ldColor.hcl(d);
       return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div class=\"btns\">\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
     }).join('');
-    ld$.find(el.ed.colors.parentNode, '.name', 0).innerHTML = name;
+    ld$.find(elp, '.name', 0).innerHTML = name;
     editUpdate(hexs[0]);
     return ldcp.setColor(hexs[0]);
   };
@@ -386,7 +397,7 @@ ldPalettePicker = function(node, opt){
   };
   evts = {
     save: function(tgt){
-      var colors, ref$, width, height, len, canvas, ctx, i$, i;
+      var elp, key, name, colors, ref$, width, height, len, canvas, ctx, i$, i;
       if (!ld$.parent(tgt, '[data-action=save]', root)) {
         return false;
       }
@@ -394,9 +405,12 @@ ldPalettePicker = function(node, opt){
         return true;
       }
       saver.loader.on();
+      elp = el.ed.colors.parentNode;
+      key = ld$.attr(elp, 'data-key');
+      name = ld$.find(elp, '.name', 0).textContent || "untitled";
       colors = ld$.find(el.ed.colors, '.color').map(function(it){
         return {
-          value: it.style.color
+          value: ldColor.rgbaStr(it.style.background)
         };
       });
       ref$ = [800, 300, colors.length], width = ref$[0], height = ref$[1], len = ref$[2];
@@ -418,11 +432,12 @@ ldPalettePicker = function(node, opt){
         ctx.fillStyle = colors[i].value;
         ctx.fillRect((width - 600) * 0.5 + 600 * (i / len), (height - 150) * 0.5, 600 / len, 150);
       }
-      canvas.toBlob(function(blob){
+      canvas.toBlob(function(thumb){
         return saver.save({
-          thumb: blob,
+          thumb: thumb,
+          key: key,
           data: {
-            name: 'untitled',
+            name: name,
             type: 'palette',
             payload: {
               colors: colors

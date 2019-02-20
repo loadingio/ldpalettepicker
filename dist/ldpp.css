@@ -168,7 +168,7 @@
   content: " ";
   display: inline-block;
   width: 280px;
-  height: 48px;
+  height: 1px;
   margin: 0 10px 11px;
 }
 .ldpp .panel[data-panel=edit] .palette {

@@ -44,6 +44,23 @@ Invoke it when you need a palette:
 ```
 
 
+## Configuration
+
+Manually initialize Palette Picker with:
+
+````
+    new ldPalettePicker(root, opts);
+````
+
+available options:
+ * save: (data, key), function for saving palette. save btn will disappear if omitted.
+ * mypal: should be ldPage object. list user custom palettes. MyPal tab will disappear if omitted.
+ * item-per-line: how many palettes per line.
+ * className: additional class names to be added on ldpp root.
+ * use-clusterizejs: true or false. whether to use clusterizejs or not.
+
+
+
 ## Custom Palettes
 
 

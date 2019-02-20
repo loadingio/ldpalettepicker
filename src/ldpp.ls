@@ -52,7 +52,7 @@ ldPalettePicker = (node, opt = {}) ->
     html: (c) ->
       cs = c.colors.map(->"""<div class="color" style="background:#{ldColor.rgbaStr(it)}"></div>""").join("")
       """
-      <div class="palette">
+      <div class="palette"#{if c.key => " data-key=\"" + c.key + "\"" else ""}>
         <div class="colors">
         #{cs}
         <div class="ctrl">
@@ -178,17 +178,17 @@ ldPalettePicker = (node, opt = {}) ->
   document.addEventListener \mouseup, -> document.removeEventListener \mousemove, dragger
 
   pal-from-node = (n) ->
-    name = if ld$.find(n,'.palette',0) or ld$.parent(n,'.palette', root) =>
-      ld$.find(that,'.name',0).innerText
-    else 'untitled'
+    p = ld$.find(n,'.palette',0) or ld$.parent(n,'.palette',root)
+    [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).innerText]
+    else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
       ld$.find(that,'.color').map -> ldColor.hex(it.style.background)
     else []
-    return {name, hexs}
+    return {name, hexs, key}
   # Use Dynamic
   use-pal = (n) ~>
-    {name, hexs} = pal-from-node n
-    @fire \use, {name, colors: hexs.map -> ldColor.rgb(it)}
+    {name, hexs, key} = pal-from-node n
+    @fire \use, {name, key, colors: hexs.map -> ldColor.rgb(it)}
 
   # Search Dynamics
   search = (v = "") ~>
@@ -209,7 +209,9 @@ ldPalettePicker = (node, opt = {}) ->
     opt = {colors: null, toggle: true, name: \Custom} <<< opt
     if opt.toggle => @tab \edit
     if opt.colors => [hexs,name] = [opt.colors.map(-> ldColor.hex it), opt.name]
-    else {name, hexs} = pal-from-node n
+    else {name, hexs, key} = pal-from-node n
+    elp = el.ed.colors.parentNode
+    if key => elp.setAttribute \data-key, key else elp.removeAttribute \data-key
     el.ed.colors.innerHTML = hexs
       .map (d,i) ->
         hcl = ldColor.hcl(d)
@@ -224,7 +226,7 @@ ldPalettePicker = (node, opt = {}) ->
         </div>
         """
       .join('')
-    ld$.find(el.ed.colors.parentNode,'.name',0).innerHTML = name
+    ld$.find(elp,'.name',0).innerHTML = name
     edit-update hexs.0
     ldcp.set-color hexs.0
 
@@ -250,7 +252,10 @@ ldPalettePicker = (node, opt = {}) ->
       if !ld$.parent(tgt, '[data-action=save]',root) => return false
       if !(saver?) => return true
       saver.loader.on!
-      colors = ld$.find el.ed.colors, '.color' .map -> {value: it.style.color}
+      elp = el.ed.colors.parentNode
+      key = ld$.attr(elp, 'data-key')
+      name = ld$.find(elp, '.name', 0).textContent or "untitled"
+      colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.background}
       [width, height, len] = [800, 300, colors.length]
       canvas = document.createElement \canvas
       document.body.appendChild canvas
@@ -268,12 +273,8 @@ ldPalettePicker = (node, opt = {}) ->
           600/len,
           150
         )
-      canvas.toBlob (blob) ~>
-        saver.save({
-          thumb: blob
-          data: { name: \untitled, type: \palette, payload: {colors: colors} }
-        }
-        )
+      canvas.toBlob (thumb) ~>
+        saver.save { thumb, data: { name, type: \palette, payload: {colors: colors} } }, key
           .finally ~> saver.loader.off 500
           .then ~> @fire \save, null
           .catch ~> @fire \save, it
