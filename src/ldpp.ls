@@ -307,7 +307,7 @@ ldPalettePicker = (node, opt = {}) ->
     nav: (tgt) ~>
       if ld$.attr(tgt, \data-panel) and ld$.parent(tgt,'.navbar',root) => return @tab ld$.attr(tgt,\data-panel)
     edit-color: (tgt) ->
-      btn = ld$.parent(tgt,'.fa', el.ed.pal)
+      btn = ld$.parent(tgt,'i', el.ed.pal)
       color = ld$.parent(tgt,".color", el.ed.pal)
       if btn and !btn.classList.contains(\i-bars) and color.classList.contains \active =>
         if btn.classList.contains \i-close =>

@@ -435,7 +435,6 @@ ldPalettePicker = function(node, opt){
       canvas.toBlob(function(thumb){
         return saver.save({
           thumb: thumb,
-          key: key,
           data: {
             name: name,
             type: 'palette',
@@ -443,7 +442,7 @@ ldPalettePicker = function(node, opt){
               colors: colors
             }
           }
-        })['finally'](function(){
+        }, key)['finally'](function(){
           return saver.loader.off(500);
         }).then(function(){
           return this$.fire('save', null);
@@ -517,7 +516,7 @@ ldPalettePicker = function(node, opt){
     },
     editColor: function(tgt){
       var btn, color, sibling, node;
-      btn = ld$.parent(tgt, '.fa', el.ed.pal);
+      btn = ld$.parent(tgt, 'i', el.ed.pal);
       color = ld$.parent(tgt, ".color", el.ed.pal);
       if (btn && !btn.classList.contains('i-bars') && color.classList.contains('active')) {
         if (btn.classList.contains('i-close')) {
