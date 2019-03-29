@@ -292,7 +292,7 @@ ldPalettePicker = function(node, opt){
       : [null, 'untitled'], key = ref$[0], name = ref$[1];
     hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
       ? ld$.find(that, '.color').map(function(it){
-        return ldColor.hex(it.style.background);
+        return ldColor.hex(it.style.backgroundColor || it.style.background);
       })
       : [];
     return {
@@ -410,7 +410,7 @@ ldPalettePicker = function(node, opt){
       name = ld$.find(elp, '.name', 0).textContent || "untitled";
       colors = ld$.find(el.ed.colors, '.color').map(function(it){
         return {
-          value: ldColor.rgbaStr(it.style.background)
+          value: ldColor.rgbaStr(it.style.backgroundColor)
         };
       });
       ref$ = [800, 300, colors.length], width = ref$[0], height = ref$[1], len = ref$[2];
@@ -547,7 +547,7 @@ ldPalettePicker = function(node, opt){
         ld$.child(color.parentNode).map(function(it){
           return it.classList[it === color ? 'add' : 'remove']('active');
         });
-        ldcp.setColor(color.style.background);
+        ldcp.setColor(color.style.backgroundColor);
         return true;
       }
     }

@@ -182,7 +182,8 @@ ldPalettePicker = (node, opt = {}) ->
     [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).innerText]
     else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
-      ld$.find(that,'.color').map -> ldColor.hex(it.style.background)
+      ld$.find(that,'.color').map ->
+        ldColor.hex(it.style.backgroundColor or it.style.background)
     else []
     return {name, hexs, key}
   # Use Dynamic
@@ -255,7 +256,7 @@ ldPalettePicker = (node, opt = {}) ->
       elp = el.ed.colors.parentNode
       key = ld$.attr(elp, 'data-key')
       name = ld$.find(elp, '.name', 0).textContent or "untitled"
-      colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.background}
+      colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.backgroundColor}
       [width, height, len] = [800, 300, colors.length]
       canvas = document.createElement \canvas
       document.body.appendChild canvas
@@ -327,7 +328,7 @@ ldPalettePicker = (node, opt = {}) ->
           return true
       if color =>
         ld$.child(color.parentNode).map -> it.classList[if it == color => \add else \remove] \active
-        ldcp.set-color color.style.background
+        ldcp.set-color color.style.backgroundColor
         return true
   root.addEventListener \click, (e) ~>
     tgt = e.target
