@@ -40,7 +40,7 @@ ldPalettePicker = (node, opt = {}) ->
       if rows.length == 0 => return el.pnin[tgt]innerHTML = "no result..."
       if opt.use-clusterizejs  =>
         lines = []
-        for i from 0 til rows.length by opt.item-per-line => 
+        for i from 0 til rows.length by opt.item-per-line =>
           line = []
           for j from 0 til opt.item-per-line => line.push rows[i + j]
           lines.push """<div>#{line.join('')}</div>"""
@@ -69,7 +69,7 @@ ldPalettePicker = (node, opt = {}) ->
     mypal = do
       loader: new ldLoader root: el.mp.load
       page: Object.create(opt.mypal)
-      fetch: -> 
+      fetch: ->
         @page.fetch!then (ret) ->
           content.add \mypal, ret
           content.build content.pals.mypal, 'mypal'
@@ -238,7 +238,7 @@ ldPalettePicker = (node, opt = {}) ->
         </div>
         """
       .join('')
-    ld$.find(elp,'.name',0).innerHTML = name
+    ld$.find(elp,'.name',0).innerHTML = name or 'untitled'
     edit-update hexs.0
     ldcp.set-color hexs.0
 
@@ -257,6 +257,7 @@ ldPalettePicker = (node, opt = {}) ->
       if ldcp._slider == t => return ldcp._slider = null
       ldrs[t].set v
 
+  @edit = (pal, toggle = true) -> edit-init null, {toggle} <<< pal{colors, name}
 
   # General Action
   evts = do
@@ -326,7 +327,7 @@ ldPalettePicker = (node, opt = {}) ->
           if color.parentNode.childNodes.length <= 1 => return true
           log.push!
           if color.classList.contains \active
-            sibling = (color.parentNode.childNodes[ld$.index(color) + 1] 
+            sibling = (color.parentNode.childNodes[ld$.index(color) + 1]
               or color.parentNode.childNodes[ld$.index(color) - 1])
             if sibling => sibling.classList.add \active
           color.remove!
@@ -363,7 +364,7 @@ ldPalettePicker = (node, opt = {}) ->
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
   on: (n, cb) -> @evt-handler.[][n].push cb
   fire: (n, ...v) -> for cb in (@evt-handler[n] or []) => cb.apply @, v
-  tab: (n) -> 
+  tab: (n) ->
     if !n => return
     idx = if ld$.find(@root,".panel[data-panel=#n]",0) => ld$.index(that) else -1
     if idx < 0 => return

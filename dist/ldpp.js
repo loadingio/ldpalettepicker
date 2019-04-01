@@ -409,6 +409,13 @@ ldPalettePicker = function(node, opt){
       return ldrs[t].set(v);
     });
   };
+  this.edit = function(pal, toggle){
+    var ref$;
+    toggle == null && (toggle = true);
+    return editInit(null, (ref$ = {
+      toggle: toggle
+    }, ref$.colors = pal.colors, ref$.name = pal.name, ref$));
+  };
   evts = {
     save: function(tgt){
       var elp, key, name, colors, ref$, width, height, len, canvas, ctx, i$, i;
