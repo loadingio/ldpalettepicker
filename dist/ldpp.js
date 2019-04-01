@@ -247,23 +247,28 @@ ldPalettePicker = function(node, opt){
     });
   });
   getIdx = function(e){
-    var box, idx;
-    box = el.ed.colors.getBoundingClientRect();
-    return idx = (ld$.find(el.ed.colors, '.color').length * (e.clientX - box.x)) / box.width;
+    var box, idx, ref$, ref1$, ref2$;
+    box = dragger.data.box;
+    return idx = (dragger.data.colors.length * ((ref$ = (ref2$ = e.clientX - box.x) > 0 ? ref2$ : 0) < (ref1$ = box.width) ? ref$ : ref1$)) / box.width;
   };
   dragger = function(e){
-    var srcidx, desidx, src, des;
-    srcidx = dragger.srcidx;
+    var ref$, box, srcidx, initx, colors, span, desidx, src, offset, ref1$, ref2$, ref3$, des;
+    ref$ = dragger.data, box = ref$.box, srcidx = ref$.srcidx, initx = ref$.initx, colors = ref$.colors, span = ref$.span;
     desidx = Math.round(getIdx(e));
+    src = el.ed.colors.childNodes[srcidx];
+    offset = (ref$ = (ref2$ = e.clientX - initx) > (ref3$ = -srcidx * span) ? ref2$ : ref3$) < (ref1$ = (colors.length - srcidx - 1) * span) ? ref$ : ref1$;
+    src.style.transform = "translate(" + offset + "px,0)";
     if (srcidx === desidx || srcidx + 1 === desidx) {
       return;
     }
+    src.style.transform = "translate(0,0)";
+    dragger.data.initx = e.clientX;
     log.push();
     src = el.ed.colors.childNodes[srcidx];
     des = el.ed.colors.childNodes[desidx];
     src.remove();
     el.ed.colors.insertBefore(src, des);
-    return dragger.srcidx = desidx < srcidx
+    return dragger.data.srcidx = desidx < srcidx
       ? desidx
       : desidx - 1;
   };
@@ -271,7 +276,13 @@ ldPalettePicker = function(node, opt){
     if (!ld$.parent(e.target, '.colors', el.ed.pal)) {
       return;
     }
-    dragger.srcidx = Math.floor(getIdx(e));
+    dragger.data = {
+      initx: e.clientX,
+      colors: ld$.find(el.ed.colors, '.color'),
+      box: el.ed.colors.getBoundingClientRect()
+    };
+    dragger.data.srcidx = Math.floor(getIdx(e));
+    dragger.data.span = dragger.data.box.width / dragger.data.colors.length;
     document.removeEventListener('mousemove', dragger);
     return document.addEventListener('mousemove', dragger);
   });
@@ -279,6 +290,9 @@ ldPalettePicker = function(node, opt){
     if (!ld$.parent(e.target, '.colors', el.ed.pal)) {
       return;
     }
+    ld$.find(el.ed.colors, '.color').map(function(it){
+      return it.style.transform = "";
+    });
     return document.removeEventListener('mousemove', dragger);
   });
   document.addEventListener('mouseup', function(){

@@ -133,6 +133,9 @@
 .ldpp .panel[data-panel=edit] .palette .colors {
   height: 64px;
 }
+.ldpp .panel[data-panel=edit] .palette .colors .color {
+  position: relative;
+}
 .ldpp .panel[data-panel=edit] .palette .colors .color:nth-last-child(-n+2) {
   border-radius: 0;
 }

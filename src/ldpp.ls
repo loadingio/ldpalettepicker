@@ -155,25 +155,36 @@ ldPalettePicker = (node, opt = {}) ->
 
   # Drag to re-order Dynamics
   get-idx = (e) ->
-    box = el.ed.colors.getBoundingClientRect!
-    idx = (ld$.find(el.ed.colors,'.color').length * (e.clientX - box.x)) / box.width
+    box = dragger.data.box
+    idx = (dragger.data.colors.length * ((e.clientX - box.x) >? 0 <? box.width)) / box.width
   dragger = (e) ~>
-    srcidx = dragger.srcidx
+    {box,srcidx,initx,colors,span} = dragger.data
     desidx = Math.round(get-idx(e))
+    src = el.ed.colors.childNodes[srcidx]
+    offset = (e.clientX - initx) >? -srcidx * span  <? (colors.length - srcidx - 1) * span
+    src.style.transform = "translate(#{offset}px,0)"
     if srcidx == desidx or srcidx + 1 == desidx => return
+    src.style.transform = "translate(0,0)"
+    dragger.data.initx = e.clientX
     log.push!
     src = el.ed.colors.childNodes[srcidx]
     des = el.ed.colors.childNodes[desidx]
     src.remove!
     el.ed.colors.insertBefore src, des
-    dragger.srcidx = if desidx < srcidx => desidx else desidx - 1
+    dragger.data.srcidx = if desidx < srcidx => desidx else desidx - 1
   el.ed.pal.addEventListener \mousedown, (e) ~>
     if !ld$.parent(e.target,'.colors',el.ed.pal) => return
-    dragger.srcidx = Math.floor(get-idx(e))
+    dragger.data = do
+      initx: e.clientX
+      colors: ld$.find(el.ed.colors, '.color')
+      box: el.ed.colors.getBoundingClientRect!
+    dragger.data.srcidx = Math.floor(get-idx(e))
+    dragger.data.span = dragger.data.box.width / dragger.data.colors.length
     document.removeEventListener \mousemove, dragger
     document.addEventListener \mousemove, dragger
   el.ed.pal.addEventListener \mouseup,(e)  ~>
     if !ld$.parent(e.target,'.colors',el.ed.pal) => return
+    ld$.find(el.ed.colors, '.color').map -> it.style.transform = ""
     document.removeEventListener \mousemove, dragger
   document.addEventListener \mouseup, -> document.removeEventListener \mousemove, dragger
 
