@@ -264,7 +264,7 @@
 }
 .ldpp .panel[data-panel=edit] .value,
 .ldpe .value {
-  margin: 20px 0 27px;
+  margin: 18px 0 24px;
 }
 .ldpp .panel[data-panel=edit] .value:last-child,
 .ldpe .value:last-child {
@@ -293,14 +293,7 @@
 .ldpp .panel[data-panel=edit] .label-group,
 .ldpe .label-group {
   position: relative;
-}
-.ldpp .panel[data-panel=edit] .label-group input,
-.ldpe .label-group input {
-  width: 40px;
-  height: 12px;
-  position: absolute;
-  top: 3px;
-  right: 0;
+  font-size: 0.875rem;
 }
 .ldpp .panel[data-panel=mypal] .btn-load {
   position: relative;

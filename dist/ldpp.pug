@@ -17,7 +17,7 @@ mixin palette(palette)
     .name= palette[0]
 
 //- Palette Editor
-mixin editor
+mixin paletteEditor
   .ldpal
     .name
     .colors
@@ -33,7 +33,7 @@ mixin editor
                 option(value="rgb") RGB
                 option(value="hsl") HSL
                 option(value="hcl") HCL
-            .col-sm-4: input.form-control.form-control-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
+            .col-sm-4.pl-0: input.form-control.form-control-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
           - var configs = [["Red", "Green", "Blue", "rgb", "active"], ["Hue", "Saturation", "Luminance", "hsl",""], ["Hue", "Chroma", "Luminance", "hcl",""]];
           each config in configs
             .row.config(data-tag=config[3],class=config[4])
@@ -87,7 +87,7 @@ mixin ldPalettePicker
           | Load More
           .ld.ldld.ldbtn.sm
       .panel(data-panel="edit")
-        +editor
+        +paletteEditor
         .foot
           hr
           .float-right

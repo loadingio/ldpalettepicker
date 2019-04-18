@@ -15,6 +15,8 @@ ldPalettePicker = (node, opt = {}) ->
   el.pnin = do
     view: ld$.find(el.pn.view, '.inner', 0)
     mypal: ld$.find(el.pn.mypal, '.inner', 0)
+  el.ed = do
+    save: ld$.find(el.pn.edit,'*[data-action=save]',0)
 
   el.mp = do
     load: ld$.find(el.pn.mypal,'.btn-load',0)
@@ -108,16 +110,19 @@ ldPalettePicker = (node, opt = {}) ->
     @tab pal
   el.nv.search.addEventListener \keyup, (e) -> search (e.target.value or "")
 
+  #Save
+  if opt.save? =>
+    saver = do
+      loader: new ldLoader root: el.ed.save
+      save: opt.save
+
   # General Action
   evts = do
     save: (tgt) ~>
       if !ld$.parent(tgt, '[data-action=save]',root) => return false
       if !(saver?) => return true
       saver.loader.on!
-      elp = el.ed.colors.parentNode
-      key = ld$.attr(elp, 'data-key')
-      name = ld$.find(elp, '.name', 0).textContent or "untitled"
-      colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.backgroundColor}
+      {colors, name, key} = @ldpe.get-pal!
       [width, height, len] = [800, 300, colors.length]
       canvas = document.createElement \canvas
       document.body.appendChild canvas

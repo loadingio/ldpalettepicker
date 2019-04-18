@@ -10,13 +10,6 @@ ldPaletteEditor = (opt = {}) ->
     hex: ld$.find(root,'input[data-tag=hex]',0)
     sel: ld$.find(root,'select',0)
     cfgs: ld$.find(root,'.config')
-    save: ld$.find(root,'*[data-action=save]',0)
-
-  #Save
-  if opt.save? =>
-    saver = do
-      loader: new ldLoader root: el.ed.save
-      save: opt.save
 
   # Undo System
   log = do
@@ -182,6 +175,13 @@ ldPaletteEditor = (opt = {}) ->
   root.addEventListener \click, (e) ~>
     tgt = e.target
     if evts.edit-color(tgt) => return
+
+  @get-pal = ->
+    elp = el.ed.colors.parentNode
+    key = ld$.attr(elp, 'data-key')
+    name = ld$.find(elp, '.name', 0).textContent or "untitled"
+    colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.backgroundColor}
+    return {colors, name, key}
 
   edit-init {pal: {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
   return @
