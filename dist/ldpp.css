@@ -47,12 +47,15 @@
 .ldpp .palette .ctrl,
 .ldpal .ctrl {
   position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 3px;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
-  color: rgba(255,255,255,0.7);
   opacity: 0;
   transition: opacity ease-in-out 0.2s;
   text-align: center;
@@ -60,11 +63,14 @@
 }
 .ldpp .palette .ctrl .btn,
 .ldpal .ctrl .btn {
+  color: rgba(255,255,255,0.7);
   margin-top: 1px;
   line-height: 1.2em;
-  width: 48%;
-  height: 90%;
+  width: 50%;
+  height: 100%;
   margin: auto;
+  border-radius: 0;
+  flex: 1 1 auto;
 }
 .ldpp .palette .ctrl .btn:hover,
 .ldpal .ctrl .btn:hover {
@@ -130,25 +136,6 @@
 .ldpp .panel:nth-child(3) {
   transform: translate(200%, 0);
 }
-.ldpp .panel[data-panel=edit] .palette {
-  width: 90%;
-  margin: auto;
-}
-.ldpp .panel[data-panel=edit] .palette .colors {
-  height: 64px;
-}
-.ldpp .panel[data-panel=edit] .palette .colors .color {
-  position: relative;
-}
-.ldpp .panel[data-panel=edit] .palette .colors .color:nth-last-child(-n+2) {
-  border-radius: 0;
-}
-.ldpp .panel[data-panel=edit] .palette .colors .color:nth-last-child(-n+1) {
-  border-radius: 0 3px 3px 0;
-}
-.ldpp .panel[data-panel=edit] .palette .name {
-  display: none;
-}
 .ldpp .panels {
   position: relative;
   transition: transform 0.5s ease-in-out;
@@ -178,35 +165,51 @@
   height: 1px;
   margin: 0 10px 11px;
 }
-.ldpp .panel[data-panel=edit] .palette {
-  width: 100%;
+.ldpp .panel[data-panel=edit] {
+  padding-bottom: 0;
+}
+.ldpp .panel[data-panel=edit] .edit > .inner {
+  padding: 20px 20px 0;
+}
+.ldpp .panel[data-panel=edit] .ldpal {
   margin: 10px 0 0;
   padding: 0 20px 0;
 }
-.ldpp .panel[data-panel=edit] .palette .name {
+.ldpp .panel[data-panel=edit] .ldpal,
+.ldpe .ldpal {
+  width: 100%;
+}
+.ldpp .panel[data-panel=edit] .ldpal .name,
+.ldpe .ldpal .name {
   display: none;
 }
-.ldpp .panel[data-panel=edit] .palette .colors {
+.ldpp .panel[data-panel=edit] .ldpal .colors,
+.ldpe .ldpal .colors {
   height: 120px;
   border: 1px solid #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   overflow: visible;
 }
-.ldpp .panel[data-panel=edit] .palette .color:first-child {
+.ldpp .panel[data-panel=edit] .ldpal .color:first-child,
+.ldpe .ldpal .color:first-child {
   border-radius: 5px 0 0 5px;
 }
-.ldpp .panel[data-panel=edit] .palette .color:last-child {
+.ldpp .panel[data-panel=edit] .ldpal .color:last-child,
+.ldpe .ldpal .color:last-child {
   border-radius: 0 5px 5px 0;
 }
-.ldpp .panel[data-panel=edit] .palette .color {
+.ldpp .panel[data-panel=edit] .ldpal .color,
+.ldpe .ldpal .color {
   transition: flex 0.3s ease-in-out;
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .palette .color.dark .btns {
+.ldpp .panel[data-panel=edit] .ldpal .color.dark .btns,
+.ldpe .ldpal .color.dark .btns {
   color: #fff;
 }
-.ldpp .panel[data-panel=edit] .palette .color .btns {
+.ldpp .panel[data-panel=edit] .ldpal .color .btns,
+.ldpe .ldpal .color .btns {
   opacity: 0;
   width: 20px;
   margin: auto;
@@ -217,14 +220,17 @@
   justify-content: space-around;
   color: #444;
 }
-.ldpp .panel[data-panel=edit] .palette .color .btns .fa {
+.ldpp .panel[data-panel=edit] .ldpal .color .btns .fa,
+.ldpe .ldpal .color .btns .fa {
   flex: 0 0 auto;
   cursor: pointer;
 }
-.ldpp .panel[data-panel=edit] .palette .color.active .btns {
+.ldpp .panel[data-panel=edit] .ldpal .color.active .btns,
+.ldpe .ldpal .color.active .btns {
   opacity: 1;
 }
-.ldpp .panel[data-panel=edit] .palette .color.active {
+.ldpp .panel[data-panel=edit] .ldpal .color.active,
+.ldpe .ldpal .color.active {
   transform: scale(1.05);
   border-radius: 3px;
   border: 2px solid #000;
@@ -232,7 +238,8 @@
   z-index: 1;
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .palette .color.active:after {
+.ldpp .panel[data-panel=edit] .ldpal .color.active:after,
+.ldpe .ldpal .color.active:after {
   content: " ";
   width: 20px;
   height: 20px;
@@ -247,35 +254,48 @@
   border-bottom: 2px solid rgba(0,0,0,0.2);
   display: none;
 }
-.ldpp .panel[data-panel=edit] .ldColorPicker {
+.ldpp .panel[data-panel=edit] .ldColorPicker,
+.ldpe .ldColorPicker {
   width: 100%;
   height: 200px;
   display: inline-block;
   vertical-align: top;
   margin-top: 0;
 }
-.ldpp .panel[data-panel=edit] .value {
-  margin: 15px 0 27px;
+.ldpp .panel[data-panel=edit] .value,
+.ldpe .value {
+  margin: 20px 0 27px;
 }
-.ldpp .panel[data-panel=edit] .edit {
+.ldpp .panel[data-panel=edit] .value:last-child,
+.ldpe .value:last-child {
+  margin-bottom: 0;
+}
+.ldpp .panel[data-panel=edit] .edit,
+.ldpe .edit {
   text-align: left;
   margin-top: 0;
 }
-.ldpp .panel[data-panel=edit] .edit > .inner {
-  padding: 20px;
+.ldpp .panel[data-panel=edit] .edit > .inner,
+.ldpe .edit > .inner {
+  padding-top: 20px;
 }
-.ldpp .panel[data-panel=edit] .edit > .foot {
-  padding: 20px;
+.ldpp .panel[data-panel=edit] > .foot,
+.ldpe > .foot {
+  padding: 0 20px;
   width: 100%;
+  text-align: left;
 }
-.ldpp .panel[data-panel=edit] .ldrs {
+.ldpp .panel[data-panel=edit] .ldrs,
+.ldpe .ldrs {
   margin-top: -3px;
   height: 37px;
 }
-.ldpp .panel[data-panel=edit] .label-group {
+.ldpp .panel[data-panel=edit] .label-group,
+.ldpe .label-group {
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .label-group input {
+.ldpp .panel[data-panel=edit] .label-group input,
+.ldpe .label-group input {
   width: 40px;
   height: 12px;
   position: absolute;
@@ -288,9 +308,15 @@
   margin: 20px auto;
   cursor: pointer;
 }
-.ldpp .row.config {
+.ldpe .ldpal {
+  padding: 0;
+  margin: 0;
+}
+.ldpp .row.config,
+.ldpe .row.config {
   display: none;
 }
-.ldpp .row.config.active {
+.ldpp .row.config.active,
+.ldpe .row.config.active {
   display: flex;
 }

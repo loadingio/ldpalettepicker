@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 echo "Transpiling ldpp.ls..."
-lsc -cbp src/ldpp.ls > dist/ldpp.js
+lsc -cbp src/ldpp.ls > dist/ldpp.raw.js
+echo "Transpiling ldpe.ls..."
+lsc -cbp src/ldpe.ls > dist/ldpe.js
 echo "Transpiling ldpp.styl..."
 stylus -p src/ldpp.styl > dist/ldpp.css
-echo "Uglifying ldpp.js..."
-uglifyjs dist/ldpp.js > dist/ldpp.min.js
+echo "Uglifying ldpp.raw.js..."
+uglifyjs dist/ldpp.raw.js > dist/ldpp.raw.min.js
+echo "Uglifying ldpe.js..."
+uglifyjs dist/ldpe.js > dist/ldpe.min.js
+echo "Merge ldpe and ldpp..."
+cat dist/ldpp.raw.js dist/ldpe.js > dist/ldpp.js
+cat dist/ldpp.raw.min.js dist/ldpe.min.js > dist/ldpp.min.js
 echo "Uglifying ldpp.css..."
 uglifycss dist/ldpp.css > dist/ldpp.min.css
 echo "Copy palettes presets to dist/ ..."

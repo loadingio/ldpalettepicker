@@ -14,3 +14,7 @@ ldcv = new ldCover({root: document.querySelector('.ldcv')})
 
 # bring up default palette
 # ldcv.on \toggle.on, -> ret.1.edit {name: "blah", colors: <[#f00 #0f0 #00f]>}, false
+
+new ldPaletteEditor root: \#editor
+new ldPaletteEditor root: \#ldcv-editor
+ldcv-editor = new ldCover({root: \#ldcv-editor})

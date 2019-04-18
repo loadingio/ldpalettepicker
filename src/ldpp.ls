@@ -15,14 +15,7 @@ ldPalettePicker = (node, opt = {}) ->
   el.pnin = do
     view: ld$.find(el.pn.view, '.inner', 0)
     mypal: ld$.find(el.pn.mypal, '.inner', 0)
-  el.ed = do
-    picker: ld$.find(el.pn.edit,'.ldColorPicker',0)
-    pal: ld$.find(el.pn.edit,'.palette',0)
-    colors: ld$.find(el.pn.edit,'.palette .colors',0)
-    hex: ld$.find(el.pn.edit,'input[data-tag=hex]',0)
-    sel: ld$.find(el.pn.edit,'select',0)
-    cfgs: ld$.find(el.pn.edit,'.config')
-    save: ld$.find(el.pn.edit,'*[data-action=save]',0)
+
   el.mp = do
     load: ld$.find(el.pn.mypal,'.btn-load',0)
 
@@ -87,107 +80,6 @@ ldPalettePicker = (node, opt = {}) ->
     ret.style.display = \none
     ld$.remove(el.pn.mypal)
 
-  #Save
-  if opt.save? =>
-    saver = do
-      loader: new ldLoader root: el.ed.save
-      save: opt.save
-
-  else ld$.remove(el.ed.save)
-
-  # Undo System
-  log = do
-    stack: []
-    cur: null
-    handle: null
-    undo: ~>
-      html = log.stack.pop!
-      if !html => return
-      el.ed.pal.innerHTML = html
-      el.ed.colors = ld$.find(el.ed.pal,'.colors',0)
-    push: (forced = false) ->
-      if @handle => clearTimeout that
-      if !@cur => @cur = el.ed.pal.innerHTML
-      _ = ~>
-        if @stack[* - 1] != @cur => @stack.push @cur
-        @ <<< handle: null, cur: null
-      if forced => _!
-      else @handle = setTimeout (~> _! ), 200
-
-
-  # Color Picker Initialization
-  @ldcp = ldcp = new ldColorPicker el.ed.picker, {inline: true}
-  ldcp.on \change, ~> log.push!; edit-update it
-
-  # Input ( Slider, Inputbox ) Initialization
-  ldrs = {}
-  irs-opt = base: min: 0, max: 255, step: 1, hide_min_max: true, hide_from_to: true, grid: false
-  irs-opt  <<< do
-    "hsl-h": {} <<< irs-opt.base <<< {max: 360}
-    "hsl-s": {} <<< irs-opt.base <<< {max: 1, step: 0.01}
-    "hsl-l": {} <<< irs-opt.base <<< {max: 1, step: 0.01}
-    "hcl-h": {} <<< irs-opt.base <<< {max: 360}
-    "hcl-c": {} <<< irs-opt.base <<< {max: 230}
-    "hcl-l": {} <<< irs-opt.base <<< {max: 100}
-  irs-opt["rgb-r"] = irs-opt["rgb-g"] = irs-opt["rgb-b"] = irs-opt.base
-  <[rgb-r rgb-g rgb-b hsl-h hsl-s hsl-l hcl-h hcl-c hcl-l]>.map ->
-    ((t) ->
-      v = t.split \-
-      # Type in input.value: set ldcp
-      ld$.find(root,".value[data-tag=#{t}]",0).addEventListener \change, (e) ->
-        c = ldcp.get-color v.0
-        c[v.1] = e.target.value
-        ldcp.set-color c
-      # Drag in input.ldrs: set ldcp
-      ldrs[t] = new ldSlider {root: ld$.find(root,".ldrs[data-tag=#{t}]",0)} <<< irs-opt[t]
-      ((t) ->
-        ldrs[t].on \change, (val) ->
-          ldcp._slider = t
-          c = ldcp.get-color v.0
-          c[v.1] = val
-          ldcp.set-color c
-      )(t)
-    ) it
-  el.ed.hex.addEventListener \change, (e) -> ldcp.set-color e.target.value   # Hex Input
-  el.ed.sel.addEventListener \change, (e) ~> el.ed.cfgs.map ~>               # Select Box
-    it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
-    for k,v of ldrs => v.update!
-
-  # Drag to re-order Dynamics
-  get-idx = (e) ->
-    box = dragger.data.box
-    idx = (dragger.data.colors.length * ((e.clientX - box.x) >? 0 <? box.width)) / box.width
-  dragger = (e) ~>
-    {box,srcidx,initx,colors,span} = dragger.data
-    desidx = Math.round(get-idx(e))
-    src = el.ed.colors.childNodes[srcidx]
-    offset = (e.clientX - initx) >? -srcidx * span  <? (colors.length - srcidx - 1) * span
-    src.style.transform = "translate(#{offset}px,0)"
-    if srcidx == desidx or srcidx + 1 == desidx => return
-    src.style.transform = "translate(0,0)"
-    dragger.data.initx = e.clientX
-    log.push!
-    src = el.ed.colors.childNodes[srcidx]
-    des = el.ed.colors.childNodes[desidx]
-    src.remove!
-    el.ed.colors.insertBefore src, des
-    dragger.data.srcidx = if desidx < srcidx => desidx else desidx - 1
-  el.ed.pal.addEventListener \mousedown, (e) ~>
-    if !ld$.parent(e.target,'.colors',el.ed.pal) => return
-    dragger.data = do
-      initx: e.clientX
-      colors: ld$.find(el.ed.colors, '.color')
-      box: el.ed.colors.getBoundingClientRect!
-    dragger.data.srcidx = Math.floor(get-idx(e))
-    dragger.data.span = dragger.data.box.width / dragger.data.colors.length
-    document.removeEventListener \mousemove, dragger
-    document.addEventListener \mousemove, dragger
-  el.ed.pal.addEventListener \mouseup,(e)  ~>
-    if !ld$.parent(e.target,'.colors',el.ed.pal) => return
-    ld$.find(el.ed.colors, '.color').map -> it.style.transform = ""
-    document.removeEventListener \mousemove, dragger
-  document.addEventListener \mouseup, -> document.removeEventListener \mousemove, dragger
-
   pal-from-node = (n) ->
     p = ld$.find(n,'.palette',0) or ld$.parent(n,'.palette',root)
     [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).innerText]
@@ -215,49 +107,6 @@ ldPalettePicker = (node, opt = {}) ->
       pal)
     @tab pal
   el.nv.search.addEventListener \keyup, (e) -> search (e.target.value or "")
-
-  # Edit Dynamics
-  edit-init = (n,opt={}) ~>
-    opt = {colors: null, toggle: true, name: \Custom} <<< opt
-    if opt.toggle => @tab \edit
-    if opt.colors => [hexs,name] = [opt.colors.map(-> ldColor.hex it), opt.name]
-    else {name, hexs, key} = pal-from-node n
-    elp = el.ed.colors.parentNode
-    if key => elp.setAttribute \data-key, key else elp.removeAttribute \data-key
-    el.ed.colors.innerHTML = hexs
-      .map (d,i) ->
-        hcl = ldColor.hcl(d)
-        """
-        <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
-        style="background:#d;color:#d">
-          <div class="btns">
-            <i class="i-clone"></i>
-            <i class="i-bars"></i>
-            <i class="i-close"></i>
-          </div>
-        </div>
-        """
-      .join('')
-    ld$.find(elp,'.name',0).innerHTML = name or 'untitled'
-    edit-update hexs.0
-    ldcp.set-color hexs.0
-
-  edit-update = (c) ->
-    hcl = ldColor.hcl(c)
-    node = ld$.find(root,'.color.active',0)
-    node.style.background = ldColor.rgbaStr c
-    node.classList[if hcl.l < 50 => "add" else "remove"] \dark
-    el.ed.hex.value = ldColor.hex c
-    c = {rgb: ldColor.rgb(c), hsl: ldColor.hsl(c), hcl: hcl }
-    <[rgb-r rgb-g rgb-b hsl-h hsl-s hsl-l hcl-h hcl-c hcl-l]>.map (t) ~>
-      p = t.split \-
-      v = c[p.0][p.1]
-      if !(t == \hsl-s or t == \hsl-l) => v = Math.round(v)
-      ld$.find(root,".value[data-tag=#{t}]",0).value = v
-      if ldcp._slider == t => return ldcp._slider = null
-      ldrs[t].set v
-
-  @edit = (pal, toggle = true) -> edit-init null, {toggle} <<< pal{colors, name}
 
   # General Action
   evts = do
@@ -312,36 +161,17 @@ ldPalettePicker = (node, opt = {}) ->
       if !(n = ld$.parent(tgt,"*[data-cat]",p)) => return
       @tab \view # go to view first so search will execute in view panel
       search el.nv.search.value = (ld$.attr(n,"data-cat") or "")
-    edit: (tgt) ->
+    edit: (tgt) ~>
       if !(n = ld$.parent(tgt,".palette .btn", root)) => return
-      if ld$.attr(n,\data-action) == \edit => return edit-init(n) or true
-    undo: (tgt) ->
-      if (n = ld$.parent(tgt,"*[data-action=undo]", root)) => return log.undo! or true
+      if ld$.attr(n,\data-action) == \edit =>
+        @tab \edit
+        @ldpe.init({pal: pal-from-node(n)})
+        return true
+    undo: (tgt) ~>
+      if (n = ld$.parent(tgt,"*[data-action=undo]", root)) => return @ldpe.undo! or true
     nav: (tgt) ~>
       if ld$.attr(tgt, \data-panel) and ld$.parent(tgt,'.navbar',root) => return @tab ld$.attr(tgt,\data-panel)
-    edit-color: (tgt) ->
-      btn = ld$.parent(tgt,'i', el.ed.pal)
-      color = ld$.parent(tgt,".color", el.ed.pal)
-      if btn and !btn.classList.contains(\i-bars) and color.classList.contains \active =>
-        if btn.classList.contains \i-close =>
-          if color.parentNode.childNodes.length <= 1 => return true
-          log.push!
-          if color.classList.contains \active
-            sibling = (color.parentNode.childNodes[ld$.index(color) + 1]
-              or color.parentNode.childNodes[ld$.index(color) - 1])
-            if sibling => sibling.classList.add \active
-          color.remove!
-          return true
-        if btn.classList.contains \i-clone =>
-          node = color.cloneNode(true)
-          ld$.child(color.parentNode).map -> it.classList.remove \active
-          node.classList.add \active
-          ld$.insertAfter(color.parentNode, node, color)
-          return true
-      if color =>
-        ld$.child(color.parentNode).map -> it.classList[if it == color => \add else \remove] \active
-        ldcp.set-color color.style.backgroundColor
-        return true
+
   root.addEventListener \click, (e) ~>
     tgt = e.target
     if evts.save(tgt) => return
@@ -351,14 +181,13 @@ ldPalettePicker = (node, opt = {}) ->
     if evts.edit(tgt) => return
     if evts.undo(tgt) => return
     if evts.nav(tgt) => return
-    if evts.edit-color(tgt) => return
 
   # Final Preparation
   @evt-handler = {}
   content.add \view, opt.palettes
   content.build content.pals.view
-  edit-init null, {colors: <[#b34e19 #d78c51 #f3e7c9]>, toggle: false}
-
+  @ldpe = new ldPaletteEditor root: el.pn.edit
+  @edit = (pal, toggle = true) ~> @ldpe.init {toggle, pal}
   @
 
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
