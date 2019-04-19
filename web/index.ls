@@ -9,7 +9,6 @@ save = (data) -> new Promise (res, rej) -> console.log data; res!
 ldPalettePicker.register("default2", palettes)
 pals = ldPalettePicker.get("default2")
 ret = ldPalettePicker.init({pals: pals, useClusterizejs: true, mypal: mypal, save: save})
-#ldPalettePicker.init({useClusterizejs: true, mypal: mypal})
 ldcv = new ldCover({root: document.querySelector('.ldcv')})
 
 # bring up default palette
