@@ -78,6 +78,7 @@ ldPalettePicker = function(node, opt){
           lines.push("<div>" + line.join('') + "</div>");
         }
         return new Clusterize({
+          rows_in_block: 7,
           rows: lines,
           contentElem: el.pnin[tgt],
           scrollElem: el.pn[tgt]

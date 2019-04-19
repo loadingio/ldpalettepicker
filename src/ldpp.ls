@@ -40,6 +40,7 @@ ldPalettePicker = (node, opt = {}) ->
           for j from 0 til opt.item-per-line => line.push rows[i + j]
           lines.push """<div>#{line.join('')}</div>"""
         new Clusterize do
+          rows_in_block: 7
           rows: lines
           contentElem: el.pnin[tgt]
           scrollElem: el.pn[tgt]
