@@ -92,7 +92,7 @@ ldPalettePicker = function(node, opt){
       cs = c.colors.map(function(it){
         return "<div class=\"color\" style=\"background:" + ldColor.rgbaStr(it) + "\"></div>";
       }).join("");
-      return "<div class=\"palette\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><i class=\"i-check\"></i><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><i class=\"i-cog\"></i><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
+      return "<div class=\"palette\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  " + cs + "\n  <div class=\"ctrl\">\n  <div class=\"btn btn-sm\" data-action=\"use\"><i class=\"i-check\"></i><div class=\"desc\">USE</div></div>\n  <div class=\"btn btn-sm\" data-action=\"edit\"><i class=\"i-gear\"></i><div class=\"desc\">EDIT</div></div>\n  </div>\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
     }
   };
   if (opt.mypal != null) {

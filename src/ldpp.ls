@@ -53,7 +53,7 @@ ldPalettePicker = (node, opt = {}) ->
         #{cs}
         <div class="ctrl">
         <div class="btn btn-sm" data-action="use"><i class="i-check"></i><div class="desc">USE</div></div>
-        <div class="btn btn-sm" data-action="edit"><i class="i-cog"></i><div class="desc">EDIT</div></div>
+        <div class="btn btn-sm" data-action="edit"><i class="i-gear"></i><div class="desc">EDIT</div></div>
         </div>
         </div>
         <div class="name">#{c.name or 'untitled'}</div>
