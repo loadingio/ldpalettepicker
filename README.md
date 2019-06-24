@@ -1,6 +1,10 @@
 # ldPalettePicker
 
-HTML Widget for Palette Picker.
+HTML Widget for Palette Picker. Provide following ( should we split them into standalone projects? ):
+
+ * ldPalette - Palette Wrapper. Currently only provide convert / download to png / svg / json / scss functionality.
+ * ldPaletteEditor - For editing palette.
+ * ldPalettePicker - Picker + Editor
 
 
 ## Usage
@@ -80,9 +84,11 @@ Palette is defined as following format:
       name: "Palette Name",
       tag: ["tag", "list", ...],
       # either one of below
-      colors: [ldColor, ldColor, ...]               # type agnoistic color. we should internally use this
-      colors: [{hex: "#999", tag: [...]}, ...]      # hex. color follows ldColor format.
-      colors: ["#999", ...]                         # compact but losing color tags
+      colors: [ldColor, ldColor, ...]                 # type agnoistic color. we should internally use this
+      colors: [{hex: "#999", tag: [...]}, ...]        # hex. color follows ldColor format.
+      colors: ["#999", ...]                           # compact but losing color tags
+      # deprecated and we should use ldColor directly instead of  a indirect object with value member.
+      colors: [{value: ldColor,...}, {value: ldColor, ...}] 
     }
 
 

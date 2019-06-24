@@ -1,11 +1,13 @@
 ldPalette = ->
-ldPalette.download = (pal, type = \png) ->
+ldPalette.convert = (pal, type = \png) ->
   promise = new Promise (res, rej) ->
     name = pal.name or \palette
     len = pal.colors.length
     if type == \json
+      blob = new Blob([JSON.stringify pal], {type: "application/json"})
       return res do
-        url: URL.createObjectURL(new Blob([JSON.stringify pal], {type: "application/json"}))
+        blob: blob
+        url: URL.createObjectURL blob
         filename: "#name.json"
     else if type == \svg =>
       rects = []
@@ -19,8 +21,10 @@ ldPalette.download = (pal, type = \png) ->
       ] ++ rects ++ [
         """</svg>"""
       ]).join(\\n)
+      blob = new Blob([payload], {type: "image/svg+xml"})
       return res do
-        url: URL.createObjectURL(new Blob([payload], {type: "image/svg+xml"}))
+        blob: blob
+        url: URL.createObjectURL blob
         filename: "#name.svg"
     else if type == \png =>
       [iw,ih,dw,dh] = [500,100,500,100]
@@ -42,14 +46,17 @@ ldPalette.download = (pal, type = \png) ->
         )
       return canvas.toBlob (blob) ~>
         document.body.removeChild canvas
-        res { url: URL.createObjectURL(blob), filename: "#name.png" }
+        res { blob: blob, url: URL.createObjectURL(blob), filename: "#name.png" }
     else if type == \scss =>
       data = ["""$palette-name: '#name'"""]
       for i from 0 til len => data.push """$palette-color#{i + 1}: #{ldColor.web(pal.colors[i])};"""
+      blob = new Blob([data.join(\\n)], {type: "text/plain"})
       return res do
-        url: URL.createObjectURL(new Blob([data.join(\\n)], {type: "text/plain"}))
+        blob: blob
+        url: URL.createObjectURL blob
         filename: "#name.scss"
-  promise.then (ret) ->
+ldPalette.download = (pal, type = \png) ->
+  ldPalette.convert pal, type .then (ret) ->
     a = ld$.create name: \a, attr: {download: ret.filename, href: ret.url}, style: display: \none
     document.body.appendChild a
     a.click!

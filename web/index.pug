@@ -92,6 +92,27 @@ html(lang="en")
             .btn.btn-outline-dark(data-ldcv-set="") Close
 
       .btn.btn-primary.btn-lg.btn-block.w-50.m-auto(onclick="ldcvEditor.toggle()") Show Editor
+      br
+      h3.mt-4 Convert to Image
+
+      .d-flex.m-auto.w-50(style="justify-content: center")
+        .dropdown.mr-2
+          .btn.btn-primary.btn-lg.btn-block.dropdown-toggle(data-toggle="dropdown") To Image
+          .dropdown-menu
+            a.dropdown-item(onclick="image('png')") PNG
+            a.dropdown-item(onclick="image('json')") JSON
+            a.dropdown-item(onclick="image('scss')") SCSS
+            a.dropdown-item(onclick="image('svg')") SVG
+        .dropdown
+          .btn.btn-primary.btn-lg.btn-block.dropdown-toggle(data-toggle="dropdown") Download
+          .dropdown-menu
+            a.dropdown-item(onclick="down('png')") PNG
+            a.dropdown-item(onclick="down('json')") JSON
+            a.dropdown-item(onclick="down('scss')") SCSS
+            a.dropdown-item(onclick="down('svg')") SVG
+
+      #image-output.shadow-sm.border.w-50.mx-auto.mt-4
+
     script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.26/bootstrap-native-v4.min.js")
     script(type="text/javascript",src="ldpp.palettes.js")
     script(type="text/javascript",src="ldpe.js")

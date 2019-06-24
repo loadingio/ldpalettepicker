@@ -14,6 +14,15 @@ ldcv = new ldCover({root: document.querySelector('.ldcv')})
 # bring up default palette
 # ldcv.on \toggle.on, -> ret.1.edit {name: "blah", colors: <[#f00 #0f0 #00f]>}, false
 
-new ldPaletteEditor root: \#editor
+ldpe = new ldPaletteEditor root: \#editor
 new ldPaletteEditor root: \#ldcv-editor
 ldcv-editor = new ldCover({root: \#ldcv-editor})
+
+image = (type = \png) -> ldPalette.convert ldpe.get-pal!, type .then (ret) ->
+  out = document.querySelector(\#image-output)
+  if type in <[png svg]> => out.innerHTML = """<img src="#{ret.url}"/>"""
+  else 
+    fr = new FileReader!
+    fr.onload = -> out.innerHTML = fr.result
+    fr.readAsText ret.blob
+down = (type = \png) -> ldPalette.download ldpe.get-pal!, type
