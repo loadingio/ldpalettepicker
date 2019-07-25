@@ -153,7 +153,7 @@ ldPalettePicker = (node, opt = {}) ->
       if !ld$.parent(tgt,'[data-action=use]',root) => return false
       if (n = ld$.parent(tgt,".palette .btn", root)) => return use-pal(n) or true
       if n = ld$.parent(tgt,".panel[data-panel=edit]", root) =>
-        n = ld$.find n, \.palette, 0
+        n = ld$.find n, '.palette,.ldpal', 0
         if n => return use-pal(n) or true
     mypal: (tgt) ~>
       if !(p = ld$.parent(tgt,".navbar",root)) => return
