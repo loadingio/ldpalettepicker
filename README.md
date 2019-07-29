@@ -58,6 +58,7 @@ Manually initialize Palette Picker with:
 
 available options:
  * save: (data, key), function for saving palette. save btn will disappear if omitted.
+   - expect this to return the saved palette, including its name, key and colors as an object.
  * mypal: should be ldPage object. list user custom palettes. MyPal tab will disappear if omitted.
  * item-per-line: how many palettes per line.
  * className: additional class names to be added on ldpp root.

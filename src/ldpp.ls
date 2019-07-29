@@ -146,8 +146,7 @@ ldPalettePicker = (node, opt = {}) ->
         #saver.save { thumb, name, type, payload: {colors: colors} }, key
         saver.save { thumb, data: { name, type: \palette, payload: {colors: colors} } }, key
           .finally ~> saver.loader.off 500
-          .then ~> @fire \save, null
-          .catch ~> @fire \save, it
+          .then (pal) ~> if pal => @ldpe.init({pal})
 
       return true
 

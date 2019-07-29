@@ -228,10 +228,12 @@ ldPalettePicker = function(node, opt){
           }
         }, key)['finally'](function(){
           return saver.loader.off(500);
-        }).then(function(){
-          return this$.fire('save', null);
-        })['catch'](function(it){
-          return this$.fire('save', it);
+        }).then(function(pal){
+          if (pal) {
+            return this$.ldpe.init({
+              pal: pal
+            });
+          }
         });
       });
       return true;
