@@ -142,6 +142,8 @@ ldPalettePicker = (node, opt = {}) ->
           150
         )
       canvas.toBlob (thumb) ~>
+        # we should use this after we deploy v2.
+        #saver.save { thumb, name, type, payload: {colors: colors} }, key
         saver.save { thumb, data: { name, type: \palette, payload: {colors: colors} } }, key
           .finally ~> saver.loader.off 500
           .then ~> @fire \save, null

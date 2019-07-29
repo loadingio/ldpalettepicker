@@ -245,9 +245,7 @@ ldPalettePicker = function(node, opt){
         return usePal(n) || true;
       }
       if (n = ld$.parent(tgt, ".panel[data-panel=edit]", root)) {
-        console.log(n);
         n = ld$.find(n, '.palette,.ldpal', 0);
-        console.log(n);
         if (n) {
           return usePal(n) || true;
         }
