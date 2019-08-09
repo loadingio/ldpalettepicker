@@ -59,6 +59,7 @@ Manually initialize Palette Picker with:
 available options:
  * save: (data, key), function for saving palette. save btn will disappear if omitted.
    - expect this to return the saved palette, including its name, key and colors as an object.
+ * random: a function or palette list that decide a subset of palette to return when user calling ldpp.random();
  * mypal: should be ldPage object. list user custom palettes. MyPal tab will disappear if omitted.
  * item-per-line: how many palettes per line.
  * className: additional class names to be added on ldpp root.
@@ -76,6 +77,20 @@ example:
     ldPalettePicker.init(pals);
 ```
 
+## API
+
+ldPalettePicker class function:
+ * register(name, palettes) - register a palette list with specific name.
+   - name: string for representing this palette list
+   - palettes: Array of palette. palette could be in {name, colors} format, or in compact text format.
+ * get(name) - get palette list with specific name.
+   - name: palette list name registered with register function.
+   - return palette in {name, colors} format.
+ * init(opt) - init all ldPalettePickers by searching get with `ldPalettePicker` attribute.
+   - opt - optional configs to overwrite default settings
+
+ldPalettePicker object function:
+ * random(): return a random palette from palette list of this picker.
 
 ## Spec
 

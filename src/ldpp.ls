@@ -1,8 +1,8 @@
-ldPalettePicker = (node, opt = {}) ->
-  opt = {palettes: [], item-per-line: 2} <<< opt
+ldPalettePicker = (opt = {}) ->
+  @opt = opt = {palettes: [], item-per-line: 2} <<< opt
   @pals = view: opt.palettes
   # Prepare DOM
-  @root = root = if typeof(node) == typeof('') => node = document.querySelector(node) else node
+  @root = root = if typeof(opt.root) == typeof('') => document.querySelector(opt.root) else opt.root
   if opt.className => @root.classList.add.apply @root.classList, opt.className.split(' ').filter(->it).map(->it.trim!)
   @el = el = {}
   el.nv = do
@@ -207,6 +207,11 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
     ld$.find(@root,\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
     ld$.find(@root,".nav-link").map -> it.classList[if ld$.attr(it,\data-panel) == n => \add else \remove] \active
     true
+  random: ->
+    pals = @opt.palettes
+    if !@opt.random => return pals[Math.floor(Math.random! * pals.length)]
+    if Array.isArray(@opt.random) => return @opt.random[Math.floor(Math.random! * @opt.random.length)]
+    return @opt.random!
 
 # Class Methods
 ldPalettePicker <<< do
