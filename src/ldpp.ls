@@ -194,7 +194,7 @@ ldPalettePicker = (opt = {}) ->
   content.add \view, opt.palettes
   content.build content.pals.view
   @ldpe = new ldPaletteEditor root: el.pn.edit
-  @edit = (pal, toggle = true) ~> @ldpe.init {toggle, pal}
+  @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
   @
 
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
@@ -205,7 +205,7 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
     idx = if ld$.find(@root,".panel[data-panel=#n]",0) => ld$.index(that) else -1
     if idx < 0 => return
     ld$.find(@root,\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
-    ld$.find(@root,".nav-link").map -> it.classList[if ld$.attr(it,\data-panel) == n => \add else \remove] \active
+    ld$.find(@root,".nav-link").map -> it.classList.toggle \active, (ld$.attr(it,\data-panel) == n)
     true
   random: ->
     pals = @opt.palettes

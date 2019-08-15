@@ -144,8 +144,6 @@ ldPaletteEditor = (opt = {}) ->
       if ldcp._slider == t => return ldcp._slider = null
       ldrs[t].set v
 
-  #@edit = (pal, toggle = true) -> edit-init null, {toggle} <<< pal{colors, name}
-
   # General Action
   evts = do
     edit-color: (tgt) ->

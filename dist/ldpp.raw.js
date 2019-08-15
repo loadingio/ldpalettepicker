@@ -338,10 +338,12 @@ ldPalettePicker = function(opt){
   });
   this.edit = function(pal, toggle){
     toggle == null && (toggle = true);
-    return this$.ldpe.init({
-      toggle: toggle,
+    this$.ldpe.init({
       pal: pal
     });
+    if (toggle) {
+      return this$.tab('edit');
+    }
   };
   return this;
 };
@@ -372,7 +374,7 @@ ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
     }
     ld$.find(this.root, '.panels', 0).style.transform = "translate(" + idx * -100 + "%,0)";
     ld$.find(this.root, ".nav-link").map(function(it){
-      return it.classList[ld$.attr(it, 'data-panel') === n ? 'add' : 'remove']('active');
+      return it.classList.toggle('active', ld$.attr(it, 'data-panel') === n);
     });
     return true;
   },
