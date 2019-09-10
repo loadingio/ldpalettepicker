@@ -268,14 +268,18 @@
 .ldpp .panel[data-panel=edit] .ldColorPicker,
 .ldpe .ldColorPicker {
   width: 100%;
-  height: 200px;
+  height: calc(11.9375em - 8px);
   display: inline-block;
   vertical-align: top;
   margin-top: 0;
 }
+.ldpp .panel[data-panel=edit] .ldColorPicker .ldcp-panel,
+.ldpe .ldColorPicker .ldcp-panel {
+  padding: 0;
+}
 .ldpp .panel[data-panel=edit] .value,
 .ldpe .value {
-  margin: 18px 0 24px;
+  margin: 1.2125em 0 0.1em;
 }
 .ldpp .panel[data-panel=edit] .value:last-child,
 .ldpe .value:last-child {
@@ -304,7 +308,8 @@
 .ldpp .panel[data-panel=edit] .label-group,
 .ldpe .label-group {
   position: relative;
-  font-size: 0.875rem;
+  font-size: 0.75em;
+  line-height: 1.75em;
 }
 .ldpp .panel[data-panel=mypal] .btn-load {
   position: relative;

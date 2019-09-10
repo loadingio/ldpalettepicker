@@ -210,12 +210,14 @@ for num in (1..3)
 .ldpp .panel[data-panel=edit], .ldpe
   .ldColorPicker
     width: 100%
-    height: 200px
+    height: calc(11.9375em - 8px)
     display: inline-block
     vertical-align: top
     margin-top: 0
+    .ldcp-panel
+      padding: 0
   .value
-    margin: 18px 0 24px
+    margin: 1.2125em 0 0.1em
   .value:last-child
     margin-bottom: 0
   .edit
@@ -232,7 +234,8 @@ for num in (1..3)
     height: 37px
   .label-group
     position: relative
-    font-size: 0.875rem
+    font-size: 0.75em
+    line-height: 1.75em
 
 .ldpp .panel[data-panel=mypal] .btn-load
   position: relative
