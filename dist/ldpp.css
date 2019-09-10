@@ -56,8 +56,8 @@
   text-align: center;
   line-height: 48px;
 }
-.ldpp .palette .ctrl .btn,
-.ldpal .ctrl .btn {
+.ldpp .palette .ctrl .btn.btn-sm,
+.ldpal .ctrl .btn.btn-sm {
   color: rgba(255,255,255,0.7);
   margin-top: 1px;
   line-height: 1.2em;
@@ -66,6 +66,7 @@
   margin: auto;
   border-radius: 0;
   flex: 1 1 auto;
+  font-size: 1em;
 }
 .ldpp .palette .ctrl .btn:hover,
 .ldpal .ctrl .btn:hover {
@@ -88,13 +89,12 @@
 .ldpp .palette .name,
 .ldpal .name {
   text-transform: capitalize;
-  margin-top: 3px;
+  margin-top: 1px;
   font-size: 13px;
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  opacity: 0.9;
 }
 .ldpp .palette .colors,
 .ldpal .colors {
@@ -128,11 +128,15 @@
   margin: 0 5px 10px;
   padding: 0;
 }
+.ldpal.ldpal-sm .ctrl {
+  padding: 2px;
+}
 .ldpal.ldpal-sm .ctrl .btn {
-  font-size: 0.7em;
+  font-size: 12px;
+  line-height: 1.1em;
 }
 .ldpal.ldpal-sm .colors {
-  height: 36px;
+  height: 40px;
 }
 .ldpp .panel:nth-child(1) {
   transform: translate(0%, 0);
