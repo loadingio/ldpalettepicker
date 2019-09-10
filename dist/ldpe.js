@@ -55,10 +55,20 @@ ldPaletteEditor = function(opt){
           return _();
         }, 200);
       }
+    },
+    clear: function(){
+      this.stack.splice(0);
+      if (this.handle) {
+        clearTimeout(this.handle);
+      }
+      return this.handle = null, this.cur = null, this;
     }
   };
   this.undo = function(){
     return log.undo();
+  };
+  this.clearLog = function(){
+    return log.clear();
   };
   this.ldcp = ldcp = new ldColorPicker(el.ed.picker, {
     inline: true

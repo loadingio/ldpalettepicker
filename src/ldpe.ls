@@ -29,7 +29,12 @@ ldPaletteEditor = (opt = {}) ->
         @ <<< handle: null, cur: null
       if forced => _!
       else @handle = setTimeout (~> _! ), 200
+    clear: ->
+      @stack.splice 0
+      if @handle => clearTimeout @handle
+      @ <<< handle: null, cur: null
   @undo = -> log.undo!
+  @clear-log = -> log.clear!
 
 
   # Color Picker Initialization
