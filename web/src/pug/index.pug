@@ -28,7 +28,29 @@ html(lang="en")
         li #[b ldPalettePicker] - Widget for picking and editing palette.
 
       h2 Usage
-      p For visualizing a palette, use #[code ldp] class with following structure:
+      p ldPalette is designed to be used along with Pug, so in the following examples we will use Pug instead of HTML. To use ldPalettePicker, download and include the required file:
+      .example.code-block.
+        include path-to/ldpp.pug
+        link(rel="stylesheet",type="text/css",href="path-to/ldpp.css")
+        script(src="path-to/ldpp.js")
+
+      h2 ldPalette
+      p There are two parts of ldPalette: #[code ldPalette JS Object], and #[code ldPalette HTML Construct].
+      p a ldPalette object is like this: 
+
+      .code-block.example.
+        {
+          name: "Palette Name",
+          tag: ["tag", "list", ...],
+          # either one of below
+          colors: [ldColor, ldColor, ...]                 # type agnoistic color. we should internally use this
+          colors: [{hex: "#999", tag: [...]}, ...]        # hex. color follows ldColor format.
+          colors: ["#999", ...]                           # compact but losing color tags
+          # deprecated and we should use ldColor directly instead of  a indirect object with value member.
+          colors: [{value: ldColor,...}, {value: ldColor, ...}]
+        }
+
+      p For visualizing a palette in HTML, use #[code ldp] class with following structure:
       .code-block.example.
         .ldp #[span.text-secondary - container of this palette.]
           .colors #[span.text-secondary - wrapper for colors div]
@@ -38,20 +60,16 @@ html(lang="en")
           .name #[span.text-secondary - optional name containing the name of this palette.]
       p Following is an example of a palette:
       .code-block.example.
-        &lt;div class="ldp"&gt;
-          &lt;div class="colors"&gt;
-            &lt;div class="ctrl"&gt;
-              &lt;div data-action="..."&gt;&lt;/div&gt;
+        .ldp
+          .colors
+            .ctrl
+              div(data-action="view") \#[i.i-eye]View
+              div(data-action="edit") \#[i.i-chevron-down]Export
+            .colors
+              .color(style="background:#ff0")
+              .color(style="background:#ff0")
               ...
-              &lt;div data-action="..."&gt;&lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
-            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
-            ...
-            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="name"&gt; Palette Name &lt;/div&gt;
-        &lt;/div&gt;
+          .name Palette
       p Result:
       .example
         .ldp(style="width:280px")
@@ -96,56 +114,19 @@ html(lang="en")
               .col-md-6: +ldp("Palette", colors, actions, "ldp-sm w-100")
               .col-md-6: input.form-control.form-control-sm
 
-
-
-
-      h2.text-center Embedded Picker
-      #container: +ldPalettePicker
-      h3 Work with ldCover
-      .btn.btn-primary(onclick="ldcv.toggle(true)") Toggle
-      .ldcv.default-size: .base: .inner: +ldPalettePicker
-      +nbr(4)
-      .text-center
-        h3 Standalone Palette Styling
-        .ldpal
-          .colors
-            each c in ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
-              .color(style="background:" + c)
-            .ctrl Rainbow
-          .name Rainbow
-
-      br
-      br
-      h5 usage
-      textarea(rows="7",cols="60",style="font-family:monospace;font-size:16px;border-radius:3px").
-        .ldpal
-          .colors
-            .color(style="background:...")
-            ...
-            .ctrl ( things to show on hover )
-          .name Pal Name
-      h3(style="margin-top:100px") Standalone Palette Editor
-      #editor.ldpe(style="max-width:580px;margin:auto"): +paletteEditor
-
-      h3(style="margin-top:100px") Modal Palette Editor
-      #ldcv-editor.ldpe.ldcv: .base: .inner.card(style="width:580px;margin:auto"): .card-body
-        +paletteEditor
-        .foot
-          hr
-          .btn.btn-outline-dark.mr-2 Undo
-          .form-inline.float-right
-            .input-group.mr-2(style="width:210px")
-              input.form-control(placeholder="Palette Name..")
-              .input-group-append
-                .btn.btn-outline-dark Save
-            .btn.btn-outline-dark.mr-2 Download
-            .btn.btn-outline-dark(data-ldcv-set="") Close
-
-      .btn.btn-primary.btn-lg.btn-block.w-50.m-auto(onclick="ldcvEditor.toggle()") Show Editor
-      br
-      h3.mt-4 Convert to Image
-
-      .d-flex.m-auto.w-50(style="justify-content: center")
+      h3 API
+      p ldPalette ships along with some helper APIs: 
+      ul
+        li
+          span #[code ldPalette.convert(palette, format)] - convert palette to certain format, and return corresponding object. 4 formats are currently available:
+          ul
+            li SVG
+            li PNG
+            li JSON
+            li SCSS
+        li #[code ldPalette.download(palette, format)] - trigger downloading of a converted palette.
+      p Following is a demonstration of calling converting and downloading of a palette.
+      .d-flex.mx-auto.w-50.mt-4.justify-content-center
         .dropdown.mr-2
           .btn.btn-primary.btn-lg.btn-block.dropdown-toggle(data-toggle="dropdown") To Image
           .dropdown-menu
@@ -160,8 +141,67 @@ html(lang="en")
             a.dropdown-item(onclick="down('json')") JSON
             a.dropdown-item(onclick="down('scss')") SCSS
             a.dropdown-item(onclick="down('svg')") SVG
-
       #image-output.shadow-sm.border.w-50.mx-auto.mt-4
+
+      h2 ldPaletteEditor
+      p ldPalettePicker ships with a bunch of pre-built palettes, but sometimes user just need to customize their own. This could be done through the ldPaletteEditor.
+      p ldPaletteEditor is more complicated than simply a palette, so we prepare the DOM construct via a Pug mixin:
+      .row.botder.p-2.no-gutters
+        .col-md-4: .example.code-block.h-100.
+          .ldpe: +ldPaletteEditor
+          script.
+            new ldPaletteEditor({
+              root: '.ldpe'
+            });
+        .col-md-8.pl-1: .card: .card-body: #ldpe-ex1.w-100.mx-auto.ldpe: +ldPaletteEditor
+      p ldPaletteEditor provides following APIs:
+      ul
+        li #[code getPal] - get the current palette, in ldPalette format.
+        li
+          span #[code init(opt)] - initialize editor. opt is an object with following member:
+          ul
+            li pal - default palette, in ldPalette format.
+        li #[code undo] - undo the last edit action.
+        li #[code clearLog] - clear edit history.
+
+      h2 ldPalettePicker
+      p ldPalettePicker is an integrated widget for choosing, managing and editing palettes. It contains at least 3 tabs: built-in palettes, saved palettes, and edit panel.
+      p To create a ldPalettePicker, it's similar to how to prepare a ldPaletteEditor; prepare the HTML with Pug mixin, and initialize it with JavaScript. However, there are two notes about initializing ldPalettePicker:
+      ul
+        li We will need to set container's height for ldPalettePicker to be properly shown, minimal 570px:
+        li We will need to prepare some builtin palettes to be listed in the default panel. ldPalettePicker ships with a default list of palette so we will use it to demonstrate here.
+      .row.botder.p-2.no-gutters
+        .col-md-5: .example.code-block.h-100.
+          .ldpp(style="height:570px")
+            +ldPalettePicker
+          script.
+            new ldPalettePicker({
+              root: '.ldpp',
+              palettes:
+                ldPalettePicker.get(
+                  'default'
+                )
+            });
+        .col-md-7.pl-1: .card: .card-body: #ldpp-ex1.w-100.mx-auto.ldpp(style="height:570px"): +ldPalettePicker
+
+      h3 Work with ldCover
+      p ldPalettePicker is commonly used along with ldCover, which popups when user toggles the editor / picker. Toggling demo modals by clicking buttons below:
+      .btn.btn-lg.btn-primary.mr-2(onclick="ldcvPicker.toggle(true)") ldPalettePicker
+      .btn.btn-lg.btn-primary(onclick="ldcvEditor.toggle(true)") ldPaletteEditor
+
+      #ldcv-picker.ldcv.default-size: .base: .inner.ldpp: +ldPalettePicker
+      #ldcv-editor.ldcv.default-size: .base(style="height:490px"): .inner.p-4: .ldpe
+        +ldPaletteEditor
+        hr
+        .btn.btn-outline-dark.mr-2 Undo
+        .form-inline.float-right
+          .input-group.mr-2(style="width:210px")
+            input.form-control(placeholder="Palette Name..")
+            .input-group-append
+              .btn.btn-outline-dark Save
+          .btn.btn-outline-dark.mr-2 Download
+          .btn.btn-outline-dark(data-ldcv-set="") Close
+      +nbr(4)
 
     +script("https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.26/bootstrap-native-v4.min.js")
     +script("assets/lib/ldui.min.js")

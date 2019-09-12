@@ -27,116 +27,16 @@
 .ldpp .navbar .nav-link {
   cursor: pointer;
 }
-.ldpp .palette,
-.ldpal {
-  text-align: left;
-  width: 280px;
-  display: inline-block;
+.ldpp div[data-panel=view] .ldp,
+.ldpp div[data-panel=mypal] .ldp {
+  width: calc(50% - 20px);
   margin: 0 10px 5px;
   padding: 10px 10px 2px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  position: relative;
-  cursor: pointer;
 }
-.ldpp .palette .ctrl,
-.ldpal .ctrl {
-  position: absolute;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  padding: 3px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  opacity: 0;
-  transition: opacity ease-in-out 0.2s;
-  text-align: center;
-  line-height: 48px;
-}
-.ldpp .palette .ctrl .btn.btn-sm,
-.ldpal .ctrl .btn.btn-sm {
-  color: rgba(255,255,255,0.7);
-  margin-top: 1px;
-  line-height: 1.2em;
-  width: 50%;
-  height: 100%;
-  margin: auto;
-  border-radius: 0;
-  flex: 1 1 auto;
-  font-size: 1em;
-}
-.ldpp .palette .ctrl .btn:hover,
-.ldpal .ctrl .btn:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.3);
-}
-.ldpp .palette .ctrl .fa,
-.ldpal .ctrl .fa {
-  font-size: 1.6em;
-  margin-top: 1px;
-}
-.ldpp .palette .ctrl .desc,
-.ldpal .ctrl .desc {
-  font-size: 0.8em;
-}
-.ldpp .palette:hover .ctrl,
-.ldpal:hover .ctrl {
-  opacity: 1;
-}
-.ldpp .palette .name,
-.ldpal .name {
-  text-transform: capitalize;
-  margin-top: 1px;
-  font-size: 13px;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.ldpp .palette .colors,
-.ldpal .colors {
-  box-shadow: 0 0 0 1px #fff, 0 0 1px 1px rgba(0,0,0,0.2);
-  position: relative;
-  width: 100%;
-  height: 48px;
-  border-radius: 3px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: nowrap;
-}
-.ldpp .palette .color,
-.ldpal .color {
-  flex: 1 1 auto;
-  display: inline-block;
-  width: 32px;
-  height: 100%;
-}
-.ldpp .palette .color:first-of-type,
-.ldpal .color:first-of-type {
-  border-radius: 3px 0 0 3px;
-}
-.ldpp .palette .color:nth-last-child(-n+2),
-.ldpal .color:nth-last-child(-n+2) {
-  border-radius: 0 3px 3px 0;
-}
-.ldpal.ldpal-sm {
-  width: 140px;
-  height: 58px;
-  margin: 0 5px 10px;
-  padding: 0;
-}
-.ldpal.ldpal-sm .ctrl {
-  padding: 2px;
-}
-.ldpal.ldpal-sm .ctrl .btn {
-  font-size: 12px;
-  line-height: 1.1em;
-}
-.ldpal.ldpal-sm .colors {
-  height: 40px;
+.ldpp div[data-panel=view] .ldp .name,
+.ldpp div[data-panel=mypal] .ldp .name {
+  font-size: 0.875em;
+  text-align: left;
 }
 .ldpp .panel:nth-child(1) {
   transform: translate(0%, 0);
@@ -182,45 +82,45 @@
 .ldpp .panel[data-panel=edit] .edit > .inner {
   padding: 20px 20px 0;
 }
-.ldpp .panel[data-panel=edit] .ldpal {
+.ldpp .panel[data-panel=edit] .ldp {
   margin: 7px 0;
   padding: 0 20px 0;
 }
-.ldpp .panel[data-panel=edit] .ldpal,
-.ldpe .ldpal {
+.ldpp .panel[data-panel=edit] .ldp,
+.ldpe .ldp {
   width: 100%;
 }
-.ldpp .panel[data-panel=edit] .ldpal .name,
-.ldpe .ldpal .name {
+.ldpp .panel[data-panel=edit] .ldp .name,
+.ldpe .ldp .name {
   display: none;
 }
-.ldpp .panel[data-panel=edit] .ldpal .colors,
-.ldpe .ldpal .colors {
+.ldpp .panel[data-panel=edit] .ldp .colors,
+.ldpe .ldp .colors {
   height: 120px;
   border: 1px solid #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   overflow: visible;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color:first-child,
-.ldpe .ldpal .color:first-child {
+.ldpp .panel[data-panel=edit] .ldp .color:first-child,
+.ldpe .ldp .color:first-child {
   border-radius: 5px 0 0 5px;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color:last-child,
-.ldpe .ldpal .color:last-child {
+.ldpp .panel[data-panel=edit] .ldp .color:last-child,
+.ldpe .ldp .color:last-child {
   border-radius: 0 5px 5px 0;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color,
-.ldpe .ldpal .color {
+.ldpp .panel[data-panel=edit] .ldp .color,
+.ldpe .ldp .color {
   transition: flex 0.3s ease-in-out;
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color.dark .btns,
-.ldpe .ldpal .color.dark .btns {
+.ldpp .panel[data-panel=edit] .ldp .color.dark div[data-action],
+.ldpe .ldp .color.dark div[data-action] {
   color: #fff;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color .btns,
-.ldpe .ldpal .color .btns {
+.ldpp .panel[data-panel=edit] .ldp .color div[data-action],
+.ldpe .ldp .color div[data-action] {
   opacity: 0;
   width: 20px;
   margin: auto;
@@ -231,17 +131,17 @@
   justify-content: space-around;
   color: #444;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color .btns .fa,
-.ldpe .ldpal .color .btns .fa {
+.ldpp .panel[data-panel=edit] .ldp .color div[data-action] i,
+.ldpe .ldp .color div[data-action] i {
   flex: 0 0 auto;
   cursor: pointer;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color.active .btns,
-.ldpe .ldpal .color.active .btns {
+.ldpp .panel[data-panel=edit] .ldp .color.active div[data-action],
+.ldpe .ldp .color.active div[data-action] {
   opacity: 1;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color.active,
-.ldpe .ldpal .color.active {
+.ldpp .panel[data-panel=edit] .ldp .color.active,
+.ldpe .ldp .color.active {
   transform: scale(1.02);
   border-radius: 3px;
   border: 2px solid #000;
@@ -249,8 +149,8 @@
   z-index: 1;
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .ldpal .color.active:after,
-.ldpe .ldpal .color.active:after {
+.ldpp .panel[data-panel=edit] .ldp .color.active:after,
+.ldpe .ldp .color.active:after {
   content: " ";
   width: 20px;
   height: 20px;
@@ -268,7 +168,7 @@
 .ldpp .panel[data-panel=edit] .ldColorPicker,
 .ldpe .ldColorPicker {
   width: 100%;
-  height: calc(11.9375em - 8px);
+  height: calc(10.9875em + 1rem - 7px);
   display: inline-block;
   vertical-align: top;
   margin-top: 0;
@@ -317,7 +217,7 @@
   margin: 20px auto;
   cursor: pointer;
 }
-.ldpe .ldpal {
+.ldpe .ldp {
   padding: 0;
   margin: 0;
 }
@@ -384,7 +284,8 @@
   flex-direction: column;
 }
 .ldp .ctrl div[data-action] i {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin-bottom: 0.1em;
 }
 .ldp .ctrl div[data-action]:hover {
   color: #fff;

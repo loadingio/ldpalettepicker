@@ -48,13 +48,13 @@ ldPalettePicker = (opt = {}) ->
     html: (c) ->
       cs = c.colors.map(->"""<div class="color" style="background:#{ldColor.rgbaStr(it)}"></div>""").join("")
       """
-      <div class="palette"#{if c.key => " data-key=\"" + c.key + "\"" else ""}>
+      <div class="ldp"#{if c.key => " data-key=\"" + c.key + "\"" else ""}>
         <div class="colors">
-        #{cs}
         <div class="ctrl">
-        <div class="btn btn-sm" data-action="use"><i class="i-check"></i><div class="desc">USE</div></div>
-        <div class="btn btn-sm" data-action="edit"><i class="i-gear"></i><div class="desc">EDIT</div></div>
+        <div data-action="use"><i class="i-check"></i>USE</div>
+        <div data-action="edit"><i class="i-gear"></i>EDIT</div>
         </div>
+        #{cs}
         </div>
         <div class="name">#{c.name or 'untitled'}</div>
       </div>
@@ -84,7 +84,7 @@ ldPalettePicker = (opt = {}) ->
     ld$.remove(el.pn.mypal)
 
   pal-from-node = (n) ->
-    p = ld$.find(n,'.palette',0) or ld$.parent(n,'.palette',root)
+    p = ld$.find(n,'.ldp',0) or ld$.parent(n,'.ldp',root)
     [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).innerText]
     else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
@@ -152,9 +152,9 @@ ldPalettePicker = (opt = {}) ->
 
     use: (tgt) ~>
       if !ld$.parent(tgt,'[data-action=use]',root) => return false
-      if (n = ld$.parent(tgt,".palette .btn", root)) => return use-pal(n) or true
+      if (n = ld$.parent(tgt,".ldp div[data-action]", root)) => return use-pal(n) or true
       if n = ld$.parent(tgt,".panel[data-panel=edit]", root) =>
-        n = ld$.find n, '.palette,.ldpal', 0
+        n = ld$.find n, '.ldp', 0
         if n => return use-pal(n) or true
     mypal: (tgt) ~>
       if !(p = ld$.parent(tgt,".navbar",root)) => return
@@ -169,7 +169,7 @@ ldPalettePicker = (opt = {}) ->
       @tab \view # go to view first so search will execute in view panel
       search el.nv.search.value = (ld$.attr(n,"data-cat") or "")
     edit: (tgt) ~>
-      if !(n = ld$.parent(tgt,".palette .btn", root)) => return
+      if !(n = ld$.parent(tgt,".ldp div[data-action]", root)) => return
       if ld$.attr(n,\data-action) == \edit =>
         @tab \edit
         @ldpe.init({pal: pal-from-node(n)})

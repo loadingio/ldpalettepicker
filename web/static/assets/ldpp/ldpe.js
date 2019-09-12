@@ -13,8 +13,8 @@ ldPaletteEditor = function(opt){
   this.el = el = {};
   el.ed = {
     picker: ld$.find(root, '.ldColorPicker', 0),
-    pal: ld$.find(root, '.ldpal', 0),
-    colors: ld$.find(root, '.ldpal .colors', 0),
+    pal: ld$.find(root, '.ldp', 0),
+    colors: ld$.find(root, '.ldp .colors', 0),
     hex: ld$.find(root, 'input[data-tag=hex]', 0),
     sel: ld$.find(root, 'select', 0),
     cfgs: ld$.find(root, '.config')
@@ -207,7 +207,7 @@ ldPaletteEditor = function(opt){
     el.ed.colors.innerHTML = hexs.map(function(d, i){
       var hcl;
       hcl = ldColor.hcl(d);
-      return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div class=\"btns\">\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
+      return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
     }).join('');
     ld$.find(elp, '.name', 0).innerHTML = name || 'untitled';
     editUpdate(hexs[0]);

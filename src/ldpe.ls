@@ -5,8 +5,8 @@ ldPaletteEditor = (opt = {}) ->
 
   el.ed = do
     picker: ld$.find(root,'.ldColorPicker',0)
-    pal: ld$.find(root,'.ldpal',0)
-    colors: ld$.find(root,'.ldpal .colors',0)
+    pal: ld$.find(root,'.ldp',0)
+    colors: ld$.find(root,'.ldp .colors',0)
     hex: ld$.find(root,'input[data-tag=hex]',0)
     sel: ld$.find(root,'select',0)
     cfgs: ld$.find(root,'.config')
@@ -122,7 +122,7 @@ ldPaletteEditor = (opt = {}) ->
         """
         <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
         style="background:#d;color:#d">
-          <div class="btns">
+          <div data-action>
             <i class="i-clone"></i>
             <i class="i-bars"></i>
             <i class="i-close"></i>
