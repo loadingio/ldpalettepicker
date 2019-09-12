@@ -1,0 +1,172 @@
+doctype html
+include ../../static/assets/lib/pug/ldui.pug
+include ../../static/assets/ldpp/ldpp.pug
+html(lang="en")
+  - var colors = ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
+  - var actions = [["view", "View"], ["export", "Export"]]
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    meta(name='viewport',content='width=device-width, initial-scale=1.0')
+    link(href="https://fonts.googleapis.com/css?family=Oxygen:300,700|Roboto:300,500,700|BenchNine|Varela+Round&display=swap", rel="stylesheet")
+    +css("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
+    +css("assets/lib/clusterize.css")
+    +css("assets/lib/ldui.min.css")
+    +css("assets/ldpp/ldpp.min.css")
+    +css("css/index.css")
+
+  body
+    .w-100.h-50.bg-light: .vertical-center
+      .w-100: .w-50.mx-auto.text-center
+        h1.font-weight-bold ldPalettePicker
+        .text-center palette utilities including editor, picker and palette wrapper.
+    .w-1024.rwd.mt-4.mx-auto.p-4.typeset.headling-contrast
+      h2 About
+      p ldPlaettePicker is a set of tool for manipulating color palettes. It contains three parts:
+      ul
+        li #[b ldPalette] - Palette wrapper, for manipulating palette.
+        li #[b ldPaletteEditor] - API and interface for editing palette.
+        li #[b ldPalettePicker] - Widget for picking and editing palette.
+
+      h2 Usage
+      p For visualizing a palette, use #[code ldp] class with following structure:
+      .code-block.example.
+        .ldp #[span.text-secondary - container of this palette.]
+          .colors #[span.text-secondary - wrapper for colors div]
+            .ctrl #[span.text-secondary - contains buttons shown when hovering. ]
+              div(data-action="...") #[span.text-secondary - button for triggering certain action]
+            .color #[span.text-secondary - blocks colored by setting background attribute in inline style.]
+          .name #[span.text-secondary - optional name containing the name of this palette.]
+      p Following is an example of a palette:
+      .code-block.example.
+        &lt;div class="ldp"&gt;
+          &lt;div class="colors"&gt;
+            &lt;div class="ctrl"&gt;
+              &lt;div data-action="..."&gt;&lt;/div&gt;
+              ...
+              &lt;div data-action="..."&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
+            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
+            ...
+            &lt;div class="color" style="background:..."&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="name"&gt; Palette Name &lt;/div&gt;
+        &lt;/div&gt;
+      p Result:
+      .example
+        .ldp(style="width:280px")
+          .colors
+            .ctrl
+              div(data-action="view") #[i.i-eye]View
+              div(data-action="export") #[i.i-chevron-down]Export
+            each c in colors
+              .color(style=`background:${c}`)
+          .name Rainbow
+      p You may not want to type the whole construct by yourself, so we also provide a Pug mixin for quickly setup the construct:
+      .example.code-block.
+        +ldp(
+          "name",
+          ["color1", "color2", ...],
+          [["action-1", "action-text-1"], ...]
+          "space separated additional classes"
+        )
+      h3 Customization
+      p #[code ldp] provides the basic styles and DOM construct. To further styling it, you can customize it yourself by CSS. ldPalette provides some CSS classes for basic variations, It's at your discretion to use them.
+      p Here are some common CSS styles you'd probably like to customize:
+      ul
+        li #[code .ldp] - #[code width] for width of palette.
+        li #[code .ldp] - #[code font-size] for font size of palette.
+        li #[code .colors] - #[code height] for height of palette.
+      p The size, by default, is proportional to container font-size and designed to match the size of bootstrap form-control, but it's always customizable. Control the size by applying one of the #[code ldp-lg], #[code ldp-sm] CSS classes.
+      .example
+        .row
+          .col-md-4
+            .text-center: b ldp-lg
+            .row.mt-2
+              .col-md-6: +ldp("Palette", colors, actions, "ldp-lg w-100")
+              .col-md-6: input.form-control.form-control-lg
+          .col-md-4
+            .text-center: b normal
+            .row.mt-2
+              .col-md-6: +ldp("Palette", colors, actions, "w-100")
+              .col-md-6: input.form-control
+          .col-md-4
+            .text-center: b ldp-sm
+            .row.mt-2
+              .col-md-6: +ldp("Palette", colors, actions, "ldp-sm w-100")
+              .col-md-6: input.form-control.form-control-sm
+
+
+
+
+      h2.text-center Embedded Picker
+      #container: +ldPalettePicker
+      h3 Work with ldCover
+      .btn.btn-primary(onclick="ldcv.toggle(true)") Toggle
+      .ldcv.default-size: .base: .inner: +ldPalettePicker
+      +nbr(4)
+      .text-center
+        h3 Standalone Palette Styling
+        .ldpal
+          .colors
+            each c in ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
+              .color(style="background:" + c)
+            .ctrl Rainbow
+          .name Rainbow
+
+      br
+      br
+      h5 usage
+      textarea(rows="7",cols="60",style="font-family:monospace;font-size:16px;border-radius:3px").
+        .ldpal
+          .colors
+            .color(style="background:...")
+            ...
+            .ctrl ( things to show on hover )
+          .name Pal Name
+      h3(style="margin-top:100px") Standalone Palette Editor
+      #editor.ldpe(style="max-width:580px;margin:auto"): +paletteEditor
+
+      h3(style="margin-top:100px") Modal Palette Editor
+      #ldcv-editor.ldpe.ldcv: .base: .inner.card(style="width:580px;margin:auto"): .card-body
+        +paletteEditor
+        .foot
+          hr
+          .btn.btn-outline-dark.mr-2 Undo
+          .form-inline.float-right
+            .input-group.mr-2(style="width:210px")
+              input.form-control(placeholder="Palette Name..")
+              .input-group-append
+                .btn.btn-outline-dark Save
+            .btn.btn-outline-dark.mr-2 Download
+            .btn.btn-outline-dark(data-ldcv-set="") Close
+
+      .btn.btn-primary.btn-lg.btn-block.w-50.m-auto(onclick="ldcvEditor.toggle()") Show Editor
+      br
+      h3.mt-4 Convert to Image
+
+      .d-flex.m-auto.w-50(style="justify-content: center")
+        .dropdown.mr-2
+          .btn.btn-primary.btn-lg.btn-block.dropdown-toggle(data-toggle="dropdown") To Image
+          .dropdown-menu
+            a.dropdown-item(onclick="image('png')") PNG
+            a.dropdown-item(onclick="image('json')") JSON
+            a.dropdown-item(onclick="image('scss')") SCSS
+            a.dropdown-item(onclick="image('svg')") SVG
+        .dropdown
+          .btn.btn-primary.btn-lg.btn-block.dropdown-toggle(data-toggle="dropdown") Download
+          .dropdown-menu
+            a.dropdown-item(onclick="down('png')") PNG
+            a.dropdown-item(onclick="down('json')") JSON
+            a.dropdown-item(onclick="down('scss')") SCSS
+            a.dropdown-item(onclick="down('svg')") SVG
+
+      #image-output.shadow-sm.border.w-50.mx-auto.mt-4
+
+    +script("https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.26/bootstrap-native-v4.min.js")
+    +script("assets/lib/ldui.min.js")
+    +script("assets/lib/clusterize.min.js")
+    +script("assets/ldpp.palettes.js")
+    +script("assets/ldpp/ldpe.js")
+    +script("assets/ldpp/ldpp.js")
+    +script("js/index.js")

@@ -253,3 +253,83 @@ for num in (1..3)
     &.active
       display: flex
 
+.ldp
+  display: inline-block
+  .colors
+    cursor: pointer
+    position: relative
+    box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 1px 1px rgba(0,0,0,.2)
+    width: 100%
+    border-radius: 3px
+    overflow: hidden
+    display: flex
+    flex-wrap: nowrap
+  .color
+    flex: 1 1 0
+    display: inline-block
+    width: 0
+    height: 100%
+  .color:first-child, .ctrl + .color
+    border-radius: 3px 0 0 3px
+  .color:last-child
+    border-radius: 0 3px 3px 0
+  .ctrl
+    position: absolute
+    display: flex
+    flex-wrap: nowrap
+    justify-content: center
+    padding: 3px
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,.5)
+    opacity: 0
+    transition: opacity ease-in-out 0.2s
+    text-align: center
+    div[data-action]
+      color: rgba(255,255,255,.7)
+      height: 100%
+      flex: 1 1 0
+      line-height: 1em
+      font-size: .8em
+      display: flex
+      i { font-size: 1.2em }
+      /* for vertically, horizontally aligning content */
+      align-items: center
+      justify-content: center
+      /* make contents flow top-down. */
+      flex-direction: column
+    div[data-action]:hover
+      color: #fff
+      background: rgba(255,255,255,.3)
+    div[data-action]:first-child, .ctrl + div[data-action]
+      border-radius: 3px 0 0 3px
+    div[data-action]:last-child
+      border-radius: 0 3px 3px 0
+
+
+  .name
+    text-transform: capitalize
+    width: 100%
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+  &:hover .ctrl
+    opacity: 1
+    opacity: 1
+
+.ldp
+  width: 15em
+.ldp .colors
+  height: calc(1.5em + .75rem + 2px)
+
+.ldp.ldp-sm
+  font-size: .875rem
+.ldp.ldp-sm .colors
+  height: calc(1.5em + .5rem + 2px)
+
+.ldp.ldp-lg
+  font-size: 1.25rem
+.ldp.ldp-lg .colors
+  height: calc(1.5em + 1rem + 2px)

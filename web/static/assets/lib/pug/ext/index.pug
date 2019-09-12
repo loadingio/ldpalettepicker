@@ -1,17 +1,5 @@
 //- module
 
-mixin ldp(name, colors, actions, cls)
-  - if(!actions) actions = []
-  .ldp(class=(cls || ""))
-    .colors
-      .ctrl
-        each a in actions
-          div(data-action=a[0])= a[1]
-      each c in colors
-        .color(style=`background:${c}`)
-    if name
-      .name= name
-
 //- Palette Widget in Palette List
 mixin palette(palette)
   - if(!palette) palette = [[],""]
@@ -106,3 +94,47 @@ mixin ldPalettePicker
             .btn.btn-primary.mr-2(data-action="use") Use This Palette
             .btn.btn-outline-secondary.ld-ext-right(data-action="save") Save as Asset #[.ld.ldld.ldbtn.sm]
           .btn.btn-outline-secondary(data-action="undo") Undo #[i.i-undo]
+mixin ldCover
+  .ldcv: .base: .inner
+    block
+//- module
+- var anikit = {"groupName":["No Animation","Popular Animation","Repeat Animation","Transition"],"members":[["static"],["blink","bounce-out","bounce-in","bounce","fade","float-btt-in","breath","slide-ltr","flip-h","spin","tremble"],["blink","blur","beat","bounceAlt","pulse","tick-alt","jump","bounce-out-alt","bounce-in-alt","bounce","clock","fade","float","heartbeat","hit","move-ltr","move-rtl","move-ttb","move-btt","orbit","breath","dim","metronome","swing","wander-v","wander","jingle","rubber-v","rubber","shake-v","shake","tick","smash","jelly-alt","jelly","damage","rush-btt","rush-ttb","rush-rtl","rush-ltr","slide-ltr","slide-rtl","slide-btt","slide-ttb","coin-h","coin-v","cycle","flip-h","flip-v","spin-fast","spin","squeeze","surprise","measure","shiver","swim","tremble","wrench"],["blur-in","blur-out","bounce-out","bounce-in","spring-ltr-in","spring-rtl-in","spring-ttb-in","spring-btt-in","throw-ltr-in","throw-rtl-in","throw-ttb-in","throw-btt-in","jump-alt-in","jump-alt-out","jump-in","jump-out","zoom-in","zoom-out","fade-in","fade-out","grow-rtl-in","grow-rtl-out","grow-ltr-in","grow-ltr-out","grow-ttb-in","grow-ttb-out","grow-btt-in","grow-btt-out","flip-v-in","flip-v-out","flip-h-in","flip-h-out","slide-rtl-in","slide-rtl-out","slide-ltr-in","slide-ltr-out","slide-ttb-in","slide-ttb-out","slide-btt-in","slide-btt-out","float-rtl-in","float-rtl-out","float-ltr-in","float-ltr-out","float-ttb-in","float-ttb-out","float-btt-in","float-btt-out","fall-rtl-in","fall-ltr-in","fall-ttb-in","fall-btt-in","power-off","power-on","rush-btt-in","rush-ttb-in","rush-ltr-in","rush-rtl-in","vortex-out","vortex-in","vortex-alt-out","vortex-alt-in"]]};
+
+mixin anikit-dropdown
+  .dropdown
+    .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Animations...
+    .dropdown-menu
+      .inner: +anikit-dropdown-menu
+
+mixin anikit-dropdown-menu
+  each n,i in anikit.groupName
+    h6.dropdown-header.head #{n}
+    each k in anikit.members[i]
+      a.dropdown-item.anikit(href="#",data-anikit=k) #[span= k] #[.demo: .inner: .ld(class="ld-" + k)]
+    if i < 3
+      .dropdown-divider
+
+mixin anikit-modal
+  .ldcv.default-size: .base(style="position:relative")
+    .inner
+      .closebtn.lg(data-ldcv-set)
+      +anikit-modal-content
+
+mixin anikit-modal-content
+  each n,i in anikit.groupName
+    h6.ml-4.mt-4.head #{n}
+    .anikits
+      each k in anikit.members[i]
+        .anikit(data-ldcv-set=k,data-anikit=k)
+          .demo: .inner: .ld(class="ld-" + k)
+          span= k
+    .dropdown-divider
+  if i < 3
+    hr
+
+mixin anikit-select-options
+  each n,i in anikit.groupName
+    optgroup(label=n)
+      each k in anikit.members[i]
+        option(value=k)= k
+

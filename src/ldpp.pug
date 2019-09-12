@@ -1,5 +1,17 @@
 //- module
 
+mixin ldp(name, colors, actions, cls)
+  - if(!actions) actions = []
+  .ldp(class=(cls || ""))
+    .colors
+      .ctrl
+        each a in actions
+          div(data-action=a[0])= a[1]
+      each c in colors
+        .color(style=`background:${c}`)
+    if name
+      .name= name
+
 //- Palette Widget in Palette List
 mixin palette(palette)
   - if(!palette) palette = [[],""]

@@ -231,7 +231,7 @@ ldPalettePicker <<< do
   init: (opt = {}) ->
     pals = if !opt.pals => @get \default else opt.pals
     Array.from(document.querySelectorAll '*[ldPalettePicker]').map ->
-      new ldPalettePicker(it, {palettes: pals} <<< opt)
+      new ldPalettePicker({palettes: pals, root: it} <<< opt)
 
 # Default Color Palette
 ldPalettePicker.register "default", """

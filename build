@@ -22,5 +22,8 @@ echo "Copy palettes presets to dist/ ..."
 cp tool/js/*.js dist/
 echo "Copy pug mixin to dist/ ..."
 cp src/ldpp.pug dist/
+echo "Deploy to web ... "
+mkdir -p web/static/assets/ldpp/
+cp -R dist/* web/static/assets/ldpp/
 echo "Done."
 
