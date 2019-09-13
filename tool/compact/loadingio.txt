@@ -55,7 +55,7 @@ America Express,002663 4d4f53,brand
 Arriva,004d73 00334e 007fdb dbebfa 832561 11862f bfca02 848a8c,brand
 Asana,3be8b0 1aafd0 6a67ce ffb900 fc636b,brand,qualitative
 Bandai Namco / バンダイナムコ,da3732 e4762f f7be33,brand,gradient
-Bestbuy,003b64 fff200,brand
+Best buy,003b64 fff200,brand
 Bitly,ee6123 eeca77 7db0dc,brand
 Bootstrap,337ab7 5bc0de 5cb85c f0ad4e d9534f,brand,qualitative
 Bower,52382b e46547 fecc47 59a82c 27abea,brand,qualitative

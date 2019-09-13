@@ -8,8 +8,12 @@ hash = {}
 for line in lines =>
   line = line.split ' = '
   attr = line.0.split \-
-  if attr.2 => hash[][attr.1].push line.1
+  v = +attr[* - 1]
+  if isNaN(v) => continue
+  n = attr.splice(1, attr.length - 2).join(' ')
+  hash[][n].push line.1
 
+for k,v of hash => if v.length > 11 => delete hash[k]
 palettes = [{name: k, colors: v, tag: ["brand"]} for k,v of hash]
 
 output = []
