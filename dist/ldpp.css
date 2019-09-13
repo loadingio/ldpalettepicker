@@ -257,6 +257,7 @@
 }
 .ldp .ctrl {
   position: absolute;
+  z-index: 1;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
