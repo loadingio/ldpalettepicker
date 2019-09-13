@@ -12,22 +12,6 @@ mixin ldp(name, colors, actions, cls)
     if name
       .name= name
 
-//- Palette Widget in Palette List
-  mixin palette(palette)
-    - if(!palette) palette = [[],""]
-    .ldp
-      .colors
-        each color in palette[1]
-          .color(style="background:" + color)
-        .ctrl
-          .btn.btn-sm
-            i.i-check
-            .desc USE
-          .btn.btn-sm(data-action="edit")
-            i.i-gear
-            .desc EDIT
-      .name= palette[0]
-
 //- Palette Editor
 mixin ldPaletteEditor
   .ldp
