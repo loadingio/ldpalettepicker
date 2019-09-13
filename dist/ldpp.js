@@ -245,7 +245,7 @@ ldPalettePicker = function(opt){
       if (!ld$.parent(tgt, '[data-action=use]', root)) {
         return false;
       }
-      if (n = ld$.parent(tgt, ".ldp div[data-action]", root)) {
+      if (n = ld$.parent(tgt, ".ldp *[data-action]", root)) {
         return usePal(n) || true;
       }
       if (n = ld$.parent(tgt, ".panel[data-panel=edit]", root)) {
@@ -284,7 +284,7 @@ ldPalettePicker = function(opt){
     },
     edit: function(tgt){
       var n;
-      if (!(n = ld$.parent(tgt, ".ldp div[data-action]", root))) {
+      if (!(n = ld$.parent(tgt, ".ldp *[data-action]", root))) {
         return;
       }
       if (ld$.attr(n, 'data-action') === 'edit') {

@@ -115,12 +115,12 @@
   transition: flex 0.3s ease-in-out;
   position: relative;
 }
-.ldpp .panel[data-panel=edit] .ldp .color.dark div[data-action],
-.ldpe .ldp .color.dark div[data-action] {
+.ldpp .panel[data-panel=edit] .ldp .color.dark *[data-action],
+.ldpe .ldp .color.dark *[data-action] {
   color: #fff;
 }
-.ldpp .panel[data-panel=edit] .ldp .color div[data-action],
-.ldpe .ldp .color div[data-action] {
+.ldpp .panel[data-panel=edit] .ldp .color *[data-action],
+.ldpe .ldp .color *[data-action] {
   opacity: 0;
   width: 20px;
   margin: auto;
@@ -131,13 +131,13 @@
   justify-content: space-around;
   color: #444;
 }
-.ldpp .panel[data-panel=edit] .ldp .color div[data-action] i,
-.ldpe .ldp .color div[data-action] i {
+.ldpp .panel[data-panel=edit] .ldp .color *[data-action] i,
+.ldpe .ldp .color *[data-action] i {
   flex: 0 0 auto;
   cursor: pointer;
 }
-.ldpp .panel[data-panel=edit] .ldp .color.active div[data-action],
-.ldpe .ldp .color.active div[data-action] {
+.ldpp .panel[data-panel=edit] .ldp .color.active *[data-action],
+.ldpe .ldp .color.active *[data-action] {
   opacity: 1;
 }
 .ldpp .panel[data-panel=edit] .ldp .color.active,
@@ -203,7 +203,6 @@
 .ldpp .panel[data-panel=edit] .ldrs,
 .ldpe .ldrs {
   margin-top: -3px;
-  height: 37px;
 }
 .ldpp .panel[data-panel=edit] .label-group,
 .ldpe .label-group {
@@ -231,6 +230,7 @@
 }
 .ldp {
   display: inline-block;
+  position: relative;
 }
 .ldp .colors {
   cursor: pointer;
@@ -270,32 +270,33 @@
   transition: opacity ease-in-out 0.2s;
   text-align: center;
 }
-.ldp .ctrl div[data-action] {
+.ldp .ctrl *[data-action] {
   color: rgba(255,255,255,0.7);
   height: 100%;
   flex: 1 1 0;
   line-height: 1em;
   font-size: 0.8em;
   display: flex;
+  text-decoration: none;
 /* for vertically, horizontally aligning content */
   align-items: center;
   justify-content: center;
 /* make contents flow top-down. */
   flex-direction: column;
 }
-.ldp .ctrl div[data-action] i {
+.ldp .ctrl *[data-action] i {
   font-size: 1.1em;
   margin-bottom: 0.1em;
 }
-.ldp .ctrl div[data-action]:hover {
+.ldp .ctrl *[data-action]:hover {
   color: #fff;
   background: rgba(255,255,255,0.3);
 }
-.ldp .ctrl div[data-action]:first-child,
-.ldp .ctrl .ctrl + div[data-action] {
+.ldp .ctrl *[data-action]:first-child,
+.ldp .ctrl .ctrl + *[data-action] {
   border-radius: 3px 0 0 3px;
 }
-.ldp .ctrl div[data-action]:last-child {
+.ldp .ctrl *[data-action]:last-child {
   border-radius: 0 3px 3px 0;
 }
 .ldp .name {

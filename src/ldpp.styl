@@ -90,9 +90,9 @@ for num in (1..3)
     .color
       transition: flex 0.3s ease-in-out
       position: relative
-      &.dark div[data-action]
+      &.dark *[data-action]
         color: #fff
-      div[data-action]
+      *[data-action]
         opacity: 0
         width: 20px
         margin: auto
@@ -105,7 +105,7 @@ for num in (1..3)
         i
           flex: 0 0 auto
           cursor: pointer
-      &.active div[data-action]
+      &.active *[data-action]
         opacity: 1
       &.active
         transform: scale(1.02)
@@ -154,7 +154,6 @@ for num in (1..3)
     text-align: left
   .ldrs
     margin-top: -3px
-    height: 37px
   .label-group
     position: relative
     font-size: 0.75em
@@ -178,6 +177,7 @@ for num in (1..3)
 
 .ldp
   display: inline-block
+  position: relative
   .colors
     cursor: pointer
     position: relative
@@ -210,25 +210,26 @@ for num in (1..3)
     opacity: 0
     transition: opacity ease-in-out 0.2s
     text-align: center
-    div[data-action]
+    *[data-action]
       color: rgba(255,255,255,.7)
       height: 100%
       flex: 1 1 0
       line-height: 1em
       font-size: .8em
       display: flex
+      text-decoration: none
       i { font-size: 1.1em; margin-bottom: .1em }
       /* for vertically, horizontally aligning content */
       align-items: center
       justify-content: center
       /* make contents flow top-down. */
       flex-direction: column
-    div[data-action]:hover
+    *[data-action]:hover
       color: #fff
       background: rgba(255,255,255,.3)
-    div[data-action]:first-child, .ctrl + div[data-action]
+    *[data-action]:first-child, .ctrl + *[data-action]
       border-radius: 3px 0 0 3px
-    div[data-action]:last-child
+    *[data-action]:last-child
       border-radius: 0 3px 3px 0
 
 

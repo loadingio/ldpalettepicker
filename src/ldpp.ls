@@ -152,7 +152,7 @@ ldPalettePicker = (opt = {}) ->
 
     use: (tgt) ~>
       if !ld$.parent(tgt,'[data-action=use]',root) => return false
-      if (n = ld$.parent(tgt,".ldp div[data-action]", root)) => return use-pal(n) or true
+      if (n = ld$.parent(tgt,".ldp *[data-action]", root)) => return use-pal(n) or true
       if n = ld$.parent(tgt,".panel[data-panel=edit]", root) =>
         n = ld$.find n, '.ldp', 0
         if n => return use-pal(n) or true
@@ -169,7 +169,7 @@ ldPalettePicker = (opt = {}) ->
       @tab \view # go to view first so search will execute in view panel
       search el.nv.search.value = (ld$.attr(n,"data-cat") or "")
     edit: (tgt) ~>
-      if !(n = ld$.parent(tgt,".ldp div[data-action]", root)) => return
+      if !(n = ld$.parent(tgt,".ldp *[data-action]", root)) => return
       if ld$.attr(n,\data-action) == \edit =>
         @tab \edit
         @ldpe.init({pal: pal-from-node(n)})
