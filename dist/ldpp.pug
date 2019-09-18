@@ -25,11 +25,11 @@ mixin ldPaletteEditor
         .col-sm-6
           .row.mb-2
             .col-sm-8
-              select.form-control.form-control-sm(value="rgb")
+              select.form-control.form-control-local-sm(value="rgb")
                 option(value="rgb") RGB
                 option(value="hsl") HSL
                 option(value="hcl") HCL
-            .col-sm-4.pl-0: input.form-control.form-control-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
+            .col-sm-4.pl-0: input.form-control.form-control-local-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
           - var configs = [["Red", "Green", "Blue", "rgb", "active"], ["Hue", "Saturation", "Luminance", "hsl",""], ["Hue", "Chroma", "Luminance", "hcl",""]];
           each config in configs
             .row.config(data-tag=config[3],class=config[4])
@@ -44,11 +44,11 @@ mixin ldPaletteEditor
                 input.ldrs.ldrs-sm(
                 data-tag=config[3] + "-" + config[2][0].toLowerCase())
               .col-sm-4
-                input.value.form-control.form-control-sm(
+                input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[0][0].toLowerCase())
-                input.value.form-control.form-control-sm(
+                input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[1][0].toLowerCase())
-                input.value.form-control.form-control-sm(
+                input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[2][0].toLowerCase())
 
 //- Palette Picker Widget
