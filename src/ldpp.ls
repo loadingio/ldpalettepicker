@@ -63,7 +63,7 @@ ldPalettePicker = (opt = {}) ->
   #Custom Palette List
   if opt.mypal? => # mypal should be a ldPage instance
     mypal = do
-      loader: new ldLoader root: el.mp.load
+      loader: new ldLoader root: el.mp.load, auto-z: true
       page: Object.create(opt.mypal)
       fetch: ->
         @page.fetch!then (ret) ->
@@ -114,7 +114,7 @@ ldPalettePicker = (opt = {}) ->
   #Save
   if opt.save? =>
     saver = do
-      loader: new ldLoader root: el.ed.save
+      loader: new ldLoader root: el.ed.save, auto-z: true
       save: opt.save
 
   # General Action

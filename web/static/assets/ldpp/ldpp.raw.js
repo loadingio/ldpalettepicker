@@ -100,7 +100,8 @@ ldPalettePicker = function(opt){
   if (opt.mypal != null) {
     mypal = {
       loader: new ldLoader({
-        root: el.mp.load
+        root: el.mp.load,
+        autoZ: true
       }),
       page: Object.create(opt.mypal),
       fetch: function(){
@@ -183,7 +184,8 @@ ldPalettePicker = function(opt){
   if (opt.save != null) {
     saver = {
       loader: new ldLoader({
-        root: el.ed.save
+        root: el.ed.save,
+        autoZ: true
       }),
       save: opt.save
     };
