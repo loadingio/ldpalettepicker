@@ -64,7 +64,9 @@ available options:
  * item-per-line: how many palettes per line.
  * className: additional class names to be added on ldpp root.
  * use-clusterizejs: true or false. whether to use clusterizejs or not.
-
+ * ldcv: object, default null.
+   if not null, ldPalettePicker will find an ancestor with `ldcv` class, and make itself a ldCover widget.
+   user then can invoke ldpp.get! to trigger a ldCover, and wait for the result directly.
 
 
 ## Custom Palettes
@@ -91,6 +93,7 @@ ldPalettePicker class function:
 
 ldPalettePicker object function:
  * random(): return a random palette from palette list of this picker.
+ * get(): only callable if ldcv is true. return a promise that provide a palette object after user chooses a palette.
 
 ## Spec
 
