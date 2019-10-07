@@ -39,13 +39,13 @@
   text-align: left;
 }
 .ldpp .panel:nth-child(1) {
-  transform: translate(0%, 0);
+  transform: translate(0%, 0) translateZ(1px);
 }
 .ldpp .panel:nth-child(2) {
-  transform: translate(100%, 0);
+  transform: translate(100%, 0) translateZ(1px);
 }
 .ldpp .panel:nth-child(3) {
-  transform: translate(200%, 0);
+  transform: translate(200%, 0) translateZ(1px);
 }
 .ldpp .panels {
   position: relative;
