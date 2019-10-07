@@ -78,7 +78,7 @@
       log.push();
       return editUpdate(it);
     });
-    ldrs = {};
+    this.ldrs = ldrs = {};
     irsOpt = {
       base: {
         min: 0,
@@ -307,6 +307,16 @@
     });
     return this;
   };
+  ldPaletteEditor.prototype = import$(Object.create(Object.prototype), {
+    syncUi: function(){
+      var k, ref$, v, results$ = [];
+      for (k in ref$ = this.ldrs) {
+        v = ref$[k];
+        results$.push(v.update());
+      }
+      return results$;
+    }
+  });
   if (typeof window != 'undefined' && window !== null) {
     return window.ldPaletteEditor = ldPaletteEditor;
   }

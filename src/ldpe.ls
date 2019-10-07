@@ -43,7 +43,7 @@
     ldcp.on \change, ~> log.push!; edit-update it
 
     # Input ( Slider, Inputbox ) Initialization
-    ldrs = {}
+    @ldrs = ldrs = {}
     irs-opt = base: min: 0, max: 255, step: 1, hide_min_max: true, hide_from_to: true, grid: false
     irs-opt  <<< do
       "hsl-h": {} <<< irs-opt.base <<< {max: 360}
@@ -189,6 +189,8 @@
 
     edit-init {pal: {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
     return @
+  ldPaletteEditor.prototype = Object.create(Object.prototype) <<< do
+    sync-ui: -> for k,v of @ldrs => v.update!
 
   if window? => window.ldPaletteEditor = ldPaletteEditor
 )!

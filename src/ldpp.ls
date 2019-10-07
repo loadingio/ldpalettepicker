@@ -212,6 +212,7 @@
       if idx < 0 => return
       ld$.find(@root,\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
       ld$.find(@root,".nav-link").map -> it.classList.toggle \active, (ld$.attr(it,\data-panel) == n)
+      @ldpe.sync-ui!
       true
     random: ->
       pals = @opt.palettes

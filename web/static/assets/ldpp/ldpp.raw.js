@@ -400,6 +400,7 @@ var slice$ = [].slice;
       ld$.find(this.root, ".nav-link").map(function(it){
         return it.classList.toggle('active', ld$.attr(it, 'data-panel') === n);
       });
+      this.ldpe.syncUi();
       return true;
     },
     random: function(){

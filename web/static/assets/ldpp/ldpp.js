@@ -400,6 +400,7 @@ var slice$ = [].slice;
       ld$.find(this.root, ".nav-link").map(function(it){
         return it.classList.toggle('active', ld$.attr(it, 'data-panel') === n);
       });
+      this.ldpe.syncUi();
       return true;
     },
     random: function(){
@@ -549,7 +550,7 @@ function import$(obj, src){
       log.push();
       return editUpdate(it);
     });
-    ldrs = {};
+    this.ldrs = ldrs = {};
     irsOpt = {
       base: {
         min: 0,
@@ -778,6 +779,16 @@ function import$(obj, src){
     });
     return this;
   };
+  ldPaletteEditor.prototype = import$(Object.create(Object.prototype), {
+    syncUi: function(){
+      var k, ref$, v, results$ = [];
+      for (k in ref$ = this.ldrs) {
+        v = ref$[k];
+        results$.push(v.update());
+      }
+      return results$;
+    }
+  });
   if (typeof window != 'undefined' && window !== null) {
     return window.ldPaletteEditor = ldPaletteEditor;
   }
