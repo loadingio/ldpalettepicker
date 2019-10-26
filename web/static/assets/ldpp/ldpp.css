@@ -228,6 +228,9 @@
 .ldpe .row.config.active {
   display: flex;
 }
+.ldpe .ldColorPicker {
+  z-index: 1 !important;
+}
 .ldp {
   display: inline-block;
   position: relative;
