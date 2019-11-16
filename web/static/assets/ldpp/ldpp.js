@@ -115,8 +115,11 @@ var slice$ = [].slice;
       };
       mypal.page.setHost(el.pn.mypal);
       el.mp.load.addEventListener('click', function(){
-        return mypal.loader.on(100).then(function(){
+        return mypal.loader.on().then(function(){
           return mypal.page.fetch();
+        }).then(function(it){
+          debounce(100);
+          return it;
         }).then(function(it){
           content.add('mypal', it);
           return content.build(content.pals.mypal, 'mypal');

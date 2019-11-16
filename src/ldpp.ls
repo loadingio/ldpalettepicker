@@ -72,8 +72,9 @@
             content.build content.pals.mypal, 'mypal'
       mypal.page.set-host el.pn.mypal
       el.mp.load.addEventListener \click, ->
-        mypal.loader.on 100
+        mypal.loader.on!
           .then -> mypal.page.fetch!
+          .then -> debounce 100; return it
           .then ->
             content.add \mypal, it
             content.build content.pals.mypal, 'mypal'
