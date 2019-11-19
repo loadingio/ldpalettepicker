@@ -70,7 +70,7 @@ var slice$ = [].slice;
         if (rows.length === 0) {
           return el.pnin[tgt].innerHTML = "no result...";
         }
-        if (opt.useClusterizejs) {
+        if (opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
           lines = [];
           for (i$ = 0, to$ = rows.length, step$ = opt.itemPerLine; step$ < 0 ? i$ > to$ : i$ < to$; i$ += step$) {
             i = i$;
