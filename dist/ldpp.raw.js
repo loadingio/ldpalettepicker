@@ -81,12 +81,16 @@ var slice$ = [].slice;
             }
             lines.push("<div>" + line.join('') + "</div>");
           }
-          return new Clusterize({
-            rows_in_block: 7,
-            rows: lines,
-            contentElem: el.pnin[tgt],
-            scrollElem: el.pn[tgt]
-          });
+          if (content.cluster) {
+            return content.cluster.update(lines);
+          } else {
+            return content.cluster = new Clusterize({
+              rows_in_block: 7,
+              rows: lines,
+              contentElem: el.pnin[tgt],
+              scrollElem: el.pn[tgt]
+            });
+          }
         } else {
           return el.pnin[tgt].innerHTML = rows.join('');
         }
