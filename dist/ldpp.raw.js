@@ -81,10 +81,10 @@ var slice$ = [].slice;
             }
             lines.push("<div>" + line.join('') + "</div>");
           }
-          if (content.cluster) {
-            return content.cluster.update(lines);
+          if ((content.cluster || (content.cluster = {}))[tgt]) {
+            return content.cluster[tgt].update(lines);
           } else {
-            return content.cluster = new Clusterize({
+            return (content.cluster || (content.cluster = {}))[tgt] = new Clusterize({
               rows_in_block: 7,
               rows: lines,
               contentElem: el.pnin[tgt],

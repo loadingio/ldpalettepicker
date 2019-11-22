@@ -40,8 +40,8 @@
             line = []
             for j from 0 til opt.item-per-line => line.push rows[i + j]
             lines.push """<div>#{line.join('')}</div>"""
-          if content.cluster => content.cluster.update lines
-          else content.cluster = new Clusterize do
+          if content.{}cluster[tgt] => content.cluster[tgt].update lines
+          else content.{}cluster[tgt] = new Clusterize do
             rows_in_block: 7
             rows: lines
             contentElem: el.pnin[tgt]
