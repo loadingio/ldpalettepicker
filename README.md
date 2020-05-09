@@ -76,8 +76,24 @@ example:
 ```
     ldPalettePicker.register("default2", palettes);
     var pals = ldPalettePicker.get("default2");
-    ldPalettePicker.init(pals);
+    ldPalettePicker.init({pals});
 ```
+
+ldPalettePicker ships with following prebuilt palette sets, which you can find under `dist` folder:
+
+ * `brandcolors`
+    - src: brandcolors.palettes.js
+    - palettes from [brandcolors](http://brandcolors.net/).
+ * `colorbrewer`
+    - src: colorbrewer.palettes.js
+    - palettes from [colorbrewer](https://colorbrewer2.org/).
+ * `loadingio`
+    - loadingio.palettes.js
+    - palettes used in [loading.io](https://loading.io/color/feature/).
+ * `all`
+    - all.palettes.js
+    - all palettes above.
+
 
 ## API
 
