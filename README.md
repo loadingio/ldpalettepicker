@@ -32,7 +32,7 @@ Invoke it when you need a palette:
 ```
     script.
       ldpp
-        .choose()
+        .get()
         .then(function(palette) {
           /* palette structure: 
              {
