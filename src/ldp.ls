@@ -61,3 +61,5 @@ ldPalette.download = (pal, type = \png) ->
     document.body.appendChild a
     a.click!
     document.body.removeChild a
+
+if window? => window.ldPalette = ldPalette

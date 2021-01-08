@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
+rm -rf dist
+mkdir -p dist
 echo "Transpiling ldpp.ls..."
-lsc -cbp src/ldpp.ls > dist/ldpp.raw.js
+lsc -cp --no-header src/ldpp.ls > dist/ldpp.raw.js
 echo "Transpiling ldpe.ls..."
-lsc -cbp src/ldpe.ls > dist/ldpe.js
+lsc -cp --no-header  src/ldpe.ls > dist/ldpe.js
 echo "Transpiling ldp.ls..."
-lsc -cbp src/ldp.ls > dist/ldp.js
+lsc -cp --no-header  src/ldp.ls > dist/ldp.js
 echo "Transpiling ldpp.styl..."
 stylus -p src/ldpp.styl > dist/ldpp.css
 echo "Uglifying ldpp.raw.js..."
@@ -23,7 +25,8 @@ cp tool/js/*.js dist/
 echo "Copy pug mixin to dist/ ..."
 cp src/ldpp.pug dist/
 echo "Deploy to web ... "
-mkdir -p web/static/assets/ldpp/
-cp -R dist/* web/static/assets/ldpp/
+rm -rf web/static/assets/lib/ldpalettepicker/dev
+mkdir -p web/static/assets/lib/ldpalettepicker/dev
+cp -R dist/* web/static/assets/lib/ldpalettepicker/dev/
 echo "Done."
 
