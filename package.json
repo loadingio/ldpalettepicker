@@ -1,9 +1,12 @@
 {
-  "author": "Kirby Wu",
-  "name": "ldPalettePicker",
+  "author": "zbryikt",
+  "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
   "version": "0.0.1",
+  "files": [
+    "dist/**/*"
+  ],
   "homepage": "https://github.com/loadingio/ldPalettePicker",
   "repository": {
     "type": "git",
