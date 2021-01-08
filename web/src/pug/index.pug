@@ -1,6 +1,6 @@
 doctype html
 include /../../static/assets/lib/bootstrap.ldui/main/index.pug
-include ../../static/assets/ldpp/ldpp.pug
+include ../../static/assets/lib/ldpalettepicker/dev/ldpp.pug
 html(lang="en")
   - var colors = ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
   - var actions = [["view", "View"], ["export", "Export"]]
@@ -14,7 +14,7 @@ html(lang="en")
     +css("assets/lib/@loadingio/ldcolorpicker/main/ldcp.min.css")
     +css("assets/lib/ldcover/main/ldcv.min.css")
     +css("assets/lib/ldslider/main/ldrs.min.css")
-    +css("assets/ldpp/ldpp.min.css")
+    +css("assets/lib/ldpalettepicker/dev/ldpp.min.css")
     +css("css/index.css")
 
   body
@@ -215,6 +215,6 @@ html(lang="en")
     +script("assets/lib/ldslider/main/ldrs.min.js")
     +script("assets/lib/ldloader/main/ldld.min.js")
     +script("assets/ldpp.palettes.js")
-    +script("assets/ldpp/ldpe.js")
-    +script("assets/ldpp/ldpp.js")
+    +script("assets/lib/ldpalettepicker/dev/ldpe.js")
+    +script("assets/lib/ldpalettepicker/dev/ldpp.js")
     +script("js/index.js")
