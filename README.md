@@ -11,25 +11,20 @@ HTML Widget for Palette Picker. Provide following ( should we split them into st
 
 Prepare HTML structure with our Pug mixin:
 
-```
     include ldpp.pug
     div(id="...",class="...", ...)
       +ldPalettePicker
-```
 
 By default ldPalettePicker doesn't provide styling of the panel / dialog so you can do it in the wrap div.
 
 
 Initialize the widget with JavaScript:
 
-```
     script.
       var ldpp = ldPalettePicker.init();
-```
 
 Invoke it when you need a palette:
 
-```
     script.
       ldpp
         .get()
@@ -45,16 +40,14 @@ Invoke it when you need a palette:
         })
         .catch(function(err) {
         });
-```
 
 
 ## Configuration
 
 Manually initialize Palette Picker with:
 
-````
     new ldPalettePicker(root, opts);
-````
+
 
 available options:
  * save: (data, key), function for saving palette. save btn will disappear if omitted.
@@ -73,11 +66,11 @@ available options:
 
 
 example:
-```
+
     ldPalettePicker.register("default2", palettes);
     var pals = ldPalettePicker.get("default2");
     ldPalettePicker.init({pals});
-```
+
 
 ldPalettePicker ships with following prebuilt palette sets, which you can find under `dist` folder:
 
@@ -131,9 +124,8 @@ Palette is defined as following format:
 
 For better performance with large amount of palettes, you can enable [Clusterize.js](https://clusterize.js.org/) by setting useClusterizejs to true:
 
-````
     ldPalettePicker.init({useClusterizejs: true});
-````
+
 
 ( To make it work you also have to include js and css files of [Clusterize.js](https://clusterize.js.org/). )
 
