@@ -36,6 +36,12 @@
     "uglify-js": "=3.4.9",
     "uglifycss": "=0.0.29"
   },
+  "dependencies": {
+    "@loadingio/ldcolorpicker": "^1.1.0",
+    "ldloader": "^1.2.0",
+    "ldcolor": "0.0.1",
+    "ldslider": "^1.1.0"
+  },
   "peerDependencies": {
     "@loadingio/ldcolorpicker": "^1.1.0",
     "ldloader": "^1.2.0",
