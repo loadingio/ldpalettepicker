@@ -1,5 +1,5 @@
 ldPaletteEditor = (opt = {}) ->
-  @opt = opt = {palettes: [], item-per-line: 2} <<< opt
+  @opt = opt = {} <<< opt
   @root = root = if typeof(opt.root) == typeof('') => document.querySelector(opt.root) else opt.root
   @el = el = {}
 

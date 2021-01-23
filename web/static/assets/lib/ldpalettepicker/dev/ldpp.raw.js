@@ -1,5 +1,5 @@
 (function(){
-  var ldPalettePicker, slice$ = [].slice;
+  var ldPalettePicker;
   ldPalettePicker = function(opt){
     var root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, n, this$ = this;
     opt == null && (opt = {});
@@ -167,6 +167,8 @@
       });
       if (this$.ldcv) {
         return this$.ldcv.set(ret);
+      } else {
+        return this$._set(ret);
       }
     };
     search = function(v){
@@ -342,6 +344,9 @@
       }
       if (evts.nav(tgt)) {}
     });
+    this.access = {
+      list: []
+    };
     this.evtHandler = {};
     content.add('view', opt.palettes);
     content.build(content.pals.view);
@@ -374,21 +379,38 @@
       return ((ref$ = this.evtHandler)[n] || (ref$[n] = [])).push(cb);
     },
     fire: function(n){
-      var v, i$, ref$, len$, cb, results$ = [];
-      v = slice$.call(arguments, 1);
+      var v, res$, i$, to$, ref$, len$, cb, results$ = [];
+      res$ = [];
+      for (i$ = 1, to$ = arguments.length; i$ < to$; ++i$) {
+        res$.push(arguments[i$]);
+      }
+      v = res$;
       for (i$ = 0, len$ = (ref$ = this.evtHandler[n] || []).length; i$ < len$; ++i$) {
         cb = ref$[i$];
         results$.push(cb.apply(this, v));
       }
       return results$;
     },
-    get: function(){
+    _get: function(){
       var this$ = this;
-      return Promise.resolve().then(function(){
-        if (this$.ldcv) {
-          return this$.ldcv.get();
-        }
+      return new Promise(function(res, rej){
+        return this$.access.list.push({
+          res: res,
+          rej: rej
+        });
       });
+    },
+    _set: function(v){
+      return this.access.list.splice(0).map(function(it){
+        return it.res(v);
+      });
+    },
+    get: function(){
+      if (this.ldcv) {
+        return this.ldcv.get();
+      } else {
+        return this._get();
+      }
     },
     tab: function(n){
       var idx, that;

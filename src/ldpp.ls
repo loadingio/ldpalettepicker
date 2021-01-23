@@ -98,7 +98,7 @@ ldPalettePicker = (opt = {}) ->
   use-pal = (n) ~>
     {name, hexs, key} = pal-from-node n
     @fire \use, ret = {name, key, colors: hexs.map -> ldColor.rgb(it)}
-    if @ldcv => @ldcv.set ret
+    if @ldcv => @ldcv.set ret else @_set ret
 
   # Search Dynamics
   search = (v = "") ~>
@@ -192,6 +192,8 @@ ldPalettePicker = (opt = {}) ->
     if evts.undo(tgt) => return
     if evts.nav(tgt) => return
 
+  # get set
+  @access = {list: []}
   # Final Preparation
   @evt-handler = {}
   content.add \view, opt.palettes
@@ -206,7 +208,9 @@ ldPalettePicker = (opt = {}) ->
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
   on: (n, cb) -> @evt-handler.[][n].push cb
   fire: (n, ...v) -> for cb in (@evt-handler[n] or []) => cb.apply @, v
-  get: -> Promise.resolve!then ~> if @ldcv => @ldcv.get!
+  _get: -> new Promise (res, rej) ~> @access.list.push {res, rej}
+  _set: (v) -> @access.list.splice(0).map -> it.res v
+  get: -> if @ldcv => @ldcv.get! else @_get!
   tab: (n) ->
     if !n => return
     idx = if ld$.find(@root,".panel[data-panel=#n]",0) => ld$.index(that) else -1

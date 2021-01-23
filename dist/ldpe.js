@@ -1,12 +1,9 @@
 (function(){
   var ldPaletteEditor;
   ldPaletteEditor = function(opt){
-    var root, el, log, ldcp, ldrs, irsOpt, ref$, getIdx, dragger, editInit, editUpdate, evts, this$ = this;
+    var root, el, log, ldcp, ldrs, irsOpt, ref$, getIdx, dragger, editInit, editUpdate, evts;
     opt == null && (opt = {});
-    this.opt = opt = import$({
-      palettes: [],
-      itemPerLine: 2
-    }, opt);
+    this.opt = opt = import$({}, opt);
     this.root = root = typeof opt.root === typeof ''
       ? document.querySelector(opt.root)
       : opt.root;
@@ -214,7 +211,7 @@
       return ldcp.setColor(hexs[0]);
     };
     editUpdate = function(c){
-      var hcl, node, this$ = this;
+      var hcl, node;
       hcl = ldColor.hcl(c);
       node = ld$.find(root, '.color.active', 0);
       node.style.background = ldColor.rgbaStr(c);

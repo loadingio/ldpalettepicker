@@ -5,7 +5,7 @@
     var promise;
     type == null && (type = 'png');
     return promise = new Promise(function(res, rej){
-      var name, len, blob, rects, i$, i, payload, ref$, iw, ih, dw, dh, canvas, ctx, data, this$ = this;
+      var name, len, blob, rects, i$, i, payload, ref$, iw, ih, dw, dh, canvas, ctx, data;
       name = pal.name || 'palette';
       len = pal.colors.length;
       if (type === 'json') {
