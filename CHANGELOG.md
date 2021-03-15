@@ -1,4 +1,11 @@
-# 0.0.3
+# Change Log
+
+# v0.0.4
+
+ - upgrade modules
+
+
+# v0.0.3
 
  - upgrade modules
  - use deploy module
@@ -8,7 +15,8 @@
  - better documentation.
  - reomve useless code ( ldpe opt default values are not used. )
 
-# 0.0.2
+
+# v0.0.2
 
  - upgrade modules
  - update builder
