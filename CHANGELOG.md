@@ -1,5 +1,10 @@
 # Change Log
 
+# v0.0.5
+
+ - upgrade ldcolor, tweak package dependencies rule
+
+
 # v0.0.4
 
  - upgrade modules

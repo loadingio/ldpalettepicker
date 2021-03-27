@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "files": [
     "dist/**/*"
   ],
@@ -21,7 +21,7 @@
     "deploy": "npx deploy web/static"
   },
   "devDependencies": {
-    "@loadingio/ldpage": "0.0.3",
+    "@loadingio/ldpage": "^0.0.3",
     "@loadingio/ldquery": "^1.1.1",
     "bootstrap": "^4.5.3",
     "bootstrap.ldui": "github:loadingio/bootstrap.ldui",
@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "@loadingio/ldcolorpicker": "^1.1.0",
-    "ldcolor": "^0.0.2",
+    "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
     "ldslider": "^1.1.0"
   },
   "peerDependencies": {
     "@loadingio/ldcolorpicker": "^1.1.0",
-    "ldcolor": "^0.0.2",
+    "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
     "ldslider": "^1.1.0"
   },
