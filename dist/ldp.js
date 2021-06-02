@@ -1,7 +1,7 @@
 (function(){
-  var ldPalette;
-  ldPalette = function(){};
-  ldPalette.convert = function(pal, type){
+  var ldpalette;
+  ldpalette = function(){};
+  ldpalette.convert = function(pal, type){
     var promise;
     type == null && (type = 'png');
     return promise = new Promise(function(res, rej){
@@ -76,9 +76,9 @@
       }
     });
   };
-  ldPalette.download = function(pal, type){
+  ldpalette.download = function(pal, type){
     type == null && (type = 'png');
-    return ldPalette.convert(pal, type).then(function(ret){
+    return ldpalette.convert(pal, type).then(function(ret){
       var a;
       a = ld$.create({
         name: 'a',
@@ -96,6 +96,6 @@
     });
   };
   if (typeof window != 'undefined' && window !== null) {
-    window.ldPalette = ldPalette;
+    window.ldpalette = window.ldPalette = ldpalette;
   }
 }).call(this);

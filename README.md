@@ -2,9 +2,9 @@
 
 Palette related tools including:
 
- - `ldPalette`: palette class.
- - `ldPaletteEditor`: palette editor
- - `ldPalettePicker`: palette picker + editor
+ - `ldPalette` ( `ldpalette` ): palette class.
+ - `ldPaletteEditor` ( `ldpe` ): palette editor
+ - `ldPalettePicker` ( `ldpp` ): palette picker + editor
 
 
 ## Palette Definition
@@ -41,7 +41,7 @@ In ldPalettePicker, a palette is defined in following format:
 
 Sample usage:
 
-    ldPalette.convert({colors:["#f00","#0f0"]},"svg").then(function(blob) { ... })
+    ldpalette.convert({colors:["#f00","#0f0"]},"svg").then(function(blob) { ... })
 
 Object methods are left to implement in the future.
 
@@ -50,11 +50,11 @@ Object methods are left to implement in the future.
 
 `ldPaletteEditor` - defined in `ldpe.js` - provides palette editing functionality. usage:
 
-    ldpe = new ldPaletteEditor({ ... });
+    editor = new ldpe({ ... });
 
 where constructor options:
 
- - `root`: root node of a ldPaletteEditor widget. use `ldPaletteEditor` mixin in ldpp.pug for a default widget DOM.
+ - `root`: root node of a ldPaletteEditor widget. use `ldpe` mixin in ldpp.pug for a default widget DOM.
 
 ### API
 
@@ -70,19 +70,19 @@ where constructor options:
 
 `ldPalettePicker` - defined in `ldpp.js` - provides a simple way to pick / customize palettes. Usage:
 
-    ldpp = new ldPalettePicker({ ... });
+    picker = new ldpp({ ... });
 
 HTML counterpart: ( in Pug )
 
     include ldpp.pug
     div(id="...",class="...", ...)
-      +ldPalettePicker
+      +ldpp
 
 or, when using along with `ldCover`:
 
     include ldpp.pug
     .ldcv(id="...",class="...", ...): .base: .inner
-      +ldPalettePicker
+      +ldpp
 
 where constructor options:
 
@@ -121,7 +121,7 @@ ldPaletePicker also provided following helper functions:
 
  - `register(name, palettes)`: register provided palette list with the specified name.
  - `get(name)`: get palette list with the given name.
- - `init(opt)`: init all palette picker by querying `[ldPalettePicker]` selector.
+ - `init(opt)`: init all palette picker by querying `[ldpp]` selector.
    - return a list of `ldPalettePicker` object.
    - `pals`: optional. Array of palettes. when provided, all pickers will be initialized with palettes given here.
      - when omitted, pickers will be inited with the palette list named `default` ( builtin palettes ).
@@ -147,9 +147,9 @@ Use `get` to prompt user for a picked palette:
 
 example:
 
-    ldPalettePicker.register("default2", palettes);
-    var pals = ldPalettePicker.get("default2");
-    ldPalettePicker.init({pals});
+    ldpp.register("default2", palettes);
+    var pals = ldpp.get("default2");
+    ldpp.init({pals});
 
 
 ldPalettePicker ships with following prebuilt palette sets, which you can find under `dist` folder:
@@ -172,7 +172,7 @@ ldPalettePicker ships with following prebuilt palette sets, which you can find u
 
 For better performance with large amount of palettes, you can enable [Clusterize.js](https://clusterize.js.org/) by setting useClusterizejs to true:
 
-    ldPalettePicker.init({useClusterizejs: true});
+    ldpp.init({useClusterizejs: true});
 
 
 ( To make it work you also have to include js and css files of [Clusterize.js](https://clusterize.js.org/). )

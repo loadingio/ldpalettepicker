@@ -1,4 +1,4 @@
-ldPaletteEditor = (opt = {}) ->
+ldpe = (opt = {}) ->
   @opt = opt = {} <<< opt
   @root = root = if typeof(opt.root) == typeof('') => document.querySelector(opt.root) else opt.root
   @el = el = {}
@@ -188,7 +188,7 @@ ldPaletteEditor = (opt = {}) ->
 
   edit-init {pal: {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
   return @
-ldPaletteEditor.prototype = Object.create(Object.prototype) <<< do
+ldpe.prototype = Object.create(Object.prototype) <<< do
   sync-ui: -> for k,v of @ldrs => v.update!
 
-if window? => window.ldPaletteEditor = ldPaletteEditor
+if window? => window.ldpe = window.ldPaletteEditor = ldpe

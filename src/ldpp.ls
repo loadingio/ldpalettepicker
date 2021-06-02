@@ -1,4 +1,4 @@
-ldPalettePicker = (opt = {}) ->
+ldpp = (opt = {}) ->
   @opt = opt = {palettes: [], item-per-line: 2} <<< opt
   @pals = view: opt.palettes
   # Prepare DOM
@@ -198,7 +198,7 @@ ldPalettePicker = (opt = {}) ->
   @evt-handler = {}
   content.add \view, opt.palettes
   content.build content.pals.view
-  @ldpe = new ldPaletteEditor root: el.pn.edit
+  @ldpe = new ldpe root: el.pn.edit
   @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
   if ldCover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv', document)) =>
     @ldcv = new ldCover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
@@ -208,7 +208,7 @@ ldPalettePicker = (opt = {}) ->
     ld$.find(@root, \.panel).map (n,i) -> if idx != i => n.style.display = \none
   @
 
-ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
+ldpp.prototype = Object.create(Object.prototype) <<< do
   on: (n, cb) -> @evt-handler.[][n].push cb
   fire: (n, ...v) -> for cb in (@evt-handler[n] or []) => cb.apply @, v
   _get: -> new Promise (res, rej) ~> @access.list.push {res, rej}
@@ -232,7 +232,7 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
     return @opt.random!
 
 # Class Methods
-ldPalettePicker <<< do
+ldpp <<< do
   palettes: []
   parse: do
     text: (txt) ->
@@ -248,11 +248,11 @@ ldPalettePicker <<< do
 
   init: (opt = {}) ->
     pals = if !opt.pals => @get \default else opt.pals
-    Array.from(document.querySelectorAll '*[ldPalettePicker]').map ->
-      new ldPalettePicker({palettes: pals, root: it} <<< opt)
+    Array.from(document.querySelectorAll '*[ldpp]').map ->
+      new ldpp({palettes: pals, root: it} <<< opt)
 
 # Default Color Palette
-ldPalettePicker.register "default", """
+ldpp.register "default", """
   flourish,b22 e55 f87 fb6 ab8 898,qualitative
   gray,000 333 666 ddd fff,gradient
   young,fec fe6 cd9 acd 7ab aac,concept
@@ -260,4 +260,4 @@ ldPalettePicker.register "default", """
   French,37a 9ab eee f98 c10,diverging
   Afghan Girl,010 253 ffd da8 b53,artwork
 """
-if window? => window.ldPalettePicker = ldPalettePicker
+if window? => window.ldpp = window.ldPalettePicker = ldpp

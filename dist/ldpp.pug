@@ -13,7 +13,7 @@ mixin ldp(name, colors, actions, cls)
       .name= name
 
 //- Palette Editor
-mixin ldPaletteEditor
+mixin ldpe
   .ldp
     .name
     .colors
@@ -52,8 +52,8 @@ mixin ldPaletteEditor
                 data-tag=config[3] + "-" + config[2][0].toLowerCase())
 
 //- Palette Picker Widget
-mixin ldPalettePicker
-  .ldpp(ldPalettePicker)
+mixin ldpp
+  .ldpp(ldpp)
     .navbar.text-center: .inner(data-tag="menu")
       ul.nav.nav-pills.float-right
         .nav-item: a.nav-link.active(data-panel="view") View
@@ -83,7 +83,7 @@ mixin ldPalettePicker
           | Load More
           .ld.ldld.ldbtn.sm
       .panel(data-panel="edit")
-        +ldPaletteEditor
+        +ldpe
         .foot
           hr
           .float-right

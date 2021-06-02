@@ -1,6 +1,6 @@
 (function(){
-  var ldPaletteEditor;
-  ldPaletteEditor = function(opt){
+  var ldpe;
+  ldpe = function(opt){
     var root, el, log, ldcp, ldrs, irsOpt, ref$, getIdx, dragger, editInit, editUpdate, evts;
     opt == null && (opt = {});
     this.opt = opt = import$({}, opt);
@@ -303,7 +303,7 @@
     });
     return this;
   };
-  ldPaletteEditor.prototype = import$(Object.create(Object.prototype), {
+  ldpe.prototype = import$(Object.create(Object.prototype), {
     syncUi: function(){
       var k, ref$, v, results$ = [];
       for (k in ref$ = this.ldrs) {
@@ -314,7 +314,7 @@
     }
   });
   if (typeof window != 'undefined' && window !== null) {
-    window.ldPaletteEditor = ldPaletteEditor;
+    window.ldpe = window.ldPaletteEditor = ldpe;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;

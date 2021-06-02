@@ -26,9 +26,9 @@ html(lang="en")
       h2 About
       p ldPlaettePicker is a set of tool for manipulating color palettes. It contains three parts:
       ul
-        li #[b ldPalette] - Palette wrapper, for manipulating palette.
-        li #[b ldPaletteEditor] - API and interface for editing palette.
-        li #[b ldPalettePicker] - Widget for picking and editing palette.
+        li #[b ldPalette] ( #[code ldpalette] ) - Palette wrapper, for manipulating palette.
+        li #[b ldPaletteEditor] ( #[code ldpe] ) - API and interface for editing palette.
+        li #[b ldPalettePicker] ( #[code ldpp] ) - Widget for picking and editing palette.
 
       h2 Usage
       p ldPalette is designed to be used along with Pug, so in the following examples we will use Pug instead of HTML. To use ldPalettePicker, download and include the required file:
@@ -121,13 +121,13 @@ html(lang="en")
       p ldPalette ships along with some helper APIs: 
       ul
         li
-          span #[code ldPalette.convert(palette, format)] - convert palette to certain format, and return corresponding object. 4 formats are currently available:
+          span #[code ldpalette.convert(palette, format)] - convert palette to certain format, and return corresponding object. 4 formats are currently available:
           ul
             li SVG
             li PNG
             li JSON
             li SCSS
-        li #[code ldPalette.download(palette, format)] - trigger downloading of a converted palette.
+        li #[code ldpalette.download(palette, format)] - trigger downloading of a converted palette.
       p Following is a demonstration of calling converting and downloading of a palette.
       .d-flex.mx-auto.w-50.mt-4.justify-content-center
         .dropdown.mr-2
@@ -151,12 +151,12 @@ html(lang="en")
       p ldPaletteEditor is more complicated than simply a palette, so we prepare the DOM construct via a Pug mixin:
       .row.botder.p-2.no-gutters
         .col-md-4: .example.code-block.h-100.
-          .ldpe: +ldPaletteEditor
+          .ldpe: +ldpe
           script.
-            new ldPaletteEditor({
+            new ldpe({
               root: '.ldpe'
             });
-        .col-md-8.pl-1: .card: .card-body: #ldpe-ex1.w-100.mx-auto.ldpe: +ldPaletteEditor
+        .col-md-8.pl-1: .card: .card-body: #ldpe-ex1.w-100.mx-auto.ldpe: +ldpe
       p ldPaletteEditor provides following APIs:
       ul
         li #[code getPal] - get the current palette, in ldPalette format.
@@ -176,25 +176,25 @@ html(lang="en")
       .row.botder.p-2.no-gutters
         .col-md-5: .example.code-block.h-100.
           .ldpp(style="height:570px")
-            +ldPalettePicker
+            +ldpp
           script.
-            new ldPalettePicker({
+            new ldpp({
               root: '.ldpp',
               palettes:
-                ldPalettePicker.get(
+                ldpp.get(
                   'default'
                 )
             });
-        .col-md-7.pl-1: .card: .card-body: #ldpp-ex1.w-100.mx-auto.ldpp(style="height:570px"): +ldPalettePicker
+        .col-md-7.pl-1: .card: .card-body: #ldpp-ex1.w-100.mx-auto.ldpp(style="height:570px"): +ldpp
 
       h3 Work with ldCover
       p ldPalettePicker is commonly used along with ldCover, which popups when user toggles the editor / picker. Toggling demo modals by clicking buttons below:
       .btn.btn-lg.btn-primary.mr-2(onclick="ldcvPicker.toggle(true)") ldPalettePicker
       .btn.btn-lg.btn-primary(onclick="ldcvEditor.toggle(true)") ldPaletteEditor
 
-      #ldcv-picker.ldcv.default-size: .base: .inner.ldpp: +ldPalettePicker
+      #ldcv-picker.ldcv.default-size: .base: .inner.ldpp: +ldpp
       #ldcv-editor.ldcv.default-size: .base(style="height:490px"): .inner.p-4: .ldpe
-        +ldPaletteEditor
+        +ldpe
         hr
         .btn.btn-outline-dark.mr-2 Undo
         .form-inline.float-right
@@ -206,7 +206,7 @@ html(lang="en")
           .btn.btn-outline-dark(data-ldcv-set="") Close
       +nbr(4)
 
-    +script("assets/lib/bootstrap.native/main/bootstrap-native.min.js")
+    +script("assets/lib/bootstrap.native/main/bootstrap-native-v4.min.js")
     +script("assets/lib/@loadingio/ldquery/main/ldq.min.js")
     +script("assets/lib/@loadingio/ldpage/main/ldpage.min.js")
     +script("assets/lib/ldcolor/main/ldcolor.min.js")

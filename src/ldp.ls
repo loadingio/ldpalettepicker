@@ -1,5 +1,5 @@
-ldPalette = ->
-ldPalette.convert = (pal, type = \png) ->
+ldpalette = ->
+ldpalette.convert = (pal, type = \png) ->
   promise = new Promise (res, rej) ->
     name = pal.name or \palette
     len = pal.colors.length
@@ -55,11 +55,11 @@ ldPalette.convert = (pal, type = \png) ->
         blob: blob
         url: URL.createObjectURL blob
         filename: "#name.scss"
-ldPalette.download = (pal, type = \png) ->
-  ldPalette.convert pal, type .then (ret) ->
+ldpalette.download = (pal, type = \png) ->
+  ldpalette.convert pal, type .then (ret) ->
     a = ld$.create name: \a, attr: {download: ret.filename, href: ret.url}, style: display: \none
     document.body.appendChild a
     a.click!
     document.body.removeChild a
 
-if window? => window.ldPalette = ldPalette
+if window? => window.ldpalette = window.ldPalette = ldpalette

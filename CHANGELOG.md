@@ -4,6 +4,7 @@
 
  - upgrade modules
  - adopt newer version of `ldcolor`, `ldcolorpicker` and `ldslider`.
+ - update all ldp, ldpe, ldpp variables with all lowercase and shorten names.
 
 
 ## v0.0.6

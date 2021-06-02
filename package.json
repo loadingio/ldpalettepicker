@@ -26,7 +26,7 @@
     "@loadingio/ldquery": "^2.0.0",
     "bootstrap": "^4.5.3",
     "bootstrap.ldui": "github:loadingio/bootstrap.ldui",
-    "bootstrap.native": "^3.0.14",
+    "bootstrap.native": "^3.0.15",
     "clusterize.js": "^0.18.1",
     "deploy": "github:zbryikt/deploy",
     "fedep": "^0.0.12",

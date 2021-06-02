@@ -1,6 +1,6 @@
 (function(){
-  var ldPalettePicker;
-  ldPalettePicker = function(opt){
+  var ldpp;
+  ldpp = function(opt){
     var root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, n, this$ = this;
     opt == null && (opt = {});
     this.opt = opt = import$({
@@ -350,7 +350,7 @@
     this.evtHandler = {};
     content.add('view', opt.palettes);
     content.build(content.pals.view);
-    this.ldpe = new ldPaletteEditor({
+    this.ldpe = new ldpe({
       root: el.pn.edit
     });
     this.edit = function(pal, toggle){
@@ -382,7 +382,7 @@
     });
     return this;
   };
-  ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
+  ldpp.prototype = import$(Object.create(Object.prototype), {
     on: function(n, cb){
       var ref$;
       return ((ref$ = this.evtHandler)[n] || (ref$[n] = [])).push(cb);
@@ -457,7 +457,7 @@
       return this.opt.random();
     }
   });
-  import$(ldPalettePicker, {
+  import$(ldpp, {
     palettes: [],
     parse: {
       text: function(txt){
@@ -494,17 +494,17 @@
       pals = !opt.pals
         ? this.get('default')
         : opt.pals;
-      return Array.from(document.querySelectorAll('*[ldPalettePicker]')).map(function(it){
-        return new ldPalettePicker(import$({
+      return Array.from(document.querySelectorAll('*[ldpp]')).map(function(it){
+        return new ldpp(import$({
           palettes: pals,
           root: it
         }, opt));
       });
     }
   });
-  ldPalettePicker.register("default", "flourish,b22 e55 f87 fb6 ab8 898,qualitative\ngray,000 333 666 ddd fff,gradient\nyoung,fec fe6 cd9 acd 7ab aac,concept\nplotDB,ed1e79 c69c6d 8cc63f 29abe2,brand\nFrench,37a 9ab eee f98 c10,diverging\nAfghan Girl,010 253 ffd da8 b53,artwork");
+  ldpp.register("default", "flourish,b22 e55 f87 fb6 ab8 898,qualitative\ngray,000 333 666 ddd fff,gradient\nyoung,fec fe6 cd9 acd 7ab aac,concept\nplotDB,ed1e79 c69c6d 8cc63f 29abe2,brand\nFrench,37a 9ab eee f98 c10,diverging\nAfghan Girl,010 253 ffd da8 b53,artwork");
   if (typeof window != 'undefined' && window !== null) {
-    window.ldPalettePicker = ldPalettePicker;
+    window.ldpp = window.ldPalettePicker = ldpp;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;
@@ -513,8 +513,8 @@
   }
 }).call(this);
 (function(){
-  var ldPaletteEditor;
-  ldPaletteEditor = function(opt){
+  var ldpe;
+  ldpe = function(opt){
     var root, el, log, ldcp, ldrs, irsOpt, ref$, getIdx, dragger, editInit, editUpdate, evts;
     opt == null && (opt = {});
     this.opt = opt = import$({}, opt);
@@ -817,7 +817,7 @@
     });
     return this;
   };
-  ldPaletteEditor.prototype = import$(Object.create(Object.prototype), {
+  ldpe.prototype = import$(Object.create(Object.prototype), {
     syncUi: function(){
       var k, ref$, v, results$ = [];
       for (k in ref$ = this.ldrs) {
@@ -828,7 +828,7 @@
     }
   });
   if (typeof window != 'undefined' && window !== null) {
-    window.ldPaletteEditor = ldPaletteEditor;
+    window.ldpe = window.ldPaletteEditor = ldpe;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;
@@ -837,9 +837,9 @@
   }
 }).call(this);
 (function(){
-  var ldPalette;
-  ldPalette = function(){};
-  ldPalette.convert = function(pal, type){
+  var ldpalette;
+  ldpalette = function(){};
+  ldpalette.convert = function(pal, type){
     var promise;
     type == null && (type = 'png');
     return promise = new Promise(function(res, rej){
@@ -914,9 +914,9 @@
       }
     });
   };
-  ldPalette.download = function(pal, type){
+  ldpalette.download = function(pal, type){
     type == null && (type = 'png');
-    return ldPalette.convert(pal, type).then(function(ret){
+    return ldpalette.convert(pal, type).then(function(ret){
       var a;
       a = ld$.create({
         name: 'a',
@@ -934,6 +934,6 @@
     });
   };
   if (typeof window != 'undefined' && window !== null) {
-    window.ldPalette = ldPalette;
+    window.ldpalette = window.ldPalette = ldpalette;
   }
 }).call(this);
