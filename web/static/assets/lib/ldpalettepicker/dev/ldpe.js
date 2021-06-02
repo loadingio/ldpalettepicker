@@ -96,14 +96,18 @@
     irsOpt["rgb-r"] = irsOpt["rgb-g"] = irsOpt["rgb-b"] = irsOpt.base;
     ['rgb-r', 'rgb-g', 'rgb-b', 'hsl-h', 'hsl-s', 'hsl-l', 'hcl-h', 'hcl-c', 'hcl-l'].map(function(it){
       return function(t){
-        var v;
+        var v, handle, deb, x$;
         v = t.split('-');
-        ld$.find(root, ".value[data-tag=" + t + "]", 0).addEventListener('change', function(e){
+        handle = function(e){
           var c;
           c = ldcp.getColor(v[0]);
           c[v[1]] = e.target.value;
           return ldcp.setColor(c);
-        });
+        };
+        deb = debounce(500, handle);
+        x$ = ld$.find(root, ".value[data-tag=" + t + "]", 0);
+        x$.addEventListener('change', handle);
+        x$.addEventListener('input', deb);
         ldrs[t] = new ldslider(import$({
           root: ld$.find(root, ".ldrs[data-tag=" + t + "]", 0)
         }, irsOpt[t]));
@@ -121,16 +125,19 @@
     el.ed.hex.addEventListener('change', function(e){
       return ldcp.setColor(e.target.value);
     });
+    el.ed.hex.addEventListener('input', debounce(500, function(e){
+      return ldcp.setColor(e.target.value);
+    }));
     el.ed.sel.addEventListener('change', function(e){
-      return el.ed.cfgs.map(function(it){
-        var k, ref$, v, results$ = [];
-        it.classList[ld$.attr(it, 'data-tag') === e.target.value ? 'add' : 'remove']('active');
-        for (k in ref$ = ldrs) {
-          v = ref$[k];
-          results$.push(v.update());
-        }
-        return results$;
+      var k, ref$, v, results$ = [];
+      el.ed.cfgs.map(function(it){
+        return it.classList[ld$.attr(it, 'data-tag') === e.target.value ? 'add' : 'remove']('active');
       });
+      for (k in ref$ = ldrs) {
+        v = ref$[k];
+        results$.push(v.update());
+      }
+      return results$;
     });
     getIdx = function(e){
       var box, idx, ref$, ref1$, ref2$;

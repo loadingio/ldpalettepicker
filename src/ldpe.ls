@@ -56,10 +56,14 @@ ldpe = (opt = {}) ->
     ((t) ->
       v = t.split \-
       # Type in input.value: set ldcp
-      ld$.find(root,".value[data-tag=#{t}]",0).addEventListener \change, (e) ->
+      handle = (e) ->
         c = ldcp.get-color v.0
         c[v.1] = e.target.value
         ldcp.set-color c
+      deb = debounce 500, handle
+      ld$.find(root,".value[data-tag=#{t}]",0)
+        ..addEventListener \change, handle
+        ..addEventListener \input, deb
       # Drag in input.ldrs: set ldcp
       ldrs[t] = new ldslider {root: ld$.find(root,".ldrs[data-tag=#{t}]",0)} <<< irs-opt[t]
       ((t) ->
@@ -70,9 +74,13 @@ ldpe = (opt = {}) ->
           ldcp.set-color c
       )(t)
     ) it
-  el.ed.hex.addEventListener \change, (e) -> ldcp.set-color e.target.value   # Hex Input
-  el.ed.sel.addEventListener \change, (e) ~> el.ed.cfgs.map ~>               # Select Box
-    it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
+  # Hex Input
+  el.ed.hex.addEventListener \change, (e) -> ldcp.set-color e.target.value
+  el.ed.hex.addEventListener \input, debounce 500, (e) -> ldcp.set-color e.target.value
+  # Select Box
+  el.ed.sel.addEventListener \change, (e) ~>
+    el.ed.cfgs.map ~>
+      it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
     for k,v of ldrs => v.update!
 
   # Drag to re-order Dynamics

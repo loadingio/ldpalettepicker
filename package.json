@@ -39,17 +39,17 @@
     "uglifycss": "=0.0.29"
   },
   "dependencies": {
-    "@loadingio/ldcolorpicker": "^2.0.1",
+    "@loadingio/ldcolorpicker": "^2.0.2",
     "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
-    "ldslider": "^2.0.5"
+    "ldslider": "^2.0.6"
   },
   "peerDependencies": {
     "@loadingio/debounce.js": "^0.0.1",
-    "@loadingio/ldcolorpicker": "^2.0.1",
+    "@loadingio/ldcolorpicker": "^2.0.2",
     "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
-    "ldslider": "^2.0.5"
+    "ldslider": "^2.0.6"
   },
   "frontendDependencies": {
     "root": "web/static/assets/lib",

@@ -239,7 +239,6 @@ ldslider.prototype = import$(Object.create(Object.prototype), {
     elL = this.el[alt ? 'q' : 'p'];
     rbox = elL.parentNode.getBoundingClientRect();
     w06 = rbox.width * 0.6;
-    console.log(1, v);
     if (isEvent) {
       x = (ref$ = (ref2$ = v - rbox.x) > 0 ? ref2$ : 0) < (ref1$ = rbox.width) ? ref$ : ref1$;
       dx = x / rbox.width;
@@ -263,7 +262,6 @@ ldslider.prototype = import$(Object.create(Object.prototype), {
     }
     value = v = (ref$ = (ref2$ = this.opt.min + Math.round((value - this.opt.min) / this.opt.step) * this.opt.step) > (ref3$ = this.opt.min) ? ref2$ : ref3$) < (ref1$ = this.opt.max) ? ref$ : ref1$;
     this.val[label] = value;
-    console.log(2, value);
     xs = {};
     for (k in ref$ = this.val) {
       v = ref$[k];
@@ -300,7 +298,6 @@ ldslider.prototype = import$(Object.create(Object.prototype), {
     }
     x = xs[label];
     v = this.val[label];
-    console.log(3, v);
     left = !this.range
       ? 0
       : Math.min(xs.from, xs.to) + 0.5;

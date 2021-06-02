@@ -5,6 +5,8 @@
  - upgrade modules
  - adopt newer version of `ldcolor`, `ldcolorpicker` and `ldslider`.
  - update all ldp, ldpe, ldpp variables with all lowercase and shorten names.
+ - debounce ldpe input box event.
+ - prevent unnecessary update of ldslider
 
 
 ## v0.0.6
