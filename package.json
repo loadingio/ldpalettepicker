@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "files": [
     "dist/**/*"
   ],
@@ -18,7 +18,6 @@
   },
   "scripts": {
     "start": "npx server -r web -o true",
-    "postinstall": "npx fedep",
     "deploy": "npx deploy web/static"
   },
   "devDependencies": {
@@ -34,23 +33,23 @@
     "fs-extra": "^7.0.1",
     "ldcover": "^1.3.1",
     "livescript": "^1.6.0",
-    "stylus": "=0.54.5",
+    "stylus": "^0.54.5",
     "template": "github:zbryikt/template#v2.3.13",
     "uglify-js": "=3.4.9",
     "uglifycss": "=0.0.29"
   },
   "dependencies": {
-    "@loadingio/ldcolorpicker": "^1.1.0",
+    "@loadingio/ldcolorpicker": "^2.0.1",
     "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
-    "ldslider": "^1.1.0"
+    "ldslider": "^2.0.5"
   },
   "peerDependencies": {
-    "@loadingio/ldcolorpicker": "^1.1.0",
     "@loadingio/debounce.js": "^0.0.1",
+    "@loadingio/ldcolorpicker": "^2.0.1",
     "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
-    "ldslider": "^1.1.0"
+    "ldslider": "^2.0.5"
   },
   "frontendDependencies": {
     "root": "web/static/assets/lib",

@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.0
+
+ - upgrade modules
+
+
 ## v0.0.6
 
  - set display to none of tabs after they are hidden to increase performance.
