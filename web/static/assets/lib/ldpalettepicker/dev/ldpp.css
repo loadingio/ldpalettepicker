@@ -165,16 +165,16 @@
   border-bottom: 2px solid rgba(0,0,0,0.2);
   display: none;
 }
-.ldpp .panel[data-panel=edit] .ldColorPicker,
-.ldpe .ldColorPicker {
+.ldpp .panel[data-panel=edit] .ldcolorpicker,
+.ldpe .ldcolorpicker {
   width: 100%;
   height: calc(10.9875em + 1rem - 7px);
   display: inline-block;
   vertical-align: top;
   margin-top: 0;
 }
-.ldpp .panel[data-panel=edit] .ldColorPicker .ldcp-panel,
-.ldpe .ldColorPicker .ldcp-panel {
+.ldpp .panel[data-panel=edit] .ldcolorpicker .ldcp-panel,
+.ldpe .ldcolorpicker .ldcp-panel {
   padding: 0;
 }
 .ldpp .panel[data-panel=edit] .value,
@@ -228,7 +228,7 @@
 .ldpe .row.config.active {
   display: flex;
 }
-.ldpe .ldColorPicker {
+.ldpe .ldcolorpicker {
   z-index: 1 !important;
 }
 .ldp {

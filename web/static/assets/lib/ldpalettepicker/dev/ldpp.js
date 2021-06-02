@@ -96,7 +96,7 @@
       html: function(c){
         var cs;
         cs = c.colors.map(function(it){
-          return "<div class=\"color\" style=\"background:" + ldColor.rgbaStr(it) + "\"></div>";
+          return "<div class=\"color\" style=\"background:" + ldcolor.rgbaStr(it) + "\"></div>";
         }).join("");
         return "<div class=\"ldp\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  <div class=\"ctrl\">\n  <div data-action=\"use\"><i class=\"i-check\"></i>USE</div>\n  <div data-action=\"edit\"><i class=\"i-gear\"></i>EDIT</div>\n  </div>\n  " + cs + "\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
       }
@@ -146,7 +146,7 @@
         : [null, 'untitled'], key = ref$[0], name = ref$[1];
       hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
         ? ld$.find(that, '.color').map(function(it){
-          return ldColor.hex(it.style.backgroundColor || it.style.background);
+          return ldcolor.hex(it.style.backgroundColor || it.style.background);
         })
         : [];
       return {
@@ -162,7 +162,7 @@
         name: name,
         key: key,
         colors: hexs.map(function(it){
-          return ldColor.rgb(it);
+          return ldcolor.rgb(it);
         })
       });
       if (this$.ldcv) {
@@ -523,7 +523,7 @@
       : opt.root;
     this.el = el = {};
     el.ed = {
-      picker: ld$.find(root, '.ldColorPicker', 0),
+      picker: ld$.find(root, '.ldcolorpicker', 0),
       pal: ld$.find(root, '.ldp', 0),
       colors: ld$.find(root, '.ldp .colors', 0),
       hex: ld$.find(root, 'input[data-tag=hex]', 0),
@@ -581,7 +581,7 @@
     this.clearLog = function(){
       return log.clear();
     };
-    this.ldcp = ldcp = new ldColorPicker(el.ed.picker, {
+    this.ldcp = ldcp = new ldcolorpicker(el.ed.picker, {
       inline: true
     });
     ldcp.on('change', function(it){
@@ -618,7 +618,7 @@
           c[v[1]] = e.target.value;
           return ldcp.setColor(c);
         });
-        ldrs[t] = new ldSlider(import$({
+        ldrs[t] = new ldslider(import$({
           root: ld$.find(root, ".ldrs[data-tag=" + t + "]", 0)
         }, irsOpt[t]));
         return function(t){
@@ -706,7 +706,7 @@
       }, opt);
       ref$ = [
         opt.pal.hexs || opt.pal.colors.map(function(it){
-          return ldColor.hex(it);
+          return ldcolor.hex(it);
         }), opt.pal.key, opt.pal.name || 'Custom'
       ], hexs = ref$[0], key = ref$[1], name = ref$[2];
       elp = el.ed.colors.parentNode;
@@ -717,7 +717,7 @@
       }
       el.ed.colors.innerHTML = hexs.map(function(d, i){
         var hcl;
-        hcl = ldColor.hcl(d);
+        hcl = ldcolor.hcl(d);
         return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
       }).join('');
       ld$.find(elp, '.name', 0).innerHTML = name || 'untitled';
@@ -726,14 +726,14 @@
     };
     editUpdate = function(c){
       var hcl, node;
-      hcl = ldColor.hcl(c);
+      hcl = ldcolor.hcl(c);
       node = ld$.find(root, '.color.active', 0);
-      node.style.background = ldColor.rgbaStr(c);
+      node.style.background = ldcolor.rgbaStr(c);
       node.classList[hcl.l < 50 ? "add" : "remove"]('dark');
-      el.ed.hex.value = ldColor.hex(c);
+      el.ed.hex.value = ldcolor.hex(c);
       c = {
-        rgb: ldColor.rgb(c),
-        hsl: ldColor.hsl(c),
+        rgb: ldcolor.rgb(c),
+        hsl: ldcolor.hsl(c),
         hcl: hcl
       };
       return ['rgb-r', 'rgb-g', 'rgb-b', 'hsl-h', 'hsl-s', 'hsl-l', 'hcl-h', 'hcl-c', 'hcl-l'].map(function(t){
@@ -801,7 +801,7 @@
       name = ld$.find(elp, '.name', 0).textContent || "untitled";
       colors = ld$.find(el.ed.colors, '.color').map(function(it){
         return {
-          value: ldColor.rgbaStr(it.style.backgroundColor)
+          value: ldcolor.rgbaStr(it.style.backgroundColor)
         };
       });
       return {
@@ -859,7 +859,7 @@
         rects = [];
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          rects.push("<rect x=\"" + 500 * i / len + "\" y=\"0\" width=\"" + 500 / len + "\" height=\"100\" fill=\"" + ldColor.web(pal.colors[i]) + "\"/>");
+          rects.push("<rect x=\"" + 500 * i / len + "\" y=\"0\" width=\"" + 500 / len + "\" height=\"100\" fill=\"" + ldcolor.web(pal.colors[i]) + "\"/>");
         }
         payload = (["<?xml version=\"1.0\" encoding=\"utf-8\"?>", "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"100\" viewbox=\"0 0 500 100\">"].concat(rects, ["</svg>"])).join('\n');
         blob = new Blob([payload], {
@@ -886,7 +886,7 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          ctx.fillStyle = ldColor.web(pal.colors[i]);
+          ctx.fillStyle = ldcolor.web(pal.colors[i]);
           ctx.fillRect((iw - dw) * 0.5 + dw * (i / len), (ih - dh) * 0.5, dw / len, dh);
         }
         return canvas.toBlob(function(blob){
@@ -901,7 +901,7 @@
         data = ["$palette-name: '" + name + "'"];
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          data.push("$palette-color" + (i + 1) + ": " + ldColor.web(pal.colors[i]) + ";");
+          data.push("$palette-color" + (i + 1) + ": " + ldcolor.web(pal.colors[i]) + ";");
         }
         blob = new Blob([data.join('\n')], {
           type: "text/plain"

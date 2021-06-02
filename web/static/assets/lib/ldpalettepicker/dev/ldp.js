@@ -21,7 +21,7 @@
         rects = [];
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          rects.push("<rect x=\"" + 500 * i / len + "\" y=\"0\" width=\"" + 500 / len + "\" height=\"100\" fill=\"" + ldColor.web(pal.colors[i]) + "\"/>");
+          rects.push("<rect x=\"" + 500 * i / len + "\" y=\"0\" width=\"" + 500 / len + "\" height=\"100\" fill=\"" + ldcolor.web(pal.colors[i]) + "\"/>");
         }
         payload = (["<?xml version=\"1.0\" encoding=\"utf-8\"?>", "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"100\" viewbox=\"0 0 500 100\">"].concat(rects, ["</svg>"])).join('\n');
         blob = new Blob([payload], {
@@ -48,7 +48,7 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          ctx.fillStyle = ldColor.web(pal.colors[i]);
+          ctx.fillStyle = ldcolor.web(pal.colors[i]);
           ctx.fillRect((iw - dw) * 0.5 + dw * (i / len), (ih - dh) * 0.5, dw / len, dh);
         }
         return canvas.toBlob(function(blob){
@@ -63,7 +63,7 @@
         data = ["$palette-name: '" + name + "'"];
         for (i$ = 0; i$ < len; ++i$) {
           i = i$;
-          data.push("$palette-color" + (i + 1) + ": " + ldColor.web(pal.colors[i]) + ";");
+          data.push("$palette-color" + (i + 1) + ": " + ldcolor.web(pal.colors[i]) + ";");
         }
         blob = new Blob([data.join('\n')], {
           type: "text/plain"

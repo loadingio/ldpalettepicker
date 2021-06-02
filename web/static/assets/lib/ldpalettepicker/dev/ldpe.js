@@ -9,7 +9,7 @@
       : opt.root;
     this.el = el = {};
     el.ed = {
-      picker: ld$.find(root, '.ldColorPicker', 0),
+      picker: ld$.find(root, '.ldcolorpicker', 0),
       pal: ld$.find(root, '.ldp', 0),
       colors: ld$.find(root, '.ldp .colors', 0),
       hex: ld$.find(root, 'input[data-tag=hex]', 0),
@@ -67,7 +67,7 @@
     this.clearLog = function(){
       return log.clear();
     };
-    this.ldcp = ldcp = new ldColorPicker(el.ed.picker, {
+    this.ldcp = ldcp = new ldcolorpicker(el.ed.picker, {
       inline: true
     });
     ldcp.on('change', function(it){
@@ -104,7 +104,7 @@
           c[v[1]] = e.target.value;
           return ldcp.setColor(c);
         });
-        ldrs[t] = new ldSlider(import$({
+        ldrs[t] = new ldslider(import$({
           root: ld$.find(root, ".ldrs[data-tag=" + t + "]", 0)
         }, irsOpt[t]));
         return function(t){
@@ -192,7 +192,7 @@
       }, opt);
       ref$ = [
         opt.pal.hexs || opt.pal.colors.map(function(it){
-          return ldColor.hex(it);
+          return ldcolor.hex(it);
         }), opt.pal.key, opt.pal.name || 'Custom'
       ], hexs = ref$[0], key = ref$[1], name = ref$[2];
       elp = el.ed.colors.parentNode;
@@ -203,7 +203,7 @@
       }
       el.ed.colors.innerHTML = hexs.map(function(d, i){
         var hcl;
-        hcl = ldColor.hcl(d);
+        hcl = ldcolor.hcl(d);
         return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
       }).join('');
       ld$.find(elp, '.name', 0).innerHTML = name || 'untitled';
@@ -212,14 +212,14 @@
     };
     editUpdate = function(c){
       var hcl, node;
-      hcl = ldColor.hcl(c);
+      hcl = ldcolor.hcl(c);
       node = ld$.find(root, '.color.active', 0);
-      node.style.background = ldColor.rgbaStr(c);
+      node.style.background = ldcolor.rgbaStr(c);
       node.classList[hcl.l < 50 ? "add" : "remove"]('dark');
-      el.ed.hex.value = ldColor.hex(c);
+      el.ed.hex.value = ldcolor.hex(c);
       c = {
-        rgb: ldColor.rgb(c),
-        hsl: ldColor.hsl(c),
+        rgb: ldcolor.rgb(c),
+        hsl: ldcolor.hsl(c),
         hcl: hcl
       };
       return ['rgb-r', 'rgb-g', 'rgb-b', 'hsl-h', 'hsl-s', 'hsl-l', 'hcl-h', 'hcl-c', 'hcl-l'].map(function(t){
@@ -287,7 +287,7 @@
       name = ld$.find(elp, '.name', 0).textContent || "untitled";
       colors = ld$.find(el.ed.colors, '.color').map(function(it){
         return {
-          value: ldColor.rgbaStr(it.style.backgroundColor)
+          value: ldcolor.rgbaStr(it.style.backgroundColor)
         };
       });
       return {

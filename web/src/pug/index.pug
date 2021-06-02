@@ -46,11 +46,11 @@ html(lang="en")
           name: "Palette Name",
           tag: ["tag", "list", ...],
           # either one of below
-          colors: [ldColor, ldColor, ...]                 # type agnoistic color. we should internally use this
-          colors: [{hex: "#999", tag: [...]}, ...]        # hex. color follows ldColor format.
+          colors: [ldcolor, ldcolor, ...]                 # type agnoistic color. we should internally use this
+          colors: [{hex: "#999", tag: [...]}, ...]        # hex. color follows ldcolor format.
           colors: ["#999", ...]                           # compact but losing color tags
-          # deprecated and we should use ldColor directly instead of  a indirect object with value member.
-          colors: [{value: ldColor,...}, {value: ldColor, ...}]
+          # deprecated and we should use ldcolor directly instead of  a indirect object with value member.
+          colors: [{value: ldcolor,...}, {value: ldcolor, ...}]
         }
 
       p For visualizing a palette in HTML, use #[code ldp] class with following structure:
@@ -209,7 +209,7 @@ html(lang="en")
     +script("assets/lib/bootstrap.native/main/bootstrap-native.min.js")
     +script("assets/lib/@loadingio/ldquery/main/ldq.min.js")
     +script("assets/lib/@loadingio/ldpage/main/ldpage.min.js")
-    +script("assets/lib/ldcolor/main/ldColor.min.js")
+    +script("assets/lib/ldcolor/main/ldcolor.min.js")
     +script("assets/lib/@loadingio/ldcolorpicker/main/ldcp.min.js")
     +script("assets/lib/@loadingio/debounce.js/main/debounce.min.js")
     +script("assets/lib/ldcover/main/ldcv.min.js")

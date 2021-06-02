@@ -4,7 +4,7 @@ ldPaletteEditor = (opt = {}) ->
   @el = el = {}
 
   el.ed = do
-    picker: ld$.find(root,'.ldColorPicker',0)
+    picker: ld$.find(root,'.ldcolorpicker',0)
     pal: ld$.find(root,'.ldp',0)
     colors: ld$.find(root,'.ldp .colors',0)
     hex: ld$.find(root,'input[data-tag=hex]',0)
@@ -38,7 +38,7 @@ ldPaletteEditor = (opt = {}) ->
 
 
   # Color Picker Initialization
-  @ldcp = ldcp = new ldColorPicker el.ed.picker, {inline: true}
+  @ldcp = ldcp = new ldcolorpicker el.ed.picker, {inline: true}
   ldcp.on \change, ~> log.push!; edit-update it
 
   # Input ( Slider, Inputbox ) Initialization
@@ -61,7 +61,7 @@ ldPaletteEditor = (opt = {}) ->
         c[v.1] = e.target.value
         ldcp.set-color c
       # Drag in input.ldrs: set ldcp
-      ldrs[t] = new ldSlider {root: ld$.find(root,".ldrs[data-tag=#{t}]",0)} <<< irs-opt[t]
+      ldrs[t] = new ldslider {root: ld$.find(root,".ldrs[data-tag=#{t}]",0)} <<< irs-opt[t]
       ((t) ->
         ldrs[t].on \change, (val) ->
           ldcp._slider = t
@@ -113,12 +113,12 @@ ldPaletteEditor = (opt = {}) ->
   # Edit Dynamics
   @init = edit-init = (opt={}) ~>
     opt = {pal: {}} <<< opt
-    [hexs, key, name]= [opt.pal.hexs or opt.pal.colors.map(-> ldColor.hex it), opt.pal.key, opt.pal.name or \Custom]
+    [hexs, key, name]= [opt.pal.hexs or opt.pal.colors.map(-> ldcolor.hex it), opt.pal.key, opt.pal.name or \Custom]
     elp = el.ed.colors.parentNode
     if key => elp.setAttribute \data-key, key else elp.removeAttribute \data-key
     el.ed.colors.innerHTML = hexs
       .map (d,i) ->
-        hcl = ldColor.hcl(d)
+        hcl = ldcolor.hcl(d)
         """
         <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
         style="background:#d;color:#d">
@@ -135,12 +135,12 @@ ldPaletteEditor = (opt = {}) ->
     ldcp.set-color hexs.0
 
   edit-update = (c) ->
-    hcl = ldColor.hcl(c)
+    hcl = ldcolor.hcl(c)
     node = ld$.find(root,'.color.active',0)
-    node.style.background = ldColor.rgbaStr c
+    node.style.background = ldcolor.rgbaStr c
     node.classList[if hcl.l < 50 => "add" else "remove"] \dark
-    el.ed.hex.value = ldColor.hex c
-    c = {rgb: ldColor.rgb(c), hsl: ldColor.hsl(c), hcl: hcl }
+    el.ed.hex.value = ldcolor.hex c
+    c = {rgb: ldcolor.rgb(c), hsl: ldcolor.hsl(c), hcl: hcl }
     <[rgb-r rgb-g rgb-b hsl-h hsl-s hsl-l hcl-h hcl-c hcl-l]>.map (t) ~>
       p = t.split \-
       v = c[p.0][p.1]
@@ -183,7 +183,7 @@ ldPaletteEditor = (opt = {}) ->
     elp = el.ed.colors.parentNode
     key = ld$.attr(elp, 'data-key')
     name = ld$.find(elp, '.name', 0).textContent or "untitled"
-    colors = ld$.find el.ed.colors, '.color' .map -> {value: ldColor.rgbaStr it.style.backgroundColor}
+    colors = ld$.find el.ed.colors, '.color' .map -> {value: ldcolor.rgbaStr it.style.backgroundColor}
     return {colors, name, key}
 
   edit-init {pal: {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}

@@ -47,7 +47,7 @@ ldPalettePicker = (opt = {}) ->
           scrollElem: el.pn[tgt]
       else el.pnin[tgt]innerHTML = rows.join('')
     html: (c) ->
-      cs = c.colors.map(->"""<div class="color" style="background:#{ldColor.rgbaStr(it)}"></div>""").join("")
+      cs = c.colors.map(->"""<div class="color" style="background:#{ldcolor.rgbaStr(it)}"></div>""").join("")
       """
       <div class="ldp"#{if c.key => " data-key=\"" + c.key + "\"" else ""}>
         <div class="colors">
@@ -91,13 +91,13 @@ ldPalettePicker = (opt = {}) ->
     else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
       ld$.find(that,'.color').map ->
-        ldColor.hex(it.style.backgroundColor or it.style.background)
+        ldcolor.hex(it.style.backgroundColor or it.style.background)
     else []
     return {name, hexs, key}
   # Use Dynamic
   use-pal = (n) ~>
     {name, hexs, key} = pal-from-node n
-    @fire \use, ret = {name, key, colors: hexs.map -> ldColor.rgb(it)}
+    @fire \use, ret = {name, key, colors: hexs.map -> ldcolor.rgb(it)}
     if @ldcv => @ldcv.set ret else @_set ret
 
   # Search Dynamics

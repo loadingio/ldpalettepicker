@@ -13,7 +13,7 @@ ldPalette.convert = (pal, type = \png) ->
       rects = []
       for i from 0 til len =>
         rects.push """
-        <rect x="#{500 * i/len}" y="0" width="#{500/len}" height="100" fill="#{ldColor.web(pal.colors[i])}"/>
+        <rect x="#{500 * i/len}" y="0" width="#{500/len}" height="100" fill="#{ldcolor.web(pal.colors[i])}"/>
         """
       payload = ([
         """<?xml version="1.0" encoding="utf-8"?>"""
@@ -37,7 +37,7 @@ ldPalette.convert = (pal, type = \png) ->
       ctx.fillStyle = \#ffffff
       ctx.fillRect 0, 0, canvas.width, canvas.height
       for i from 0 til len =>
-        ctx.fillStyle = ldColor.web(pal.colors[i])
+        ctx.fillStyle = ldcolor.web(pal.colors[i])
         ctx.fillRect(
           (iw - dw)*0.5 + dw * (i/len),
           (ih - dh) * 0.5,
@@ -49,7 +49,7 @@ ldPalette.convert = (pal, type = \png) ->
         res { blob: blob, url: URL.createObjectURL(blob), filename: "#name.png" }
     else if type == \scss =>
       data = ["""$palette-name: '#name'"""]
-      for i from 0 til len => data.push """$palette-color#{i + 1}: #{ldColor.web(pal.colors[i])};"""
+      for i from 0 til len => data.push """$palette-color#{i + 1}: #{ldcolor.web(pal.colors[i])};"""
       blob = new Blob([data.join(\\n)], {type: "text/plain"})
       return res do
         blob: blob

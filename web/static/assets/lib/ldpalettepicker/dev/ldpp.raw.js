@@ -96,7 +96,7 @@
       html: function(c){
         var cs;
         cs = c.colors.map(function(it){
-          return "<div class=\"color\" style=\"background:" + ldColor.rgbaStr(it) + "\"></div>";
+          return "<div class=\"color\" style=\"background:" + ldcolor.rgbaStr(it) + "\"></div>";
         }).join("");
         return "<div class=\"ldp\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  <div class=\"ctrl\">\n  <div data-action=\"use\"><i class=\"i-check\"></i>USE</div>\n  <div data-action=\"edit\"><i class=\"i-gear\"></i>EDIT</div>\n  </div>\n  " + cs + "\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
       }
@@ -146,7 +146,7 @@
         : [null, 'untitled'], key = ref$[0], name = ref$[1];
       hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
         ? ld$.find(that, '.color').map(function(it){
-          return ldColor.hex(it.style.backgroundColor || it.style.background);
+          return ldcolor.hex(it.style.backgroundColor || it.style.background);
         })
         : [];
       return {
@@ -162,7 +162,7 @@
         name: name,
         key: key,
         colors: hexs.map(function(it){
-          return ldColor.rgb(it);
+          return ldcolor.rgb(it);
         })
       });
       if (this$.ldcv) {
