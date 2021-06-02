@@ -1,16 +1,21 @@
 # Change Log
 
-# v0.0.5
+## v0.0.6
+
+ - set display to none of tabs after they are hidden to increase performance.
+
+
+## v0.0.5
 
  - upgrade ldcolor, tweak package dependencies rule
 
 
-# v0.0.4
+## v0.0.4
 
  - upgrade modules
 
 
-# v0.0.3
+## v0.0.3
 
  - upgrade modules
  - use deploy module
@@ -21,7 +26,7 @@
  - reomve useless code ( ldpe opt default values are not used. )
 
 
-# v0.0.2
+## v0.0.2
 
  - upgrade modules
  - update builder

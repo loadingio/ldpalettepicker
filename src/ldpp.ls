@@ -203,6 +203,9 @@ ldPalettePicker = (opt = {}) ->
   if ldCover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv', document)) =>
     @ldcv = new ldCover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
 
+  @tab-display = debounce 1000, ~>
+    idx = @tab-idx
+    ld$.find(@root, \.panel).map (n,i) -> if idx != i => n.style.display = \none
   @
 
 ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
@@ -211,12 +214,15 @@ ldPalettePicker.prototype = Object.create(Object.prototype) <<< do
   _get: -> new Promise (res, rej) ~> @access.list.push {res, rej}
   _set: (v) -> @access.list.splice(0).map -> it.res v
   get: -> if @ldcv => @ldcv.get! else @_get!
+
   tab: (n) ->
     if !n => return
-    idx = if ld$.find(@root,".panel[data-panel=#n]",0) => ld$.index(that) else -1
+    @tab-idx = idx = if ld$.find(@root,".panel[data-panel=#n]",0) => ld$.index(that) else -1
     if idx < 0 => return
     ld$.find(@root,\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
+    ld$.find(@root, \.panel).map (n,i) -> if idx == i => n.style.display = ''
     ld$.find(@root,".nav-link").map -> it.classList.toggle \active, (ld$.attr(it,\data-panel) == n)
+    @tab-display!
     @ldpe.sync-ui!
     true
   random: ->

@@ -371,6 +371,15 @@
           : {}));
       }
     }
+    this.tabDisplay = debounce(1000, function(){
+      var idx;
+      idx = this$.tabIdx;
+      return ld$.find(this$.root, '.panel').map(function(n, i){
+        if (idx !== i) {
+          return n.style.display = 'none';
+        }
+      });
+    });
     return this;
   };
   ldPalettePicker.prototype = import$(Object.create(Object.prototype), {
@@ -417,16 +426,22 @@
       if (!n) {
         return;
       }
-      idx = (that = ld$.find(this.root, ".panel[data-panel=" + n + "]", 0))
+      this.tabIdx = idx = (that = ld$.find(this.root, ".panel[data-panel=" + n + "]", 0))
         ? ld$.index(that)
         : -1;
       if (idx < 0) {
         return;
       }
       ld$.find(this.root, '.panels', 0).style.transform = "translate(" + idx * -100 + "%,0)";
+      ld$.find(this.root, '.panel').map(function(n, i){
+        if (idx === i) {
+          return n.style.display = '';
+        }
+      });
       ld$.find(this.root, ".nav-link").map(function(it){
         return it.classList.toggle('active', ld$.attr(it, 'data-panel') === n);
       });
+      this.tabDisplay();
       this.ldpe.syncUi();
       return true;
     },
