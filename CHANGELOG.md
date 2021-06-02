@@ -3,6 +3,7 @@
 ## v1.0.0
 
  - upgrade modules
+ - adopt newer version of `ldcolor`, `ldcolorpicker` and `ldslider`.
 
 
 ## v0.0.6
