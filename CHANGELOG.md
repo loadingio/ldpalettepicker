@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.1
+
+ - fix bug: ldrs now use `sm` instead of `ldrs-sm` to control size.
+
+
 ## v1.0.0
 
  - upgrade modules
