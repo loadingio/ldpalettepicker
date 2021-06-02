@@ -47,6 +47,7 @@
   },
   "peerDependencies": {
     "@loadingio/ldcolorpicker": "^1.1.0",
+    "@loadingio/debounce.js": "^0.0.1",
     "ldcolor": "^0.0.3",
     "ldloader": "^1.2.0",
     "ldslider": "^1.1.0"
