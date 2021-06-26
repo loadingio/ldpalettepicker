@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.2
+
+ - fix bug: ldcover doesn't work if DOM is isolated while initializing
+
+
 ## v1.0.1
 
  - fix bug: ldrs now use `sm` instead of `ldrs-sm` to control size.

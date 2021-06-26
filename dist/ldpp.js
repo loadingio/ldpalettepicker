@@ -363,7 +363,7 @@
       }
     };
     if ((typeof ldCover != 'undefined' && ldCover !== null) && opt.ldcv) {
-      if (n = ld$.parent(this.root, '.ldcv', document)) {
+      if (n = ld$.parent(this.root, '.ldcv')) {
         this.ldcv = new ldCover(import$({
           root: n
         }, typeof opt.ldcv === 'object'
