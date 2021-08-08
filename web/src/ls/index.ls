@@ -19,8 +19,8 @@
   #ldpp1 = new ldpp root: \#ldpp-ex1, palettes: ldpp.get("default")
   #ldpeeditor = new ldpe root: \#ldcv-editor
   #window.ldcv-editor = ldcv-editor = new ldpe root: \#ldcv-editor
-  window.ldcv-picker = ldcv-picker = new ldCover({root: document.querySelector('#ldcv-picker')})
-  window.ldcv-editor = ldcv-editor = new ldCover({root: document.querySelector('#ldcv-editor')})
+  window.ldcv-picker = ldcv-picker = new ldcover({root: document.querySelector('#ldcv-picker')})
+  window.ldcv-editor = ldcv-editor = new ldcover({root: document.querySelector('#ldcv-editor')})
 
   window.image = image = (type = \png) -> ldpalette.convert ldpe1.get-pal!, type .then (ret) ->
     out = document.querySelector(\#image-output)

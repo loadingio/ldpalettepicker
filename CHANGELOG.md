@@ -1,5 +1,10 @@
 # Change Log
 
+## v2.0.0
+
+ - adopt newer version of 'ldcover'
+
+
 ## v1.0.2
 
  - fix bug: ldcover doesn't work if DOM is isolated while initializing

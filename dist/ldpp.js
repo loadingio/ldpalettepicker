@@ -362,9 +362,9 @@
         return this$.tab('edit');
       }
     };
-    if ((typeof ldCover != 'undefined' && ldCover !== null) && opt.ldcv) {
+    if ((typeof ldcover != 'undefined' && ldcover !== null) && opt.ldcv) {
       if (n = ld$.parent(this.root, '.ldcv')) {
-        this.ldcv = new ldCover(import$({
+        this.ldcv = new ldcover(import$({
           root: n
         }, typeof opt.ldcv === 'object'
           ? opt.ldcv

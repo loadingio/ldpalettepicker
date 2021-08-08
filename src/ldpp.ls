@@ -200,8 +200,8 @@ ldpp = (opt = {}) ->
   content.build content.pals.view
   @ldpe = new ldpe root: el.pn.edit
   @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
-  if ldCover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv')) =>
-    @ldcv = new ldCover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
+  if ldcover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv')) =>
+    @ldcv = new ldcover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
 
   @tab-display = debounce 1000, ~>
     idx = @tab-idx
