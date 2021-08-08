@@ -1,12 +1,15 @@
 (function(){
   var ldpp;
   ldpp = function(opt){
-    var root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, n, this$ = this;
+    var root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, ldpeOpt, n, this$ = this;
     opt == null && (opt = {});
-    this.opt = opt = import$({
-      palettes: [],
-      itemPerLine: 2
-    }, opt);
+    this.opt = opt;
+    if (!opt.palettes) {
+      opt.palettes = [];
+    }
+    if (!opt.itemPerLine) {
+      opt.itemPerLine = 2;
+    }
     this.pals = {
       view: opt.palettes
     };
@@ -350,9 +353,13 @@
     this.evtHandler = {};
     content.add('view', opt.palettes);
     content.build(content.pals.view);
-    this.ldpe = new ldpe({
+    ldpeOpt = {
       root: el.pn.edit
-    });
+    };
+    if (opt.palette) {
+      ldpeOpt.palette = opt.palette;
+    }
+    this.ldpe = new ldpe(ldpeOpt);
     this.edit = function(pal, toggle){
       toggle == null && (toggle = true);
       this$.ldpe.init({
@@ -503,8 +510,10 @@
     }
   });
   ldpp.register("default", "flourish,b22 e55 f87 fb6 ab8 898,qualitative\ngray,000 333 666 ddd fff,gradient\nyoung,fec fe6 cd9 acd 7ab aac,concept\nplotDB,ed1e79 c69c6d 8cc63f 29abe2,brand\nFrench,37a 9ab eee f98 c10,diverging\nAfghan Girl,010 253 ffd da8 b53,artwork");
-  if (typeof window != 'undefined' && window !== null) {
-    window.ldpp = window.ldPalettePicker = ldpp;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = ldpp;
+  } else if (typeof window != 'undefined' && window !== null) {
+    window.ldpp = ldpp;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;
@@ -818,7 +827,7 @@
       };
     };
     editInit({
-      pal: {
+      pal: opt.palette || {
         colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
       }
     });
@@ -834,8 +843,10 @@
       return results$;
     }
   });
-  if (typeof window != 'undefined' && window !== null) {
-    window.ldpe = window.ldPaletteEditor = ldpe;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = ldpe;
+  } else if (typeof window != 'undefined' && window !== null) {
+    window.ldpe = ldpe;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;
@@ -940,7 +951,9 @@
       return document.body.removeChild(a);
     });
   };
-  if (typeof window != 'undefined' && window !== null) {
-    window.ldpalette = window.ldPalette = ldpalette;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = ldpalette;
+  } else if (typeof window != 'undefined' && window !== null) {
+    window.ldpalette = ldpalette;
   }
 }).call(this);

@@ -1,5 +1,4 @@
-require! <[fs fs-extra]>
-ldColor = require "./ldColor"
+require! <[fs fs-extra ldcolor]>
 
 fs-extra.ensure-dir-sync "compact"
 data = JSON.parse(fs.read-file-sync 'data/colorbrewer.json' .toString!)
@@ -11,7 +10,7 @@ for name,v of data =>
     ret = do
       name: "#name / #count"
       colors: list
-        .map(-> ldColor.hex(it,true))
+        .map(-> ldcolor.hex(it,true))
         .map(-> it.substring 1)
       tag: [type,"colorbrew"]
     output.push "#name / #count,#{ret.colors.join(' ')},#{ret.tag.join(',')}"

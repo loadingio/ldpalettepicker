@@ -382,7 +382,7 @@ oregon state university,dc4405 000,brand
 overstock,c7202c,brand
 oxford university press,002147 000 666,brand
 pac,004b91,brand
-pac 12,004b91 00274d 0076c0 000007 d6e03d a1a1a4 NaNNaNNaN,brand
+pac 12,004b91 00274d 0076c0 000007 d6e03d a1a1a4 fff,brand
 panasonic,0f58a8 000,brand
 pandora,005483,brand
 path,ee3423,brand

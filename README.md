@@ -2,9 +2,9 @@
 
 Palette related tools including:
 
- - `ldPalette` ( `ldpalette` ): palette class.
- - `ldPaletteEditor` ( `ldpe` ): palette editor
- - `ldPalettePicker` ( `ldpp` ): palette picker + editor
+ - `ldpalette`: palette class.
+ - `ldpe`: palette editor
+ - `ldpp`: palette picker + editor
 
 
 ## Palette Definition
@@ -24,9 +24,9 @@ In ldPalettePicker, a palette is defined in following format:
     }
 
 
-## ldPalette
+## ldpalette
 
-`ldPalette` - defined in `ldp.js` - is expected to be a JS object for palette, but currently it only provide 2 class methods:
+`ldpalette` - defined in `ldp.js` - is expected to be a JS object for palette, but currently it only provide 2 class methods:
 
  - `convert(pal, type)`: convert given pal into specific type
    - return promise which resolves an object with following fields:
@@ -46,15 +46,15 @@ Sample usage:
 Object methods are left to implement in the future.
 
 
-## ldPaletteEditor
+## ldpe
 
-`ldPaletteEditor` - defined in `ldpe.js` - provides palette editing functionality. usage:
+`ldpe` - defined in `ldpe.js` - provides palette editing functionality. usage:
 
     editor = new ldpe({ ... });
 
 where constructor options:
 
- - `root`: root node of a ldPaletteEditor widget. use `ldpe` mixin in ldpp.pug for a default widget DOM.
+ - `root`: root node of a ldpe widget. use `ldpe` mixin in ldpp.pug for a default widget DOM.
 
 ### API
 
@@ -66,9 +66,9 @@ where constructor options:
  - `clearLog`: clear undo history
 
 
-## ldPalettePicker
+## ldpp
 
-`ldPalettePicker` - defined in `ldpp.js` - provides a simple way to pick / customize palettes. Usage:
+`ldpp` - defined in `ldpp.js` - provides a simple way to pick / customize palettes. Usage:
 
     picker = new ldpp({ ... });
 
@@ -88,7 +88,7 @@ where constructor options:
 
  - `palettes`: default palette.
  - `itemPerLine`: how many palette per line in editor. default 2
- - `root`: root node of a ldPalettePicker widget. use `ldPalettePicker` mixin in ldpp.pug for a default widget DOM.
+ - `root`: root node of a ldpp widget. use `ldpp` mixin in ldpp.pug for a default widget DOM.
  - `className`: additional class names ( in space separated string ) to add in root. default ''
  - `useClusterizejs`: enable `clusterize.js` if true and `Clusterize` is available.
    - default false
@@ -122,7 +122,7 @@ ldPaletePicker also provided following helper functions:
  - `register(name, palettes)`: register provided palette list with the specified name.
  - `get(name)`: get palette list with the given name.
  - `init(opt)`: init all palette picker by querying `[ldpp]` selector.
-   - return a list of `ldPalettePicker` object.
+   - return a list of `ldpp` object.
    - `pals`: optional. Array of palettes. when provided, all pickers will be initialized with palettes given here.
      - when omitted, pickers will be inited with the palette list named `default` ( builtin palettes ).
 

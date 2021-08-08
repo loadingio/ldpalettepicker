@@ -304,7 +304,7 @@
       };
     };
     editInit({
-      pal: {
+      pal: opt.palette || {
         colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
       }
     });
@@ -320,8 +320,10 @@
       return results$;
     }
   });
-  if (typeof window != 'undefined' && window !== null) {
-    window.ldpe = window.ldPaletteEditor = ldpe;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = ldpe;
+  } else if (typeof window != 'undefined' && window !== null) {
+    window.ldpe = ldpe;
   }
   function import$(obj, src){
     var own = {}.hasOwnProperty;

@@ -1,5 +1,7 @@
 ldpp = (opt = {}) ->
-  @opt = opt = {palettes: [], item-per-line: 2} <<< opt
+  @opt = opt
+  if !opt.palettes => opt.palettes = []
+  if !opt.item-per-line => opt.item-per-line = 2
   @pals = view: opt.palettes
   # Prepare DOM
   @root = root = if typeof(opt.root) == typeof('') => document.querySelector(opt.root) else opt.root
@@ -198,7 +200,9 @@ ldpp = (opt = {}) ->
   @evt-handler = {}
   content.add \view, opt.palettes
   content.build content.pals.view
-  @ldpe = new ldpe root: el.pn.edit
+  ldpe-opt = {root: el.pn.edit}
+  if opt.palette => ldpe-opt.palette = opt.palette
+  @ldpe = new ldpe ldpe-opt
   @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
   if ldcover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv')) =>
     @ldcv = new ldcover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
@@ -260,4 +264,5 @@ ldpp.register "default", """
   French,37a 9ab eee f98 c10,diverging
   Afghan Girl,010 253 ffd da8 b53,artwork
 """
-if window? => window.ldpp = window.ldPalettePicker = ldpp
+if module? => module.exports = ldpp
+else if window? => window.ldpp = ldpp

@@ -15,6 +15,6 @@ for file in files =>
   data = data.join('\\n')
   all-pals.push filtered.join('\\n')
   name = file.replace(/.txt$/,'')
-  fs.write-file-sync "js/#name.palettes.js", """ldPalettePicker.register("#name","#data");"""
+  fs.write-file-sync "js/#name.palettes.js", """ldpp.register("#name","#data");"""
 
-fs.write-file-sync "js/all.palettes.js", """ldPalettePicker.register("all","#{all-pals.join('\\n')}");"""
+fs.write-file-sync "js/all.palettes.js", """ldpp.register("all","#{all-pals.join('\\n')}");"""

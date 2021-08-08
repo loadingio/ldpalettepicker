@@ -95,7 +95,9 @@
       return document.body.removeChild(a);
     });
   };
-  if (typeof window != 'undefined' && window !== null) {
-    window.ldpalette = window.ldPalette = ldpalette;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = ldpalette;
+  } else if (typeof window != 'undefined' && window !== null) {
+    window.ldpalette = ldpalette;
   }
 }).call(this);

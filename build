@@ -2,19 +2,19 @@
 rm -rf dist
 mkdir -p dist
 echo "Transpiling ldpp.ls..."
-npx lsc -cp --no-header src/ldpp.ls > dist/ldpp.raw.js
+./node_modules/.bin/lsc -cp --no-header src/ldpp.ls > dist/ldpp.raw.js
 echo "Transpiling ldpe.ls..."
-npx lsc -cp --no-header  src/ldpe.ls > dist/ldpe.js
+./node_modules/.bin/lsc -cp --no-header  src/ldpe.ls > dist/ldpe.js
 echo "Transpiling ldp.ls..."
-npx lsc -cp --no-header  src/ldp.ls > dist/ldp.js
+./node_modules/.bin/lsc -cp --no-header  src/ldp.ls > dist/ldp.js
 echo "Transpiling ldpp.styl..."
-npx stylus -p src/ldpp.styl > dist/ldpp.css
+./node_modules/.bin/stylus -p src/ldpp.styl > dist/ldpp.css
 echo "Uglifying ldpp.raw.js..."
-npx uglifyjs dist/ldpp.raw.js > dist/ldpp.raw.min.js
+./node_modules/.bin/uglifyjs dist/ldpp.raw.js > dist/ldpp.raw.min.js
 echo "Uglifying ldpe.js..."
-npx uglifyjs dist/ldpe.js > dist/ldpe.min.js
+./node_modules/.bin/uglifyjs dist/ldpe.js > dist/ldpe.min.js
 echo "Uglifying ldp.js..."
-npx uglifyjs dist/ldp.js > dist/ldp.min.js
+./node_modules/.bin/uglifyjs dist/ldp.js > dist/ldp.min.js
 echo "Merge ldpe and ldpp..."
 cat dist/ldpp.raw.js dist/ldpe.js dist/ldp.js > dist/ldpp.js
 cat dist/ldpp.raw.min.js dist/ldpe.min.js dist/ldp.min.js > dist/ldpp.min.js

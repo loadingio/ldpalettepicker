@@ -1,5 +1,13 @@
 # Change Log
 
+## v2.0.1
+
+ - bug fix: palettes js files should use lowercase module name.
+ - remove local `ldColor` file and use versioned `ldcolor` from npm in `tool` folder
+ - check `module` and `window` before initialization
+ - support `palette` option for default palette in ldpe and thus ldpp
+
+
 ## v2.0.0
 
  - adopt newer version of 'ldcover'

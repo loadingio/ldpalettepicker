@@ -194,9 +194,10 @@ ldpe = (opt = {}) ->
     colors = ld$.find el.ed.colors, '.color' .map -> {value: ldcolor.rgbaStr it.style.backgroundColor}
     return {colors, name, key}
 
-  edit-init {pal: {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
+  edit-init {pal: opt.palette or {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
   return @
 ldpe.prototype = Object.create(Object.prototype) <<< do
   sync-ui: -> for k,v of @ldrs => v.update!
 
-if window? => window.ldpe = window.ldPaletteEditor = ldpe
+if module? => module.exports = ldpe
+else if window? => window.ldpe = ldpe
