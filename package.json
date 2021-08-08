@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "files": [
     "dist/**/*"
   ],
