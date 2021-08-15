@@ -23,8 +23,8 @@ echo "Transpiling ldpe.ls..."
 ./node_modules/.bin/lsc -cp --no-header  .gen/ldpe.ls > dist/ldpe.js
 echo "Transpiling ldp.ls..."
 ./node_modules/.bin/lsc -cp --no-header  .gen/ldp.ls > dist/ldp.js
-echo "Transpiling ldpp.styl..."
-./node_modules/.bin/stylus -p src/ldpp.styl > dist/ldpp.css
+echo "Transpiling ldpp.styl -> index.css..."
+./node_modules/.bin/stylus -p src/ldpp.styl > dist/index.css
 echo "Uglifying index.js..."
 ./node_modules/.bin/uglifyjs dist/index.js > dist/index.min.js
 echo "Uglifying ldpp.js..."
@@ -33,8 +33,8 @@ echo "Uglifying ldpe.js..."
 ./node_modules/.bin/uglifyjs dist/ldpe.js > dist/ldpe.min.js
 echo "Uglifying ldp.js..."
 ./node_modules/.bin/uglifyjs dist/ldp.js > dist/ldp.min.js
-echo "Uglifying ldpp.css..."
-uglifycss dist/ldpp.css > dist/ldpp.min.css
+echo "Uglifying index.css..."
+uglifycss dist/index.css > dist/index.min.css
 echo "Copy palettes presets to dist/ ..."
 cp tool/js/*.js dist/
 rm -rf .gen

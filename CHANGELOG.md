@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.0.1
+
+ - rename `ldpp.css` to `index.css` for aligning module naming
+
+
 ## v3.0.0
 
  - reorg dist files - standalone modules with default `index.js` for all-in-one
