@@ -34,10 +34,10 @@
   ldpe2 = new ldpe({
     root: '#ldpe-ex1'
   });
-  window.ldcvPicker = ldcvPicker = new ldCover({
+  window.ldcvPicker = ldcvPicker = new ldcover({
     root: document.querySelector('#ldcv-picker')
   });
-  window.ldcvEditor = ldcvEditor = new ldCover({
+  window.ldcvEditor = ldcvEditor = new ldcover({
     root: document.querySelector('#ldcv-editor')
   });
   window.image = image = function(type){

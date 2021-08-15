@@ -198,6 +198,3 @@ ldpe = (opt = {}) ->
   return @
 ldpe.prototype = Object.create(Object.prototype) <<< do
   sync-ui: -> for k,v of @ldrs => v.update!
-
-if module? => module.exports = ldpe
-else if window? => window.ldpe = ldpe

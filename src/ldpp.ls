@@ -264,5 +264,3 @@ ldpp.register "default", """
   French,37a 9ab eee f98 c10,diverging
   Afghan Girl,010 253 ffd da8 b53,artwork
 """
-if module? => module.exports = ldpp
-else if window? => window.ldpp = ldpp

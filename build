@@ -1,27 +1,43 @@
 #!/usr/bin/env bash
-rm -rf dist
-mkdir -p dist
+rm -rf dist .gen
+mkdir -p dist .gen
+
+cat src/ldp.ls > .gen/index.ls
+cat src/ldpe.ls >> .gen/index.ls
+cat src/ldpp.ls >> .gen/index.ls
+echo "if module? => module.exports = ldpp else if window? => window.ldpp = ldpp" >> .gen/index.ls
+
+cat src/ldp.ls > .gen/ldp.ls
+echo "if module? => module.exports = ldpalette else if window? => window.ldpalette = ldpalette" >> .gen/ldp.ls
+cat src/ldpe.ls >> .gen/ldpe.ls
+echo "if module? => module.exports = ldpe else if window? => window.ldpe = ldpe" >> .gen/ldpe.ls
+cat src/ldpp.ls >> .gen/ldpp.ls
+echo "if module? => module.exports = ldpp else if window? => window.ldpp = ldpp" >> .gen/ldpp.ls
+
+
+echo "Transpiling index.ls..."
+./node_modules/.bin/lsc -cp --no-header .gen/index.ls > dist/index.js
 echo "Transpiling ldpp.ls..."
-./node_modules/.bin/lsc -cp --no-header src/ldpp.ls > dist/ldpp.raw.js
+./node_modules/.bin/lsc -cp --no-header .gen/ldpp.ls > dist/ldpp.js
 echo "Transpiling ldpe.ls..."
-./node_modules/.bin/lsc -cp --no-header  src/ldpe.ls > dist/ldpe.js
+./node_modules/.bin/lsc -cp --no-header  .gen/ldpe.ls > dist/ldpe.js
 echo "Transpiling ldp.ls..."
-./node_modules/.bin/lsc -cp --no-header  src/ldp.ls > dist/ldp.js
+./node_modules/.bin/lsc -cp --no-header  .gen/ldp.ls > dist/ldp.js
 echo "Transpiling ldpp.styl..."
 ./node_modules/.bin/stylus -p src/ldpp.styl > dist/ldpp.css
-echo "Uglifying ldpp.raw.js..."
-./node_modules/.bin/uglifyjs dist/ldpp.raw.js > dist/ldpp.raw.min.js
+echo "Uglifying index.js..."
+./node_modules/.bin/uglifyjs dist/index.js > dist/index.min.js
+echo "Uglifying ldpp.js..."
+./node_modules/.bin/uglifyjs dist/ldpp.js > dist/ldpp.min.js
 echo "Uglifying ldpe.js..."
 ./node_modules/.bin/uglifyjs dist/ldpe.js > dist/ldpe.min.js
 echo "Uglifying ldp.js..."
 ./node_modules/.bin/uglifyjs dist/ldp.js > dist/ldp.min.js
-echo "Merge ldpe and ldpp..."
-cat dist/ldpp.raw.js dist/ldpe.js dist/ldp.js > dist/ldpp.js
-cat dist/ldpp.raw.min.js dist/ldpe.min.js dist/ldp.min.js > dist/ldpp.min.js
 echo "Uglifying ldpp.css..."
 uglifycss dist/ldpp.css > dist/ldpp.min.css
 echo "Copy palettes presets to dist/ ..."
 cp tool/js/*.js dist/
+rm -rf .gen
 echo "Copy pug mixin to dist/ ..."
 cp src/ldpp.pug dist/
 echo "Deploy to web ... "

@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.0.0
+
+ - reorg dist files - standalone modules with default `index.js` for all-in-one
+
+
 ## v2.0.1
 
  - bug fix: palettes js files should use lowercase module name.
