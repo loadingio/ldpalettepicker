@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.0.2
+
+ - auto init dropdown menu
+ - add shadow to dropdown menu
+
+
 ## v3.0.1
 
  - rename `ldpp.css` to `index.css` for aligning module naming

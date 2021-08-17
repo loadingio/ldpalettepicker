@@ -10,6 +10,7 @@ ldpp = (opt = {}) ->
   el.nv = do
     root: ld$.find(root, '.navbar', 0)
     search: ld$.find(root, 'input[data-tag=search]',0)
+    filter: ld$.find(root, '.input-group-append.dropdown', 0)
   el.pn = do
     view: ld$.find(root, '.panel[data-panel=view]',0)
     mypal: ld$.find(root, '.panel[data-panel=mypal]',0)
@@ -115,6 +116,8 @@ ldpp = (opt = {}) ->
       pal)
     @tab pal
   el.nv.search.addEventListener \keyup, (e) -> search (e.target.value or "")
+  # this is not good. we should probably don't rely on BS and BSN for frontend dynamics.
+  if BSN? => new BSN.Dropdown el.nv.filter
 
   #Save
   if opt.save? =>

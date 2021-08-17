@@ -26,7 +26,8 @@
     this.el = el = {};
     el.nv = {
       root: ld$.find(root, '.navbar', 0),
-      search: ld$.find(root, 'input[data-tag=search]', 0)
+      search: ld$.find(root, 'input[data-tag=search]', 0),
+      filter: ld$.find(root, '.input-group-append.dropdown', 0)
     };
     el.pn = {
       view: ld$.find(root, '.panel[data-panel=view]', 0),
@@ -196,6 +197,9 @@
     el.nv.search.addEventListener('keyup', function(e){
       return search(e.target.value || "");
     });
+    if (typeof BSN != 'undefined' && BSN !== null) {
+      new BSN.Dropdown(el.nv.filter);
+    }
     if (opt.save != null) {
       saver = {
         loader: new ldLoader({
