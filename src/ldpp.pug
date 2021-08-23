@@ -62,19 +62,20 @@ mixin ldpp
       div.nav.nav-pills
         .input-group
           input.form-control(placeholder="Search...",data-tag="search")
-          .input-group-append.dropdown
-              .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Filter
-              .dropdown-menu.shadow-sm(data-tag="categories")
-                a.dropdown-item(href="#",data-cat="") All
-                .dropdown-divider
-                a.dropdown-item(href="#",data-cat="artwork") Artwork
-                a.dropdown-item(href="#",data-cat="brand") Brand
-                a.dropdown-item(href="#",data-cat="concept") Concept
-                .dropdown-divider
-                a.dropdown-item(href="#",data-cat="gradient") Gradient
-                a.dropdown-item(href="#",data-cat="qualitative") Qualitative
-                a.dropdown-item(href="#",data-cat="diverging") Diverging
-                a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
+          .input-group-append(style="flex:1 1 auto")
+            .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Filter
+            .dropdown-menu.shadow-sm(data-tag="categories")
+              a.dropdown-item(href="#",data-cat="") All
+              .dropdown-divider
+              a.dropdown-item(href="#",data-cat="artwork") Artwork
+              a.dropdown-item(href="#",data-cat="brand") Brand
+              a.dropdown-item(href="#",data-cat="concept") Concept
+              .dropdown-divider
+              a.dropdown-item(href="#",data-cat="gradient") Gradient
+              a.dropdown-item(href="#",data-cat="qualitative") Qualitative
+              a.dropdown-item(href="#",data-cat="diverging") Diverging
+              a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
+
     .panels
       .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
       .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px")

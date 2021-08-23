@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.0.3
+
+ - update dropdown menu style
+
+
 ## v3.0.2
 
  - auto init dropdown menu
