@@ -1,5 +1,8 @@
 i18n-res =
   "zh-TW":
+    "search": "搜尋"
+    "USE": "套用"
+    "EDIT": "編輯"
     "view": "檢視"
     "my pals": "我的色盤"
     "edit": "編輯"
@@ -50,6 +53,7 @@ ldpp = (opt = {}) ->
 
   Array.from(@root.querySelectorAll('[t]')).map (n) ~>
     n.textContent = @i18n.t(n.getAttribute(\t))
+  el.nv.search.setAttribute \placeholder, (@i18n.t("search") + "...")
 
   # Prepare content
   content = do
@@ -76,14 +80,14 @@ ldpp = (opt = {}) ->
           contentElem: el.pnin[tgt]
           scrollElem: el.pn[tgt]
       else el.pnin[tgt]innerHTML = rows.join('')
-    html: (c) ->
+    html: (c) ~>
       cs = c.colors.map(->"""<div class="color" style="background:#{ldcolor.rgbaStr(it)}"></div>""").join("")
       """
       <div class="ldp"#{if c.key => " data-key=\"" + c.key + "\"" else ""}>
         <div class="colors">
         <div class="ctrl">
-        <div data-action="use"><i class="i-check"></i>USE</div>
-        <div data-action="edit"><i class="i-gear"></i>EDIT</div>
+        <div data-action="use"><i class="i-check"></i>#{@i18n.t('USE')}</div>
+        <div data-action="edit"><i class="i-gear"></i>#{@i18n.t('EDIT')}</div>
         </div>
         #{cs}
         </div>

@@ -417,6 +417,9 @@
   });
   i18nRes = {
     "zh-TW": {
+      "search": "搜尋",
+      "USE": "套用",
+      "EDIT": "編輯",
       "view": "檢視",
       "my pals": "我的色盤",
       "edit": "編輯",
@@ -491,6 +494,7 @@
     Array.from(this.root.querySelectorAll('[t]')).map(function(n){
       return n.textContent = this$.i18n.t(n.getAttribute('t'));
     });
+    el.nv.search.setAttribute('placeholder', this.i18n.t("search") + "...");
     content = {
       pals: {},
       add: function(tab, p){
@@ -549,7 +553,7 @@
         cs = c.colors.map(function(it){
           return "<div class=\"color\" style=\"background:" + ldcolor.rgbaStr(it) + "\"></div>";
         }).join("");
-        return "<div class=\"ldp\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  <div class=\"ctrl\">\n  <div data-action=\"use\"><i class=\"i-check\"></i>USE</div>\n  <div data-action=\"edit\"><i class=\"i-gear\"></i>EDIT</div>\n  </div>\n  " + cs + "\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
+        return "<div class=\"ldp\"" + (c.key ? " data-key=\"" + c.key + "\"" : "") + ">\n  <div class=\"colors\">\n  <div class=\"ctrl\">\n  <div data-action=\"use\"><i class=\"i-check\"></i>" + this$.i18n.t('USE') + "</div>\n  <div data-action=\"edit\"><i class=\"i-gear\"></i>" + this$.i18n.t('EDIT') + "</div>\n  </div>\n  " + cs + "\n  </div>\n  <div class=\"name\">" + (c.name || 'untitled') + "</div>\n</div>";
       }
     };
     if (opt.mypal != null) {

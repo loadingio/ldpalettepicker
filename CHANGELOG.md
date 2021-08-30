@@ -3,6 +3,7 @@
 ## v3.0.4
 
  - support i18n
+ - tweak icon layout
 
 
 ## v3.0.3
