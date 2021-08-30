@@ -87,6 +87,9 @@ or, when using along with `ldCover`:
 where constructor options:
 
  - `palettes`: default palette.
+ - `i18n`: object for i18n. if provided, should at least support following API:
+   - `addResourceBundles(resObj)`: add resource bundles for multiple languages in `resObj`.
+   - `t(text)`: translate text 
  - `itemPerLine`: how many palette per line in editor. default 2
  - `root`: root node of a ldpp widget. use `ldpp` mixin in ldpp.pug for a default widget DOM.
  - `className`: additional class names ( in space separated string ) to add in root. default ''
