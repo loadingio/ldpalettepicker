@@ -292,8 +292,8 @@
   flex-direction: column;
 }
 .ldp .ctrl *[data-action] i {
-  font-size: 1.1em;
-  margin-bottom: 0.1em;
+  font-size: 1em;
+  margin-bottom: 0.2em;
 }
 .ldp .ctrl *[data-action]:hover {
   color: #fff;
