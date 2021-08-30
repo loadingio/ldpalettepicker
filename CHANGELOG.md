@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.0.4
+
+ - support i18n
+
+
 ## v3.0.3
 
  - update dropdown menu style

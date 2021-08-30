@@ -1,5 +1,29 @@
+i18n-res =
+  "zh-TW":
+    "view": "檢視"
+    "my pals": "我的色盤"
+    "edit": "編輯"
+    "filter": "過濾"
+    "all": "全部"
+    "artwork": "創作"
+    "brand": "品牌"
+    "concept": "概念"
+    "gradient": "漸層"
+    "qualitative": "定性"
+    "diverging": "雙色"
+    "colorbrew": "釀色"
+    "load more": "更多"
+    "use this palette": "使用此色盤"
+    "save as asset": "儲存色盤"
+    "undo": "undo"
+    "no result...": "沒有可用的色盤..."
+
 ldpp = (opt = {}) ->
   @opt = opt
+
+  @i18n = i18n = opt.i18n or {t: -> it }
+  if @i18n and @i18n.add-resource-bundles => @i18n.add-resource-bundles i18n-res
+
   if !opt.palettes => opt.palettes = []
   if !opt.item-per-line => opt.item-per-line = 2
   @pals = view: opt.palettes
@@ -24,18 +48,21 @@ ldpp = (opt = {}) ->
   el.mp = do
     load: ld$.find(el.pn.mypal,'.btn-load',0)
 
+  Array.from(@root.querySelectorAll('[t]')).map (n) ~>
+    n.textContent = @i18n.t(n.getAttribute(\t))
+
   # Prepare content
   content = do
     pals: {}
     add: (tab=\view, p) ->
       if !@pals[tab] => @pals[tab] = []
       @pals[tab] ++= (p.map ~> {html: @html(it), obj: it})
-    build: (p = [], tgt='view') ->
+    build: (p = [], tgt='view') ~>
       # build content for edit? it might be we searching while in edit panel.
       # just set tgt to view.
       if tgt == \edit => tgt = \view
       rows = p.map -> it.html
-      if rows.length == 0 => return el.pnin[tgt]innerHTML = "no result..."
+      if rows.length == 0 => return el.pnin[tgt]innerHTML = @i18n.t("no result...")
       if opt.use-clusterizejs and Clusterize? =>
         lines = []
         for i from 0 til rows.length by opt.item-per-line =>
@@ -185,7 +212,8 @@ ldpp = (opt = {}) ->
     undo: (tgt) ~>
       if (n = ld$.parent(tgt,"*[data-action=undo]", root)) => return @ldpe.undo! or true
     nav: (tgt) ~>
-      if ld$.attr(tgt, \data-panel) and ld$.parent(tgt,'.navbar',root) => return @tab ld$.attr(tgt,\data-panel)
+      if !(n = ld$.parent(tgt, '[data-panel]', root)) => return
+      if ld$.parent(n,'.navbar',root) => return @tab ld$.attr(n,\data-panel)
 
   root.addEventListener \click, (e) ~>
     tgt = e.target

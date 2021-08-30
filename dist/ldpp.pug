@@ -56,38 +56,40 @@ mixin ldpp
   .ldpp(ldpp)
     .navbar.text-center: .inner(data-tag="menu")
       ul.nav.nav-pills.float-right
-        .nav-item: a.nav-link.active(data-panel="view") View
-        .nav-item: a.nav-link(data-panel="mypal") My Pals
-        .nav-item: a.nav-link(data-panel="edit") Edit
+        .nav-item: a.nav-link.active(data-panel="view"): span(t="view")
+        .nav-item: a.nav-link(data-panel="mypal"): span(t="my pals")
+        .nav-item: a.nav-link(data-panel="edit"): span(t="edit")
       div.nav.nav-pills
         .input-group
           input.form-control(placeholder="Search...",data-tag="search")
           .input-group-append(style="flex:1 1 auto")
-            .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Filter
+            .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown"): span(t="filter")
             .dropdown-menu.shadow-sm(data-tag="categories")
-              a.dropdown-item(href="#",data-cat="") All
+              a.dropdown-item(href="#",data-cat=""): span(t="all")
               .dropdown-divider
-              a.dropdown-item(href="#",data-cat="artwork") Artwork
-              a.dropdown-item(href="#",data-cat="brand") Brand
-              a.dropdown-item(href="#",data-cat="concept") Concept
+              a.dropdown-item(href="#",data-cat="artwork"): span(t="artwork")
+              a.dropdown-item(href="#",data-cat="brand"): span(t="brand")
+              a.dropdown-item(href="#",data-cat="concept"): span(t="concept")
               .dropdown-divider
-              a.dropdown-item(href="#",data-cat="gradient") Gradient
-              a.dropdown-item(href="#",data-cat="qualitative") Qualitative
-              a.dropdown-item(href="#",data-cat="diverging") Diverging
-              a.dropdown-item(href="#",data-cat="colorbrew") Colorbrew
+              a.dropdown-item(href="#",data-cat="gradient"): span(t="gradient")
+              a.dropdown-item(href="#",data-cat="qualitative"): span(t="qualitative")
+              a.dropdown-item(href="#",data-cat="diverging"): span(t="diverging")
+              a.dropdown-item(href="#",data-cat="colorbrew"): span(t="colorbrew")
 
     .panels
       .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content
       .panel.clusterize-scroll(data-panel="mypal",style="max-height:600px")
         .inner.clusterize-content
         .btn.btn-primary.btn-block.ld-over-inverse.btn-load
-          | Load More
+          span(t="load more")
           .ld.ldld.ldbtn.sm
       .panel(data-panel="edit")
         +ldpe
         .foot
           hr
           .float-right
-            .btn.btn-primary.mr-2(data-action="use") Use This Palette
-            .btn.btn-outline-secondary.ld-ext-right(data-action="save") Save as Asset #[.ld.ldld.ldbtn.sm]
-          .btn.btn-outline-secondary(data-action="undo") Undo #[i.i-undo]
+            .btn.btn-primary.mr-2(data-action="use"): span(t="use this palette")
+            .btn.btn-outline-secondary.ld-ext-right(data-action="save")
+              span(t="save as asset")
+              .ld.ldld.ldbtn.sm
+          .btn.btn-outline-secondary(data-action="undo") #[span(t="undo")] #[i.i-undo]

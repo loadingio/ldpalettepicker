@@ -1,5 +1,5 @@
 (function(){
-  var ldpalette, ldpe, ldpp;
+  var ldpalette, ldpe, i18nRes, ldpp;
   ldpalette = function(){};
   ldpalette.convert = function(pal, type){
     var promise;
@@ -415,10 +415,39 @@
       return results$;
     }
   });
+  i18nRes = {
+    "zh-TW": {
+      "view": "檢視",
+      "my pals": "我的色盤",
+      "edit": "編輯",
+      "filter": "過濾",
+      "all": "全部",
+      "artwork": "創作",
+      "brand": "品牌",
+      "concept": "概念",
+      "gradient": "漸層",
+      "qualitative": "定性",
+      "diverging": "雙色",
+      "colorbrew": "釀色",
+      "load more": "更多",
+      "use this palette": "使用此色盤",
+      "save as asset": "儲存色盤",
+      "undo": "undo",
+      "no result...": "沒有可用的色盤..."
+    }
+  };
   ldpp = function(opt){
-    var root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, ldpeOpt, n, this$ = this;
+    var i18n, root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, ldpeOpt, n, this$ = this;
     opt == null && (opt = {});
     this.opt = opt;
+    this.i18n = i18n = opt.i18n || {
+      t: function(it){
+        return it;
+      }
+    };
+    if (this.i18n && this.i18n.addResourceBundles) {
+      this.i18n.addResourceBundles(i18nRes);
+    }
     if (!opt.palettes) {
       opt.palettes = [];
     }
@@ -459,6 +488,9 @@
     el.mp = {
       load: ld$.find(el.pn.mypal, '.btn-load', 0)
     };
+    Array.from(this.root.querySelectorAll('[t]')).map(function(n){
+      return n.textContent = this$.i18n.t(n.getAttribute('t'));
+    });
     content = {
       pals: {},
       add: function(tab, p){
@@ -485,7 +517,7 @@
           return it.html;
         });
         if (rows.length === 0) {
-          return el.pnin[tgt].innerHTML = "no result...";
+          return el.pnin[tgt].innerHTML = this$.i18n.t("no result...");
         }
         if (opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
           lines = [];
@@ -738,8 +770,12 @@
         }
       },
       nav: function(tgt){
-        if (ld$.attr(tgt, 'data-panel') && ld$.parent(tgt, '.navbar', root)) {
-          return this$.tab(ld$.attr(tgt, 'data-panel'));
+        var n;
+        if (!(n = ld$.parent(tgt, '[data-panel]', root))) {
+          return;
+        }
+        if (ld$.parent(n, '.navbar', root)) {
+          return this$.tab(ld$.attr(n, 'data-panel'));
         }
       }
     };

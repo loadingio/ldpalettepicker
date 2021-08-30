@@ -47,6 +47,9 @@
 .ldpp .panel:nth-child(3) {
   transform: translate(200%, 0) translateZ(1px);
 }
+.ldpp [t] {
+  text-transform: capitalize;
+}
 .ldpp .panels {
   position: relative;
   transition: transform 0.5s ease-in-out;
