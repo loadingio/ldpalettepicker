@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.1.0
+
+ - tweak ui: use flexbox to layout for more precise result.
+ - some changes in CSS may lead to broken ui
+
+
 ## v3.0.4
 
  - support i18n

@@ -54,16 +54,12 @@ mixin ldpe
 //- Palette Picker Widget
 mixin ldpp
   .ldpp(ldpp)
-    .navbar.text-center: .inner(data-tag="menu")
-      ul.nav.nav-pills.float-right
-        .nav-item: a.nav-link.active(data-panel="view"): span(t="view")
-        .nav-item: a.nav-link(data-panel="mypal"): span(t="my pals")
-        .nav-item: a.nav-link(data-panel="edit"): span(t="edit")
-      div.nav.nav-pills.float-left
+    .header
+      .flex-grow-1.mr-4
         .input-group
           input.form-control(data-tag="search")
-          .input-group-append(style="flex:1 1 auto")
-            .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown"): span(t="filter")
+          .input-group-append
+            .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown"): span(t="filter") &nbsp;
             .dropdown-menu.shadow-sm(data-tag="categories")
               a.dropdown-item(href="#",data-cat=""): span(t="all")
               .dropdown-divider
@@ -75,6 +71,10 @@ mixin ldpp
               a.dropdown-item(href="#",data-cat="qualitative"): span(t="qualitative")
               a.dropdown-item(href="#",data-cat="diverging"): span(t="diverging")
               a.dropdown-item(href="#",data-cat="colorbrew"): span(t="colorbrew")
+      div(style="white-space:nowrap")
+        .btn.btn-primary(data-panel="view"): span(t="view")
+        .btn.btn-text(data-panel="mypal"): span(t="my pals")
+        .btn.btn-text(data-panel="edit"): span(t="edit")
 
     .panels
       .panel.active.clusterize-scroll(data-panel="view",style="max-height:600px"): .inner.clusterize-content

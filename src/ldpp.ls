@@ -35,7 +35,7 @@ ldpp = (opt = {}) ->
   if opt.className => @root.classList.add.apply @root.classList, opt.className.split(' ').filter(->it).map(->it.trim!)
   @el = el = {}
   el.nv = do
-    root: ld$.find(root, '.navbar', 0)
+    root: ld$.find(root, '.header', 0)
     search: ld$.find(root, 'input[data-tag=search]',0)
     filter: ld$.find(root, '.input-group-append', 0)
   el.pn = do
@@ -115,7 +115,7 @@ ldpp = (opt = {}) ->
         .then -> mypal.loader.off 100
         .then -> if mypal.page.is-end! => el.mp.load.style.display = \none
   else
-    ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.nav-item', el.nv.root)
+    ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.btn', el.nv.root)
     ret.style.display = \none
     ld$.remove(el.pn.mypal)
 
@@ -196,13 +196,13 @@ ldpp = (opt = {}) ->
         n = ld$.find n, '.ldp', 0
         if n => return use-pal(n) or true
     mypal: (tgt) ~>
-      if !(p = ld$.parent(tgt,".navbar",root)) => return
+      if !(p = ld$.parent(tgt,".header",root)) => return
       if(n = ld$.parent(tgt,"*[data-panel=mypal]", p)) =>
         if !(mypal?) => return @tab \view
         mypal.fetch!
         return @tab \mypal
     view: (tgt) ~>
-      if !(p = ld$.parent(tgt,".navbar",root)) => return
+      if !(p = ld$.parent(tgt,".header",root)) => return
       if(n = ld$.parent(tgt,"*[data-panel=view]", p)) => return @tab \view
       if !(n = ld$.parent(tgt,"*[data-cat]",p)) => return
       @tab \view # go to view first so search will execute in view panel
@@ -217,7 +217,7 @@ ldpp = (opt = {}) ->
       if (n = ld$.parent(tgt,"*[data-action=undo]", root)) => return @ldpe.undo! or true
     nav: (tgt) ~>
       if !(n = ld$.parent(tgt, '[data-panel]', root)) => return
-      if ld$.parent(n,'.navbar',root) => return @tab ld$.attr(n,\data-panel)
+      if ld$.parent(n,'.header',root) => return @tab ld$.attr(n,\data-panel)
 
   root.addEventListener \click, (e) ~>
     tgt = e.target
@@ -260,7 +260,9 @@ ldpp.prototype = Object.create(Object.prototype) <<< do
     if idx < 0 => return
     ld$.find(@root,\.panels,0).style.transform = "translate(#{idx * -100}%,0)"
     ld$.find(@root, \.panel).map (n,i) -> if idx == i => n.style.display = ''
-    ld$.find(@root,".nav-link").map -> it.classList.toggle \active, (ld$.attr(it,\data-panel) == n)
+    ld$.find(@root,".btn[data-panel]").map ->
+      it.classList.toggle \btn-text, (ld$.attr(it,\data-panel) != n)
+      it.classList.toggle \btn-primary, (ld$.attr(it,\data-panel) == n)
     @tab-display!
     @ldpe.sync-ui!
     true

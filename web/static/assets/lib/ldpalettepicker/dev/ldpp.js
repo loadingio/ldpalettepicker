@@ -57,7 +57,7 @@
     }
     this.el = el = {};
     el.nv = {
-      root: ld$.find(root, '.navbar', 0),
+      root: ld$.find(root, '.header', 0),
       search: ld$.find(root, 'input[data-tag=search]', 0),
       filter: ld$.find(root, '.input-group-append', 0)
     };
@@ -174,7 +174,7 @@
         });
       });
     } else {
-      ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.nav-item', el.nv.root);
+      ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.btn', el.nv.root);
       ret.style.display = 'none';
       ld$.remove(el.pn.mypal);
     }
@@ -314,7 +314,7 @@
       },
       mypal: function(tgt){
         var p, n;
-        if (!(p = ld$.parent(tgt, ".navbar", root))) {
+        if (!(p = ld$.parent(tgt, ".header", root))) {
           return;
         }
         if (n = ld$.parent(tgt, "*[data-panel=mypal]", p)) {
@@ -327,7 +327,7 @@
       },
       view: function(tgt){
         var p, n;
-        if (!(p = ld$.parent(tgt, ".navbar", root))) {
+        if (!(p = ld$.parent(tgt, ".header", root))) {
           return;
         }
         if (n = ld$.parent(tgt, "*[data-panel=view]", p)) {
@@ -363,7 +363,7 @@
         if (!(n = ld$.parent(tgt, '[data-panel]', root))) {
           return;
         }
-        if (ld$.parent(n, '.navbar', root)) {
+        if (ld$.parent(n, '.header', root)) {
           return this$.tab(ld$.attr(n, 'data-panel'));
         }
       }
@@ -489,8 +489,9 @@
           return n.style.display = '';
         }
       });
-      ld$.find(this.root, ".nav-link").map(function(it){
-        return it.classList.toggle('active', ld$.attr(it, 'data-panel') === n);
+      ld$.find(this.root, ".btn[data-panel]").map(function(it){
+        it.classList.toggle('btn-text', ld$.attr(it, 'data-panel') !== n);
+        return it.classList.toggle('btn-primary', ld$.attr(it, 'data-panel') === n);
       });
       this.tabDisplay();
       this.ldpe.syncUi();
