@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.1.1
+
+ - fix bug: selector for hiding mypal button incorrect
+ - tweak ldpp's ldpe layout with flexbox
+
+
 ## v3.1.0
 
  - tweak ui: use flexbox to layout for more precise result.

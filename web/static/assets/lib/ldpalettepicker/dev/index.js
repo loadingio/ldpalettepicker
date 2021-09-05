@@ -589,7 +589,7 @@
         });
       });
     } else {
-      ret = ld$.parent(ld$.find(el.nv.root, 'a[data-panel=mypal]', 0), '.btn', el.nv.root);
+      ret = ld$.find(el.nv.root, '.btn[data-panel=mypal]', 0);
       ret.style.display = 'none';
       ld$.remove(el.pn.mypal);
     }
