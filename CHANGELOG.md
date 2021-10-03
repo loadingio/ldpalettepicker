@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.2
+
+ - force font size to `1rem` in panel root for sizing consistency
+
+
 ## v3.1.1
 
  - fix bug: selector for hiding mypal button incorrect
