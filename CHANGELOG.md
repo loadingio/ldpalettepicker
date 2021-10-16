@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.3
+
+ - in all palettes, also provide brandcolor and colorbrewer palettes
+
+
 ## v3.1.2
 
  - force font size to `1rem` in panel root for sizing consistency

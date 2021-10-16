@@ -9,6 +9,7 @@ fs.read-file-sync \compact/loadingio.txt
   .split \\n
   .map -> hash[it.split(\,).0.replace(/ +/g,'').toLowerCase!] = true
 
+map = {}
 for file in files =>
   data = filtered = fs.read-file-sync "compact/#file" .toString!split \\n 
   if file != 'loadingio.txt' => filtered = data.filter(-> !hash[it.split(\,).0.replace(/ +/g,'').toLowerCase!])
@@ -16,5 +17,21 @@ for file in files =>
   all-pals.push filtered.join('\\n')
   name = file.replace(/.txt$/,'')
   fs.write-file-sync "js/#name.palettes.js", """ldpp.register("#name","#data");"""
+  map[name] = data
 
-fs.write-file-sync "js/all.palettes.js", """ldpp.register("all","#{all-pals.join('\\n')}");"""
+all-code = "(function(){"
+
+names = [k for k of map]
+for i from 0 til names.length =>
+  name = names[i]
+  data = map[name]
+  all-code += """
+  var d#{i} = "#data";
+  ldpp.register("#name",d#i);\n
+  """
+
+all-code += """
+ldpp.register("all",(#{[0 til names.length].map(-> \d + it).join(\+);}));
+}());
+"""
+fs.write-file-sync "js/all.palettes.js", all-code
