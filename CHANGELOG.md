@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.4
+
+ - fix bug: when clusterize.js enabled, palette list layout is broken due to additional div inserted.
+
+
 ## v3.1.3
 
  - in all palettes, also provide brandcolor and colorbrewer palettes

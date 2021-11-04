@@ -84,6 +84,13 @@
   height: 1px;
   margin: 0 10px 11px;
 }
+.ldpp .panel > .inner > .clusterize-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2em;
+  justify-content: space-between;
+}
 .ldpp .panel[data-panel=edit] {
   padding-bottom: 0;
   display: flex;
