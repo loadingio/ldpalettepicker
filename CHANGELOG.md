@@ -3,6 +3,7 @@
 ## v3.1.6 (upcoming)
 
  - skip clusterizejs only if vscroll is available when `use-vscroll` is set.
+ - upgrade modules
 
 
 ## v3.1.5
