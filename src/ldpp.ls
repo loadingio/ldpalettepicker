@@ -86,6 +86,8 @@ ldpp = (opt = {}) ->
             ..height = "100%"
             ..overflowY = "scroll"
           @vscroll = new vscroll.fixed root: el.pnin[tgt]
+          # update content based on dimensions after visible so it will be more accurate
+          if @ldcv => @ldcv.on \toggle.on, -> @vscroll.locate!
       if @vscroll => @vscroll.update!
 
     html: (c) ~>

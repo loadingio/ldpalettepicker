@@ -555,6 +555,11 @@
             this$.vscroll = new vscroll.fixed({
               root: el.pnin[tgt]
             });
+            if (this$.ldcv) {
+              this$.ldcv.on('toggle.on', function(){
+                return this.vscroll.locate();
+              });
+            }
           }
         }
         if (this$.vscroll) {
