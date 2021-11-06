@@ -95,7 +95,12 @@ where constructor options:
  - `className`: additional class names ( in space separated string ) to add in root. default ''
  - `useClusterizejs`: enable `clusterize.js` if true and `Clusterize` is available.
    - default false
-   - For palette list performance gain.
+   - Can enormously reduce dom element counts.
+   - require dual licensed `clusterize.js` library
+ - `useVscroll`: enable `@loadingio/vscroll` if true and `vscroll` is available.
+   - default false
+   - Can enormously reduce dom element counts.
+   - based on `@loadingio/vscroll`, MIT Licensed.
  - `ldcv`: default false. if provided and ldCover is available, a ldcv object will be created automatically with this object as constructor options.
  - `random`: if provided, serve as random palete. (TBD)
  - `mypal`: optional ldPage object for loading customized palette on scrolling.

@@ -9,7 +9,7 @@
 
   ldpp.register("default2", palettes)
   pals = ldpp.get("default2")
-  ret = ldpp.init({pals: pals, useClusterizejs: true, mypal: mypal, save: save})
+  ret = ldpp.init({pals: pals, /*useClusterizejs: true*/, mypal: mypal, save: save, use-vscroll: true})
 
   # bring up default palette
   # ldcv.on \toggle.on, -> ret.1.edit {name: "blah", colors: <[#f00 #0f0 #00f]>}, false

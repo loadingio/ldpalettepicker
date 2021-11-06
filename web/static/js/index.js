@@ -24,9 +24,10 @@
   pals = ldpp.get("default2");
   ret = ldpp.init({
     pals: pals,
-    useClusterizejs: true,
+    'void': void 8,
     mypal: mypal,
-    save: save
+    save: save,
+    useVscroll: true
   });
   ldpe1 = new ldpe({
     root: '#ldcv-editor .ldpe'

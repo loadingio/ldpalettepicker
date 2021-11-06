@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.5
+
+ - support `@loadingio/vscroll` for optimize palette list browsing.
+
+
 ## v3.1.4
 
  - fix bug: when clusterize.js enabled, palette list layout is broken due to additional div inserted.

@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "files": [
     "dist/**/*"
   ],
@@ -24,6 +24,7 @@
     "@loadingio/debounce.js": "^0.0.1",
     "@loadingio/ldpage": "^0.0.3",
     "@loadingio/ldquery": "^2.0.0",
+    "@loadingio/vscroll": "^0.0.3",
     "bootstrap": "^4.5.3",
     "bootstrap.ldui": "github:loadingio/bootstrap.ldui",
     "bootstrap.native": "^3.0.15",
@@ -62,6 +63,7 @@
       "@loadingio/ldpage",
       "@loadingio/ldcolorpicker",
       "@loadingio/debounce.js",
+      "@loadingio/vscroll",
       "ldcover",
       "ldcolor",
       "ldslider",

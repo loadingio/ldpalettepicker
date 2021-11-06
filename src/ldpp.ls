@@ -67,7 +67,7 @@ ldpp = (opt = {}) ->
       if tgt == \edit => tgt = \view
       rows = p.map -> it.html
       if rows.length == 0 => return el.pnin[tgt]innerHTML = @i18n.t("no result...")
-      if opt.use-clusterizejs and Clusterize? =>
+      if !opt.use-vscroll and opt.use-clusterizejs and Clusterize? =>
         lines = []
         for i from 0 til rows.length by opt.item-per-line =>
           line = []
@@ -80,6 +80,14 @@ ldpp = (opt = {}) ->
           contentElem: el.pnin[tgt]
           scrollElem: el.pn[tgt]
       else el.pnin[tgt]innerHTML = rows.join('')
+      if opt.use-vscroll and vscroll? =>
+        if !@vscroll =>
+          el.pnin[tgt].style
+            ..height = "100%"
+            ..overflowY = "scroll"
+          @vscroll = new vscroll.fixed root: el.pnin[tgt]
+      if @vscroll => @vscroll.update!
+
     html: (c) ~>
       cs = c.colors.map(->"""<div class="color" style="background:#{ldcolor.rgbaStr(it)}"></div>""").join("")
       """

@@ -511,7 +511,7 @@
         }));
       },
       build: function(p, tgt){
-        var rows, lines, i$, step$, to$, i, line, j$, to1$, j;
+        var rows, lines, i$, step$, to$, i, line, j$, to1$, j, x$;
         p == null && (p = []);
         tgt == null && (tgt = 'view');
         if (tgt === 'edit') {
@@ -523,7 +523,7 @@
         if (rows.length === 0) {
           return el.pnin[tgt].innerHTML = this$.i18n.t("no result...");
         }
-        if (opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
+        if (!opt.useVscroll && opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
           lines = [];
           for (i$ = 0, to$ = rows.length, step$ = opt.itemPerLine; step$ < 0 ? i$ > to$ : i$ < to$; i$ += step$) {
             i = i$;
@@ -535,9 +535,9 @@
             lines.push("<div class=\"clusterize-row\">" + line.join('') + "</div>");
           }
           if ((content.cluster || (content.cluster = {}))[tgt]) {
-            return content.cluster[tgt].update(lines);
+            content.cluster[tgt].update(lines);
           } else {
-            return (content.cluster || (content.cluster = {}))[tgt] = new Clusterize({
+            (content.cluster || (content.cluster = {}))[tgt] = new Clusterize({
               rows_in_block: 7,
               rows: lines,
               contentElem: el.pnin[tgt],
@@ -545,7 +545,20 @@
             });
           }
         } else {
-          return el.pnin[tgt].innerHTML = rows.join('');
+          el.pnin[tgt].innerHTML = rows.join('');
+        }
+        if (opt.useVscroll && (typeof vscroll != 'undefined' && vscroll !== null)) {
+          if (!this$.vscroll) {
+            x$ = el.pnin[tgt].style;
+            x$.height = "100%";
+            x$.overflowY = "scroll";
+            this$.vscroll = new vscroll.fixed({
+              root: el.pnin[tgt]
+            });
+          }
+        }
+        if (this$.vscroll) {
+          return this$.vscroll.update();
         }
       },
       html: function(c){
