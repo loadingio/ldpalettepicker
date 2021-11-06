@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.6 (upcoming)
+
+ - skip clusterizejs only if vscroll is available when `use-vscroll` is set.
+
+
 ## v3.1.5
 
  - support `@loadingio/vscroll` for optimize palette list browsing.

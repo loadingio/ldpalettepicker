@@ -67,7 +67,7 @@ ldpp = (opt = {}) ->
       if tgt == \edit => tgt = \view
       rows = p.map -> it.html
       if rows.length == 0 => return el.pnin[tgt]innerHTML = @i18n.t("no result...")
-      if !opt.use-vscroll and opt.use-clusterizejs and Clusterize? =>
+      if !(opt.use-vscroll and vscroll?) and opt.use-clusterizejs and Clusterize? =>
         lines = []
         for i from 0 til rows.length by opt.item-per-line =>
           line = []

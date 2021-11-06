@@ -523,7 +523,7 @@
         if (rows.length === 0) {
           return el.pnin[tgt].innerHTML = this$.i18n.t("no result...");
         }
-        if (!opt.useVscroll && opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
+        if (!(opt.useVscroll && (typeof vscroll != 'undefined' && vscroll !== null)) && opt.useClusterizejs && (typeof Clusterize != 'undefined' && Clusterize !== null)) {
           lines = [];
           for (i$ = 0, to$ = rows.length, step$ = opt.itemPerLine; step$ < 0 ? i$ > to$ : i$ < to$; i$ += step$) {
             i = i$;
