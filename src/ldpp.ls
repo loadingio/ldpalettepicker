@@ -86,7 +86,10 @@ ldpp = (opt = {}) ->
             ..overflowY = "scroll"
           @vscroll = new vscroll.fixed root: el.pnin[tgt]
           # update content based on dimensions after visible so it will be more accurate
-          if @ldcv => @ldcv.on \toggle.on, -> @vscroll.locate!
+          if @ldcv => @ldcv.on \toggle.on, ~>
+            @vscroll.setchild (@_rows or rows).join('')
+            @vscroll.update 40
+        @_rows = rows
         @vscroll.setchild rows.join('')
         @vscroll.update 40
       else el.pnin[tgt]innerHTML = rows.join('')
@@ -244,14 +247,14 @@ ldpp = (opt = {}) ->
   @access = {list: []}
   # Final Preparation
   @evt-handler = {}
+  if ldcover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv')) =>
+    @ldcv = new ldcover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
   content.add \view, opt.palettes
   content.build content.pals.view
   ldpe-opt = {root: el.pn.edit}
   if opt.palette => ldpe-opt.palette = opt.palette
   @ldpe = new ldpe ldpe-opt
   @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
-  if ldcover? and opt.ldcv => if (n = ld$.parent(@root, '.ldcv')) =>
-    @ldcv = new ldcover {root: n} <<< (if typeof(opt.ldcv) == \object => opt.ldcv else {})
 
   @tab-display = debounce 1000, ~>
     idx = @tab-idx

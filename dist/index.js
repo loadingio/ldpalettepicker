@@ -442,7 +442,7 @@
     }
   };
   ldpp = function(opt){
-    var i18n, root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, ldpeOpt, n, this$ = this;
+    var i18n, root, el, content, mypal, ret, palFromNode, usePal, search, saver, evts, n, ldpeOpt, this$ = this;
     opt == null && (opt = {});
     this.opt = opt;
     this.i18n = i18n = opt.i18n || {
@@ -556,10 +556,12 @@
             });
             if (this$.ldcv) {
               this$.ldcv.on('toggle.on', function(){
-                return this.vscroll.locate();
+                this$.vscroll.setchild((this$._rows || rows).join(''));
+                return this$.vscroll.update(40);
               });
             }
           }
+          this$._rows = rows;
           this$.vscroll.setchild(rows.join(''));
           return this$.vscroll.update(40);
         } else {
@@ -828,6 +830,15 @@
       list: []
     };
     this.evtHandler = {};
+    if ((typeof ldcover != 'undefined' && ldcover !== null) && opt.ldcv) {
+      if (n = ld$.parent(this.root, '.ldcv')) {
+        this.ldcv = new ldcover(import$({
+          root: n
+        }, typeof opt.ldcv === 'object'
+          ? opt.ldcv
+          : {}));
+      }
+    }
     content.add('view', opt.palettes);
     content.build(content.pals.view);
     ldpeOpt = {
@@ -846,15 +857,6 @@
         return this$.tab('edit');
       }
     };
-    if ((typeof ldcover != 'undefined' && ldcover !== null) && opt.ldcv) {
-      if (n = ld$.parent(this.root, '.ldcv')) {
-        this.ldcv = new ldcover(import$({
-          root: n
-        }, typeof opt.ldcv === 'object'
-          ? opt.ldcv
-          : {}));
-      }
-    }
     this.tabDisplay = debounce(1000, function(){
       var idx;
       idx = this$.tabIdx;

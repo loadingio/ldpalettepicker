@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.1.8
+
+ - fix bug: vscroll should re-update after ldcv popuped to update dimensional information correctly.
+ - fix bug: ldcv should be initialized but content building ( which may use ldcv )
+
+
 ## v3.1.7
 
  - fix bug: make vscroll probe length longer
