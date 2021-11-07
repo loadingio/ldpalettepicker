@@ -561,7 +561,7 @@
             }
           }
           this$.vscroll.setchild(rows.join(''));
-          return this$.vscroll.update(10);
+          return this$.vscroll.update(40);
         } else {
           return el.pnin[tgt].innerHTML = rows.join('');
         }

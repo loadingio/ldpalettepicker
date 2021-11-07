@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.7
+
+ - fix bug: make vscroll probe length longer
+
+
 ## v3.1.6
 
  - skip clusterizejs only if vscroll is available when `use-vscroll` is set.

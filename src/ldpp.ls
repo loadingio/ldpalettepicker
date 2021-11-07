@@ -88,7 +88,7 @@ ldpp = (opt = {}) ->
           # update content based on dimensions after visible so it will be more accurate
           if @ldcv => @ldcv.on \toggle.on, -> @vscroll.locate!
         @vscroll.setchild rows.join('')
-        @vscroll.update 10
+        @vscroll.update 40
       else el.pnin[tgt]innerHTML = rows.join('')
 
     html: (c) ~>
