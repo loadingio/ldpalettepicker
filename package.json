@@ -24,7 +24,7 @@
     "@loadingio/debounce.js": "^0.0.1",
     "@loadingio/ldpage": "^0.0.3",
     "@loadingio/ldquery": "^2.0.0",
-    "@loadingio/vscroll": "^0.0.3",
+    "@loadingio/vscroll": "^0.0.5",
     "bootstrap": "^4.5.3",
     "bootstrap.ldui": "github:loadingio/bootstrap.ldui",
     "bootstrap.native": "^3.0.15",

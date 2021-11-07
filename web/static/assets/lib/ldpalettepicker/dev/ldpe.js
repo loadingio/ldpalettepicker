@@ -304,9 +304,7 @@
       };
     };
     editInit({
-      pal: opt.palette || {
-        colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
-      }
+      pal: opt.palette || JSON.parse(JSON.stringify(ldpe.defaultPalette))
     });
     return this;
   };
@@ -320,6 +318,10 @@
       return results$;
     }
   });
+  ldpe.defaultPalette = {
+    name: 'sample',
+    colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
+  };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ldpe;
   } else if (typeof window != 'undefined' && window !== null) {

@@ -79,8 +79,7 @@ ldpp = (opt = {}) ->
           rows: lines
           contentElem: el.pnin[tgt]
           scrollElem: el.pn[tgt]
-      else el.pnin[tgt]innerHTML = rows.join('')
-      if opt.use-vscroll and vscroll? =>
+      else if opt.use-vscroll and vscroll? =>
         if !@vscroll =>
           el.pnin[tgt].style
             ..height = "100%"
@@ -88,7 +87,9 @@ ldpp = (opt = {}) ->
           @vscroll = new vscroll.fixed root: el.pnin[tgt]
           # update content based on dimensions after visible so it will be more accurate
           if @ldcv => @ldcv.on \toggle.on, -> @vscroll.locate!
-      if @vscroll => @vscroll.update!
+        @vscroll.setchild rows.join('')
+        @vscroll.update 10
+      else el.pnin[tgt]innerHTML = rows.join('')
 
     html: (c) ~>
       cs = c.colors.map(->"""<div class="color" style="background:#{ldcolor.rgbaStr(it)}"></div>""").join("")
@@ -301,6 +302,8 @@ ldpp <<< do
     pals = if !opt.pals => @get \default else opt.pals
     Array.from(document.querySelectorAll '*[ldpp]').map ->
       new ldpp({palettes: pals, root: it} <<< opt)
+
+  default-palette: {name: \sample, colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}
 
 # Default Color Palette
 ldpp.register "default", """

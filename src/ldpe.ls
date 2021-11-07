@@ -194,7 +194,8 @@ ldpe = (opt = {}) ->
     colors = ld$.find el.ed.colors, '.color' .map -> {value: ldcolor.rgbaStr it.style.backgroundColor}
     return {colors, name, key}
 
-  edit-init {pal: opt.palette or {colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}}
+  edit-init {pal: opt.palette or JSON.parse(JSON.stringify(ldpe.default-palette))}
   return @
 ldpe.prototype = Object.create(Object.prototype) <<< do
   sync-ui: -> for k,v of @ldrs => v.update!
+ldpe.default-palette = {name: \sample, colors: <[#E8614C #F4A358 #E8DA8D #2DA88B #294B59]>}

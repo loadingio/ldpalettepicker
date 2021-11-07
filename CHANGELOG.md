@@ -1,9 +1,12 @@
 # Change Log
 
-## v3.1.6 (upcoming)
+## v3.1.6
 
  - skip clusterizejs only if vscroll is available when `use-vscroll` is set.
  - upgrade modules
+ - relocate scroll position for vscroll after ldcv becomes visible.
+ - partial update vscroll with a small enought number to increase performance
+ - add `default-palette`
 
 
 ## v3.1.5

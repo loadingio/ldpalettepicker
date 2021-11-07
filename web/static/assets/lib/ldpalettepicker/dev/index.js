@@ -399,9 +399,7 @@
       };
     };
     editInit({
-      pal: opt.palette || {
-        colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
-      }
+      pal: opt.palette || JSON.parse(JSON.stringify(ldpe.defaultPalette))
     });
     return this;
   };
@@ -415,6 +413,10 @@
       return results$;
     }
   });
+  ldpe.defaultPalette = {
+    name: 'sample',
+    colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
+  };
   i18nRes = {
     "zh-TW": {
       "search": "搜尋",
@@ -535,19 +537,16 @@
             lines.push("<div class=\"clusterize-row\">" + line.join('') + "</div>");
           }
           if ((content.cluster || (content.cluster = {}))[tgt]) {
-            content.cluster[tgt].update(lines);
+            return content.cluster[tgt].update(lines);
           } else {
-            (content.cluster || (content.cluster = {}))[tgt] = new Clusterize({
+            return (content.cluster || (content.cluster = {}))[tgt] = new Clusterize({
               rows_in_block: 7,
               rows: lines,
               contentElem: el.pnin[tgt],
               scrollElem: el.pn[tgt]
             });
           }
-        } else {
-          el.pnin[tgt].innerHTML = rows.join('');
-        }
-        if (opt.useVscroll && (typeof vscroll != 'undefined' && vscroll !== null)) {
+        } else if (opt.useVscroll && (typeof vscroll != 'undefined' && vscroll !== null)) {
           if (!this$.vscroll) {
             x$ = el.pnin[tgt].style;
             x$.height = "100%";
@@ -561,9 +560,10 @@
               });
             }
           }
-        }
-        if (this$.vscroll) {
-          return this$.vscroll.update();
+          this$.vscroll.setchild(rows.join(''));
+          return this$.vscroll.update(10);
+        } else {
+          return el.pnin[tgt].innerHTML = rows.join('');
         }
       },
       html: function(c){
@@ -985,6 +985,10 @@
           root: it
         }, opt));
       });
+    },
+    defaultPalette: {
+      name: 'sample',
+      colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
     }
   });
   ldpp.register("default", "flourish,b22 e55 f87 fb6 ab8 898,qualitative\ngray,000 333 666 ddd fff,gradient\nyoung,fec fe6 cd9 acd 7ab aac,concept\nplotDB,ed1e79 c69c6d 8cc63f 29abe2,brand\nFrench,37a 9ab eee f98 c10,diverging\nAfghan Girl,010 253 ffd da8 b53,artwork");
