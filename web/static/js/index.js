@@ -1,6 +1,6 @@
 (function(){
   var mypal, save, pals, ret, ldpe1, ldpe2, ldcvPicker, ldcvEditor, image, down;
-  mypal = new ldPage({
+  mypal = new ldpage({
     fetch: function(){
       return ld$.fetch('assets/sample-palettes.json', {}, {
         type: 'json'

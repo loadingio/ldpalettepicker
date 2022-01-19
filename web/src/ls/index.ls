@@ -1,5 +1,5 @@
 (->
-  mypal = new ldPage do
+  mypal = new ldpage do
     fetch: -> 
       ld$.fetch \assets/sample-palettes.json, {}, {type: \json}
         .then -> it.map ->

@@ -26,13 +26,13 @@ echo "Transpiling ldp.ls..."
 echo "Transpiling ldpp.styl -> index.css..."
 ./node_modules/.bin/stylus -p src/ldpp.styl > dist/index.css
 echo "Uglifying index.js..."
-./node_modules/.bin/uglifyjs dist/index.js > dist/index.min.js
+./node_modules/.bin/uglifyjs dist/index.js -m -c > dist/index.min.js
 echo "Uglifying ldpp.js..."
-./node_modules/.bin/uglifyjs dist/ldpp.js > dist/ldpp.min.js
+./node_modules/.bin/uglifyjs dist/ldpp.js -m -c > dist/ldpp.min.js
 echo "Uglifying ldpe.js..."
-./node_modules/.bin/uglifyjs dist/ldpe.js > dist/ldpe.min.js
+./node_modules/.bin/uglifyjs dist/ldpe.js -m -c > dist/ldpe.min.js
 echo "Uglifying ldp.js..."
-./node_modules/.bin/uglifyjs dist/ldp.js > dist/ldp.min.js
+./node_modules/.bin/uglifyjs dist/ldp.js -m -c > dist/ldp.min.js
 echo "Uglifying index.css..."
 uglifycss dist/index.css > dist/index.min.css
 echo "Copy palettes presets to dist/ ..."

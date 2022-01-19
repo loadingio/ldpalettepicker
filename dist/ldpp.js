@@ -161,7 +161,7 @@
     };
     if (opt.mypal != null) {
       mypal = {
-        loader: new ldLoader({
+        loader: new ldloader({
           root: el.mp.load,
           autoZ: true
         }),
@@ -256,7 +256,7 @@
     }
     if (opt.save != null) {
       saver = {
-        loader: new ldLoader({
+        loader: new ldloader({
           root: el.ed.save,
           autoZ: true
         }),

@@ -1,5 +1,14 @@
 # Change Log
 
+## v4.0.0
+
+ - upgrade modules
+ - release with compact directory structure
+ - add `style`, `main` and `browser` field in `package.json`.
+ - further minimie generated js file with mangling and compression
+ - patch test code to make it work with upgraded modules
+
+
 ## v3.1.8
 
  - fix bug: vscroll should re-update after ldcv popuped to update dimensional information correctly.

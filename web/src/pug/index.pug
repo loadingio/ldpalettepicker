@@ -1,6 +1,6 @@
 doctype html
-include /../../static/assets/lib/bootstrap.ldui/main/index.pug
-include ../../static/assets/lib/ldpalettepicker/dev/ldpp.pug
+include @/@loadingio/bootstrap.ext/index.pug
+include @static/assets/lib/ldpalettepicker/dev/ldpp.pug
 html(lang="en")
   - var colors = ["#e5261f","#f7955e","#ffe06b","#aeec51","#58c8ec","#4a5df0","#d062f0"]
   - var actions = [["view", "View"], ["export", "Export"]]
@@ -8,12 +8,11 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name='viewport',content='width=device-width, initial-scale=1.0')
     link(href="https://fonts.googleapis.com/css?family=Oxygen:300,700|Roboto:300,500,700|BenchNine|Varela+Round&display=swap", rel="stylesheet")
-    +css("assets/lib/bootstrap/main/css/bootstrap.min.css")
-    +css("assets/lib/clusterize.js/main/clusterize.css")
-    +css("assets/lib/bootstrap.ldui/main/bootstrap.ldui.min.css")
-    +css("assets/lib/@loadingio/ldcolorpicker/main/ldcp.min.css")
-    +css("assets/lib/ldcover/main/ldcv.min.css")
-    +css("assets/lib/ldslider/main/ldrs.min.css")
+    +css("assets/lib/bootstrap/main/dist/css/bootstrap.min.css")
+    +css("assets/lib/@loadingio/bootstrap.ext/main/index.min.css")
+    +css("assets/lib/@loadingio/ldcolorpicker/main/index.min.css")
+    +css("assets/lib/ldcover/main/index.min.css")
+    +css("assets/lib/ldslider/main/index.min.css")
     +css("assets/lib/ldpalettepicker/dev/index.min.css")
     +css("css/index.css")
 
@@ -206,17 +205,16 @@ html(lang="en")
           .btn.btn-outline-dark(data-ldcv-set="") Close
       +nbr(4)
 
-    +script("assets/lib/bootstrap.native/main/bootstrap-native-v4.min.js")
-    +script("assets/lib/@loadingio/ldquery/main/ldq.min.js")
-    +script("assets/lib/@loadingio/ldpage/main/ldpage.min.js")
-    +script("assets/lib/ldcolor/main/ldcolor.min.js")
-    +script("assets/lib/@loadingio/ldcolorpicker/main/ldcp.js")
-    +script("assets/lib/@loadingio/debounce.js/main/debounce.min.js")
+    +script("assets/lib/bootstrap.native/main/dist/bootstrap-native-v4.min.js")
+    +script("assets/lib/@loadingio/ldquery/main/index.min.js")
+    +script("assets/lib/@loadingio/ldpage/main/index.min.js")
+    +script("assets/lib/ldcolor/main/index.min.js")
+    +script("assets/lib/@loadingio/ldcolorpicker/main/index.js")
+    +script("assets/lib/@loadingio/debounce.js/main/index.min.js")
     +script("assets/lib/@loadingio/vscroll/main/index.min.js")
-    +script("assets/lib/clusterize.js/main/clusterize.min.js")
-    +script("assets/lib/ldcover/main/ldcv.min.js")
-    +script("assets/lib/ldslider/main/ldrs.js")
-    +script("assets/lib/ldloader/main/ldld.min.js")
+    +script("assets/lib/ldcover/main/index.min.js")
+    +script("assets/lib/ldslider/main/index.js")
+    +script("assets/lib/ldloader/main/index.min.js")
     +script("assets/ldpp.palettes.js")
     +script("assets/lib/ldpalettepicker/dev/ldp.js")
     +script("assets/lib/ldpalettepicker/dev/ldpe.js")
