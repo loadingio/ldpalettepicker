@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.2 (upcoming)
+
+ - audit fix for fixing vulnerabilities in dependencies
+
+
 ## v4.0.1
 
  - fix bug: vscroll causes incorrect palette list when re-open after switching between tabs.
