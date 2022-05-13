@@ -80,18 +80,18 @@ ldpp = (opt = {}) ->
           contentElem: el.pnin[tgt]
           scrollElem: el.pn[tgt]
       else if opt.use-vscroll and vscroll? =>
-        if !@vscroll =>
+        if !@{}vscroll[tgt] =>
           el.pnin[tgt].style
             ..height = "100%"
             ..overflowY = "scroll"
-          @vscroll = new vscroll.fixed root: el.pnin[tgt]
+          @vscroll[tgt] = new vscroll.fixed root: el.pnin[tgt]
           # update content based on dimensions after visible so it will be more accurate
           if @ldcv => @ldcv.on \toggle.on, ~>
-            @vscroll.setchild (@_rows or rows).join('')
-            @vscroll.update 40
+            @vscroll[tgt].setchild (@_rows or rows).join('')
+            @vscroll[tgt].update 40
         @_rows = rows
-        @vscroll.setchild rows.join('')
-        @vscroll.update 40
+        @vscroll[tgt].setchild rows.join('')
+        @vscroll[tgt].update 40
       else el.pnin[tgt]innerHTML = rows.join('')
 
     html: (c) ~>
@@ -213,11 +213,13 @@ ldpp = (opt = {}) ->
       if !(p = ld$.parent(tgt,".header",root)) => return
       if(n = ld$.parent(tgt,"*[data-panel=mypal]", p)) =>
         if !(mypal?) => return @tab \view
-        mypal.fetch!
-        return @tab \mypal
+        @tab \mypal
+        return mypal.fetch!
     view: (tgt) ~>
       if !(p = ld$.parent(tgt,".header",root)) => return
-      if(n = ld$.parent(tgt,"*[data-panel=view]", p)) => return @tab \view
+      if (n = ld$.parent(tgt,"*[data-panel=view]", p)) =>
+        @tab \view
+        return search(el.nv.search.value or '')
       if !(n = ld$.parent(tgt,"*[data-cat]",p)) => return
       @tab \view # go to view first so search will execute in view panel
       search el.nv.search.value = (ld$.attr(n,"data-cat") or "")

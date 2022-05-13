@@ -29,6 +29,7 @@
     save: save,
     useVscroll: true
   });
+  console.log(ret);
   ldpe1 = new ldpe({
     root: '#ldcv-editor .ldpe'
   });

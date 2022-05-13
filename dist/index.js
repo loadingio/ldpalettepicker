@@ -547,23 +547,23 @@
             });
           }
         } else if (opt.useVscroll && (typeof vscroll != 'undefined' && vscroll !== null)) {
-          if (!this$.vscroll) {
+          if (!(this$.vscroll || (this$.vscroll = {}))[tgt]) {
             x$ = el.pnin[tgt].style;
             x$.height = "100%";
             x$.overflowY = "scroll";
-            this$.vscroll = new vscroll.fixed({
+            this$.vscroll[tgt] = new vscroll.fixed({
               root: el.pnin[tgt]
             });
             if (this$.ldcv) {
               this$.ldcv.on('toggle.on', function(){
-                this$.vscroll.setchild((this$._rows || rows).join(''));
-                return this$.vscroll.update(40);
+                this$.vscroll[tgt].setchild((this$._rows || rows).join(''));
+                return this$.vscroll[tgt].update(40);
               });
             }
           }
           this$._rows = rows;
-          this$.vscroll.setchild(rows.join(''));
-          return this$.vscroll.update(40);
+          this$.vscroll[tgt].setchild(rows.join(''));
+          return this$.vscroll[tgt].update(40);
         } else {
           return el.pnin[tgt].innerHTML = rows.join('');
         }
@@ -756,8 +756,8 @@
           if (!(mypal != null)) {
             return this$.tab('view');
           }
-          mypal.fetch();
-          return this$.tab('mypal');
+          this$.tab('mypal');
+          return mypal.fetch();
         }
       },
       view: function(tgt){
@@ -766,7 +766,8 @@
           return;
         }
         if (n = ld$.parent(tgt, "*[data-panel=view]", p)) {
-          return this$.tab('view');
+          this$.tab('view');
+          return search(el.nv.search.value || '');
         }
         if (!(n = ld$.parent(tgt, "*[data-cat]", p))) {
           return;

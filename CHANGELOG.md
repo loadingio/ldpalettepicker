@@ -1,5 +1,12 @@
 # Change Log
 
+## v4.0.1
+
+ - fix bug: vscroll causes incorrect palette list when re-open after switching between tabs.
+ - always rebuild list if switching to view tab
+ - tweak menu bar for responsive design
+
+
 ## v4.0.0
 
  - upgrade modules
