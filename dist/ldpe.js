@@ -215,9 +215,10 @@
         elp.removeAttribute('data-key');
       }
       el.ed.colors.innerHTML = hexs.map(function(d, i){
-        var hcl;
+        var hcl, web;
         hcl = ldcolor.hcl(d);
-        return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\ndata-tag=\"" + ((opt.pal.hexs || opt.pal.colors)[i].tag || '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
+        web = ldcolor.web(d);
+        return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\ndata-tag=\"" + ((opt.pal.hexs || opt.pal.colors)[i].tag || '') + "\"\nstyle=\"background:" + web + ";color:" + web + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
       }).join('');
       ld$.find(elp, '.name', 0).innerHTML = name || 'untitled';
       editUpdate(hexs[0]);

@@ -132,10 +132,11 @@ ldpe = (opt = {}) ->
     el.ed.colors.innerHTML = hexs
       .map (d,i) ->
         hcl = ldcolor.hcl(d)
+        web = ldcolor.web(d)
         """
         <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
         data-tag="#{(opt.pal.hexs or opt.pal.colors)[i].tag or ''}"
-        style="background:#d;color:#d">
+        style="background:#web;color:#web">
           <div data-action>
             <i class="i-clone"></i>
             <i class="i-bars"></i>
