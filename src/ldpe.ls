@@ -83,10 +83,11 @@ ldpe = (opt = {}) ->
     el.ed.cfgs.map ~>
       it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
     for k,v of ldrs => v.update!
-  # Tag Input
-  el.ed.tag.addEventListener \input, (e) ->
-    node = ld$.find(root,'.color.active',0)
-    node.setAttribute \data-tag, el.ed.tag.value or ''
+  # Tag Input. check existence for backward compatibility
+  if el.ed.tag =>
+    el.ed.tag.addEventListener \input, (e) ->
+      node = ld$.find(root,'.color.active',0)
+      node.setAttribute \data-tag, el.ed.tag.value or ''
 
   # Drag to re-order Dynamics
   get-idx = (e) ->
@@ -148,7 +149,8 @@ ldpe = (opt = {}) ->
     ld$.find(elp,'.name',0).innerHTML = name or 'untitled'
     edit-update hexs.0
     ldcp.set-color hexs.0
-    el.ed.tag.value = (opt.pal.hexs or opt.pal.colors).0.tag or ''
+    # check existence for backward compatibility
+    if el.ed.tag => el.ed.tag.value = (opt.pal.hexs or opt.pal.colors).0.tag or ''
 
   edit-update = (c) ->
     hcl = ldcolor.hcl(c)
@@ -189,7 +191,8 @@ ldpe = (opt = {}) ->
       if color =>
         ld$.child(color.parentNode).map -> it.classList[if it == color => \add else \remove] \active
         ldcp.set-color color.style.backgroundColor
-        el.ed.tag.value = color.getAttribute(\data-tag) or ''
+        # check existence for backward compatibility
+        if el.ed.tag => el.ed.tag.value = color.getAttribute(\data-tag) or ''
         return true
 
   root.addEventListener \click, (e) ~>

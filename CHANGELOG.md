@@ -1,10 +1,11 @@
 # Change Log
 
-## v4.0.2 (upcoming)
+## v4.0.2
 
  - audit fix for fixing vulnerabilities in dependencies
  - tweak layout
- - support `tag` editing
+ - support `tag` editing with backward compatibility
+ - prevent horizontal scrolling in ldpe panel of ldpp
 
 
 ## v4.0.1
