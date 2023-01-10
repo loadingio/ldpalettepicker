@@ -15,7 +15,7 @@
 }
 .ldpp > .header {
   flex: 0 0 1px;
-  padding: 1em 1.5em;
+  padding: 1em 1em;
   display: flex;
   flex-wrap: nowrap;
   align-items: start;
@@ -29,7 +29,7 @@
 }
 .ldpp div[data-panel=view] .ldp,
 .ldpp div[data-panel=mypal] .ldp {
-  width: calc(50% - 20px);
+  width: calc(50% - 1em);
   margin: 0 0 1em;
   padding: 0;
 }
@@ -61,7 +61,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.5em 0 0;
+  padding: 0 0 0;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -100,14 +100,14 @@
   flex: 1 0 1%;
 }
 .ldpp .panel[data-panel=edit] .edit > .inner {
-  padding: 20px 20px 0;
+  padding: 1em 1em 0;
 }
 .ldpp .panel[data-panel=edit] .ldp {
   margin: 7px 0;
-  padding: 0 20px 0;
+  padding: 0 1em 0;
 }
 .ldpp .panel[data-panel=edit] > .foot {
-  padding-bottom: 20px !important;
+  padding-bottom: 1em !important;
 }
 .ldpp .panel[data-panel=edit] .ldp,
 .ldpe .ldp {
@@ -216,11 +216,11 @@
 }
 .ldpp .panel[data-panel=edit] .edit > .inner,
 .ldpe .edit > .inner {
-  padding-top: 20px;
+  padding-top: 1em;
 }
 .ldpp .panel[data-panel=edit] > .foot,
 .ldpe > .foot {
-  padding: 0 20px;
+  padding: 0 1em;
   width: 100%;
   text-align: left;
 }
@@ -237,7 +237,7 @@
 .ldpp .panel[data-panel=mypal] .btn-load {
   position: relative;
   width: 50%;
-  margin: 20px auto;
+  margin: 1em auto;
   cursor: pointer;
 }
 .ldpe .ldp {

@@ -3,6 +3,7 @@
 ## v4.0.2 (upcoming)
 
  - audit fix for fixing vulnerabilities in dependencies
+ - tweak layout
 
 
 ## v4.0.1

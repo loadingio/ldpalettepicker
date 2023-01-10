@@ -54,8 +54,8 @@ mixin ldpe
 //- Palette Picker Widget
 mixin ldpp
   .ldpp(ldpp)
-    .header(style="display:flex;justify-content:space-between;gap:.5em;flex-wrap:wrap")
-      .mb-2(style="white-space:nowrap;flex:3 0 auto;width:10em")
+    .header.d-flex.justify-content-center.flex-wrap.g-2
+      div(style="white-space:nowrap;flex:3 0 auto;width:10em")
         .input-group
           input.form-control(data-tag="search")
           .input-group-append
@@ -72,7 +72,7 @@ mixin ldpp
               a.dropdown-item(href="#",data-cat="diverging"): span(t="diverging")
               a.dropdown-item(href="#",data-cat="colorbrew"): span(t="colorbrew")
       div(style="flex:5 0 1px")
-      .mb-2(style="display:flex;justify-content:space-between;flex:1 0 auto;width:fit-content;white-space:nowrap")
+      .d-flex.justify-content-end.text-nowrap(style="flex:1 0 auto;width:fit-content")
         .btn.btn-primary(data-panel="view"): span(t="view")
         .btn.btn-text(data-panel="mypal"): span(t="my pals")
         .btn.btn-text(data-panel="edit"): span(t="edit")

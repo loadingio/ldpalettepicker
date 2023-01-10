@@ -14,7 +14,7 @@
   flex-direction: column
   & > .header
     flex: 0 0 1px
-    padding: 1em 1.5em
+    padding: 1em 1em
     display: flex
     flex-wrap: nowrap
     align-items: start
@@ -25,7 +25,7 @@
     flex: 1 0 1%
 
 .ldpp div[data-panel=view] .ldp, .ldpp div[data-panel=mypal] .ldp
-  width: calc(50% - 20px)
+  width: calc(50% - 1em)
   margin: 0 0 1em
   padding: 0
   .name
@@ -49,7 +49,7 @@ for num in (1..3)
   position: absolute
   top: 0
   left: 0
-  padding: .5em 0 0
+  padding: 0 0 0
   width: 100%
   height: 100%
   overflow-y: scroll
@@ -84,12 +84,12 @@ for num in (1..3)
   .edit
     flex: 1 0 1%
   .edit > .inner
-    padding: 20px 20px 0
+    padding: 1em 1em 0
   .ldp
     margin: 7px 0
-    padding: 0 20px 0
+    padding: 0 1em 0
   & > .foot
-    padding-bottom: 20px!important
+    padding-bottom: 1em!important
 
 .ldpp .panel[data-panel=edit], .ldpe
   .ldp
@@ -167,9 +167,9 @@ for num in (1..3)
     text-align: left
     margin-top: 0
     & > .inner
-      padding-top: 20px
+      padding-top: 1em
   & > .foot
-    padding: 0 20px
+    padding: 0 1em
     width: 100%
     text-align: left
   .ldrs
@@ -182,7 +182,7 @@ for num in (1..3)
 .ldpp .panel[data-panel=mypal] .btn-load
   position: relative
   width: 50%
-  margin: 20px auto
+  margin: 1em auto
   cursor: pointer
 
 .ldpe .ldp
