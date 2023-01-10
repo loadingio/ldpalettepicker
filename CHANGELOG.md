@@ -4,6 +4,7 @@
 
  - audit fix for fixing vulnerabilities in dependencies
  - tweak layout
+ - support `tag` editing
 
 
 ## v4.0.1

@@ -14,7 +14,8 @@
       colors: ld$.find(root, '.ldp .colors', 0),
       hex: ld$.find(root, 'input[data-tag=hex]', 0),
       sel: ld$.find(root, 'select', 0),
-      cfgs: ld$.find(root, '.config')
+      cfgs: ld$.find(root, '.config'),
+      tag: ld$.find(root, 'input[data-tag=tag]', 0)
     };
     log = {
       stack: [],
@@ -139,6 +140,11 @@
       }
       return results$;
     });
+    el.ed.tag.addEventListener('input', function(e){
+      var node;
+      node = ld$.find(root, '.color.active', 0);
+      return node.setAttribute('data-tag', el.ed.tag.value) || '';
+    });
     getIdx = function(e){
       var box, idx, ref$, ref1$, ref2$;
       box = dragger.data.box;
@@ -211,11 +217,12 @@
       el.ed.colors.innerHTML = hexs.map(function(d, i){
         var hcl;
         hcl = ldcolor.hcl(d);
-        return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
+        return "<div class=\"color" + (i ? '' : ' active') + (hcl.l < 50 ? ' dark' : '') + "\"\ndata-tag=\"" + ((opt.pal.hexs || opt.pal.colors)[i].tag || '') + "\"\nstyle=\"background:" + d + ";color:" + d + "\">\n  <div data-action>\n    <i class=\"i-clone\"></i>\n    <i class=\"i-bars\"></i>\n    <i class=\"i-close\"></i>\n  </div>\n</div>";
       }).join('');
       ld$.find(elp, '.name', 0).innerHTML = name || 'untitled';
       editUpdate(hexs[0]);
-      return ldcp.setColor(hexs[0]);
+      ldcp.setColor(hexs[0]);
+      return el.ed.tag.value = (opt.pal.hexs || opt.pal.colors)[0].tag || '';
     };
     editUpdate = function(c){
       var hcl, node;
@@ -278,6 +285,7 @@
             return it.classList[it === color ? 'add' : 'remove']('active');
           });
           ldcp.setColor(color.style.backgroundColor);
+          el.ed.tag.value = color.getAttribute('data-tag') || '';
           return true;
         }
       }

@@ -30,6 +30,12 @@
     useVscroll: true
   });
   console.log(ret);
+  ret[0].on('use', function(it){
+    return console.log(it);
+  });
+  ret[1].on('use', function(it){
+    return console.log(it);
+  });
   ldpe1 = new ldpe({
     root: '#ldcv-editor .ldpe'
   });

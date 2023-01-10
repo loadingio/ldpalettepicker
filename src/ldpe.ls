@@ -10,6 +10,7 @@ ldpe = (opt = {}) ->
     hex: ld$.find(root,'input[data-tag=hex]',0)
     sel: ld$.find(root,'select',0)
     cfgs: ld$.find(root,'.config')
+    tag: ld$.find(root, 'input[data-tag=tag]', 0)
 
   # Undo System
   log = do
@@ -82,6 +83,10 @@ ldpe = (opt = {}) ->
     el.ed.cfgs.map ~>
       it.classList[if ld$.attr(it,\data-tag) == e.target.value => \add else \remove] \active
     for k,v of ldrs => v.update!
+  # Tag Input
+  el.ed.tag.addEventListener \input, (e) ->
+    node = ld$.find(root,'.color.active',0)
+    node.setAttribute \data-tag, el.ed.tag.value or ''
 
   # Drag to re-order Dynamics
   get-idx = (e) ->
@@ -129,6 +134,7 @@ ldpe = (opt = {}) ->
         hcl = ldcolor.hcl(d)
         """
         <div class="color#{if i => '' else ' active'}#{if hcl.l < 50 => ' dark' else ''}"
+        data-tag="#{(opt.pal.hexs or opt.pal.colors)[i].tag or ''}"
         style="background:#d;color:#d">
           <div data-action>
             <i class="i-clone"></i>
@@ -141,6 +147,7 @@ ldpe = (opt = {}) ->
     ld$.find(elp,'.name',0).innerHTML = name or 'untitled'
     edit-update hexs.0
     ldcp.set-color hexs.0
+    el.ed.tag.value = (opt.pal.hexs or opt.pal.colors).0.tag or ''
 
   edit-update = (c) ->
     hcl = ldcolor.hcl(c)
@@ -181,6 +188,7 @@ ldpe = (opt = {}) ->
       if color =>
         ld$.child(color.parentNode).map -> it.classList[if it == color => \add else \remove] \active
         ldcp.set-color color.style.backgroundColor
+        el.ed.tag.value = color.getAttribute(\data-tag) or ''
         return true
 
   root.addEventListener \click, (e) ~>

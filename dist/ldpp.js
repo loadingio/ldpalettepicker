@@ -204,7 +204,12 @@
         : [null, 'untitled'], key = ref$[0], name = ref$[1];
       hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
         ? ld$.find(that, '.color').map(function(it){
-          return ldcolor.hex(it.style.backgroundColor || it.style.background);
+          return {
+            hex: ldcolor.hex(it.style.backgroundColor || it.style.background),
+            tag: (it.getAttribute('data-tag') || '').split(',').filter(function(it){
+              return it;
+            })
+          };
         })
         : [];
       return {
@@ -220,7 +225,8 @@
         name: name,
         key: key,
         colors: hexs.map(function(it){
-          return ldcolor.rgb(it);
+          var ref$;
+          return ref$ = ldcolor.rgb(it), ref$.tag = it.tag, ref$;
         })
       });
       if (this$.ldcv) {
