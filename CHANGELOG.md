@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.3
+
+ - tweak layout for responsive design
+
+
 ## v4.0.2
 
  - audit fix for fixing vulnerabilities in dependencies

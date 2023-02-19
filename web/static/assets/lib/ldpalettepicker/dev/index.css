@@ -245,12 +245,12 @@
   padding: 0;
   margin: 0;
 }
-.ldpp .row.config,
-.ldpe .row.config {
+.ldpp .config,
+.ldpe .config {
   display: none;
 }
-.ldpp .row.config.active,
-.ldpe .row.config.active {
+.ldpp .config.active,
+.ldpe .config.active {
   display: flex;
 }
 .ldpe .ldcolorpicker {

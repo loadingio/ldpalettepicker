@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "style": "dist/index.min.css",
   "browser": "dist/index.min.js",
   "main": "dist/index.min.js",

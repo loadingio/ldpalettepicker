@@ -20,20 +20,20 @@ mixin ldpe
   .edit
     .inner
       .row
-        .col-sm-6
+        .col-sm-6.mb-2
           .ldcolorpicker.no-border.no-palette
-        .col-sm-6
-          .row.mb-2
-            .col-sm-8
+        .col-sm-6.mb-2
+          .d-flex.g-2.mb-2
+            .w-50
               select.form-control.form-control-local-sm(value="rgb")
                 option(value="rgb") RGB
                 option(value="hsl") HSL
                 option(value="hcl") HCL
-            .col-sm-4.pl-0: input.form-control.form-control-local-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
+            .w-100: input.form-control.form-control-local-sm.value(placeholder="Hex Value",data-tag="hex",style="margin:0")
           - var configs = [["Red", "Green", "Blue", "rgb", "active"], ["Hue", "Saturation", "Luminance", "hsl",""], ["Hue", "Chroma", "Luminance", "hcl",""]];
           each config in configs
-            .row.config(data-tag=config[3],class=config[4])
-              .col-sm-8
+            .config.g-2(data-tag=config[3],class=config[4])
+              .w-100
                 .label-group: span= config[0]
                 input.ldrs.sm.auto(
                 data-tag=config[3] + "-" + config[0][0].toLowerCase())
@@ -43,14 +43,14 @@ mixin ldpe
                 .label-group: span= config[2]
                 input.ldrs.sm.auto(
                 data-tag=config[3] + "-" + config[2][0].toLowerCase())
-              .col-sm-4
+              .w-50
                 input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[0][0].toLowerCase())
                 input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[1][0].toLowerCase())
                 input.value.form-control.form-control-local-sm(
                 data-tag=config[3] + "-" + config[2][0].toLowerCase())
-      div(style="padding-top:1em")
+      .my-2
         input.form-control.form-control-local-sm(data-tag="tag",placeholder="Comma separated tags for this color")
 
 //- Palette Picker Widget
@@ -89,7 +89,7 @@ mixin ldpp
       .panel(data-panel="edit")
         +ldpe
         .foot
-          hr
+          hr.mt-0.mb-3
           .float-right
             .btn.btn-primary.mr-2(data-action="use"): span(t="use this palette")
             .btn.btn-outline-secondary.ld-ext-right(data-action="save")
