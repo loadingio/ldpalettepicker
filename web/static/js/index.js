@@ -29,6 +29,7 @@
     save: save,
     useVscroll: true
   });
+  console.log(pals);
   console.log(ret);
   ret[0].on('use', function(it){
     return console.log(it);

@@ -215,3 +215,4 @@ Hello Kitty,f90013 ffe700 ffffff 0054ae 251815,concept,diverging
 Pom Pom Purin,fefcac ffffff a65c18,concept
 Bee,f8f7de f7ea87 d29d30 854d0d 3a200c,concept,gradient
 Rose,46300d a00816 e91629 efefe9 188009,concept
+PlotDB,ed6ca4 fbb05b acd372 7bc4e2,brand

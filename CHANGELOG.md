@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.4 (upcoming)
+
+ - add color palette from `PlotDB`
+
+
 ## v4.0.3
 
  - tweak layout for responsive design
