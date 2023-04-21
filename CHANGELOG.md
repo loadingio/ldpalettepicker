@@ -1,8 +1,11 @@
 # Change Log
 
-## v4.0.4 (upcoming)
+## v4.0.4
 
  - add color palette from `PlotDB`
+ - upgrade vscroll dependency to fix searching bug when there is only single match.
+ - make the alignment of content in panel at top.
+ - upgrade dependencies
 
 
 ## v4.0.3

@@ -10,8 +10,8 @@
   ldpp.register("default2", palettes)
   pals = ldpp.get("default2")
   ret = ldpp.init({pals: pals, /*useClusterizejs: true*/, mypal: mypal, save: save, use-vscroll: true})
-  console.log pals
-  console.log ret
+  #console.log pals
+  #console.log ret
   ret.0.on \use, -> console.log it
   ret.1.on \use, -> console.log it
 
