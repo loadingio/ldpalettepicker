@@ -168,12 +168,17 @@ ldPalettePicker ships with following prebuilt palette sets, which you can find u
  * `colorbrewer`
     - src: colorbrewer.palettes.js
     - palettes from [colorbrewer](https://colorbrewer2.org/).
+    - license: Apache license Version 2.0
+ * `cartocolors`
+    - cartocolors.palettes.js
+    - palettes from [CARTOColors](https://github.com/CartoDB/cartocolor)
+    - license: CC-BY 3.0 License.
  * `loadingio`
     - loadingio.palettes.js
     - palettes used in [loading.io](https://loading.io/color/feature/).
  * `all`
     - all.palettes.js
-    - all palettes above.
+    - palettes from `brandcolors` + `colorbrewer` + `loadingio`.
 
 
 ## License Consideration
@@ -188,6 +193,9 @@ For better performance with large amount of palettes, you can enable [Clusterize
 Yet Clusterize.js is released under dual license - free for personal use and charge for commercial license. So it's up to your discretion to whether use it or not - and you should acquire necessary license when you use it.
 
 When enabling, Clusterize.js requires another option "itemPerLine", which controls how many palettes are in a line in the list view. Its default value is 2.
+
+Alternatively you can use `@loadingio/vscroll` which is released under MIT license.
+
 
 ## TODO
 

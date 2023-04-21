@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.5 (upcoming)
+
+ - Add `cartocolors` colorscheme.
+
+
 ## v4.0.4
 
  - add color palette from `PlotDB`
