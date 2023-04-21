@@ -22,6 +22,7 @@
   };
   ldpp.register("default2", palettes);
   pals = ldpp.get("default2");
+  pals = ldpp.get("all");
   ret = ldpp.init({
     pals: pals,
     'void': void 8,

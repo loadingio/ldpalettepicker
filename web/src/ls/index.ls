@@ -7,8 +7,12 @@
           it <<< it.payload
   save = (data) -> new Promise (res, rej) -> console.log data; res!
 
+  # from /assets/ldpp.palettes.js
   ldpp.register("default2", palettes)
   pals = ldpp.get("default2")
+
+  # use default all palettes
+  pals = ldpp.get("all")
   ret = ldpp.init({pals: pals, /*useClusterizejs: true*/, mypal: mypal, save: save, use-vscroll: true})
   #console.log pals
   #console.log ret
