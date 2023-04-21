@@ -21,7 +21,8 @@ for file in files =>
 
 all-code = "(function(){"
 
-names = [k for k of map]
+names = [k for k of map].filter -> !/cartocolors/.exec(it)
+
 for i from 0 til names.length =>
   name = names[i]
   data = map[name]
