@@ -120,6 +120,9 @@ where constructor options:
  - `fire(name, ...params)`: fire an event named `name` with parameters `params`.
  - `get()`: prompt ( or simply wait ) users to pick a palette. return a promise resolving a palette picked.
  - `tab(n)`: switch to the tab named `n`.
+ - `edit(pal, toggle)`: edit palette `pal`. 
+   - `pal`: palette to edit.
+   - `toggle`: default true. if true, toggle the edit panel.
  - `random()`: a function or palette list that decide a subset of palette to return when user calling ldpp.random();
 
 
