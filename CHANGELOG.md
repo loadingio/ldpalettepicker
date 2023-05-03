@@ -1,8 +1,10 @@
 # Change Log
 
-## v4.0.5 (upcoming)
+## v4.0.5
 
  - Add `cartocolors` colorscheme.
+ - fix bug: opacity in selected palette is gone.
+   - Use `hsl` to replace `hex` to fix this issue.
 
 
 ## v4.0.4

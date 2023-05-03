@@ -127,7 +127,7 @@ ldpe = (opt = {}) ->
   # Edit Dynamics
   @init = edit-init = (opt={}) ~>
     opt = {pal: {}} <<< opt
-    [hexs, key, name]= [opt.pal.hexs or opt.pal.colors.map(-> ldcolor.hex it), opt.pal.key, opt.pal.name or \Custom]
+    [hexs, key, name]= [opt.pal.hexs or opt.pal.colors.map(-> ldcolor.hsl it), opt.pal.key, opt.pal.name or \Custom]
     elp = el.ed.colors.parentNode
     if key => elp.setAttribute \data-key, key else elp.removeAttribute \data-key
     el.ed.colors.innerHTML = hexs

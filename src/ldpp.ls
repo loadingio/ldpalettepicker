@@ -139,14 +139,15 @@ ldpp = (opt = {}) ->
     else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
       ld$.find(that,'.color').map ->
-        hex: ldcolor.hex(it.style.backgroundColor or it.style.background)
-        tag: (it.getAttribute(\data-tag) or '').split(',').filter(->it)
+        {
+          tag: (it.getAttribute(\data-tag) or '').split(',').filter(->it)
+        } <<< ldcolor.hsl(it.style.backgroundColor or it.style.background)
     else []
     return {name, hexs, key}
   # Use Dynamic
   use-pal = (n) ~>
     {name, hexs, key} = pal-from-node n
-    @fire \use, ret = {name, key, colors: hexs.map -> ldcolor.rgb(it) <<< it{tag} }
+    @fire \use, ret = {name, key, colors: hexs.map -> ldcolor.hsl(it) <<< it{tag} }
     if @ldcv => @ldcv.set ret else @_set ret
 
   # Search Dynamics

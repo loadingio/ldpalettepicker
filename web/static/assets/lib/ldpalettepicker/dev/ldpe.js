@@ -207,7 +207,7 @@
       }, opt);
       ref$ = [
         opt.pal.hexs || opt.pal.colors.map(function(it){
-          return ldcolor.hex(it);
+          return ldcolor.hsl(it);
         }), opt.pal.key, opt.pal.name || 'Custom'
       ], hexs = ref$[0], key = ref$[1], name = ref$[2];
       elp = el.ed.colors.parentNode;
