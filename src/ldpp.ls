@@ -113,12 +113,14 @@ ldpp = (opt = {}) ->
   if opt.mypal? => # mypal should be a ldPage instance
     mypal = do
       loader: new ldloader root: el.mp.load, auto-z: true
-      page: Object.create(opt.mypal)
+      page: opt.mypal
       fetch: ->
         @page.fetch!then (ret) ->
           content.add \mypal, ret
           content.build content.pals.mypal, 'mypal'
-    mypal.page.set-host el.pn.mypal
+    # for legacy support. use `page.host` for newer paginate lib.
+    if mypal.page.set-host => mypal.page.set-host el.pn.mypal
+    else mypal.page.host el.pn.mypal
     el.mp.load.addEventListener \click, ->
       mypal.loader.on!
         .then -> mypal.page.fetch!

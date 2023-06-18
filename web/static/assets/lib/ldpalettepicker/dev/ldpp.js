@@ -165,7 +165,7 @@
           root: el.mp.load,
           autoZ: true
         }),
-        page: Object.create(opt.mypal),
+        page: opt.mypal,
         fetch: function(){
           return this.page.fetch().then(function(ret){
             content.add('mypal', ret);
@@ -173,7 +173,11 @@
           });
         }
       };
-      mypal.page.setHost(el.pn.mypal);
+      if (mypal.page.setHost) {
+        mypal.page.setHost(el.pn.mypal);
+      } else {
+        mypal.page.host(el.pn.mypal);
+      }
       el.mp.load.addEventListener('click', function(){
         return mypal.loader.on().then(function(){
           return mypal.page.fetch();
