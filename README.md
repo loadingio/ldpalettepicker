@@ -102,7 +102,7 @@ where constructor options:
    - Can enormously reduce dom element counts.
    - based on `@loadingio/vscroll`, MIT Licensed.
  - `ldcv`: default false. if provided and ldCover is available, a ldcv object will be created automatically with this object as constructor options.
- - `random`: if provided, serve as random palete. (TBD)
+ - `random`: if provided, serve as random palette. (TBD)
  - `mypal`: optional ldPage object for loading customized palette on scrolling.
  - `save`: optional function for saving a palette.
     - return a promise which resolves to the saved palette.
