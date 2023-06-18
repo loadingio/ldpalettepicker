@@ -1,5 +1,12 @@
 # Change Log
 
+## v4.0.6
+
+ - support `@loadingio/paginate` v0.1.0 api (`setHost` to `host`) with legacy support
+ - fix bug: exception from paginate object due to cloning
+ - upgrade `@loadingio/paginate` from `v0.1.0` to `v0.1.1`
+
+
 ## v4.0.5
 
  - Add `cartocolors` colorscheme.
