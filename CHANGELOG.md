@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.7
+
+ - prevent gapping between colors of converted SVG / PNG from palette
+
+
 ## v4.0.6
 
  - support `@loadingio/paginate` v0.1.0 api (`setHost` to `host`) with legacy support

@@ -13,7 +13,7 @@ ldpalette.convert = (pal, type = \png) ->
       rects = []
       for i from 0 til len =>
         rects.push """
-        <rect x="#{500 * i/len}" y="0" width="#{500/len}" height="100" fill="#{ldcolor.web(pal.colors[i])}"/>
+        <rect x="#{500 * i/len}" y="0" width="#{Math.ceil(1 + 500/len)}" height="100" fill="#{ldcolor.web(pal.colors[i])}"/>
         """
       payload = ([
         """<?xml version="1.0" encoding="utf-8"?>"""
@@ -41,7 +41,7 @@ ldpalette.convert = (pal, type = \png) ->
         ctx.fillRect(
           (iw - dw)*0.5 + dw * (i/len),
           (ih - dh) * 0.5,
-          dw/len,
+          Math.ceil(1 + dw/len),
           dh
         )
       return canvas.toBlob (blob) ~>
