@@ -1,5 +1,11 @@
 # Change Log
 
+## v4.0.9
+
+ - update ldcp and sliders when log.undo
+ - only track editing by log.push if new color is different (or not defined)
+
+
 ## v4.0.8
 
  - fix bug: editor doesn't reflect undo change in sliders
