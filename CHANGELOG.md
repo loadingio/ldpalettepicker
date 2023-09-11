@@ -2,7 +2,7 @@
 
 ## v4.0.8
 
- - editor doesn't reflect undo change in sliders
+ - fix bug: editor doesn't reflect undo change in sliders
 
 
 ## v4.0.7
