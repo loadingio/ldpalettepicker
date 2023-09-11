@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.0.8
+
+ - editor doesn't reflect undo change in sliders
+
+
 ## v4.0.7
 
  - prevent gapping between colors of converted SVG / PNG from palette

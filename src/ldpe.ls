@@ -22,6 +22,7 @@ ldpe = (opt = {}) ->
       if !html => return
       el.ed.pal.innerHTML = html
       el.ed.colors = ld$.find(el.ed.pal,'.colors',0)
+      edit-update!
     push: (forced = false) ->
       if @handle => clearTimeout that
       if !@cur => @cur = el.ed.pal.innerHTML
@@ -153,9 +154,13 @@ ldpe = (opt = {}) ->
     if el.ed.tag => el.ed.tag.value = (opt.pal.hexs or opt.pal.colors).0.tag or ''
 
   edit-update = (c) ->
-    hcl = ldcolor.hcl(c)
     node = ld$.find(root,'.color.active',0)
-    node.style.background = ldcolor.rgbaStr c
+    if c? =>
+      hcl = ldcolor.hcl(c)
+      node.style.background = ldcolor.rgbaStr c
+    else
+      c = ldcolor.rgbaStr(node.style.background)
+      hcl = ldcolor.hcl c
     node.classList[if hcl.l < 50 => "add" else "remove"] \dark
     el.ed.hex.value = ldcolor.hex c
     c = {rgb: ldcolor.rgb(c), hsl: ldcolor.hsl(c), hcl: hcl }

@@ -123,7 +123,8 @@
           return;
         }
         el.ed.pal.innerHTML = html;
-        return el.ed.colors = ld$.find(el.ed.pal, '.colors', 0);
+        el.ed.colors = ld$.find(el.ed.pal, '.colors', 0);
+        return editUpdate();
       },
       push: function(forced){
         var that, _, this$ = this;
@@ -325,10 +326,15 @@
       }
     };
     editUpdate = function(c){
-      var hcl, node;
-      hcl = ldcolor.hcl(c);
+      var node, hcl;
       node = ld$.find(root, '.color.active', 0);
-      node.style.background = ldcolor.rgbaStr(c);
+      if (c != null) {
+        hcl = ldcolor.hcl(c);
+        node.style.background = ldcolor.rgbaStr(c);
+      } else {
+        c = ldcolor.rgbaStr(node.style.background);
+        hcl = ldcolor.hcl(c);
+      }
       node.classList[hcl.l < 50 ? "add" : "remove"]('dark');
       el.ed.hex.value = ldcolor.hex(c);
       c = {
