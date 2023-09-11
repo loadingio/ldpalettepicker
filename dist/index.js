@@ -117,18 +117,23 @@
       cur: null,
       handle: null,
       undo: function(){
-        var html;
+        var html, c;
         html = log.stack.pop();
         if (!html) {
           return;
         }
         el.ed.pal.innerHTML = html;
         el.ed.colors = ld$.find(el.ed.pal, '.colors', 0);
-        return editUpdate();
+        c = ldcolor.rgbaStr(ld$.find(root, '.color.active', 0).style.background);
+        return editUpdate(c);
       },
-      push: function(forced){
-        var that, _, this$ = this;
-        forced == null && (forced = false);
+      push: function(o){
+        var c, that, _, this$ = this;
+        o == null && (o = {});
+        c = ldcolor.rgbaStr(ld$.find(root, '.color.active', 0).style.background);
+        if (o.c && ldcolor.same(o.c, c)) {
+          return;
+        }
         if (that = this.handle) {
           clearTimeout(that);
         }
@@ -142,7 +147,7 @@
           }
           return this$.handle = null, this$.cur = null, this$;
         };
-        if (forced) {
+        if (o.forced) {
           return _();
         } else {
           return this.handle = setTimeout(function(){
@@ -167,9 +172,11 @@
     this.ldcp = ldcp = new ldcolorpicker(el.ed.picker, {
       inline: true
     });
-    ldcp.on('change', function(it){
-      log.push();
-      return editUpdate(it);
+    ldcp.on('change', function(c){
+      log.push({
+        c: c
+      });
+      return editUpdate(c);
     });
     this.ldrs = ldrs = {};
     irsOpt = {

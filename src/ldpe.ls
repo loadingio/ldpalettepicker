@@ -22,14 +22,17 @@ ldpe = (opt = {}) ->
       if !html => return
       el.ed.pal.innerHTML = html
       el.ed.colors = ld$.find(el.ed.pal,'.colors',0)
-      edit-update!
-    push: (forced = false) ->
+      c = ldcolor.rgbaStr(ld$.find(root,'.color.active',0).style.background)
+      edit-update c
+    push: (o = {}) ->
+      c = ldcolor.rgbaStr(ld$.find(root,'.color.active',0).style.background)
+      if o.c and ldcolor.same(o.c, c) => return
       if @handle => clearTimeout that
       if !@cur => @cur = el.ed.pal.innerHTML
       _ = ~>
         if @stack[* - 1] != @cur => @stack.push @cur
         @ <<< handle: null, cur: null
-      if forced => _!
+      if o.forced => _!
       else @handle = setTimeout (~> _! ), 200
     clear: ->
       @stack.splice 0
@@ -41,7 +44,7 @@ ldpe = (opt = {}) ->
 
   # Color Picker Initialization
   @ldcp = ldcp = new ldcolorpicker el.ed.picker, {inline: true}
-  ldcp.on \change, ~> log.push!; edit-update it
+  ldcp.on \change, (c) ~> log.push({c}); edit-update c
 
   # Input ( Slider, Inputbox ) Initialization
   @ldrs = ldrs = {}
