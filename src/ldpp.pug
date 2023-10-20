@@ -90,9 +90,13 @@ mixin ldpp
         +ldpe
         .foot
           hr.mt-0.mb-3
-          .float-right
-            .btn.btn-primary.mr-2(data-action="use"): span(t="use this palette")
-            .btn.btn-outline-secondary.ld-ext-right(data-action="save")
-              span(t="save as asset")
-              .ld.ldld.ldbtn.sm
-          .btn.btn-outline-secondary(data-action="undo") #[span(t="undo")] #[i.i-undo]
+          .d-flex.g-1
+            .d-flex.g-1
+              .btn.btn-outline-secondary(data-action="undo") #[span(t="undo")] #[i.i-undo]
+              .btn.btn-outline-secondary(data-action="paste") #[span(t="paste")]
+            .flex-grow-1
+            .d-flex.g-1
+              .btn.btn-primary(data-action="use"): span(t="use this palette")
+              .btn.btn-outline-secondary.ld-ext-right(data-action="save")
+                span(t="save as asset")
+                .ld.ldld.ldbtn.sm

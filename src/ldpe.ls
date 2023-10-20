@@ -40,6 +40,20 @@ ldpe = (opt = {}) ->
       @ <<< handle: null, cur: null
   @undo = -> log.undo!
   @clear-log = -> log.clear!
+  @paste = ->
+    navigator.clipboard.readText!
+      .then (text = "") ~>
+        name = ''
+        try
+          pal = JSON.parse(text)
+          if pal.name => namt = that
+          pal = if pal.colors => pal.colors else pal
+        catch e
+          pal = text.split(/\s+|\\n/)
+        pal = {name, colors: pal.map -> ldcolor.web(it)}
+        if !pal.colors.filter(-> it != \transparent).length => return
+        @init {pal}
+      .catch ->
 
 
   # Color Picker Initialization

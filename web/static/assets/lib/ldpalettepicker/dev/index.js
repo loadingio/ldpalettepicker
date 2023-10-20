@@ -169,6 +169,38 @@
     this.clearLog = function(){
       return log.clear();
     };
+    this.paste = function(){
+      var this$ = this;
+      return navigator.clipboard.readText().then(function(text){
+        var name, pal, that, namt, e;
+        text == null && (text = "");
+        name = '';
+        try {
+          pal = JSON.parse(text);
+          if (that = pal.name) {
+            namt = that;
+          }
+          pal = pal.colors ? pal.colors : pal;
+        } catch (e$) {
+          e = e$;
+          pal = text.split(/\s+|\\n/);
+        }
+        pal = {
+          name: name,
+          colors: pal.map(function(it){
+            return ldcolor.web(it);
+          })
+        };
+        if (!pal.colors.filter(function(it){
+          return it !== 'transparent';
+        }).length) {
+          return;
+        }
+        return this$.init({
+          pal: pal
+        });
+      })['catch'](function(){});
+    };
     this.ldcp = ldcp = new ldcolorpicker(el.ed.picker, {
       inline: true
     });
@@ -465,7 +497,8 @@
       "load more": "更多",
       "use this palette": "使用此色盤",
       "save as asset": "儲存色盤",
-      "undo": "undo",
+      "undo": "還原",
+      "paste": "貼上",
       "no result...": "沒有可用的色盤..."
     }
   };
@@ -831,6 +864,12 @@
           return this$.ldpe.undo() || true;
         }
       },
+      paste: function(tgt){
+        var n;
+        if (n = ld$.parent(tgt, "*[data-action=paste]", root)) {
+          return this$.ldpe.paste() || true;
+        }
+      },
       nav: function(tgt){
         var n;
         if (!(n = ld$.parent(tgt, '[data-panel]', root))) {
@@ -860,6 +899,9 @@
         return;
       }
       if (evts.undo(tgt)) {
+        return;
+      }
+      if (evts.paste(tgt)) {
         return;
       }
       if (evts.nav(tgt)) {}

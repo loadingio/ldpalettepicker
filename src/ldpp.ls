@@ -18,7 +18,8 @@ i18n-res =
     "load more": "更多"
     "use this palette": "使用此色盤"
     "save as asset": "儲存色盤"
-    "undo": "undo"
+    "undo": "還原"
+    "paste": "貼上"
     "no result...": "沒有可用的色盤..."
 
 ldpp = (opt = {}) ->
@@ -235,6 +236,8 @@ ldpp = (opt = {}) ->
         return true
     undo: (tgt) ~>
       if (n = ld$.parent(tgt,"*[data-action=undo]", root)) => return @ldpe.undo! or true
+    paste: (tgt) ~>
+      if (n = ld$.parent(tgt,"*[data-action=paste]", root)) => return @ldpe.paste! or true
     nav: (tgt) ~>
       if !(n = ld$.parent(tgt, '[data-panel]', root)) => return
       if ld$.parent(n,'.header',root) => return @tab ld$.attr(n,\data-panel)
@@ -247,6 +250,7 @@ ldpp = (opt = {}) ->
     if evts.view(tgt) => return
     if evts.edit(tgt) => return
     if evts.undo(tgt) => return
+    if evts.paste(tgt) => return
     if evts.nav(tgt) => return
 
   # get set

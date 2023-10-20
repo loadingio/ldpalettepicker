@@ -20,7 +20,8 @@
       "load more": "更多",
       "use this palette": "使用此色盤",
       "save as asset": "儲存色盤",
-      "undo": "undo",
+      "undo": "還原",
+      "paste": "貼上",
       "no result...": "沒有可用的色盤..."
     }
   };
@@ -386,6 +387,12 @@
           return this$.ldpe.undo() || true;
         }
       },
+      paste: function(tgt){
+        var n;
+        if (n = ld$.parent(tgt, "*[data-action=paste]", root)) {
+          return this$.ldpe.paste() || true;
+        }
+      },
       nav: function(tgt){
         var n;
         if (!(n = ld$.parent(tgt, '[data-panel]', root))) {
@@ -415,6 +422,9 @@
         return;
       }
       if (evts.undo(tgt)) {
+        return;
+      }
+      if (evts.paste(tgt)) {
         return;
       }
       if (evts.nav(tgt)) {}

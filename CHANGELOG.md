@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.1.0
+
+ - support palette pasting
+
+
 ## v4.0.9
 
  - update ldcp and sliders when log.undo

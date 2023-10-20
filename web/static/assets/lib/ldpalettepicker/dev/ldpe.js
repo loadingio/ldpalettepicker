@@ -74,6 +74,38 @@
     this.clearLog = function(){
       return log.clear();
     };
+    this.paste = function(){
+      var this$ = this;
+      return navigator.clipboard.readText().then(function(text){
+        var name, pal, that, namt, e;
+        text == null && (text = "");
+        name = '';
+        try {
+          pal = JSON.parse(text);
+          if (that = pal.name) {
+            namt = that;
+          }
+          pal = pal.colors ? pal.colors : pal;
+        } catch (e$) {
+          e = e$;
+          pal = text.split(/\s+|\\n/);
+        }
+        pal = {
+          name: name,
+          colors: pal.map(function(it){
+            return ldcolor.web(it);
+          })
+        };
+        if (!pal.colors.filter(function(it){
+          return it !== 'transparent';
+        }).length) {
+          return;
+        }
+        return this$.init({
+          pal: pal
+        });
+      })['catch'](function(){});
+    };
     this.ldcp = ldcp = new ldcolorpicker(el.ed.picker, {
       inline: true
     });
