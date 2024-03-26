@@ -225,7 +225,11 @@ ldpe = (opt = {}) ->
     elp = el.ed.colors.parentNode
     key = ld$.attr(elp, 'data-key')
     name = ld$.find(elp, '.name', 0).textContent or "untitled"
-    colors = ld$.find el.ed.colors, '.color' .map -> {value: ldcolor.rgbaStr it.style.backgroundColor}
+    colors = ld$.find el.ed.colors, '.color'
+      .map ->
+        ret = value: ldcolor.rgbaStr it.style.backgroundColor
+        if tag = it.getAttribute('data-tag') => ret.tag = tag
+        ret
     return {colors, name, key}
 
   edit-init {pal: opt.palette or JSON.parse(JSON.stringify(ldpe.default-palette))}

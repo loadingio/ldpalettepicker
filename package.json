@@ -3,7 +3,7 @@
   "name": "ldpalettepicker",
   "license": "MIT",
   "description": "Palette Picker Widget",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "style": "dist/index.min.css",
   "browser": "dist/index.min.js",
   "main": "dist/index.min.js",
@@ -24,36 +24,35 @@
     "deploy": "npx deploy web/static"
   },
   "devDependencies": {
-    "@loadingio/bootstrap.ext": "^0.0.9",
+    "@loadingio/bootstrap.ext": "^0.0.11",
     "@loadingio/debounce.js": "^1.0.1",
-    "@loadingio/ldquery": "^3.0.4",
-    "@loadingio/paginate": "^0.1.1",
-    "@loadingio/vscroll": "^0.0.9",
+    "@loadingio/ldquery": "^3.0.6",
+    "@loadingio/vscroll": "^0.0.11",
     "@zbryikt/deploy": "^0.0.4",
     "@zbryikt/template": "^2.3.45",
     "bootstrap": "^4.5.3",
     "bootstrap.native": "^3.0.15",
-    "fedep": "^1.1.11",
+    "fedep": "^1.3.0",
     "fs-extra": "^7.0.1",
-    "ldcover": "^3.5.1",
+    "ldcover": "^3.5.4",
     "livescript": "^1.6.0",
     "stylus": "^0.55.0",
     "uglify-js": "^3.13.1",
     "uglifycss": "^0.0.29"
   },
   "dependencies": {
-    "@loadingio/ldcolorpicker": "^3.0.5",
-    "@loadingio/paginate": "^0.1.0",
-    "ldcolor": "^1.1.0",
-    "ldloader": "^3.0.2",
-    "ldslider": "^3.1.1"
+    "@loadingio/ldcolorpicker": "^3.0.6",
+    "@loadingio/paginate": "^0.1.1",
+    "ldcolor": "^1.1.2",
+    "ldloader": "^3.0.3",
+    "ldslider": "^3.1.2"
   },
   "peerDependencies": {
     "@loadingio/debounce.js": "^1.0.1",
-    "@loadingio/ldcolorpicker": "^3.0.3",
-    "ldcolor": "^1.1.0",
-    "ldloader": "^3.0.2",
-    "ldslider": "^3.1.1"
+    "@loadingio/ldcolorpicker": "^3.0.6",
+    "ldcolor": "^1.1.2",
+    "ldloader": "^3.0.3",
+    "ldslider": "^3.1.2"
   },
   "frontendDependencies": {
     "root": "web/static/assets/lib",

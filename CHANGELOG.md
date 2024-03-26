@@ -1,5 +1,11 @@
 # Change Log
 
+## v4.1.1
+
+ - fix bug: `getPal` of ldPaletteEditor didn't return color with tags.
+ - upgrade dependencies
+
+
 ## v4.1.0
 
  - support palette pasting

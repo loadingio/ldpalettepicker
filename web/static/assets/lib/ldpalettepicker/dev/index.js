@@ -448,9 +448,14 @@
       key = ld$.attr(elp, 'data-key');
       name = ld$.find(elp, '.name', 0).textContent || "untitled";
       colors = ld$.find(el.ed.colors, '.color').map(function(it){
-        return {
+        var ret, tag;
+        ret = {
           value: ldcolor.rgbaStr(it.style.backgroundColor)
         };
+        if (tag = it.getAttribute('data-tag')) {
+          ret.tag = tag;
+        }
+        return ret;
       });
       return {
         colors: colors,
