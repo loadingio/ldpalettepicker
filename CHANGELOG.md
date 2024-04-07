@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.1.2
+
+ - fix for panel's responsiveness
+
+
 ## v4.1.1
 
  - fix bug: `getPal` of ldPaletteEditor didn't return color with tags.
