@@ -8,14 +8,16 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name='viewport',content='width=device-width, initial-scale=1.0')
     link(href="https://fonts.googleapis.com/css?family=Oxygen:300,700|Roboto:300,500,700|BenchNine|Varela+Round&display=swap", rel="stylesheet")
-    +css("assets/lib/bootstrap/main/dist/css/bootstrap.min.css")
-    +css("assets/lib/@loadingio/bootstrap.ext/main/index.min.css")
-    +css("assets/lib/@loadingio/ldcolorpicker/main/index.min.css")
-    +css("assets/lib/ldcover/main/index.min.css")
-    +css("assets/lib/ldslider/main/index.min.css")
-    +css("assets/lib/ldpalettepicker/dev/index.min.css")
-    +css("css/index.css")
-
+    +css([
+      {name: "bootstrap", path: "dist/css/bootstrap.min.css"},
+      {name: "@loadingio/bootstrap.ext"},
+      {name: "@loadingio/ldcolorpicker"},
+      {name: "ldiconfont"},
+      {name: "ldcover"},
+      {name: "ldslider"},
+      {name: "ldpalettepicker", version: "dev"},
+      {url: "css/index.css"}
+    ])
   body
     .w-100.h-50.bg-light: .vertical-center
       .w-100: .w-50.mx-auto.text-center
@@ -191,7 +193,9 @@ html(lang="en")
       .btn.btn-lg.btn-primary.mr-2(onclick="ldcvPicker.toggle(true)") ldPalettePicker
       .btn.btn-lg.btn-primary(onclick="ldcvEditor.toggle(true)") ldPaletteEditor
 
-      #ldcv-picker.ldcv.default-size: .base: .inner.ldpp: +ldpp
+      #ldcv-picker.ldcv.default-size: .base: .inner.ldpp(style="padding-top:.5em")
+          .position-absolute.z-float(style="top:.25em;right:.25em;line-height:1em",data-ldcv-set=""): i.i-close
+          +ldpp
       #ldcv-editor.ldcv.default-size: .base(style="height:fit-content"): .inner.p-4: .ldpe
         +ldpe
         hr

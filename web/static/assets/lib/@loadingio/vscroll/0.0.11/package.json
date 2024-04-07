@@ -1,0 +1,1 @@
+{"name":"@loadingio/vscroll","version":"0.0.11","description":"","browser":"index.min.js","main":"index.min.js","scripts":{"start":"npx server -r web -o true"},"keywords":[],"author":"zbryikt","license":"MIT","dependencies":{"@zbryikt/template":"^2.3.45","fedep":"^1.1.11","ldview":"^1.4.0"},"frontendDependencies":{"root":"web/static/assets/lib","modules":["ldview"]}}

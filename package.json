@@ -44,6 +44,7 @@
     "@loadingio/ldcolorpicker": "^3.0.6",
     "@loadingio/paginate": "^0.1.1",
     "ldcolor": "^1.1.2",
+    "ldiconfont": "^0.2.6",
     "ldloader": "^3.0.3",
     "ldslider": "^3.1.2"
   },
@@ -65,6 +66,7 @@
       "@loadingio/ldcolorpicker",
       "@loadingio/debounce.js",
       "@loadingio/vscroll",
+      "ldiconfont",
       "ldcover",
       "ldcolor",
       "ldslider",

@@ -245,6 +245,11 @@
   margin: 1em auto;
   cursor: pointer;
 }
+@media (max-width: 640px) {
+  .ldpp .btn {
+    font-size: 0.875em;
+  }
+}
 .ldpe .ldp {
   padding: 0;
   margin: 0;
