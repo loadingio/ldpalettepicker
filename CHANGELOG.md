@@ -2,6 +2,7 @@
 
 ## v4.1.3 (upcoming)
 
+ - add script to merge all palette data txt files
  - tweak palette naming
 
 
