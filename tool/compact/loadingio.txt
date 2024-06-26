@@ -1,5 +1,4 @@
 Attack on Titan,1d0e0b 774023 d88c51 f3e7c9 fff9f5,artwork,gradient
-Bleach / ブリーチ,0a0a0a 28292f ffffff f9ae5c e4812f,artwork,diverging
 Big Hero 6,85a2b6 bbcedd dce4eb fdfdfd d69293 be5960 a00d1e,artwork,disney,diverging
 Frozen - Elsa alt,1d3f72 5699d2 d8ebf9 71c2cc 4996a2 785471 e8cdc5 eee7d8,artwork,disney
 Frozen - Elsa,93dbe9 689cc5 5e6fa3 3b4368 191d3a d9dbee b3b7e2,artwork,disney
@@ -11,6 +10,7 @@ Winnie the Pooh,220b09 d34c31 e88432 ff312d f5c037 e89788 fd3262 f0c3a9 9d9aca 6
 Wreck It Ralph,3c0f0f f91a10 e46b43 edb195 2aa7c9 06628d 04284d,artwork,disney
 Dragon Ball / ドラゴンボール,1c4595 e76a24 01080a e7e5e8 fbbc42,artwork
 Kung Fu Panda,a12d2b be4939 dc6949 080604 f7f6ea 7d8176 f3b63f,artwork,dreamworks
+Kurosaki Ichigo / 黑崎一護,0a0a0a 28292f ffffff f9ae5c e4812f,artwork,diverging
 Madagascar,695b50 9e8978 b5a393 1c1612 fefefe ce611e fdd039 594531 916631 ddb867,artwork,dreamworks
 Penguins of Madagascar,262323 fefefe a24124 e37e44 dae4e5 adbcbf 77868b 53585a,artwork,dreamworks
 Prince of Egypt,2f2926 603417 74411f 8e511c bc8540 d5912e e3ab45,artwork,dreamworks
@@ -23,8 +23,8 @@ Happiness and Cyanide,facd9e 389798 459448 f19d3b 923f2b,artwork,qualitative
 Magica Madoka / 魔法少女まどか☆マギカ,ffb6bb ffe691 95d5ee 585872 9e4446,artwork,qualitative
 Minions alt,eb7f19 dfa950 94733c f4edd8 fae127 189ad2 a5b5bc 53697e 2d2a2e,artwork
 Minions,eab145 fad96d 959795 4a6985 3e444e 221a1a 813513 e8e1d6 fdfdfd,artwork
-Naruto / ナルト,fdf4af edb870 f7d8b4 1b2124 06080a e86e38 f72405,artwork
 One Piece / ワンピース,c8472c 412a1e f8de3c fefefe 58acf4 105edd 0b3075,artwork
+Seventh Hokage / 七代目火影,fdf4af edb870 f7d8b4 1b2124 06080a e86e38 f72405,artwork
 Spirited Away / 千と千尋の神隠し (alt),d2d2cb 4d695d 83a79d dae8e5 30b0e0 a1cde5 bfdeee bc252d,artwork
 Spirited Away / 千と千尋の神隠し,7d5753 e0aa82 1f1418 441a21 7e1f30 db3548 4a4041 2c1d1e,artwork
 Your Name / 君の名は,8cd0e5 376888 826b88 de786a f8b976 fcddc9,artwork
