@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.1.3 (upcoming)
+
+ - tweak palette naming
+
+
 ## v4.1.2
 
  - fix for panel's responsiveness
