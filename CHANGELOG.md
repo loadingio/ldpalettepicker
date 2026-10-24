@@ -1,9 +1,12 @@
 # Change Log
 
-## v4.1.3 (upcoming)
+## v4.1.3
 
  - add script to merge all palette data txt files
  - tweak palette naming
+ - merge: dedupe palettes by url-style name case-insensitively, prefer `loadingio.txt`, and log dropped entries
+ - `all` palettes: exclude entries duplicated in `loadingio.txt` and fix entries glued together across sources
+ - keep same-name palettes in `loadingio.txt` by renaming them with `(alt)`, `(alt 2)` ..., and remove identical duplicates
 
 
 ## v4.1.2
