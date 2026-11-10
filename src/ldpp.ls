@@ -115,22 +115,45 @@ ldpp = (opt = {}) ->
     mypal = do
       loader: new ldloader root: el.mp.load, auto-z: true
       page: opt.mypal
+      # 切到 my pals 分頁時只在第一次 ( 或 reset 後 ) 抓, 之後靠 load more 翻頁, 不然每切一次就多接一頁
+      fetched: false
+      # 存檔時可能已經先把色盤放進列表, 之後抓到同 key 的就略過, 避免重複
+      add: (list = []) ->
+        pals = content.pals.[]mypal
+        keys = new Set(pals.map(-> it.obj.key).filter(-> it?).map(-> "#it"))
+        content.add \mypal, list.filter(-> !(it.key? and keys.has("#{it.key}")))
+        content.build content.pals.mypal, 'mypal'
+      sync-load: -> el.mp.load.style.display = if @page.is-end and @page.is-end! => \none else ''
       fetch: ->
-        @page.fetch!then (ret) ->
-          content.add \mypal, ret
-          content.build content.pals.mypal, 'mypal'
+        @fetched = true
+        @page.fetch!then (ret) ~>
+          @add ret
+          @sync-load!
+      # 存好的色盤加進列表最前面; 同 key 的 ( 更新 ) 就地替換
+      upsert: (pal) ->
+        item = {html: content.html(pal), obj: pal}
+        list = content.pals.[]mypal
+        idx = if pal.key? => list.findIndex(-> it.obj.key? and "#{it.obj.key}" == "#{pal.key}") else -1
+        if ~idx => list[idx] = item else list.unshift item
+        content.build list, 'mypal'
+      # 例如登入狀態改變: 清掉列表, 下次切到分頁時重抓
+      reset: ->
+        @fetched = false
+        content.pals.mypal = []
+        if @page.reset => @page.reset!
+        el.mp.load.style.display = ''
+        content.build [], 'mypal'
     # for legacy support. use `page.host` for newer paginate lib.
     if mypal.page.set-host => mypal.page.set-host el.pn.mypal
     else mypal.page.host el.pn.mypal
     el.mp.load.addEventListener \click, ->
+      mypal.fetched = true
       mypal.loader.on!
         .then -> mypal.page.fetch!
         .then -> debounce 100; return it
-        .then ->
-          content.add \mypal, it
-          content.build content.pals.mypal, 'mypal'
+        .then -> mypal.add it
         .then -> mypal.loader.off 100
-        .then -> if mypal.page.is-end! => el.mp.load.style.display = \none
+        .then -> mypal.sync-load!
   else
     ret = ld$.find(el.nv.root, '.btn[data-panel=mypal]', 0)
     ret.style.display = \none
@@ -138,7 +161,8 @@ ldpp = (opt = {}) ->
 
   pal-from-node = (n) ->
     p = ld$.find(n,'.ldp',0) or ld$.parent(n,'.ldp',root)
-    [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).innerText]
+    # 用 textContent: innerText 會套用 css 的 text-transform ( 名稱顯示成首字大寫 ), 存檔時名字就被改掉
+    [key,name] = if p => [ld$.attr(p, 'data-key'), ld$.find(that,'.name',0).textContent]
     else [null, 'untitled']
     hexs = if ld$.find(n,'.colors',0) or ld$.parent(n, '.colors', root) =>
       ld$.find(that,'.color').map ->
@@ -174,6 +198,8 @@ ldpp = (opt = {}) ->
     saver = do
       loader: new ldloader root: el.ed.save, auto-z: true
       save: opt.save
+  # 沒有 save 時按鈕按了也沒作用, 直接藏起來
+  else if el.ed.save => el.ed.save.style.display = \none
 
   # General Action
   evts = do
@@ -204,7 +230,10 @@ ldpp = (opt = {}) ->
         #saver.save { thumb, name, type, payload: {colors: colors} }, key
         saver.save { thumb, data: { name, type: \palette, payload: {colors: colors} } }, key
           .finally ~> saver.loader.off 500
-          .then (pal) ~> if pal => @ldpe.init({pal})
+          .then (pal) ~>
+            if !pal => return
+            @ldpe.init({pal})
+            if mypal? => mypal.upsert pal
 
       return true
 
@@ -219,7 +248,8 @@ ldpp = (opt = {}) ->
       if(n = ld$.parent(tgt,"*[data-panel=mypal]", p)) =>
         if !(mypal?) => return @tab \view
         @tab \mypal
-        return mypal.fetch!
+        # 已抓過就只重畫: 在別的分頁時 ( 例如存檔後 ) 建的列表, vscroll 量不到尺寸會是空的
+        return if mypal.fetched => content.build(content.pals.mypal or [], 'mypal') or true else mypal.fetch!
     view: (tgt) ~>
       if !(p = ld$.parent(tgt,".header",root)) => return
       if (n = ld$.parent(tgt,"*[data-panel=view]", p)) =>
@@ -265,6 +295,7 @@ ldpp = (opt = {}) ->
   if opt.palette => ldpe-opt.palette = opt.palette
   @ldpe = new ldpe ldpe-opt
   @edit = (pal, toggle = true) ~> @ldpe.init {pal}; if toggle => @tab \edit
+  @reset-mypal = ~> if mypal? => mypal.reset!
 
   @tab-display = debounce 1000, ~>
     idx = @tab-idx

@@ -649,11 +649,61 @@
           autoZ: true
         }),
         page: opt.mypal,
+        fetched: false,
+        add: function(list){
+          var pals, ref$, keys;
+          list == null && (list = []);
+          pals = (ref$ = content.pals).mypal || (ref$.mypal = []);
+          keys = new Set(pals.map(function(it){
+            return it.obj.key;
+          }).filter(function(it){
+            return it != null;
+          }).map(function(it){
+            return it + "";
+          }));
+          content.add('mypal', list.filter(function(it){
+            return !(it.key != null && keys.has(it.key + ""));
+          }));
+          return content.build(content.pals.mypal, 'mypal');
+        },
+        syncLoad: function(){
+          return el.mp.load.style.display = this.page.isEnd && this.page.isEnd() ? 'none' : '';
+        },
         fetch: function(){
+          var this$ = this;
+          this.fetched = true;
           return this.page.fetch().then(function(ret){
-            content.add('mypal', ret);
-            return content.build(content.pals.mypal, 'mypal');
+            this$.add(ret);
+            return this$.syncLoad();
           });
+        },
+        upsert: function(pal){
+          var item, list, ref$, idx;
+          item = {
+            html: content.html(pal),
+            obj: pal
+          };
+          list = (ref$ = content.pals).mypal || (ref$.mypal = []);
+          idx = pal.key != null
+            ? list.findIndex(function(it){
+              return it.obj.key != null && it.obj.key + "" === pal.key + "";
+            })
+            : -1;
+          if (~idx) {
+            list[idx] = item;
+          } else {
+            list.unshift(item);
+          }
+          return content.build(list, 'mypal');
+        },
+        reset: function(){
+          this.fetched = false;
+          content.pals.mypal = [];
+          if (this.page.reset) {
+            this.page.reset();
+          }
+          el.mp.load.style.display = '';
+          return content.build([], 'mypal');
         }
       };
       if (mypal.page.setHost) {
@@ -662,20 +712,18 @@
         mypal.page.host(el.pn.mypal);
       }
       el.mp.load.addEventListener('click', function(){
+        mypal.fetched = true;
         return mypal.loader.on().then(function(){
           return mypal.page.fetch();
         }).then(function(it){
           debounce(100);
           return it;
         }).then(function(it){
-          content.add('mypal', it);
-          return content.build(content.pals.mypal, 'mypal');
+          return mypal.add(it);
         }).then(function(){
           return mypal.loader.off(100);
         }).then(function(){
-          if (mypal.page.isEnd()) {
-            return el.mp.load.style.display = 'none';
-          }
+          return mypal.syncLoad();
         });
       });
     } else {
@@ -687,7 +735,7 @@
       var p, that, ref$, key, name, hexs;
       p = ld$.find(n, '.ldp', 0) || ld$.parent(n, '.ldp', root);
       ref$ = (that = p)
-        ? [ld$.attr(p, 'data-key'), ld$.find(that, '.name', 0).innerText]
+        ? [ld$.attr(p, 'data-key'), ld$.find(that, '.name', 0).textContent]
         : [null, 'untitled'], key = ref$[0], name = ref$[1];
       hexs = (that = ld$.find(n, '.colors', 0) || ld$.parent(n, '.colors', root))
         ? ld$.find(that, '.color').map(function(it){
@@ -754,6 +802,8 @@
         }),
         save: opt.save
       };
+    } else if (el.ed.save) {
+      el.ed.save.style.display = 'none';
     }
     evts = {
       save: function(tgt){
@@ -798,10 +848,14 @@
           }, key)['finally'](function(){
             return saver.loader.off(500);
           }).then(function(pal){
-            if (pal) {
-              return this$.ldpe.init({
-                pal: pal
-              });
+            if (!pal) {
+              return;
+            }
+            this$.ldpe.init({
+              pal: pal
+            });
+            if (mypal != null) {
+              return mypal.upsert(pal);
             }
           });
         });
@@ -832,7 +886,9 @@
             return this$.tab('view');
           }
           this$.tab('mypal');
-          return mypal.fetch();
+          return mypal.fetched
+            ? content.build(content.pals.mypal || [], 'mypal') || true
+            : mypal.fetch();
         }
       },
       view: function(tgt){
@@ -940,6 +996,11 @@
       });
       if (toggle) {
         return this$.tab('edit');
+      }
+    };
+    this.resetMypal = function(){
+      if (mypal != null) {
+        return mypal.reset();
       }
     };
     this.tabDisplay = debounce(1000, function(){
