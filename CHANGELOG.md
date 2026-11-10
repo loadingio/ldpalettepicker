@@ -1,5 +1,17 @@
 # Change Log
 
+## v4.1.4
+
+ - add `makechart.io` palette ( brand ) in `loadingio` palettes
+ - hide save button if `save` option is not provided
+ - add ( or update, by `key` ) saved palette into `my pals` list after saving
+ - fetch `my pals` only when the tab is opened for the first time, instead of appending a page on every tab switch
+ - add `resetMypal()` API for clearing `my pals` list
+ - skip fetched `my pals` palettes that are already in the list ( by `key` )
+ - rebuild `my pals` list when switching to the tab, so lists built while hidden ( e.g., after saving ) are shown with vscroll
+ - fix bug: palette name is read with `innerText`, so css `text-transform` changes the name ( e.g., when editing and saving )
+
+
 ## v4.1.3
 
  - add script to merge all palette data txt files

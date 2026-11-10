@@ -104,8 +104,13 @@ where constructor options:
  - `ldcv`: default false. if provided and ldCover is available, a ldcv object will be created automatically with this object as constructor options.
  - `random`: if provided, serve as random palette. (TBD)
  - `mypal`: optional ldPage object for loading customized palette on scrolling.
+   - should provide `fetch()` ( resolves a list of palettes ), `host(node)` ( or legacy `setHost(node)` ) and `isEnd()`.
+   - optionally `reset()`, called by `resetMypal()` to restart from the first page.
+   - fetched once when `my pals` tab is opened for the first time; following pages are loaded by `load more` button.
  - `save`: optional function for saving a palette.
+    - save button is hidden if `save` is not provided.
     - return a promise which resolves to the saved palette.
+      - resolved palette is added to ( or updated in, if with the same `key` ) the `my pals` list.
     - accepting object with following options:
       - thumb: thumbnail of the given palette.
       - key: key of the given palette, if applicable.
@@ -123,6 +128,7 @@ where constructor options:
  - `edit(pal, toggle)`: edit palette `pal`. 
    - `pal`: palette to edit.
    - `toggle`: default true. if true, toggle the edit panel.
+ - `resetMypal()`: clear `my pals` list ( e.g., when user changes ), and fetch again when the tab is opened next time.
  - `random()`: a function or palette list that decide a subset of palette to return when user calling ldpp.random();
 
 
