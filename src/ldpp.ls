@@ -1,4 +1,26 @@
 i18n-res =
+  en:
+    "search": "Search"
+    "USE": "Use"
+    "EDIT": "Edit"
+    "view": "View"
+    "my pals": "My palettes"
+    "edit": "Edit"
+    "filter": "Filter"
+    "all": "All"
+    "artwork": "Artwork"
+    "brand": "Brand"
+    "concept": "Concept"
+    "gradient": "Gradient"
+    "qualitative": "Qualitative"
+    "diverging": "Diverging"
+    "colorbrew": "ColorBrewer"
+    "load more": "Load more"
+    "use this palette": "Use this palette"
+    "save as asset": "Save palette"
+    "undo": "Undo"
+    "paste": "Paste"
+    "no result...": "No palettes found..."
   "zh-TW":
     "search": "搜尋"
     "USE": "套用"
@@ -25,7 +47,8 @@ i18n-res =
 ldpp = (opt = {}) ->
   @opt = opt
 
-  @i18n = i18n = opt.i18n or {t: -> it }
+  # 沒有給 i18n 時用英文字串 ( 不是直接顯示 key )
+  @i18n = i18n = opt.i18n or {t: -> i18n-res.en[it] or it }
   if @i18n and @i18n.add-resource-bundles => @i18n.add-resource-bundles i18n-res
 
   if !opt.palettes => opt.palettes = []

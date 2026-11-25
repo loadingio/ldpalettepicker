@@ -483,6 +483,29 @@
     colors: ['#E8614C', '#F4A358', '#E8DA8D', '#2DA88B', '#294B59']
   };
   i18nRes = {
+    en: {
+      "search": "Search",
+      "USE": "Use",
+      "EDIT": "Edit",
+      "view": "View",
+      "my pals": "My palettes",
+      "edit": "Edit",
+      "filter": "Filter",
+      "all": "All",
+      "artwork": "Artwork",
+      "brand": "Brand",
+      "concept": "Concept",
+      "gradient": "Gradient",
+      "qualitative": "Qualitative",
+      "diverging": "Diverging",
+      "colorbrew": "ColorBrewer",
+      "load more": "Load more",
+      "use this palette": "Use this palette",
+      "save as asset": "Save palette",
+      "undo": "Undo",
+      "paste": "Paste",
+      "no result...": "No palettes found..."
+    },
     "zh-TW": {
       "search": "搜尋",
       "USE": "套用",
@@ -513,7 +536,7 @@
     this.opt = opt;
     this.i18n = i18n = opt.i18n || {
       t: function(it){
-        return it;
+        return i18nRes.en[it] || it;
       }
     };
     if (this.i18n && this.i18n.addResourceBundles) {

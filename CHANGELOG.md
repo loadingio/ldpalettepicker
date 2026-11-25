@@ -1,5 +1,11 @@
 # Change Log
 
+## v4.1.5
+
+ - add `en` i18n resources. only `zh-TW` was provided, so with an i18next that falls back to `zh-TW`, `en` users saw Chinese
+ - use `en` strings instead of raw keys ( e.g., `USE`, `my pals` ) when no `i18n` option is given
+
+
 ## v4.1.4
 
  - add `makechart.io` palette ( brand ) in `loadingio` palettes
